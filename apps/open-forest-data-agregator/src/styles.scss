@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../../../resources/_colors.scss';
+
+.api-data {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $accent-color;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  svg {
+    margin-right: 8px;
+  }
+}

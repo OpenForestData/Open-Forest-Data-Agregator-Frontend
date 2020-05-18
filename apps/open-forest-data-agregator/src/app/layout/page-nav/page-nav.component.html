@@ -1,0 +1,20 @@
+<div class="page-nav">
+  <div class="container">
+    <ol *ngIf="breadcrumbs.length > 0" class="breadcrumbs">
+      <li *ngFor="let breadcrumb of breadcrumbs">
+        <ng-container *ngIf="breadcrumb.href">
+          <a [routerLink]="breadcrumb.href">
+            {{ breadcrumb.name }}
+          </a>
+        </ng-container>
+        <ng-container *ngIf="!breadcrumb.href">
+          {{ breadcrumb.name }}
+        </ng-container>
+      </li>
+    </ol>
+    <h2 class="main-header">
+      <svg-icon [applyCss]="true" [src]="iconSrc"></svg-icon>
+      {{ title }}
+    </h2>
+  </div>
+</div>

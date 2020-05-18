@@ -1,0 +1,48 @@
+@import '../../../../../../resources/_colors.scss';
+
+.page-nav {
+  background-image: url('/assets/images/map.png');
+  background-size: cover;
+  background-position: center center;
+  padding: 20px 0 25px 0;
+}
+
+.main-header {
+  margin-bottom: 0;
+}
+
+.breadcrumbs {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0 0 5px 0;
+  font-size: 12px;
+  font-weight: 500;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-right: 4px;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 5px;
+        height: 9px;
+        background-image: url('/assets/images/small_arr.svg');
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin-left: 4px;
+      }
+    }
+
+    &:last-child {
+      color: $accent-color;
+    }
+  }
+}

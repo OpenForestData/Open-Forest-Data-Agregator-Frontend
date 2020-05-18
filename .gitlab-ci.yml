@@ -1,0 +1,20 @@
+image: node:10.15.3
+
+before_script:
+    - npm install
+
+stages:
+    - test
+    - lint
+    - build
+
+lint:
+    stage: lint
+    script:
+        - node_modules/.bin/nx lint
+        - node_modules/.bin/ng lint
+
+tests:
+    stage: test
+    script:
+        - node_modules/.bin/ng test --passWithNoTests

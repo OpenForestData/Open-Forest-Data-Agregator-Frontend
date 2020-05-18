@@ -1,0 +1,17 @@
+@import './_colors.scss';
+
+.form-select {
+  select {
+    background-color: #fff;
+    border: 1px solid $accent-color;
+    color: $primary-color;
+    font-size: 14px;
+    font-family: $primary-font;
+    padding: 6px 15px;
+  }
+
+  span {
+    font-weight: 500;
+    padding-right: 5px;
+  }
+}

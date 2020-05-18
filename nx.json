@@ -1,0 +1,24 @@
+{
+  "npmScope": "od",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "open-forest-data": {
+      "tags": []
+    },
+    "open-forest-data-e2e": {
+      "tags": []
+    },
+    "ui-slider": {
+      "tags": []
+    },
+    "ui-label": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,103 @@
+@import '_fonts.scss';
+@import '_variables.scss';
+@import '_buttons.scss';
+@import '_typo.scss';
+@import '_forms.scss';
+
+body {
+  color: $text-color;
+  font-family: $primary-font;
+  font-size: 14px;
+}
+
+a {
+  color: $accent-color;
+  text-decoration: none;
+}
+
+.container {
+  width: calc(100% - 400px);
+  margin: 0 auto;
+}
+
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 100);
+$sides: (top, bottom, left, right);
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m-#{str-slice($side, 0, 1)}-#{$space} {
+      margin-#{$side}: #{$space}px !important;
+    }
+
+    .p-#{str-slice($side, 0, 1)}-#{$space} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+
+$aligments: (left, center, right);
+
+@each $aligment in $aligments {
+  .text-#{$aligment} {
+    text-align: $aligment;
+  }
+}
+
+.half-col {
+  width: 50%;
+}
+
+.extension {
+  font-size: 9px;
+  font-weight: 500;
+  color: white;
+  padding: 2px 4px;
+  background-color: #999;
+  text-align: center;
+
+  &.pdf {
+    background-color: #f58f87;
+  }
+
+  &.csv {
+    background-color: #9087f5;
+  }
+}
+
+.flex-parent {
+  display: flex;
+
+  &.flex-direction-column {
+    flex-direction: column;
+  }
+
+  &.justify-content-center {
+    justify-content: center;
+  }
+
+  &.align-items-center {
+    align-items: center;
+  }
+
+  &.justify-content-space-between {
+    justify-content: space-between;
+  }
+
+  &.flex-wrap-wrap {
+    flex-wrap: wrap;
+  }
+
+  @for $i from 1 through 12 {
+    .flex-#{$i} {
+      flex: $i;
+    }
+  }
+}
+
+.coma-sep {
+  &:not(:last-child) {
+    &::after {
+      content: ', ';
+    }
+  }
+}

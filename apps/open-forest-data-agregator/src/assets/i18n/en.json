@@ -1,0 +1,120 @@
+{
+  "GLOBALS": {
+    "login": "Login",
+    "search": "Search"
+  },
+  "FILTERS": {
+    "show_filters": "Show filters",
+    "hide_filters": "Hide filters",
+    "ordering": {
+      "sort_by": "Sort by",
+      "most_popular": "Most popular",
+      "last_updated": "Last updated",
+      "name_desc": "Name decreasing",
+      "name_asc": "Name increasing",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "no_downloads": "Number of downloads"
+    }
+  },
+  "NAV": {
+    "datasets": "Datasets",
+    "statistics": "Statistics",
+    "articles": "Articles"
+  },
+  "HOME": {
+    "header": [
+      "Dane publiczne",
+      "gromaczone przez miasto.",
+      "Wyszukaj, przeglądaj i pobieraj"
+    ],
+    "most_viewed_datasets": "Most viewed datasets",
+    "last_added_datasets": "Last added datasets",
+    "form": {
+      "header": "Nie znalazłeś danych? Napisz do nas.",
+      "first_name": "Imię",
+      "last_name": "Nazwisko",
+      "email": "Email",
+      "message": "Treść",
+      "policy": "Wyrażam zgodę, aby moje dane osobowe w zakresie obejmującym: e-mail, imię i nazwisko były przetwarzane przez Urząd Miasta w celu obsługi wniosku dotyczącego danych w portalu Open Data. Zgoda może być w każdym momencie wycofana poprzez wysłanie drogą e-mailową zgłoszenia na adres otwarte.dane@whiteaster.com. Administratorem danych osobowych jest Whiteaster Sp. Z o.o. z siedzibą w 41-500 Chorzów, ul. Gałeczki 61. Dane wpisane do formularza będą przetwarzane w celu udzielenia odpowiedzi na przesłane zgłoszenie zgodnie z polityką prywatności.",
+      "send": "Wyślij"
+    }
+  },
+  "FAQ": [
+    {
+      "question": "Jak mogę zgłosić brak interesujących mnie danych?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Czy jako niezalogowany użytkownik mogę publikować dane?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Kto jest odpowiedzialny za administrację tego portalu?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Czym jest stopień otwartości danych?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Jak często dane są aktualizowane?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Czym są tagi?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Czy statystyki portalu generowane są automatycznie i na bieżąco aktualizowane?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Jaką korzyść z portalu Open Data mają mieszkańcy miasta?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    },
+    {
+      "question": "Czym jest polityka otwartości?",
+      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    }
+  ],
+  "CONTACT": {
+    "header": "Contact",
+    "address": [
+      "Whiteaster Sp. z o.o.",
+      "ul. ks. J. Gałeczki 61",
+      "41-500 Chorzów"
+    ],
+    "email": "otwartedane@whiteaster.com",
+    "links": [
+      {
+        "href": "/faq",
+        "name": "FAQ"
+      },
+      {
+        "href": "/datasets",
+        "name": "Datasets"
+      },
+      {
+        "href": "/articles",
+        "name": "Articles"
+      },
+      {
+        "href": "/statistics",
+        "name": "Statistics"
+      },
+      {
+        "href": "/about",
+        "name": "About service"
+      },
+      {
+        "href": "/privacy",
+        "name": "Privacy policy"
+      },
+      {
+        "href": "https://whiteaster.com/files/Open%20Data%20-%20Dokumentacja%20techniczna%20-%20API%20endpoints.pdf",
+        "name": "API technical documentation"
+      }
+    ]
+  }
+}

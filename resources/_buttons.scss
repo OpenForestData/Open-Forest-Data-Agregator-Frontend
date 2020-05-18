@@ -1,0 +1,73 @@
+@import './_colors.scss';
+
+.button {
+  background-color: #fff;
+  border: 1px solid $accent-color;
+  color: $accent-color;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  padding: 8px 30px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &.thin {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+
+    &:hover {
+      background-color: transparent;
+      color: $accent-color;
+
+      svg {
+        path {
+          fill: $accent-color;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $accent-color;
+    color: white;
+
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
+
+  svg {
+    margin-left: 10px;
+
+    path {
+      transition: 0.3s all ease;
+    }
+  }
+
+  &.fill {
+    background-color: $accent-color;
+    color: white;
+
+    svg {
+      path {
+        fill: white;
+      }
+    }
+
+    &:hover {
+      background-color: white;
+      color: $accent-color;
+
+      svg {
+        path {
+          fill: $accent-color;
+        }
+      }
+    }
+  }
+}

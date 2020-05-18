@@ -1,0 +1,27 @@
+<ol class="pagination">
+  <li class="prev-page">
+    <button (click)="pageClick(page - 1)" [disabled]="page == 1">
+      <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
+    </button>
+  </li>
+  <li *ngIf="page - offset > 1 && showOffsets">
+    <button (click)="pageClick(1)">
+      1
+    </button>
+  </li>
+  <li *ngFor="let _page of pagesArray" [ngClass]="{ active: _page == page }">
+    <button (click)="pageClick(_page)">
+      {{ _page }}
+    </button>
+  </li>
+  <li *ngIf="pages - offset > page && showOffsets">
+    <button (click)="pageClick(pages)">
+      {{ pages }}
+    </button>
+  </li>
+  <li class="next-page">
+    <button (click)="pageClick(page + 1)" [disabled]="page == pages">
+      <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
+    </button>
+  </li>
+</ol>
