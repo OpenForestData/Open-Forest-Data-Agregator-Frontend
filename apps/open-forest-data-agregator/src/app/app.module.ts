@@ -22,6 +22,11 @@ import { FooterComponent } from './layout/footer/footer.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
+import { HeaderControlsComponent } from '@app/layout/header/header-controls/header-controls.component';
+import { HeaderActionsComponent } from '@app/layout/header/header-actions/header-actions.component';
+import { HeaderNavigationItemsComponent } from '@app/layout/header/header-navigation-items/header-navigation-items.component';
+import { FooterNavigationItemsComponent } from '@app/layout/footer/footer-navigation-items/footer-navigation-items.component';
+import { FooterLogoComponent } from '@app/layout/footer/footer-logo/footer-logo.component';
 
 /**
  * Initialize translate loader
@@ -39,15 +44,22 @@ export function initializeApp(appConfigService: AppConfigService) {
   return () => appConfigService.load();
 }
 
+const components = [
+  AppComponent,
+  MainLayoutComponent,
+  HeaderComponent,
+  HeaderControlsComponent,
+  HeaderActionsComponent,
+  HeaderNavigationItemsComponent,
+  FooterComponent,
+  FooterNavigationItemsComponent,
+  FooterLogoComponent,
+  AdminLayoutComponent,
+  NotFoundComponent
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    AdminLayoutComponent,
-    NotFoundComponent
-  ],
+  declarations: [...components],
   imports: [
     CommonModule,
     BrowserModule.withServerTransition({ appId: 'ofdApp' }),

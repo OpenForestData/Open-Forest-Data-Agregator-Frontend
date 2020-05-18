@@ -1,0 +1,5 @@
+<ol class="main-footer__navigation-list">
+  <li class="main-footer__navigation-list-item" *ngFor="let item of items">
+    <a [routerLink]="item.path">{{ item.name }}</a>
+  </li>
+</ol>

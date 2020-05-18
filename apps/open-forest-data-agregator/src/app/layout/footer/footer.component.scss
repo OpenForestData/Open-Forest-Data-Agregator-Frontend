@@ -1,0 +1,12 @@
+@import '../../../../../../resources/_colors.scss';
+
+.main-footer {
+  background-color: #fff;
+  border-top: 5px solid $accent-color;
+}
+
+ofd-agregator-footer-navigation-items {
+  display: block;
+  margin-top: 38px;
+  margin-bottom: 60px;
+}

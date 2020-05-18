@@ -1,0 +1,11 @@
+<button class="search-btn">
+  <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
+</button>
+<a class="login-btn" routerLink="/login">
+  {{ 'nav.login' | translate }}
+  <svg-icon src="/assets/images/lock.svg" [applyCss]="true"></svg-icon>
+</a>
+<button class="language-btn">
+  {{ languageService.language }}
+  <svg-icon src="/assets/images/dark_arrow_down.svg" [applyCss]="true"></svg-icon>
+</button>

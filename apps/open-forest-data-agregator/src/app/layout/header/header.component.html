@@ -1,3 +1,20 @@
 <header>
-  Header
+  <nav class="container main-nav">
+    <div class="main-nav__top-bar">
+      <div class="main-nav__controls">
+        <ofd-agregator-header-controls></ofd-agregator-header-controls>
+      </div>
+      <div class="main-nav__actions">
+        <ofd-agregator-header-actions></ofd-agregator-header-actions>
+      </div>
+    </div>
+    <div class="main-nav__bottom-bar">
+      <a class="main-nav__logo" routerLink="/">
+        <svg-icon [src]="'/assets/images/logo_of.svg'" [applyCss]="true"></svg-icon>
+      </a>
+      <div class="main-nav__navigation-items">
+        <ofd-agregator-header-navigation-items></ofd-agregator-header-navigation-items>
+      </div>
+    </div>
+  </nav>
 </header>

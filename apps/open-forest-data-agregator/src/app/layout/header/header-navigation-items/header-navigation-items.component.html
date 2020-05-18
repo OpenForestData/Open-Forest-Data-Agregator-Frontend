@@ -1,0 +1,15 @@
+<ol class="navigation-items__list">
+  <li
+    class="navigation-items__list-item"
+    *ngFor="let item of items"
+    [ngClass]="{ 'has-children': item.children && item.children.length > 0 }"
+  >
+    <a [routerLink]="item.path">{{ item.name }}</a>
+
+    <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
+      <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">
+        <a [routerLink]="childrenItem.path">{{ childrenItem.name }}</a>
+      </li>
+    </ul>
+  </li>
+</ol>
