@@ -1,17 +1,17 @@
 # Open Forest Data Agregator - Frontend
 
--   [Open Forest Data Agregator - Frontend](#open-forest-data-agregator---frontend)
-    -   [Instalacja](#instalacja)
-    -   [Skrypty](#skrypty)
-        -   [Serwer developerski](#serwer-developerski)
-        -   [Serwer produkcyjny (pod SEO)](#serwer-produkcyjny-pod-seo)
-        -   [Zbudowanie aplikacji w wersji deweloperskiej](#zbudowanie-aplikacji-w-wersji-deweloperskiej)
-        -   [Zbudowanie aplikacji w wersji produkcyjnej](#zbudowanie-aplikacji-w-wersji-produkcyjnej)
-        -   [Linting](#linting)
-        -   [Testy jednostkowe](#testy-jednostkowe)
-        -   [Generowanie dokumentacji](#generowanie-dokumentacji)
-    -   [Aktualni autorzy](#aktualni-autorzy)
-    -   [Licencja](#licencja)
+- [Open Forest Data Agregator - Frontend](#open-forest-data-agregator---frontend)
+  - [Instalacja](#instalacja)
+  - [Skrypty](#skrypty)
+    - [Serwer developerski](#serwer-developerski)
+    - [Serwer produkcyjny (pod SEO)](#serwer-produkcyjny-pod-seo)
+    - [Zbudowanie aplikacji w wersji deweloperskiej](#zbudowanie-aplikacji-w-wersji-deweloperskiej)
+    - [Zbudowanie aplikacji w wersji produkcyjnej](#zbudowanie-aplikacji-w-wersji-produkcyjnej)
+    - [Linting](#linting)
+    - [Testy jednostkowe](#testy-jednostkowe)
+    - [Generowanie dokumentacji](#generowanie-dokumentacji)
+  - [Aktualni autorzy](#aktualni-autorzy)
+  - [Licencja](#licencja)
 
 ## Instalacja
 
@@ -37,14 +37,13 @@ Aplikacja zostanie zbudowana oraz wystawiona przez serwer Express pod adresem ht
 
 `npm run build`
 
-Kod docelowy po zbudowaniu zostanie umieszczony w katalogu `dist/apps/open-forest-data/`
+Kod docelowy po zbudowaniu zostanie umieszczony w katalogu `dist/apps/open-forest-data-agregator/`
 
 ### Zbudowanie aplikacji w wersji produkcyjnej
 
 `npm run build:prod`
 
-Kod docelowy po zbudowaniu zostanie umieszczony w katalogu `dist/apps/open-forest-data/`
-
+Kod docelowy po zbudowaniu zostanie umieszczony w katalogu `dist/apps/open-forest-data-agregator/`
 
 ### Linting
 
@@ -62,8 +61,8 @@ Dokumentacja zostanie wygenerowana w katalogu `documentation`
 
 ## Aktualni autorzy
 
--   **Maciej Syguła** - _frontend_
--   **Mateusz Gorczycki** - _frontend_
--   **Daniel Pasoń** - _frontend_
+- **Maciej Syguła** - _frontend_
+- **Mateusz Gorczycki** - _frontend_
+- **Daniel Pasoń** - _frontend_
 
 ## Licencja

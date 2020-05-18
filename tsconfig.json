@@ -1,27 +1,25 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "sourceMap": true,
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "target": "es2015",
-        "module": "esnext",
-        "typeRoots": ["node_modules/@types"],
-        "lib": ["es2017", "dom"],
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@app/*": ["src/app/*"],
-            "@env/*": ["src/environments/*"],
-            "@od/od-slider": ["libs/od-slider/src/index.ts"],
-            "@od/ui-label": ["libs/ui-label/src/index.ts"]
-        },
-        "rootDir": ".",
-        "esModuleInterop": true
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@env/*": ["src/environments/*"]
     },
-    "exclude": ["node_modules", "tmp"]
+    "rootDir": ".",
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "tmp"]
 }

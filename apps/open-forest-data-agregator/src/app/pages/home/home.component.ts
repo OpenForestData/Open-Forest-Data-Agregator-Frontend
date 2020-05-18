@@ -4,27 +4,25 @@ import { Component, OnInit } from '@angular/core';
  * Home Component
  */
 @Component({
-  selector: 'od-home',
+  selector: 'ofd-home',
   templateUrl: './home.component.html',
   styles: [
     `
-            od-home-slider {
-                position: relative;
-                display: block;
-            }
-        `
+      ofd-home-slider {
+        position: relative;
+        display: block;
+      }
+    `
   ]
 })
 export class HomeComponent implements OnInit {
   /**
    * @ignore
    */
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * @ignore
    */
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

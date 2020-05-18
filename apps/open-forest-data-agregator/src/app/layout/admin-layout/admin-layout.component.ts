@@ -5,13 +5,12 @@ import { Component } from '@angular/core';
  * Wrapper component for authorized users
  */
 @Component({
-  selector: 'od-admin-layout',
+  selector: 'ofd-admin-layout',
   templateUrl: './admin-layout.component.html'
 })
 export class AdminLayoutComponent {
   /**
    * @ignore
    */
-  constructor() {
-  }
+  constructor() {}
 }

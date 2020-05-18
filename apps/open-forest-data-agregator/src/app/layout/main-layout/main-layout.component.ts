@@ -5,13 +5,12 @@ import { Component } from '@angular/core';
  * Wrapper component for not authorized users
  */
 @Component({
-  selector: 'od-main-layout',
+  selector: 'ofd-main-layout',
   templateUrl: './main-layout.component.html'
 })
 export class MainLayoutComponent {
   /**
    * @ignore
    */
-  constructor() {
-  }
+  constructor() {}
 }

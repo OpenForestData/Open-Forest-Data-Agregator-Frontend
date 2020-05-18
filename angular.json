@@ -102,9 +102,7 @@
               "apps/open-forest-data-agregator/tsconfig.app.json",
               "apps/open-forest-data-agregator/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
@@ -166,76 +164,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/open-forest-data-agregator-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
-        }
-      }
-    },
-    "ui-slider": {
-      "projectType": "library",
-      "root": "libs/ui-slider",
-      "sourceRoot": "libs/ui-slider/src",
-      "prefix": "ui",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui-slider/tsconfig.lib.json",
-              "libs/ui-slider/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui-slider/jest.config.js",
-            "tsConfig": "libs/ui-slider/tsconfig.spec.json",
-            "setupFile": "libs/ui-slider/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
-    "ui-label": {
-      "projectType": "library",
-      "root": "libs/ui-label",
-      "sourceRoot": "libs/ui-label/src",
-      "prefix": "ui",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui-label/tsconfig.lib.json",
-              "libs/ui-label/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui-label/jest.config.js",
-            "tsConfig": "libs/ui-label/tsconfig.spec.json",
-            "setupFile": "libs/ui-label/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
         }
       }
     }

@@ -1,5 +1,5 @@
 {
-  "name": "open-forest-data",
+  "name": "open-forest-data-agregator",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "ng build",
     "test": "ng test --passWithNoTests",
     "build:prod": "ng build --prod",
-    "lint": "./node_modules/.bin/nx lint && ng lint",
+    "lint": "./node_modules/.bin/nx lint",
     "e2e": "ng e2e",
     "affected:apps": "./node_modules/.bin/nx affected:apps",
     "affected:libs": "./node_modules/.bin/nx affected:libs",
@@ -75,8 +75,8 @@
     "cypress": "4.0.2",
     "dotenv": "8.2.0",
     "husky": "^4.2.3",
-    "jest": "25.1.0",
-    "jest-preset-angular": "8.0.0",
+    "jest": "26.0.0",
+    "jest-preset-angular": "7.0.0",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.1",
     "scss-lint": "0.0.0",
@@ -89,7 +89,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && pretty-quick --staged && npm run test"
+      "pre-commit": "npm run lint && pretty-quick --staged && npm run test",
+      "pre-push": "npm run lint && npm run build && pretty-quick --staged && npm run test"
     }
   }
 }

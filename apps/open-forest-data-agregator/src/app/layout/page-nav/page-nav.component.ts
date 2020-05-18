@@ -6,7 +6,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
  * Page Navigation Component
  */
 @Component({
-  selector: 'od-page-nav',
+  selector: 'ofd-page-nav',
   templateUrl: 'page-nav.component.html',
   styleUrls: ['page-nav.component.scss']
 })
@@ -29,12 +29,10 @@ export class PageNavComponent implements OnInit {
   /**
    * @ignore
    */
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * @ignore
    */
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

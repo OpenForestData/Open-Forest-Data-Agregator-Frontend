@@ -1,5 +1,5 @@
 {
-  "npmScope": "od",
+  "npmScope": "ofd",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -8,16 +8,10 @@
     "nx.json": "*"
   },
   "projects": {
-    "open-forest-data": {
+    "open-forest-data-agregator": {
       "tags": []
     },
-    "open-forest-data-e2e": {
-      "tags": []
-    },
-    "ui-slider": {
-      "tags": []
-    },
-    "ui-label": {
+    "open-forest-data-agregator-e2e": {
       "tags": []
     }
   }

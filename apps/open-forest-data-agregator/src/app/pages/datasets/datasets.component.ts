@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
  * Datasets Component
  */
 @Component({
-  selector: 'od-datasets',
+  selector: 'ofd-datasets',
   templateUrl: 'datasets.component.html',
   styleUrls: ['datasets.component.scss']
 })

@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
  * Pagination component
  */
 @Component({
-  selector: 'od-pagination',
+  selector: 'ofd-pagination',
   templateUrl: 'pagination.component.html',
   styleUrls: ['pagination.component.scss']
 })
@@ -54,14 +54,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   /**
    * @ignore
    */
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * @ignore
    */
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * Rerender pagination on every change
