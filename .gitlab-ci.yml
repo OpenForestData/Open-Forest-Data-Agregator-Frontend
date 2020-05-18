@@ -1,4 +1,4 @@
-image: node:10.15.3
+image: node:10-alpine
 
 before_script:
     - npm install
@@ -18,3 +18,42 @@ tests:
     stage: test
     script:
         - node_modules/.bin/ng test --passWithNoTests
+
+Build production image:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  stage: build
+  before_script: []
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"gitlab-ci-token\",\"password\":\"$CI_JOB_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.prod --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG --destination $CI_REGISTRY_IMAGE:$latest
+  only:
+    - tags
+
+Build development image:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  stage: build
+  before_script: []
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"gitlab-ci-token\",\"password\":\"$CI_JOB_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.dev --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA --destination $CI_REGISTRY_IMAGE:development
+  only:
+    - development
+
+Build docker image:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  stage: build
+  before_script: []
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"gitlab-ci-token\",\"password\":\"$CI_JOB_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.dev --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - branches
+  except:
+    - master
+    - development
