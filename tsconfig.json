@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["src/app/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@ofd/ui-checkbox": ["libs/ui-checkbox/src/index.ts"]
     },
     "rootDir": ".",
     "esModuleInterop": true

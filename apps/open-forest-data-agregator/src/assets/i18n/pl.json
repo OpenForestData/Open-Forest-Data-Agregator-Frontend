@@ -5,7 +5,7 @@
       "datasets": "Zbiory danych",
       "stats": "Statystyki",
       "mobile-application": "Aplikacja mobilna",
-      "more": "Dowiedź się więcej",
+      "more": "Dowiedz się więcej",
       "about-project": "O projekcie",
       "about-partners": "O partnerach",
       "about-datasets": "O zasobach danych",
@@ -30,8 +30,24 @@
       "start": "Start",
       "datasets": "Zbiory danych"
     },
+    "filters": {
+      "category": "Kategoria",
+      "filters": "Filtry",
+      "media": "Zdjęcie / multimedia",
+      "coordinates": "Współrzędne",
+      "organization": "Dostawca Danych",
+      "format": "Format Danych",
+      "type": "Typ Zasobu"
+    },
     "add-data": "Dodaj dane",
     "search-placeholder": "Szukaj",
-    "advanced-search": "Wyszukiwanie zaawansowane"
+    "advanced-search": "Wyszukiwanie zaawansowane",
+    "presentation-header": "Wyświetl dane jako:",
+    "presentation": {
+      "list": "Lista",
+      "table": "Tabela",
+      "gallery": "Galeria",
+      "map": "Mapa"
+    }
   }
 }

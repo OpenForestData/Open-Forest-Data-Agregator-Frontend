@@ -1,0 +1,67 @@
+@import '../../../../../../resources/_colors.scss';
+
+.header-bar {
+  margin: 0;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: $accent-color;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  padding: 11px 14px;
+  box-sizing: border-box;
+  align-items: center;
+  letter-spacing: 1px;
+
+  > svg-icon {
+    height: 18px;
+    margin-right: 13px;
+    display: block;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
+  > button {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+
+    svg-icon {
+      display: flex;
+      width: 11px;
+      height: 6px;
+      transition: 0.3s transform ease;
+      transform: rotate(0);
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  &.expanded {
+    > button {
+      svg-icon {
+        transform: rotate(180deg);
+
+        svg {
+        }
+      }
+    }
+  }
+}

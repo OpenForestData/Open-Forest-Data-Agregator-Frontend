@@ -1,0 +1,31 @@
+<div class="datasets-filters__type">
+  <ui-checkbox [name]="'media'" [(model)]="filters.media.value">
+    {{ 'datasets.filters.' + filters.media.key | translate }}
+  </ui-checkbox>
+  <ui-checkbox [name]="'coordinates'" [(model)]="filters.coordinates.value">
+    {{ 'datasets.filters.' + filters.coordinates.key | translate }}
+  </ui-checkbox>
+</div>
+<div class="datasets-filters__filters">
+  <ofd-agregator-datasets-filter
+    header="{{ 'datasets.filters.' + filters.organization.key | translate }}"
+    [data]="filters.organization.data"
+    [key]="filters.organization.key"
+    [(value)]="filters.organization.value"
+    [isExpanded]="filters.organization.isExpanded"
+  ></ofd-agregator-datasets-filter>
+  <ofd-agregator-datasets-filter
+    header="{{ 'datasets.filters.' + filters.format.key | translate }}"
+    [data]="filters.format.data"
+    [key]="filters.format.key"
+    [(value)]="filters.format.value"
+    [isExpanded]="filters.format.isExpanded"
+  ></ofd-agregator-datasets-filter>
+  <ofd-agregator-datasets-filter
+    header="{{ 'datasets.filters.' + filters.type.key | translate }}"
+    [data]="filters.type.data"
+    [key]="filters.type.key"
+    [(value)]="filters.type.value"
+    [isExpanded]="filters.type.isExpanded"
+  ></ofd-agregator-datasets-filter>
+</div>

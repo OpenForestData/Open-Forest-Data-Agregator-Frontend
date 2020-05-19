@@ -2,9 +2,34 @@
 <ofd-agregator-datasets-header></ofd-agregator-datasets-header>
 <main class="datasets container">
   <div class="datasets__filters">
-    FILTERS
+    <div class="datasets__filters__category-filter">
+      <ofd-agregator-header-bar
+        [iconSrc]="filters.category.iconSrc"
+        [expandable]="filters.category.expandable"
+        [expanded]="filters.category.isExpanded"
+        (toggle)="toggleFilter('category')"
+      >
+        {{ 'datasets.filters.' + filters.category.key | translate }}
+      </ofd-agregator-header-bar>
+      <ofd-agregator-datasets-category
+        *ngIf="filters.category.isExpanded"
+        [categories]="categories"
+        [(selectedCategory)]="filters.category.value"
+      ></ofd-agregator-datasets-category>
+    </div>
+    <div class="datasets__filters__filters">
+      <ofd-agregator-header-bar
+        [iconSrc]="filters.filters.iconSrc"
+        [expanded]="filters.filters.isExpanded"
+        [expandable]="filters.filters.expandable"
+        (toggle)="toggleFilter('filters')"
+      >
+        {{ 'datasets.filters.' + filters.filters.key | translate }}
+      </ofd-agregator-header-bar>
+      <ofd-agregator-datasets-filters *ngIf="filters.filters.isExpanded"> </ofd-agregator-datasets-filters>
+    </div>
   </div>
   <div class="datasets__content">
-    CONTENT
+    <ofd-agregator-datasets-data-presentation></ofd-agregator-datasets-data-presentation>
   </div>
 </main>

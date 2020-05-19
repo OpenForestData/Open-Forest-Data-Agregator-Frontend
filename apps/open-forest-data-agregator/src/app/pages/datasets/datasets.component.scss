@@ -1,0 +1,22 @@
+.datasets {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 25px;
+
+  &__filters {
+    width: 30%;
+
+    &__category-filter {
+      margin-bottom: 25px;
+    }
+
+    &__filters {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__content {
+    width: calc(70% - 40px);
+  }
+}

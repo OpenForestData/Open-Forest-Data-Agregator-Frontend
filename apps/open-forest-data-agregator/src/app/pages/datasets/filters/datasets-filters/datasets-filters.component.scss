@@ -1,0 +1,13 @@
+.datasets-filters {
+  &__type {
+    padding: 21px 15px 39px 15px;
+
+    ui-checkbox {
+      display: block;
+
+      &:not(:last-of-type) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

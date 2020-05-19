@@ -1,0 +1,44 @@
+<div class="datasets-presentation">
+  <h4 class="datasets-presentation__header">
+    {{ 'datasets.presentation-header' | translate }}
+  </h4>
+  <div class="datasets-presentation__views">
+    <button
+      class="datasets-presentation__view"
+      id="view-list"
+      [ngClass]="{ active: presentation === 'list' }"
+      (click)="selectPresentation('list')"
+    >
+      <svg-icon src="/assets/images/list-view.svg" [applyCss]="true"></svg-icon>
+      {{ 'datasets.presentation.list' | translate }}
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-table"
+      [ngClass]="{ active: presentation === 'table' }"
+      (click)="selectPresentation('table')"
+    >
+      <svg-icon src="/assets/images/table-view.svg" [applyCss]="true"></svg-icon>
+      {{ 'datasets.presentation.table' | translate }}
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-gallery"
+      [ngClass]="{ active: presentation === 'gallery' }"
+      (click)="selectPresentation('gallery')"
+    >
+      <svg-icon src="/assets/images/gallery-view.svg" [applyCss]="true"></svg-icon>
+      {{ 'datasets.presentation.gallery' | translate }}
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-map"
+      [ngClass]="{ active: presentation === 'map' }"
+      (click)="selectPresentation('map')"
+    >
+      <svg-icon src="/assets/images/map-view.svg" [applyCss]="true"></svg-icon>
+      {{ 'datasets.presentation.map' | translate }}
+    </button>
+    <div class="selector" #selector></div>
+  </div>
+</div>

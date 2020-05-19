@@ -1,0 +1,57 @@
+@import '../../../../../resources/_colors.scss';
+
+.ui-checkbox {
+  color: $text-color;
+  display: flex;
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  user-select: none;
+  font-size: 14px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+}
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  height: 18px;
+  width: 18px;
+  background-color: transparent;
+  border: 1px solid $text-color;
+  border-radius: 2px;
+  box-sizing: border-box;
+  transition: 0.3s all;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background-image: url('/assets/images/check.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0;
+  left: 4px;
+  top: 5px;
+  display: block;
+  transition: 0.3s opacity;
+}
+
+.ui-checkbox input:checked ~ .checkmark {
+  border: 1px solid $accent-color;
+}
+
+.ui-checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}

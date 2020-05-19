@@ -1,0 +1,10 @@
+<ol class="datasets-category">
+  <li
+    class="datasets-category__item"
+    *ngFor="let category of categories"
+    [ngClass]="{ selected: category.value === selectedCategory }"
+    (click)="selectValue(category.value)"
+  >
+    {{ category.name }}
+  </li>
+</ol>

@@ -8,8 +8,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { UICheckboxModule } from '@libs/ui-checkbox/src/lib/ui-checkbox.module';
+
 import { PageNavComponent } from '@app/layout/page-nav/page-nav.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component';
 
 @NgModule({
   imports: [
@@ -19,17 +22,19 @@ import { PaginationComponent } from './pagination/pagination.component';
     FormsModule,
     AngularSvgIconModule,
     TranslateModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    UICheckboxModule
   ],
-  declarations: [PageNavComponent, PaginationComponent],
+  declarations: [PageNavComponent, PaginationComponent, HeaderBarComponent],
   exports: [
     CommonModule,
     TranslateModule,
     AngularSvgIconModule,
     FormsModule,
     PageNavComponent,
-    PaginationComponent
+    PaginationComponent,
+    HeaderBarComponent,
+    UICheckboxModule
   ]
 })
-export class SharedModule {
-}
+export class SharedModule {}

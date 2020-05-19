@@ -1,0 +1,67 @@
+@import '../../../../../../../resources/_colors.scss';
+
+.datasets-presentation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__header {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  &__views {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 140px;
+    margin: 0;
+    border: none;
+    padding: 15px 0;
+    line-height: 21px;
+    color: $text-color;
+    cursor: pointer;
+
+    svg-icon {
+      display: block;
+      margin-right: 20px;
+
+      svg {
+        path {
+          fill: $text-color;
+        }
+      }
+    }
+
+    &.active {
+      color: $accent-color;
+
+      svg-icon {
+        svg {
+          path {
+            fill: $accent-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.selector {
+  background-color: $accent-color;
+  height: 2px;
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  transition: 0.3s all ease;
+  transform: translate(0, 0);
+  width: 140px;
+}

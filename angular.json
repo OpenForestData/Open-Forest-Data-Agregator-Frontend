@@ -168,6 +168,29 @@
           }
         }
       }
+    },
+    "ui-checkbox": {
+      "root": "libs/ui-checkbox",
+      "sourceRoot": "libs/ui-checkbox/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/ui-checkbox/tsconfig.lib.json", "libs/ui-checkbox/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui-checkbox/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-checkbox/jest.config.js",
+            "tsConfig": "libs/ui-checkbox/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,0 +1,19 @@
+<div class="filter">
+  <h3 class="filter__title" [ngClass]="{ 'filter__title--expanded': isExpanded }">
+    {{ header }}
+
+    <button class="filter__arrow" (click)="isExpanded = !isExpanded">
+      <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
+    </button>
+  </h3>
+  <div class="filter__data" *ngIf="isExpanded">
+    <ui-checkbox
+      [name]="key"
+      [model]="value.indexOf(item.value) !== -1"
+      (modelChange)="changeFilter($event, item.value)"
+      *ngFor="let item of data"
+    >
+      {{ item.name }}
+    </ui-checkbox>
+  </div>
+</div>
