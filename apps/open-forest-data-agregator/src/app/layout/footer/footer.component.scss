@@ -3,10 +3,49 @@
 .main-footer {
   background-color: #fff;
   border-top: 5px solid $accent-color;
+  padding: 40px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__left-col {
+    width: 45%;
+  }
+
+  &__right-col {
+    width: 55%;
+  }
+
+  &__top-logos {
+    img {
+      width: 50%;
+      object-fit: contain;
+      object-position: left;
+
+      &:first-child {
+        height: 37px;
+      }
+      &:nth-child(2) {
+        height: 33px;
+      }
+    }
+  }
+
+  &__bottom-logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  p {
+    margin: 30px 0;
+    font-size: 14px;
+  }
 }
 
 ofd-agregator-footer-navigation-items {
   display: block;
-  margin-top: 38px;
   margin-bottom: 60px;
 }

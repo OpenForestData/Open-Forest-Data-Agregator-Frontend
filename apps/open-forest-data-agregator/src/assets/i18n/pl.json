@@ -24,5 +24,13 @@
     },
     "project-text": "Projekt „e-Puszcza. Podlaskie cyfrowe repozytorium przyrodniczych danych naukowych” \njest realizowany w ramach Programu Operacyjnego Polska Cyfrowa na lata 2014-2020 przez Instytut Biologii Ssaków PAN w Białowieży.",
     "logo-text": "Designed and developed by"
+  },
+  "datasets": {
+    "breadcrumbs": {
+      "start": "Start",
+      "datasets": "Zbiory danych"
+    },
+    "add-data": "Dodaj dane",
+    "search-placeholder": "Szukaj"
   }
 }

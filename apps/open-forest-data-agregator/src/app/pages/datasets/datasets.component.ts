@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
+import { TranslateService } from '@ngx-translate/core';
+
 /**
  * Datasets Component
  */
@@ -9,10 +12,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['datasets.component.scss']
 })
 export class DatasetsComponent implements OnInit {
+  public breadcrumbs: IBreadcrumbs[] = [
+    { name: 'Start', href: '/' },
+    { name: 'Zbiory danych', href: '/datasets' }
+  ];
+
   /**
    * @ignore
    */
-  constructor() {}
+  constructor(public translateService: TranslateService) {}
 
   /**
    * @ignore

@@ -9,16 +9,12 @@ body {
   color: $text-color;
   font-family: $primary-font;
   font-size: 16px;
+  background-color: $light-gray-color;
 }
 
 a {
   color: $accent-color;
   text-decoration: none;
-}
-
-.container {
-  width: calc(100% - 400px);
-  margin: 0 auto;
 }
 
 $spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 100);

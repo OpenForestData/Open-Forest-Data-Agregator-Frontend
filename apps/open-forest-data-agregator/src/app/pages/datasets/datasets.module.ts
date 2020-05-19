@@ -5,12 +5,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { DatasetsRoutingModule } from './datasets-routing.module';
 
 import { DatasetsComponent } from './datasets.component';
+import { DatasetsHeaderComponent } from '@app/pages/datasets/datasets-header/datasets-header.component';
 
 @NgModule({
-  declarations: [
-    DatasetsComponent
-  ],
+  declarations: [DatasetsComponent, DatasetsHeaderComponent],
   imports: [CommonModule, DatasetsRoutingModule, SharedModule]
 })
-export class DatasetsModule {
-}
+export class DatasetsModule {}

@@ -1,10 +1,7 @@
 @import '../../../../../../resources/_colors.scss';
 
 .page-nav {
-  background-image: url('/assets/images/map.png');
-  background-size: cover;
-  background-position: center center;
-  padding: 20px 0 25px 0;
+  padding: 20px 0;
 }
 
 .main-header {
@@ -17,32 +14,37 @@
   align-items: center;
   justify-content: flex-start;
   margin: 0;
-  padding: 0 0 5px 0;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 0;
+  font-size: 10px;
 
   li {
     display: flex;
     align-items: center;
 
+    a {
+      color: $text-color;
+    }
+
     &:not(:last-child) {
-      margin-right: 4px;
+      margin-right: 10px;
 
       &:after {
         content: '';
         display: block;
         width: 5px;
-        height: 9px;
+        height: 8px;
         background-image: url('/assets/images/small_arr.svg');
         background-size: contain;
         background-position: center center;
         background-repeat: no-repeat;
-        margin-left: 4px;
+        margin-left: 10px;
       }
     }
 
     &:last-child {
-      color: $accent-color;
+      a {
+        color: $accent-color;
+      }
     }
   }
 }

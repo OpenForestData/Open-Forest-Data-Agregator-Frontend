@@ -17,16 +17,6 @@ export class PageNavComponent implements OnInit {
   @Input() breadcrumbs: IBreadcrumbs[];
 
   /**
-   * Header title
-   */
-  @Input() title: string;
-
-  /**
-   * SVG icon path
-   */
-  @Input() iconSrc: string;
-
-  /**
    * @ignore
    */
   constructor() {}
