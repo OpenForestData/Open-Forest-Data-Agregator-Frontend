@@ -31,6 +31,7 @@
       "datasets": "Zbiory danych"
     },
     "add-data": "Dodaj dane",
-    "search-placeholder": "Szukaj"
+    "search-placeholder": "Szukaj",
+    "advanced-search": "Wyszukiwanie zaawansowane"
   }
 }

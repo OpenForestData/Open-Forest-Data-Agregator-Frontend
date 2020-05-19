@@ -1,12 +1,17 @@
 <div class="container">
-  <button class="add-data">
+  <button class="button add-data">
     {{ 'datasets.add-data' | translate }}
     <svg-icon [src]="'/assets/images/plus.svg'" [applyCss]="true"></svg-icon>
   </button>
   <form class="search-section">
     <label>
-      <input type="text" placeholder="{{ 'datasets.search-placeholder' | translate }}" />
-      <button>Szukaj</button>
+      <input class="search-section__input" type="text" placeholder="{{ 'datasets.search-placeholder' | translate }}" />
+      <button class="search-section__button" type="submit">
+        <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
+      </button>
     </label>
+    <button class="search-section__advanced-search" type="button">
+      {{ 'datasets.advanced-search' | translate }}
+    </button>
   </form>
 </div>
