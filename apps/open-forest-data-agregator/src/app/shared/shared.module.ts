@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PageNavComponent } from '@app/layout/page-nav/page-nav.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SocialComponent } from './social/social.component';
 
 @NgModule({
   imports: [
@@ -21,15 +22,15 @@ import { PaginationComponent } from './pagination/pagination.component';
     TranslateModule,
     NgxPaginationModule
   ],
-  declarations: [PageNavComponent, PaginationComponent],
+  declarations: [PageNavComponent, PaginationComponent, SocialComponent],
   exports: [
     CommonModule,
     TranslateModule,
     AngularSvgIconModule,
     FormsModule,
     PageNavComponent,
-    PaginationComponent
+    PaginationComponent,
+    SocialComponent
   ]
 })
-export class SharedModule {
-}
+export class SharedModule {}

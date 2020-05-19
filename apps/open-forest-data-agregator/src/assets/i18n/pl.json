@@ -30,6 +30,18 @@
       "start": "Start",
       "datasets": "Zbiory danych"
     },
+    "dataset": {
+      "metadata-all": {
+        "downloads": "Ilość pobrań:",
+        "created": "Utworzono:",
+        "source": "Źródło:",
+        "author": "Autor:",
+        "data-openness": "Stopień otwartości danych:",
+        "license": "Licencja:",
+        "domain": "Dziedzina:",
+        "keywords": "Słowa kluczowe:"
+      }
+    },
     "add-data": "Dodaj dane",
     "search-placeholder": "Szukaj"
   }
