@@ -1,9 +1,23 @@
-FROM node:10-alpine
+FROM node:12-alpine as build
 WORKDIR /app
 COPY ./package.json /app/
 RUN npm install
 COPY . /app
 
-EXPOSE 4200
+RUN npm run build
 
-CMD ["/bin/sh", "-c", "node build.js && npm run start"]
+
+FROM nginx:1.18 as publish
+
+RUN apt-get update \
+    && apt-get install -y \
+    jq \
+    moreutils
+
+COPY --from=build /app/dist/apps/open-forest-data-agregator/browser /usr/share/nginx/html
+COPY entrypoint.sh /
+
+RUN chmod +x entrypoint.sh
+
+CMD bash -c "/entrypoint.sh && \
+    nginx -g 'daemon off;'"
