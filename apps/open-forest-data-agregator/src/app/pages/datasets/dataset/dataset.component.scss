@@ -1,0 +1,40 @@
+.container {
+  height: 1000px;
+  background-color: #f6f4f2;
+  display: flex;
+}
+
+.dataset-left {
+  width: 33.3%;
+  background-color: inherit;
+  height: inherit;
+}
+
+.dataset-right {
+  width: 66.6%;
+  background-color: #ffffff;
+  height: inherit;
+}
+
+.metric {
+  &__header {
+    display: block;
+  }
+  &__content > p {
+    display: block;
+    font-size: 14px;
+  }
+  &__social {
+    display: block;
+  }
+}
+
+.versions {
+  &__content {
+    height: 20px;
+    font-size: 14px;
+  }
+  &__content > p {
+    display: inline;
+  }
+}
