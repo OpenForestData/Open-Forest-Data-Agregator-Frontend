@@ -24,6 +24,8 @@ export class DatasetsRangeComponent implements OnInit {
 
   public map: Map;
 
+  public firstShow = false;
+
   public drawnItems: FeatureGroup = featureGroup();
 
   public drawOptions = {
@@ -62,7 +64,13 @@ export class DatasetsRangeComponent implements OnInit {
     this.drawnItems.addLayer(layer);
 
     const bounds = this.drawnItems.getBounds();
+  }
 
-    console.log(bounds);
+  showHeader() {
+    this.isExpanded = !this.isExpanded;
+
+    if (this.isExpanded && !this.firstShow) {
+      this.firstShow = true;
+    }
   }
 }
