@@ -1,6 +1,80 @@
+@import '../../../../../../../resources/_colors.scss';
+
 .datasets-list {
   &__container {
     background-color: #fff;
     padding: 32px 40px;
+  }
+
+  &__header {
+    padding-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 22px;
+
+    select {
+      margin-left: 30px;
+    }
+  }
+
+  &__export {
+    svg {
+      display: block;
+    }
+  }
+
+  &__datasets {
+    &__item {
+      padding: 12px 22px;
+      display: flex;
+      align-items: flex-start;
+      border: 1px solid $light-gray-color;
+      margin-bottom: 20px;
+      font-size: 12px;
+      line-height: 18px;
+
+      &__picture {
+        padding-right: 20px;
+        img {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+          object-position: center center;
+          border: 4px solid #fff;
+          box-sizing: border-box;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        }
+      }
+
+      &__title {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $accent-color;
+        margin: 0 0 5px 0;
+      }
+
+      &__description {
+        font-size: 14px;
+        line-height: 21px;
+        margin: 20px 0;
+      }
+
+      &__source {
+        display: flex;
+        font-size: 12px;
+
+        b {
+          padding-left: 5px;
+        }
+
+        svg-icon {
+          margin-right: 8px;
+        }
+      }
+    }
   }
 }

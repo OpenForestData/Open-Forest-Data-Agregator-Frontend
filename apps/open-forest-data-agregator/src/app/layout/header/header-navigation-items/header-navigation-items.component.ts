@@ -23,22 +23,22 @@ export class HeaderNavigationItemsComponent implements OnInit {
     },
     {
       name: '',
-      path: 'datasets',
+      path: '/datasets',
       key: 'datasets'
     },
     {
       name: '',
-      path: 'stats',
+      path: '/stats',
       key: 'stats'
     },
     {
       name: '',
-      path: 'mobile-application',
+      path: '/mobile-application',
       key: 'mobile-application'
     },
     {
       name: '',
-      path: '',
+      path: '/',
       key: 'more',
       children: [
         { name: '', path: 'about-project', key: 'about-project' },
@@ -57,7 +57,7 @@ export class HeaderNavigationItemsComponent implements OnInit {
     },
     {
       name: '',
-      path: 'blog',
+      path: '/blog',
       key: 'blog'
     }
   ];

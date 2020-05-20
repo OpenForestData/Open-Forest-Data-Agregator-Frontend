@@ -1,8 +1,23 @@
+@import '../../../../../../resources/_colors.scss';
+
 .datasets {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding-top: 25px;
+  position: relative;
+
+  &:after {
+    content: '';
+    background-color: #fff;
+    z-index: -1;
+    top: 81px;
+    right: 0;
+    transform: translateX(calc(100% - 20px));
+    width: 500%;
+    height: 100%;
+    position: absolute;
+  }
 
   &__filters {
     width: 30%;
@@ -19,4 +34,9 @@
   &__content {
     width: calc(70% - 40px);
   }
+}
+
+:host {
+  overflow: hidden;
+  display: block;
 }

@@ -5,7 +5,10 @@
     "show-more": "Zobacz więcej",
     "show-less": "Zobacz mniej",
     "more-filters": "Więcej filtrów",
-    "less-filters": "Mniej filtrów"
+    "less-filters": "Mniej filtrów",
+    "from": "Od",
+    "to": "Do",
+    "source": "Źródło"
   },
   "nav": {
     "items": {

@@ -1,11 +1,38 @@
 <div class="datasets-list__container">
   <div class="datasets-list__header">
-    <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
-    <select>
-      <option selected disabled>{{ 'global.sort-by' | translate }}</option>
-    </select>
-    <button class="button">
+    <div>
+      <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
+      <select>
+        <option selected disabled>{{ 'global.sort-by' | translate }}</option>
+      </select>
+    </div>
+    <button class="button datasets-list__export">
       {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
     </button>
+  </div>
+
+  <div class="datasets-list__datasets">
+    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
+      <picture class="datasets-list__datasets__item__picture">
+        <img [src]="dataset.preview" [alt]="dataset.title" />
+      </picture>
+      <article>
+        <header>
+          <h3 class="datasets-list__datasets__item__title">
+            <a routerLink="/datasets/dataset"> {{ dataset.title }} </a>
+          </h3>
+          <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
+          <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>
+        </header>
+        <p class="datasets-list__datasets__item__description">
+          {{ dataset.description }}
+        </p>
+        <footer class="datasets-list__datasets__item__source">
+          <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+          {{ 'global.source' | translate }}: <b>{{ dataset.source }}</b>
+        </footer>
+      </article>
+    </div>
   </div>
 </div>

@@ -9,11 +9,11 @@
 
   <div class="filter__time-range" [hidden]="!isExpanded">
     <div class="filter__time-from">
-      <label for="time-from">Od</label>
+      <label for="time-from">{{ 'global.from' | translate }}</label>
       <input type="number" id="time-from" name="time-from" [(ngModel)]="value['from']" />
     </div>
     <div class="filter__time-to">
-      <label for="time-to">Do</label>
+      <label for="time-to">{{ 'global.to' | translate }}</label>
       <input type="number" id="time-to" name="time-to" [(ngModel)]="value['to']" />
     </div>
   </div>

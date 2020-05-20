@@ -2,19 +2,43 @@
 
 .datasets-presentation {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 
   &__header {
     font-size: 14px;
     font-weight: 600;
-    margin-right: 6px;
+    margin: 0;
+    padding: 0 6px 0 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #e6e6e6;
+      transform: translateY(1px);
+    }
   }
 
   &__views {
     display: flex;
     align-items: center;
     position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #e6e6e6;
+      transform: translateY(1px);
+    }
   }
 
   &__view {
@@ -69,6 +93,7 @@
   position: absolute;
   bottom: -1px;
   left: 0;
+  z-index: 2;
   transition: 0.3s all ease;
   transform: translate(0, 0);
   width: 140px;
