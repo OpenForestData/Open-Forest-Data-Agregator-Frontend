@@ -1,0 +1,20 @@
+<div class="filter">
+  <h3 class="filter__title" [ngClass]="{ 'filter__title--expanded': isExpanded }">
+    {{ header }}
+
+    <button class="filter__arrow" (click)="isExpanded = !isExpanded">
+      <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
+    </button>
+  </h3>
+
+  <div class="filter__time-range" [hidden]="!isExpanded">
+    <div class="filter__time-from">
+      <label for="time-from">Od</label>
+      <input type="number" id="time-from" name="time-from" [(ngModel)]="value['from']" />
+    </div>
+    <div class="filter__time-to">
+      <label for="time-to">Do</label>
+      <input type="number" id="time-to" name="time-to" [(ngModel)]="value['to']" />
+    </div>
+  </div>
+</div>

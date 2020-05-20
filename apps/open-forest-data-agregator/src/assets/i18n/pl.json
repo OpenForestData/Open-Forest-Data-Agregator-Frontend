@@ -1,4 +1,12 @@
 {
+  "global": {
+    "export": "Eksportuj",
+    "sort-by": "Sortuj wg",
+    "show-more": "Zobacz więcej",
+    "show-less": "Zobacz mniej",
+    "more-filters": "Więcej filtrów",
+    "less-filters": "Mniej filtrów"
+  },
   "nav": {
     "items": {
       "start": "Start",
@@ -37,7 +45,15 @@
       "coordinates": "Współrzędne",
       "organization": "Dostawca Danych",
       "format": "Format Danych",
-      "type": "Typ Zasobu"
+      "license": "Licencja",
+      "type": "Typ Zasobu",
+      "species": "Gatunek",
+      "gender": "Płeć",
+      "keywords": "Słowa kluczowe",
+      "created-year": "Data utworzenia",
+      "author": "Autor",
+      "range": "Zasięg",
+      "time-range": "Zakres czasowy"
     },
     "add-data": "Dodaj dane",
     "search-placeholder": "Szukaj",
@@ -48,6 +64,7 @@
       "table": "Tabela",
       "gallery": "Galeria",
       "map": "Mapa"
-    }
+    },
+    "count": "rekordów"
   }
 }

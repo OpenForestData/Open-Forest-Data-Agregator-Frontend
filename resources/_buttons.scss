@@ -1,7 +1,7 @@
 @import './_colors.scss';
 
 .button {
-  background-color: #fff;
+  background-color: transparent;
   color: $accent-color;
   font-size: 18px;
   border: 1px solid $accent-color;
@@ -10,15 +10,18 @@
   padding: 12px 38px;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.3s all ease;
 
   svg-icon {
     margin-left: 15px;
 
     svg {
       path {
+        transition: 0.3s all ease;
         fill: $accent-color;
       }
       line {
+        transition: 0.3s all ease;
         stroke: $accent-color;
       }
     }
@@ -34,6 +37,21 @@
       }
       line {
         stroke: white;
+      }
+    }
+  }
+
+  &:active {
+    color: $text-color;
+    border-color: $text-color;
+    background-color: transparent;
+
+    svg {
+      path {
+        fill: $text-color;
+      }
+      line {
+        stroke: $text-color;
       }
     }
   }

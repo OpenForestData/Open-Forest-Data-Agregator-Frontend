@@ -6,14 +6,80 @@
       <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
     </button>
   </h3>
-  <div class="filter__data" *ngIf="isExpanded">
-    <ui-checkbox
-      [name]="key"
-      [model]="value.indexOf(item.value) !== -1"
-      (modelChange)="changeFilter($event, item.value)"
-      *ngFor="let item of data"
+  <ng-container *ngIf="isExpanded">
+    <div class="filter__data">
+      <ng-container *ngIf="multiple">
+        <button (click)="toggleAllFilters()" class="filter__select-all">
+          {{ showAll ? 'Wyczyść' : 'Zaznacz' }}
+        </button>
+        <ng-container *ngFor="let item of data; let i = index">
+          <ui-checkbox
+            [name]="key"
+            [model]="value.indexOf(item.value) !== -1"
+            (modelChange)="changeFilter($event, item.value)"
+            *ngIf="(!showMore && i < maxFilters) || showMore"
+          >
+            {{ item.name }}
+          </ui-checkbox>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!multiple">
+        <ol class="datasets-filter">
+          <ng-container *ngFor="let item of data; let i = index">
+            <li
+              class="datasets-filter__item"
+              *ngIf="(!showMore && i < maxFilters) || showMore"
+              [ngClass]="{ selected: item.value === value }"
+              (click)="changeFilter(item.value !== value, item.value)"
+            >
+              {{ item.name }}
+            </li>
+          </ng-container>
+        </ol>
+      </ng-container>
+    </div>
+    <button
+      (click)="showMore = !showMore"
+      *ngIf="data.length > maxFilters"
+      class="filter__show-more"
+      [ngClass]="{ more: !showMore, less: showMore }"
     >
-      {{ item.name }}
-    </ui-checkbox>
-  </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="2" viewBox="0 0 16 2" *ngIf="showMore">
+        <path fill="#019544" d="m15,0s0.169,0.188 -14,0a1,1 0 0 0 0,2l14,0a1,1 0 0 0 0,-2z" id="Path_1070" />
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="13.241"
+        height="13.241"
+        viewBox="0 0 13.241 13.241"
+        *ngIf="!showMore"
+      >
+        <g id="Group_839" data-name="Group 839" transform="translate(-7.475 -8.854)">
+          <line
+            id="Line_43"
+            data-name="Line 43"
+            y2="11.241"
+            transform="translate(14.096 9.854)"
+            fill="none"
+            stroke="#019544"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <line
+            id="Line_44"
+            data-name="Line 44"
+            x2="11.241"
+            transform="translate(8.475 15.475)"
+            fill="none"
+            stroke="#019544"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </g>
+      </svg>
+      {{ (showMore ? 'global.show-less' : 'global.show-more') | translate }}
+    </button>
+  </ng-container>
 </div>

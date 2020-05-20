@@ -38,6 +38,10 @@
         path {
           fill: $text-color;
         }
+        line,
+        rect {
+          stroke: $text-color;
+        }
       }
     }
 
@@ -49,6 +53,10 @@
           path {
             fill: $accent-color;
           }
+          line,
+          rect {
+            stroke: $accent-color;
+          }
         }
       }
     }
@@ -59,9 +67,10 @@
   background-color: $accent-color;
   height: 2px;
   position: absolute;
-  bottom: 2px;
+  bottom: -1px;
   left: 0;
   transition: 0.3s all ease;
   transform: translate(0, 0);
   width: 140px;
+  border-radius: 3px;
 }

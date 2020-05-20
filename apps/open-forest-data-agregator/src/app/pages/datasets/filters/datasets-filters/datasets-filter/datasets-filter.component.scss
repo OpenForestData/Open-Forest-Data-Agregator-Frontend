@@ -1,3 +1,5 @@
+@import '../../../../../../../../../resources/_colors.scss';
+
 .filter {
   &__title {
     font-size: 18px;
@@ -41,10 +43,65 @@
       }
     }
   }
+
+  &__select-all {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 0;
+  }
+
+  &__show-more {
+    color: $accent-color;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    padding: 0;
+    margin-top: 7px;
+    margin-bottom: 22px;
+
+    svg {
+      margin-right: 18px;
+      display: block;
+    }
+
+    &.less {
+      align-items: center;
+      svg-icon {
+        height: 2px;
+      }
+    }
+  }
 }
 
 .filter__title--expanded {
   svg-icon {
     transform: rotate(180deg);
+  }
+}
+
+.datasets-filter {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0 15px;
+
+  &__item {
+    color: $text-color;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &.selected {
+      color: $accent-color;
+    }
   }
 }

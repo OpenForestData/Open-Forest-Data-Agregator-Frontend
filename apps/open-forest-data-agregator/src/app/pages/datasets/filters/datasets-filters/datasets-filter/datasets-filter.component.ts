@@ -16,13 +16,29 @@ export class DatasetsFilterComponent implements OnInit {
 
   @Input() value: any = null;
 
+  @Input() multiple = true;
+
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
+
+  public showMore = false;
+
+  public maxFilters = 4;
+
+  public showAll = false;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   changeFilter(event, value) {
-    this.value = event ? [...this.value, value] : this.value.filter(val => val !== value);
+    this.value = this.multiple ? (event ? [...this.value, value] : this.value.filter(val => val !== value)) : value;
+  }
+
+  toggleAllFilters() {
+    if (!this.multiple) return;
+
+    this.showAll = !this.showAll;
+
+    this.value = this.showAll ? this.data.map(val => val.value) : [];
   }
 }

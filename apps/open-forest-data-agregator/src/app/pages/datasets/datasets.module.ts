@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
+
 import { SharedModule } from '@app/shared/shared.module';
 import { DatasetsRoutingModule } from './datasets-routing.module';
 
@@ -10,6 +13,9 @@ import { DatasetsCategoryComponent } from '@app/pages/datasets/filters/datasets-
 import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
 import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
 import { DatasetsDataPresentationComponent } from './datasets-data-presentation/datasets-data-presentation.component';
+import { DatasetsListComponent } from './datasets-list/datasets-list.component';
+import { DatasetsRangeComponent } from './filters/datasets-range/datasets-range.component';
+import { DatasetsTimeRangeComponent } from './filters/datasets-time-range/datasets-time-range.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +24,11 @@ import { DatasetsDataPresentationComponent } from './datasets-data-presentation/
     DatasetsCategoryComponent,
     DatasetsFiltersComponent,
     DatasetsFilterComponent,
-    DatasetsDataPresentationComponent
+    DatasetsDataPresentationComponent,
+    DatasetsListComponent,
+    DatasetsRangeComponent,
+    DatasetsTimeRangeComponent
   ],
-  imports: [CommonModule, DatasetsRoutingModule, SharedModule]
+  imports: [CommonModule, DatasetsRoutingModule, SharedModule, LeafletModule, LeafletDrawModule]
 })
 export class DatasetsModule {}
