@@ -13,6 +13,7 @@ import { UICheckboxModule } from '@libs/ui-checkbox/src/lib/ui-checkbox.module';
 import { PageNavComponent } from '@app/layout/page-nav/page-nav.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component';
+import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component'
     AngularSvgIconModule,
     TranslateModule,
     NgxPaginationModule,
-    UICheckboxModule
+    UICheckboxModule,
+    UISelectModule
   ],
   declarations: [PageNavComponent, PaginationComponent, HeaderBarComponent],
   exports: [
@@ -34,7 +36,8 @@ import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component'
     PageNavComponent,
     PaginationComponent,
     HeaderBarComponent,
-    UICheckboxModule
+    UICheckboxModule,
+    UISelectModule
   ]
 })
 export class SharedModule {}

@@ -69,5 +69,9 @@
       "map": "Mapa"
     },
     "count": "rekordów"
+  },
+  "pagination": {
+    "show": "Pokaż",
+    "go-to-page": "Idź do strony"
   }
 }

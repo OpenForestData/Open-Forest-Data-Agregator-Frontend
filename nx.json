@@ -16,6 +16,9 @@
     },
     "ui-checkbox": {
       "tags": []
+    },
+    "ui-select": {
+      "tags": []
     }
   }
 }

@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
  * Pagination component
  */
 @Component({
-  selector: 'ofd-pagination',
+  selector: 'ofd-agregator-pagination',
   templateUrl: 'pagination.component.html',
   styleUrls: ['pagination.component.scss']
 })

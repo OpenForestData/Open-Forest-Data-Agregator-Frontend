@@ -1,4 +1,5 @@
 @import './_colors.scss';
+@import './_variables.scss';
 
 .form-select {
   select {
@@ -14,4 +15,12 @@
     font-weight: 500;
     padding-right: 5px;
   }
+}
+
+.input {
+  background-color: transparent;
+  border: 1px solid $accent-color;
+  border-radius: 50px;
+  font-family: $primary-font;
+  padding: 8px 18px;
 }

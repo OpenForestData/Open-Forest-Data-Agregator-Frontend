@@ -2,9 +2,7 @@
   <div class="datasets-list__header">
     <div>
       <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
-      <select>
-        <option selected disabled>{{ 'global.sort-by' | translate }}</option>
-      </select>
+      <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
     </div>
     <button class="button datasets-list__export">
       {{ 'global.export' | translate }}
@@ -34,5 +32,14 @@
         </footer>
       </article>
     </div>
+  </div>
+
+  <div class="datasets-list__pagination">
+    <ofd-agregator-pagination
+      [items]="600"
+      [pageSize]="15"
+      [(page)]="page"
+      [showOffsets]="true"
+    ></ofd-agregator-pagination>
   </div>
 </div>

@@ -19,6 +19,17 @@
     position: absolute;
   }
 
+  &:before {
+    content: '';
+    background-color: #fff;
+    z-index: -1;
+    top: 81px;
+    left: calc(30% + 40px);
+    height: 500%;
+    width: 100%;
+    position: absolute;
+  }
+
   &__filters {
     width: 30%;
 
