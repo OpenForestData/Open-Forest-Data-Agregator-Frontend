@@ -10,7 +10,12 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { CookieService } from 'ngx-cookie-service';
 
+import { AppRoutingModule } from './app-routing.module';
+import { ServicesModule } from './services/services.module';
+import { StateModule } from '@app/store/state.module';
+
 import { APIInterceptor } from '@app/interceptors/api.interceptor';
+
 import { AppConfigService } from './services/app-config.service';
 
 import { AppComponent } from '@app/app.component';
@@ -20,8 +25,6 @@ import { NotFoundComponent } from '@app/pages/not-found/not-fount.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 
-import { AppRoutingModule } from './app-routing.module';
-import { ServicesModule } from './services/services.module';
 import { HeaderControlsComponent } from '@app/layout/header/header-controls/header-controls.component';
 import { HeaderActionsComponent } from '@app/layout/header/header-actions/header-actions.component';
 import { HeaderNavigationItemsComponent } from '@app/layout/header/header-navigation-items/header-navigation-items.component';
@@ -65,6 +68,7 @@ const components = [
     BrowserModule.withServerTransition({ appId: 'ofdApp' }),
     HttpClientModule,
     AppRoutingModule,
+    StateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

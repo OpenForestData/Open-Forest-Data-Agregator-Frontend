@@ -46,6 +46,8 @@
     "@angular/router": "^9.1.0",
     "@asymmetrik/ngx-leaflet": "^7.0.0",
     "@asymmetrik/ngx-leaflet-draw": "^6.0.0",
+    "@ngrx/store": "^9.1.2",
+    "@ngrx/store-devtools": "^9.1.2",
     "@nguniversal/express-engine": "^9.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.2.6",
     "@ngx-progressbar/core": "^5.3.2",

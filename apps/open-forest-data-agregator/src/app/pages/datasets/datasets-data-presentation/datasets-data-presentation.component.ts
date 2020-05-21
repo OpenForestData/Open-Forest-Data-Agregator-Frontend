@@ -1,5 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
+import { AppState } from '@app/store';
+import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
+
 @Component({
   selector: 'ofd-agregator-datasets-data-presentation',
   templateUrl: './datasets-data-presentation.component.html',
@@ -10,7 +15,7 @@ export class DatasetsDataPresentationComponent implements OnInit {
 
   public presentation = 'list';
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
 
@@ -19,6 +24,8 @@ export class DatasetsDataPresentationComponent implements OnInit {
 
     const button = document.querySelector('#view-' + presentation) as HTMLElement;
     this.changeSelectorPosition(button.offsetLeft, button.clientWidth);
+
+    this.store.dispatch(new DatasetsChangeViewMode(presentation));
   }
 
   /**

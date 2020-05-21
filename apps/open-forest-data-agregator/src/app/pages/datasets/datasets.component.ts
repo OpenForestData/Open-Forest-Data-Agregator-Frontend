@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
-import { TranslateService } from '@ngx-translate/core';
 import { datasetsMock } from '@app/pages/datasets/datasets.mock';
+import { AppState } from '@app/store';
 
 /**
  * Datasets Component
@@ -13,7 +17,7 @@ import { datasetsMock } from '@app/pages/datasets/datasets.mock';
   styleUrls: ['datasets.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatasetsComponent implements OnInit {
+export class DatasetsComponent implements OnInit, OnDestroy {
   public breadcrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zbiory danych', href: '/datasets' }
@@ -37,6 +41,9 @@ export class DatasetsComponent implements OnInit {
     }
   };
 
+  /**
+   * Mock categories
+   */
   public categories = [
     { name: 'Kolekcja zoologiczna IBS PAN', value: 0 },
     { name: 'Kolekcja roślin naczyniowych INL PB', value: 1 },
@@ -52,12 +59,28 @@ export class DatasetsComponent implements OnInit {
     { name: 'Bazy danych INL PB', value: 11 }
   ];
 
-  public datasets = datasetsMock;
+  /**
+   * Mock datasets items
+   */
+  public datasetsItems = datasetsMock;
+
+  /**
+   * Datasets data from store
+   */
+  public datasets: any;
+
+  public subs: Subscription = new Subscription();
 
   /**
    * @ignore
    */
-  constructor(public translateService: TranslateService, public changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    public translateService: TranslateService,
+    public changeDetectorRef: ChangeDetectorRef,
+    private store: Store<AppState>
+  ) {
+    this.subs.add(this.store.select('datasets').subscribe(datasets => (this.datasets = datasets)));
+  }
 
   /**
    * @ignore
@@ -67,5 +90,9 @@ export class DatasetsComponent implements OnInit {
   toggleFilter(name) {
     this.filters[name].isExpanded = !this.filters[name].isExpanded;
     this.changeDetectorRef.detectChanges();
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }

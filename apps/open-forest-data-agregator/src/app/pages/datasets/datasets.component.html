@@ -32,8 +32,14 @@
   <div class="datasets__content">
     <ofd-agregator-datasets-data-presentation></ofd-agregator-datasets-data-presentation>
 
-    <div class="datasets__list">
-      <ofd-agregator-datasets-list [datasets]="datasets"></ofd-agregator-datasets-list>
+    <div class="datasets__list" *ngIf="datasets.mode === 'list'">
+      <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
+    </div>
+    <div class="datasets__table" *ngIf="datasets.mode === 'table'">
+      <ofd-agregator-datasets-table></ofd-agregator-datasets-table>
+    </div>
+    <div class="datasets__table" *ngIf="datasets.mode === 'gallery'">
+      <ofd-agregator-datasets-gallery></ofd-agregator-datasets-gallery>
     </div>
   </div>
 </main>
