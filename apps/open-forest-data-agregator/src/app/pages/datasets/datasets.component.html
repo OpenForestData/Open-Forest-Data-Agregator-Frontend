@@ -36,10 +36,10 @@
       <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
     </div>
     <div class="datasets__table" *ngIf="datasets.mode === 'table'">
-      <ofd-agregator-datasets-table></ofd-agregator-datasets-table>
+      <ofd-agregator-datasets-table [datasets]="datasetsItems"></ofd-agregator-datasets-table>
     </div>
     <div class="datasets__table" *ngIf="datasets.mode === 'gallery'">
-      <ofd-agregator-datasets-gallery></ofd-agregator-datasets-gallery>
+      <ofd-agregator-datasets-gallery [datasets]="datasetsItems"></ofd-agregator-datasets-gallery>
     </div>
   </div>
 </main>

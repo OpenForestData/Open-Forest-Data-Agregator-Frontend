@@ -1,1 +1,40 @@
-<p>datasets-gallery works!</p>
+<div class="datasets-list__container">
+  <div class="datasets-list__header">
+    <div>
+      <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
+      <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
+    </div>
+    <button class="button datasets-list__export">
+      {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
+    </button>
+  </div>
+
+  <div class="datasets-list__datasets" #galleryItems>
+    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
+      <a
+        [href]="dataset.preview"
+        class="datasets-list__datasets__item__picture"
+        [title]="dataset.title"
+        [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
+      >
+        <img [src]="dataset.preview" [alt]="dataset.title" />
+      </a>
+      <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
+      <a routerLink="/datasets/" class="datasets-list__datasets__item__link">
+        {{ 'global.see' | translate }}
+
+        <svg-icon [src]="'/assets/images/arrow-green-right.svg'" [applyCss]="true"></svg-icon>
+      </a>
+    </div>
+  </div>
+
+  <div class="datasets-list__pagination">
+    <ofd-agregator-pagination
+      [items]="600"
+      [pageSize]="15"
+      [(page)]="page"
+      [showOffsets]="true"
+    ></ofd-agregator-pagination>
+  </div>
+</div>
