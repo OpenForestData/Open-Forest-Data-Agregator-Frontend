@@ -1,0 +1,83 @@
+@import '../../../../../../../resources/colors';
+
+.search-section {
+  margin-top: 15px;
+  margin-bottom: 110px;
+
+  input.search {
+    width: 100%;
+    border-radius: 20px;
+    border: 3px solid $accent-color;
+    min-height: 40px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: black;
+      opacity: 1;
+    }
+  }
+
+  .search-wrapper {
+    position: relative;
+  }
+
+  .search-button {
+    border: none;
+    position: absolute;
+    right: 15px;
+    top: 55%;
+    transform: translateY(-50%);
+    background: transparent;
+  }
+
+  .advanced-search {
+    font-size: 16px;
+    text-align: right;
+    color: $accent-color;
+  }
+}
+
+.image-holder {
+  max-width: 90%;
+  height: 150px;
+  width: 150px;
+  border: 8px solid white;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
+  margin: 30px auto;
+
+  img {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+aside {
+  span {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .animal-name {
+    font-size: 16px;
+  }
+
+  .animal-length {
+    font-size: 14px;
+  }
+
+  .animal-weight {
+    font-size: 14px;
+  }
+}
+
+.details-wrapper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    border: none;
+  }
+}

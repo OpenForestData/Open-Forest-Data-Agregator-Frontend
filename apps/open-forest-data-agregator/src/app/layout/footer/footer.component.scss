@@ -49,3 +49,54 @@ ofd-agregator-footer-navigation-items {
   display: block;
   margin-bottom: 60px;
 }
+
+.right-side {
+  margin-top: 38px;
+
+  .image-wrapp {
+    img:first-child {
+      margin-right: 5vw;
+    }
+
+    margin-bottom: 25px;
+  }
+
+  p {
+    margin-bottom: 35px;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.ue-logo {
+  width: 100%;
+}
+.project-text {
+  font-size: 14px;
+}
+
+@media (max-width: 992px) {
+  .project-text {
+    font-size: 14px;
+  }
+
+  .image-wrapp {
+    img:last-child {
+      margin-left: 30px;
+    }
+  }
+
+  .right-side {
+    margin-top: 0px;
+  }
+
+  .ue-logo {
+    margin-top: 20px;
+  }
+}

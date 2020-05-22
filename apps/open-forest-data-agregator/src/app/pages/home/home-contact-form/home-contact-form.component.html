@@ -1,0 +1,41 @@
+<div class="modal-content">
+  <div class="times" (click)="closeModal()">&times;</div>
+
+  <ofd-agregator-section-title
+    [iconURL]="'assets/modules/home/contact.png'"
+    [titleText]="'home.contact_header' | translate"
+  ></ofd-agregator-section-title>
+
+  <div class="filds">
+    <input type="text" id="firstName" [placeholder]="'home.contact_form.name' | translate" />
+    <label for="firstName">{{ 'home.contact_form.name' | translate }}</label>
+  </div>
+
+  <div class="filds">
+    <input type="text" id="lastName" [placeholder]="'home.contact_form.surname' | translate" />
+    <label for="lastName">{{ 'home.contact_form.surname' | translate }}</label>
+  </div>
+
+  <div class="filds">
+    <input type="text" id="emailAddress" [placeholder]="'home.contact_form.email' | translate" />
+    <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
+  </div>
+
+  <div class="filds">
+    <textarea id="text" [placeholder]="'home.contact_form.text' | translate"></textarea>
+    <label for="text">{{ 'home.contact_form.text' | translate }}</label>
+  </div>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" class="check_box" id="checkbox1" name="checkbox" />
+    <label for="checkbox1"></label>
+    <span for="checkbox1" class="checkbox-label">{{ 'home.contact_form.checkbox' | translate }}</span>
+  </div>
+
+  <div class="field button-wrapp">
+    <button type="submit" class="btn">
+      {{ 'home.contact_form.send' | translate }}
+      <img src="assets/modules/home/envelop_white.png" />
+    </button>
+  </div>
+</div>

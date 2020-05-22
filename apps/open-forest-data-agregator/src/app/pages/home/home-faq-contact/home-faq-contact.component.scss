@@ -1,0 +1,45 @@
+@import '../../../../../../../resources/colors';
+
+.faq-contact {
+  background-color: $light-gray-color;
+}
+
+.faq-list {
+  margin-top: 20px;
+  padding: 0;
+
+  li {
+    list-style: none;
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: $text-color;
+    }
+
+    margin-bottom: 15px;
+  }
+}
+
+.contact_info {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.contact_button {
+  margin-top: 25px;
+}
+
+.container {
+  position: relative;
+  padding: 40px 0;
+}
+
+.trees {
+  position: absolute;
+  left: -45px;
+  bottom: 0;
+  transform: translate(-100%, 0);
+}

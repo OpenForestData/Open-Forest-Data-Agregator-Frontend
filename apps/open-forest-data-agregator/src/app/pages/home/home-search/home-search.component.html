@@ -1,0 +1,37 @@
+<section class="search-section">
+  <div class="search-wrapper">
+    <input type="text" class="search" [placeholder]="'home.search_placeholder' | translate" />
+    <button class="search-button">
+      <img src="assets/modules/home/search_icon.png" alt="{{ 'home.all_news' | translate }}" />
+    </button>
+  </div>
+  <p class="advanced-search">{{ 'home.advanced_search' | translate }}</p>
+</section>
+
+<section class="animal-of-the-day">
+  <ofd-agregator-section-title
+    [iconURL]="'assets/modules/home/heart_icon.png'"
+    [titleText]="'home.animal_of_the_day' | translate"
+  ></ofd-agregator-section-title>
+
+  <div class="image-holder">
+    <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+  </div>
+
+  <aside>
+    <span class="animal-name"> <b class="semibold">Żubr europejski </b> <i>(Bison banasus)</i> </span>
+    <span class="animal-length">
+      <b class="medium">{{ 'home.animal_length' | translate }}:</b> 2.9m (Dorosły)
+    </span>
+    <span class="animal-weight">
+      <b class="medium">{{ 'home.animal_weight' | translate }}:</b> 60 kg (Dorosły)
+    </span>
+  </aside>
+
+  <div class="details-wrapper">
+    <button class="btn">
+      {{ 'home.details' | translate }}
+      <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+    </button>
+  </div>
+</section>

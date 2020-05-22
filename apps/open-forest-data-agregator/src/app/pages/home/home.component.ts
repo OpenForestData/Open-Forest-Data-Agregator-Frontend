@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
 
 /**
  * Home Component
@@ -19,10 +20,14 @@ export class HomeComponent implements OnInit {
   /**
    * @ignore
    */
-  constructor() {}
+  constructor(public modal: UIModalService) {}
 
   /**
    * @ignore
    */
   ngOnInit() {}
+
+  onModalClose() {
+    this.modal.close('contact-modal');
+  }
 }

@@ -95,3 +95,12 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .navigation-items__list-item {
+    a {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+  }
+}

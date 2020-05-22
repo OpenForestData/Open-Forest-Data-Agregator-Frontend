@@ -4,6 +4,14 @@
 @import '_typo.scss';
 @import '_forms.scss';
 @import '_grid.scss';
+@import 'media.scss';
+
+input,
+button,
+textarea,
+select {
+  outline: none;
+}
 
 body {
   color: $text-color;
@@ -15,6 +23,11 @@ body {
 a {
   color: $accent-color;
   text-decoration: none;
+}
+
+.container {
+  // width: calc(100% - 400px);
+  margin: 0 auto;
 }
 
 $spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 100);
@@ -96,5 +109,100 @@ $aligments: (left, center, right);
     &::after {
       content: ', ';
     }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.m-t-15 {
+  margin-top: 15px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.m-b-40 {
+  margin-bottom: 40px;
+}
+
+div[class*='col-'] {
+  padding: 0;
+}
+
+p {
+  line-height: 21px;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+.btn {
+  background: transparent;
+  border-radius: 30px;
+  padding: 15px 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+  font-size: 18px;
+  font-weight: 500;
+  border: 1px solid $accent-color;
+  color: $accent-color;
+  transition: background-color 0.6s ease, color 0.6s ease;
+
+  &.no-border {
+    border: none;
+  }
+
+  img {
+    margin-left: 15px;
+  }
+  /*
+    &:hover,
+    &:active {
+      background: $accent-color;
+      color: white;
+      img {
+        filter: invert(100%);
+      }
+    }
+  */
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.color-green {
+  color: $accent-color;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 992px) {
+  .mlr-0 {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
