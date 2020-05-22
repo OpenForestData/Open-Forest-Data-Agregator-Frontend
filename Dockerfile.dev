@@ -15,6 +15,7 @@ COPY --from=build /app/dist/apps/open-forest-data-agregator/browser /usr/share/n
 COPY docker/entrypoint.sh /
 
 COPY docker/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/mime.types /etc/nginx/mime.types
 
 RUN chmod +x entrypoint.sh
 
