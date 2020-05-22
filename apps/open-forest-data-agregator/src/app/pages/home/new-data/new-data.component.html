@@ -1,0 +1,71 @@
+<section class="latest-added">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <ofd-agregator-section-title
+          [iconURL]="'assets/modules/home/clock.png'"
+          [titleText]="'home.latest_added' | translate"
+        ></ofd-agregator-section-title>
+      </div>
+    </div>
+
+    <div class="row data-row">
+      <div class="col-lg-3 data-info" *ngFor="let i of [0, 1, 2]">
+        <span class="add-date">04.04.2020</span>
+        <h3 class="add-title">Lorem ipsum dolor sit amet</h3>
+        <p class="add-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro cupiditate sit in autem quas magnam! Nobis
+          accusamus labore, eum voluptates vel, fuga cupiditate architecto ullam rerum aliquid ad! Perspiciatis, placeat
+          tempore? Hic quam accusantium saepe quas facilis nisi, earum error.
+        </p>
+        <p class="add-owner">
+          <b class="semibold">{{ 'home.owner' | translate }}: </b> <span class="color-green">IBS PAN</span>
+        </p>
+
+        <div class="add-social">
+          <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
+          <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
+          <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+          <a href="#"> <img src="assets/modules/home/social_mail.png" alt="Mail"/></a>
+        </div>
+
+        <div class="see_more_wrapper">
+          <a href="#">
+            <button class="btn no-border">
+              {{ 'home.see' | translate }}
+              <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <span class="add-date">&nbsp;</span>
+        <p class="add-text">
+          {{ 'home.add_data_info_1' | translate }}
+          <b class="semibold">{{ 'home.add_data_info_2' | translate }}</b>
+          {{ 'home.add_data_info_3' | translate }}
+        </p>
+
+        <div class="button-wrapper">
+          <button class="btn">
+            {{ 'home.add_data' | translate }}
+            <img src="assets/modules/home/plus_icon.png" alt="{{ 'home.add_data' | translate }}" />
+
+            <ul class="drop-down">
+              <li>
+                <a href="#">{{ 'home.science' | translate }}</a>
+              </li>
+              <li>
+                <a href="#">{{ 'home.dim' | translate }}</a>
+              </li>
+              <li>
+                <a href="#">{{ 'home.metric' | translate }}</a>
+              </li>
+            </ul>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

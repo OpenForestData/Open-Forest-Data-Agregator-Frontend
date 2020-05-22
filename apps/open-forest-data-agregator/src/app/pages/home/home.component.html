@@ -1,21 +1,41 @@
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
-<p>
-  HELLO!
-</p>
+<ofd-agregator-home-banner></ofd-agregator-home-banner>
+
+<div class="container desktop-only">
+  <div class="row m-t-40">
+    <div class="col-lg-7 col-md-7">
+      <ofd-agregator-home-news></ofd-agregator-home-news>
+    </div>
+    <div class="col-lg-4 col-md-4 ml-auto">
+      <ofd-agregator-home-search></ofd-agregator-home-search>
+    </div>
+  </div>
+</div>
+
+<div class="container mobile-only">
+  <ofd-agregator-home-news-mobile></ofd-agregator-home-news-mobile>
+</div>
+
+<div class="desktop-only">
+  <ofd-agregator-new-data></ofd-agregator-new-data>
+</div>
+
+<div class="mobile-only">
+  <ofd-agregator-new-data-mobile></ofd-agregator-new-data-mobile>
+</div>
+
+<div class="container">
+  <div class="row m-t-40 m-b-40 mlr-0">
+    <div class="col-lg-7 col-xs-12">
+      <ofd-agregator-home-mobile-app></ofd-agregator-home-mobile-app>
+    </div>
+    <div class="col-lg-4 ml-auto col-xs-12">
+      <ofd-agregator-home-youtube></ofd-agregator-home-youtube>
+    </div>
+  </div>
+</div>
+
+<ofd-agregator-home-faq-contact></ofd-agregator-home-faq-contact>
+
+<ui-modal id="contact-modal">
+  <ofd-agregator-home-contact-form (output)="onModalClose()"> </ofd-agregator-home-contact-form>
+</ui-modal>

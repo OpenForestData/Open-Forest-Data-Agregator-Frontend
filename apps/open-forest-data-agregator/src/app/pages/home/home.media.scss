@@ -1,0 +1,80 @@
+@import '../../../../../../resources/colors';
+
+.bg-green .animal-box-wrapper {
+  .animal-box .categories-arrow {
+    width: 11px;
+    height: 7px;
+    margin-left: 20px;
+  }
+
+  .mobile-categories {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .green-container {
+    width: 100%;
+    max-width: none;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mlr-0 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .faq-contact .row > div {
+    margin-bottom: 30px;
+  }
+
+  .animal-box-wrapper {
+    width: 100%;
+  }
+
+  .bg-gray {
+    .container > img {
+      width: 130px;
+      right: -60px;
+    }
+  }
+
+  .banner-container {
+    img {
+      margin: auto;
+    }
+
+    .slogan-text {
+      font-size: 18px;
+      margin-bottom: 50px;
+      max-width: 85%;
+      text-align: left;
+    }
+  }
+
+  .mobile-app {
+    margin: 0;
+  }
+
+  .download.mobile-only {
+    justify-content: center;
+    margin: 30px auto 45px auto;
+  }
+
+  .mobile-app .content {
+    font-size: 14px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+  }
+
+  .contact_button {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

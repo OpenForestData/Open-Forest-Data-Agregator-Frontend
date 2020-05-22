@@ -1,19 +1,25 @@
 <footer class="main-footer">
   <div class="container">
-    <div class="main-footer__left-col">
-      <ofd-agregator-footer-navigation-items></ofd-agregator-footer-navigation-items>
-      <ofd-agregator-footer-logo></ofd-agregator-footer-logo>
-    </div>
-    <div class="main-footer__right-col">
-      <div class="main-footer__top-logos">
-        <img src="/assets/images/instytut_logo.png" alt="Instytut Biologii Ssaków" />
-        <img src="/assets/images/logo_politechnika_bialostocka.png" alt="Politechnika Białostocka" />
+    <div class="row mlr-0">
+      <div class="col-lg-4 col-xs-12 col-md-10">
+        <div class="main-footer__left-col">
+          <ofd-agregator-footer-navigation-items></ofd-agregator-footer-navigation-items>
+          <ofd-agregator-footer-logo class="desktop-only"></ofd-agregator-footer-logo>
+        </div>
+        <div class="main-footer__right-col"></div>
       </div>
-      <p>{{ 'footer.project-text' | translate }}</p>
-      <div class="main-footer__bottom-logos">
-        <img src="/assets/images/fundusze_europejskie.png" alt="Fundusze Europejskie" />
-        <img src="/assets/images/rp.png" alt="Rzeczpospolita Polska" />
-        <img src="/assets/images/ue.png" alt="Unia Europejska" />
+      <div class="col-lg-6 col-xs-12 ml-auto right-side">
+        <div class="image-wrapp">
+          <img src="assets/modules/home/footer_1.png" alt="IBS PAN Białowieża" />
+          <img src="assets/modules/home/footer_2.png" alt="Politechnika Białostocka" />
+        </div>
+        <p class="project-text">{{ 'footer.project-text' | translate }}</p>
+
+        <ofd-agregator-footer-logo class="mobile-only"></ofd-agregator-footer-logo>
+
+        <div class="align-center">
+          <img src="assets/modules/home/footer_ue.png" class="ue-logo" alt="UE" />
+        </div>
       </div>
     </div>
   </div>

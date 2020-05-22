@@ -14,6 +14,8 @@ import { PageNavComponent } from '@app/layout/page-nav/page-nav.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component';
 import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
+import { SectionTitleComponent } from './section-title/section-title.component';
+import { UIModalComponent } from './ui-modal/ui-modal.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,7 @@ import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
     UICheckboxModule,
     UISelectModule
   ],
-  declarations: [PageNavComponent, PaginationComponent, HeaderBarComponent],
+  declarations: [PageNavComponent, PaginationComponent, SectionTitleComponent, UIModalComponent],
   exports: [
     CommonModule,
     TranslateModule,
@@ -37,7 +39,9 @@ import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
     PaginationComponent,
     HeaderBarComponent,
     UICheckboxModule,
-    UISelectModule
+    UISelectModule,
+    SectionTitleComponent,
+    UIModalComponent
   ]
 })
 export class SharedModule {}

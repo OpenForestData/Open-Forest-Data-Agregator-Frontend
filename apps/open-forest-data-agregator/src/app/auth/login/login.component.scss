@@ -1,0 +1,115 @@
+@import '../../../../../../resources/colors';
+
+.bg-gray {
+  background-color: $light-gray-color;
+  padding: 50px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  min-height: 55vh;
+}
+
+.form-wrapper {
+  padding: 30px 50px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
+  background: white;
+  min-width: 600px;
+  box-sizing: border-box;
+}
+
+form,
+.field {
+  box-sizing: border-box;
+}
+
+form {
+  margin-top: 50px;
+}
+
+.trees {
+  max-width: 25vw;
+  position: absolute;
+  bottom: 0;
+  right: -15px;
+}
+
+.check_box {
+  display: none;
+}
+
+.check_box + label {
+  cursor: pointer;
+
+  background: url('./../../../../../../resources/assets/modules/auth/checkbox.png') no-repeat;
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  padding: 0 0 0 0px;
+  background-position: 0 0;
+}
+
+.check_box:checked + label {
+  background-position: -20px 0;
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.field {
+  margin-bottom: 25px;
+}
+
+.checkbox-field {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+
+  label {
+    margin-left: 0px;
+    margin-bottom: 0;
+  }
+}
+
+.checkbox-label {
+  font-size: 14px;
+  margin-left: 15px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+input[type='text'],
+input[type='password'] {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border-color: $text-color;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.button-wrapp {
+  display: flex;
+  justify-content: flex-end;
+
+  .btn {
+    color: white;
+    background: $accent-color;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  align-items: center;
+  margin-top: 50px;
+
+  p {
+    margin: 0;
+  }
+}

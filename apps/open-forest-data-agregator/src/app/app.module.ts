@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +30,8 @@ import { HeaderActionsComponent } from '@app/layout/header/header-actions/header
 import { HeaderNavigationItemsComponent } from '@app/layout/header/header-navigation-items/header-navigation-items.component';
 import { FooterNavigationItemsComponent } from '@app/layout/footer/footer-navigation-items/footer-navigation-items.component';
 import { FooterLogoComponent } from '@app/layout/footer/footer-logo/footer-logo.component';
+import { SharedModule } from './shared/shared.module';
+import { HammerConfig } from 'src/config/hammer.config';
 
 /**
  * Initialize translate loader
@@ -78,11 +80,16 @@ const components = [
     }),
     AngularSvgIconModule,
     NgProgressModule,
+    SharedModule,
     ServicesModule.forRoot(),
     BrowserAnimationsModule
   ],
   providers: [
     AppConfigService,
+    {
+      provide: HammerGestureConfig,
+      useClass: HammerConfig
+    },
     { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppConfigService, HttpClientModule], multi: true },
     {
       provide: HTTP_INTERCEPTORS,

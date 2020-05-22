@@ -1,20 +1,50 @@
 <header>
   <nav class="container main-nav">
-    <div class="main-nav__top-bar">
-      <div class="main-nav__controls">
-        <ofd-agregator-header-controls></ofd-agregator-header-controls>
+    <div class="col-lg-12">
+      <div class="main-nav__top-bar desktop-flex-only">
+        <div class="main-nav__controls">
+          <ofd-agregator-header-controls></ofd-agregator-header-controls>
+        </div>
+        <div class="main-nav__actions">
+          <ofd-agregator-header-actions></ofd-agregator-header-actions>
+        </div>
       </div>
-      <div class="main-nav__actions">
-        <ofd-agregator-header-actions></ofd-agregator-header-actions>
-      </div>
-    </div>
-    <div class="main-nav__bottom-bar">
-      <a class="main-nav__logo" routerLink="/">
-        <svg-icon [src]="'/assets/images/logo_of.svg'" [applyCss]="true"></svg-icon>
-      </a>
-      <div class="main-nav__navigation-items">
-        <ofd-agregator-header-navigation-items></ofd-agregator-header-navigation-items>
+
+      <div class="main-nav__bottom-bar">
+        <a class="main-nav__logo" routerLink="/">
+          <svg-icon [src]="'/assets/images/logo_of.svg'" [applyCss]="true"></svg-icon>
+        </a>
+
+        <div class="mobile-flex-only middle-md">
+          <div class="hamburger" (click)="showMobileMenu = true">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+
+        <div class="main-nav__navigation-items desktop-only">
+          <ofd-agregator-header-navigation-items></ofd-agregator-header-navigation-items>
+        </div>
       </div>
     </div>
   </nav>
 </header>
+
+<div [ngClass]="{ active: showMobileMenu }" class="mobile-menu">
+  <div class="times">
+    <span (click)="showMobileMenu = false">&times;</span>
+  </div>
+  <div class="main-nav__controls">
+    <ofd-agregator-header-controls></ofd-agregator-header-controls>
+  </div>
+  <div class="main-nav__actions">
+    <ofd-agregator-header-actions></ofd-agregator-header-actions>
+  </div>
+
+  <ofd-agregator-section-title [titleText]="'home.menu' | translate"></ofd-agregator-section-title>
+
+  <div class="main-nav__navigation-items">
+    <ofd-agregator-header-navigation-items></ofd-agregator-header-navigation-items>
+  </div>
+</div>
