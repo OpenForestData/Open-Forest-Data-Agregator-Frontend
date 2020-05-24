@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
+import { DataTablesModule } from 'angular-datatables';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { DatasetsRoutingModule } from './datasets-routing.module';
@@ -32,6 +33,6 @@ import { DatasetsGalleryComponent } from './datasets-gallery/datasets-gallery.co
     DatasetsTableComponent,
     DatasetsGalleryComponent
   ],
-  imports: [CommonModule, DatasetsRoutingModule, SharedModule, LeafletModule, LeafletDrawModule]
+  imports: [CommonModule, DatasetsRoutingModule, SharedModule, LeafletModule, LeafletDrawModule, DataTablesModule]
 })
 export class DatasetsModule {}

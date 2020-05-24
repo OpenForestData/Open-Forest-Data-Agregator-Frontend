@@ -1,1 +1,29 @@
-<p>datasets-table works!</p>
+<div class="datasets-table__container">
+  <div class="datasets-table__header">
+    <button class="button datasets-table__export">
+      {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
+    </button>
+  </div>
+
+  <table datatable [dtOptions]="dtOptions" class="row-border hover datasets-table__table">
+    <thead>
+      <tr>
+        <th class="datasets-table__th">Dataset Persistent ID</th>
+        <th class="datasets-table__th">Tytuł</th>
+        <th class="datasets-table__th">Data publikacji</th>
+        <th class="datasets-table__th">Autor</th>
+        <th class="datasets-table__th">Temat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataset of datasets">
+        <td class="datasets-table__td">{{ dataset.datasetPersistentID }}</td>
+        <td class="datasets-table__td">{{ dataset.title }}</td>
+        <td class="datasets-table__td">{{ dataset.createdAt }}</td>
+        <td class="datasets-table__td">{{ dataset.author }}</td>
+        <td class="datasets-table__td">{{ dataset.subject }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -8,7 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DatasetsTableComponent implements OnInit {
   @Input() datasets: any[];
 
+  dtOptions: any = {};
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      dom: 'Bfrtip',
+      buttons: ['copy', 'print', 'excel']
+    };
+  }
 }
