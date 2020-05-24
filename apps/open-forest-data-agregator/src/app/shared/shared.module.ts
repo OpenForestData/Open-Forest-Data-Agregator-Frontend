@@ -29,7 +29,7 @@ import { UIModalComponent } from './ui-modal/ui-modal.component';
     UICheckboxModule,
     UISelectModule
   ],
-  declarations: [PageNavComponent, PaginationComponent, SectionTitleComponent, UIModalComponent],
+  declarations: [PageNavComponent, PaginationComponent, SectionTitleComponent, UIModalComponent, HeaderBarComponent],
   exports: [
     CommonModule,
     TranslateModule,
