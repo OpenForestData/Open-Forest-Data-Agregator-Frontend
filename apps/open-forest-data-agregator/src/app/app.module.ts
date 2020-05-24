@@ -32,6 +32,7 @@ import { FooterNavigationItemsComponent } from '@app/layout/footer/footer-naviga
 import { FooterLogoComponent } from '@app/layout/footer/footer-logo/footer-logo.component';
 import { SharedModule } from './shared/shared.module';
 import { HammerConfig } from 'src/config/hammer.config';
+import { BackToTopComponent } from '@app/layout/back-to-top/back-to-top.component';
 
 /**
  * Initialize translate loader
@@ -60,7 +61,8 @@ const components = [
   FooterNavigationItemsComponent,
   FooterLogoComponent,
   AdminLayoutComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  BackToTopComponent
 ];
 
 @NgModule({
