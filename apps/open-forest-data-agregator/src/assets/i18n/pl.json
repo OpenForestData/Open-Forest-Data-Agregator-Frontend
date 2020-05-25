@@ -9,6 +9,7 @@
     "from": "Od",
     "to": "Do",
     "source": "Źródło",
+    "show": "Pokaż",
     "see": "Zobacz"
   },
   "nav": {
@@ -58,6 +59,82 @@
       "author": "Autor",
       "range": "Zasięg",
       "time-range": "Zakres czasowy"
+    },
+    "dataset": {
+      "headers": {
+        "metadata": "Metadane",
+        "metrics": "Metryka",
+        "versions": "Wersje",
+        "api": "Dane API ",
+        "files": "Pliki",
+        "metadata-citation": "Metadane Citation",
+        "metadata-darwin": "Metadane Darwin Core",
+        "filterBy": "Filtruj wg: ",
+        "typeFile": "Typ pliku: ",
+        "access": "Dostęp: ",
+        "sortBy": "Sortuj wg",
+        "download": "Pobierz",
+        "records": "Rekordy",
+        "goto": "Idź do strony"
+      },
+      "filters": {
+        "types": {
+          "all": "Wszystkie",
+          "none": "Brak",
+          "image": "Obraz",
+          "video": "Video",
+          "document": "Dokument"
+        },
+        "access": {
+          "all": "Wszystkie",
+          "public": "Publiczny",
+          "private": "Prywatny",
+          "global": "Globalny"
+        }
+      },
+      "metadata-all": {
+        "downloads": "Ilość pobrań:",
+        "created": "Utworzono:",
+        "source": "Źródło:",
+        "author": "Autor:",
+        "data-openness": "Stopień otwartości danych:",
+        "license": "Licencja:",
+        "domain": "Dziedzina:",
+        "keywords": "Słowa kluczowe:"
+      },
+      "metadata-citation": {
+        "id": "Dataset Persistent ID",
+        "publication-date": "Publication Date",
+        "title": "Title",
+        "author": "Author",
+        "description": "Description",
+        "subject": "Subject",
+        "keyword": "Keyword",
+        "depositor": "Depositor",
+        "deposit-date": "Deposit Date"
+      },
+      "metadata-darwin": {
+        "type": "Type",
+        "license": "License",
+        "rights-holder": "Rights holder",
+        "institution-code": "Institution code",
+        "collection-code": "Collection code",
+        "dataset-name": "Dataset Name",
+        "basis-of-record": "Basis of Record",
+        "catalog-number": "Catalog Number",
+        "sex": "Sex",
+        "life-stage": "Life Stage",
+        "event": "Event Date",
+        "year": "Year",
+        "month": "Month",
+        "day": "Day",
+        "continent": "Continent",
+        "country": "Country",
+        "locality": "Locality",
+        "latitude": "Decimal Latitude",
+        "longtiude": "Decimal Longitude",
+        "latina-title": "Sex"
+      }
     },
     "add-data": "Dodaj dane",
     "search-placeholder": "Szukaj",

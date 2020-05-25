@@ -1,24 +1,31 @@
+@import '../../../../../../../resources/colors';
+
 .container {
-  height: 1000px;
   background-color: #f6f4f2;
   display: flex;
+  height: 100%;
 }
 
 .dataset-left {
-  width: 33.3%;
+  width: 30%;
   background-color: inherit;
   height: inherit;
+  padding-right: 3.3%;
 }
 
 .dataset-right {
   width: 66.6%;
   background-color: #ffffff;
   height: inherit;
+  padding-bottom: 60px;
 }
 
 .metric {
   &__header {
     display: block;
+  }
+  &__content {
+    padding-left: 5px;
   }
   &__content > p {
     display: block;
@@ -31,10 +38,317 @@
 
 .versions {
   &__content {
+    padding: 20px 0 0 5px;
     height: 20px;
     font-size: 14px;
   }
   &__content > p {
     display: inline;
   }
+  &__content > a {
+    text-decoration: underline;
+  }
+}
+
+.header-bar-dataset::ng-deep h3 {
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.right-container {
+  padding: 15px 30px 0 30px;
+  &__header {
+    p {
+      font-size: 14px;
+      padding-top: 10px;
+      margin: 0;
+    }
+    &__title {
+      display: flex;
+      flex-direction: row;
+      svg-icon {
+        padding: 0 20px 0 0;
+      }
+      p {
+        padding: 0;
+        font-size: 18px;
+      }
+    }
+    &__api {
+      a {
+        display: flex;
+        justify-content: center;
+        float: right;
+        color: $accent-color;
+        padding: 30px 0 30px 0;
+        svg-icon {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+  &__files {
+    &__download-all {
+      padding: 10px 20px 10px 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      &__buttons {
+        &__download {
+          cursor: pointer;
+          color: $accent-color;
+          background: none;
+          border: none;
+        }
+      }
+    }
+    &__download-single {
+      &__row::ng-deep {
+        padding: 10px 20px 10px 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .buttons-download {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          width: 10%;
+          &__style {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+          }
+        }
+        .single-checkbox {
+          font-size: 12px;
+          width: 90%;
+          .background-gray {
+            font-size: 9px;
+            text-decoration: none !important;
+            min-width: 40px;
+            display: flex;
+            justify-content: center;
+            margin-right: 10px;
+            background-color: $light-gray-color;
+            border: 1px solid $light-gray-color;
+            font-weight: 600;
+          }
+          .title {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    select {
+      border: none;
+      background: transparent;
+      padding: 0 10px 0 0;
+    }
+    &__sorting {
+      display: flex;
+      flex-direction: row;
+      padding: 20px 0 10px 0;
+      align-items: center;
+      font-size: 14px;
+      width: 100%;
+      justify-content: space-between;
+      &__bar-right {
+        display: flex;
+        align-items: center;
+        &__filters {
+          padding: 0 20px 0 10px;
+        }
+        &__file-type {
+          padding: 0 10px 0 0;
+        }
+        &__filter-by {
+          margin: 0;
+          padding: 0 20px 0 0;
+        }
+      }
+      &__bar-left {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        &__sort-by {
+          display: flex;
+          justify-content: flex-end;
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+}
+.meta-citation-box {
+  margin-bottom: 20px;
+}
+
+.meta-citation {
+  &__row::ng-deep {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    padding: 16px 0 0 14px;
+  }
+  .meta-citation__row__keys {
+    width: 20%;
+  }
+  .meta-citation__row__values {
+    width: 80%;
+  }
+}
+
+.meta-darwin {
+  &__row::ng-deep {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    padding: 16px 0 0 14px;
+  }
+  .meta-citation__row__keys {
+    width: 20%;
+  }
+  .meta-citation__row__values {
+    width: 80%;
+  }
+}
+
+.make-space {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  margin: 5px 0;
+}
+
+.metadata-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  padding: 10px 0 0 10px;
+  &__text {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__go-to-page {
+    input {
+      margin-left: 10px;
+    }
+  }
+
+  &__queries {
+    ui-select {
+      margin-left: 10px;
+    }
+  }
+
+  &__pages {
+    list-style-type: none;
+    margin: 30px 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    li {
+      &:not(:last-of-type) {
+        margin-right: 5px;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: $primary-color;
+      width: 21px;
+      height: 21px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      justify-content: center;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .prev-page {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .first-page {
+      &:after {
+        content: '...';
+        margin: 0 5px;
+        display: inline-block;
+      }
+    }
+
+    .last-page {
+      &:before {
+        content: '...';
+        margin: 0 5px 0 0;
+        display: inline-block;
+      }
+    }
+
+    .prev-page,
+    .next-page {
+      margin: 0;
+      padding: 2px;
+
+      svg {
+        path {
+          fill: $accent-color;
+        }
+      }
+    }
+
+    .active {
+      button {
+        background-color: $accent-color;
+        color: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.access-sort::ng-deep {
+  .ui-select {
+    &__selected-item {
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+.type-sort::ng-deep {
+  .ui-select {
+    &__selected-item {
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+.header-text {
+  padding: 0 10px 0 0;
 }
