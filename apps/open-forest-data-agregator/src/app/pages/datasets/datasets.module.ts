@@ -13,6 +13,7 @@ import { DatasetsCategoryComponent } from '@app/pages/datasets/filters/datasets-
 import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
 import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
 import { DatasetsDataPresentationComponent } from './datasets-data-presentation/datasets-data-presentation.component';
+import { DatasetModule } from './dataset/dataset.module';
 import { DatasetsListComponent } from './datasets-list/datasets-list.component';
 import { DatasetsRangeComponent } from './filters/datasets-range/datasets-range.component';
 import { DatasetsTimeRangeComponent } from './filters/datasets-time-range/datasets-time-range.component';
@@ -33,6 +34,14 @@ import { DatasetsGalleryComponent } from './datasets-gallery/datasets-gallery.co
     DatasetsTableComponent,
     DatasetsGalleryComponent
   ],
-  imports: [CommonModule, DatasetsRoutingModule, SharedModule, LeafletModule, LeafletDrawModule, DataTablesModule]
+  imports: [
+    CommonModule,
+    DatasetsRoutingModule,
+    SharedModule,
+    LeafletModule,
+    LeafletDrawModule,
+    DatasetModule,
+    DataTablesModule
+  ]
 })
 export class DatasetsModule {}

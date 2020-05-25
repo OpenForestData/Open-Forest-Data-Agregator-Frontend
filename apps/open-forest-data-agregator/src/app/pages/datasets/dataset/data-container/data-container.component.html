@@ -1,0 +1,16 @@
+<div class="data-container">
+  <h3 class="header-bar" [ngClass]="{ expanded: expanded }">
+    <svg-icon [src]="iconSrc" [applyCss]="true"></svg-icon>
+    {{ title }}
+    <ng-container *ngIf="expandable">
+      <button (click)="onToggle()">
+        <svg-icon
+          [src]="'/assets/images/dark_arrow_down.svg'"
+          [svgStyle]="{ 'width.px': 11, 'heigth.px': 6 }"
+          [applyCss]="true"
+        ></svg-icon>
+      </button>
+    </ng-container>
+  </h3>
+</div>
+<ng-content *ngIf="expanded"></ng-content>

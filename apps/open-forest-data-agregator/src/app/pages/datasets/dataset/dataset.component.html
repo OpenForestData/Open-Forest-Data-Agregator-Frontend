@@ -1,7 +1,10 @@
+<ofd-page-nav [breadcrumbs]="breadCrumbs"></ofd-page-nav>
 <section class="container">
   <div class="dataset-left">
     <div class="metric">
-      <div class="metric__header"></div>
+      <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/pencil.svg'">
+        {{ 'datasets.dataset.headers.metrics' | translate }}
+      </ofd-agregator-header-bar>
 
       <div class="metric__content">
         <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
@@ -36,7 +39,9 @@
     </div>
 
     <div class="versions">
-      <div class="versions__header"></div>
+      <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
+        {{ 'datasets.dataset.headers.versions' | translate }}
+      </ofd-agregator-header-bar>
 
       <div class="versions__content">
         <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
@@ -45,5 +50,141 @@
     </div>
   </div>
 
-  <div class="dataset-right"></div>
+  <div class="dataset-right">
+    <div class="right-container">
+      <div class="right-container__header">
+        <div class="right-container__header__title">
+          <svg-icon [src]="'/assets/images/server.svg'"></svg-icon>
+          <p>{{ testData.header.title }}</p>
+        </div>
+        <p>{{ testData.header.body }}</p>
+        <div class="right-container__header__api">
+          <a href="{{ testData.header.apiUrl }}"
+            >{{ 'datasets.dataset.headers.api' | translate
+            }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon
+          ></a>
+        </div>
+      </div>
+
+      <div class="right-container__files">
+        <ofd-agregator-data-container
+          [title]="'datasets.dataset.headers.files' | translate"
+          [iconSrc]="'/assets/images/files.svg'"
+        >
+        </ofd-agregator-data-container>
+
+        <div class="right-container__files__sorting">
+          <div class="right-container__files__sorting__bar-right">
+            <svg-icon
+              class="right-container__files__sorting__bar-right__filters"
+              [src]="'/assets/images/dataset/filters.svg'"
+            >
+            </svg-icon>
+            <p class="right-container__files__sorting__bar-right__filter-by">
+              {{ 'datasets.dataset.headers.filterBy' | translate }}
+            </p>
+            <div class="right-container__files__sorting__bar-right__file-type">
+              {{ 'datasets.dataset.headers.typeFile' | translate }}
+              <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortBy">
+              </ui-select>
+            </div>
+
+            <div class="right-container__files__sorting__bar-right__access">
+              {{ 'datasets.dataset.headers.access' | translate }}
+              <ui-select class="access-sort" [items]="sortItemsAccess" [options]="optionsAccess" [(value)]="sortBy">
+              </ui-select>
+            </div>
+          </div>
+
+          <div class="right-container__files__sorting__bar-left">
+            <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon>
+            <div class="right-container__files__sorting__bar-left__sort-by">
+              <ui-select [items]="sortItemsFilter" [options]="optionsFilter" [(value)]="sortBy"> </ui-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-container__files__download-all">
+          <ui-checkbox [name]="'downloadAllFiles'" class="right-container__files__download-all__checkbox">
+            3 {{ 'datasets.dataset.headers.records' | translate | lowercase }}
+          </ui-checkbox>
+          <div class="right-container__files__download-all__buttons">
+            <button class="right-container__files__download-all__buttons__download">
+              {{ 'datasets.dataset.headers.download' | translate }}
+              <svg-icon [src]="'/assets/images/dataset/download.svg'"></svg-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="right-container__files__download-single">
+          <div class="right-container__files__download-single__row" *ngFor="let file of testData.files">
+            <ui-checkbox [name]="'downloadAllFiles'" class="single-checkbox">
+              <div class="background-gray">
+                {{ file.format | uppercase }}
+                <!-- <p class="background-gray">{{ file.format | uppercase }}</p> -->
+              </div>
+              <p class="title">{{ file.title }}</p>
+            </ui-checkbox>
+            <div class="buttons-download">
+              <button class="buttons-download__style">
+                <svg-icon [src]="'/assets/images/dataset/download.svg'" [applyCss]="true"></svg-icon>
+              </button>
+              <button class="buttons-download__style">
+                <svg-icon [src]="'/assets/images/dataset/look.svg'" [applyCss]="true"></svg-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ofd-agregator-pagination [items]="50" [pageSize]="15" [(page)]="page" [showOffsets]="true">
+        </ofd-agregator-pagination>
+      </div>
+
+      <h3 class="metadata-header">
+        <div class="metadata-header__text">
+          <svg-icon class="header-text" [applyCss]="true" [src]="'/assets/images/metadata-content.svg'"></svg-icon>
+          {{ 'datasets.dataset.headers.metadata' | translate }}
+        </div>
+        <div class="metadata-header__export">
+          <button class="button">
+            {{ 'global.export' | translate }}
+            <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
+          </button>
+        </div>
+      </h3>
+
+      <div class="meta-citation-box">
+        <ofd-agregator-data-container
+          class="meta-citation"
+          [title]="'datasets.dataset.headers.metadata-citation' | translate"
+          [expandable]="true"
+          [expanded]="false"
+        >
+          <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: 0">
+            <div class="meta-citation__row__keys">
+              {{ 'datasets.dataset.metadata-citation.' + item.key | translate }}
+            </div>
+            <div class="meta-citation__row__values">
+              {{ item.value }}
+            </div>
+          </div>
+        </ofd-agregator-data-container>
+      </div>
+      <ofd-agregator-data-container
+        class="meta-darwin"
+        [title]="'datasets.dataset.headers.metadata-darwin' | translate"
+        [expandable]="true"
+        [expanded]="false"
+      >
+        <div class="meta-citation__row" *ngFor="let item of metaDarwin | keyvalue: 0">
+          <div class="meta-citation__row__keys">
+            {{ 'datasets.dataset.metadata-darwin.' + item.key | translate }}
+          </div>
+          <div class="meta-citation__row__values">
+            {{ item.value }}
+          </div>
+        </div>
+      </ofd-agregator-data-container>
+    </div>
+  </div>
 </section>

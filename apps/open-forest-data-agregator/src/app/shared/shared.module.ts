@@ -13,6 +13,7 @@ import { UICheckboxModule } from '@libs/ui-checkbox/src/lib/ui-checkbox.module';
 import { PageNavComponent } from '@app/layout/page-nav/page-nav.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderBarComponent } from '@app/shared/header-bar/header-bar.component';
+import { SocialComponent } from './social/social.component';
 import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
 import { SectionTitleComponent } from './section-title/section-title.component';
 import { UIModalComponent } from './ui-modal/ui-modal.component';
@@ -29,7 +30,14 @@ import { UIModalComponent } from './ui-modal/ui-modal.component';
     UICheckboxModule,
     UISelectModule
   ],
-  declarations: [PageNavComponent, PaginationComponent, SectionTitleComponent, UIModalComponent, HeaderBarComponent],
+  declarations: [
+    PageNavComponent,
+    PaginationComponent,
+    SectionTitleComponent,
+    UIModalComponent,
+    HeaderBarComponent,
+    SocialComponent
+  ],
   exports: [
     CommonModule,
     TranslateModule,
@@ -41,7 +49,8 @@ import { UIModalComponent } from './ui-modal/ui-modal.component';
     UICheckboxModule,
     UISelectModule,
     SectionTitleComponent,
-    UIModalComponent
+    UIModalComponent,
+    SocialComponent
   ]
 })
 export class SharedModule {}
