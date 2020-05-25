@@ -1,20 +1,21 @@
 import { Component, HostListener, Inject, OnInit, ViewChild, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
-export const debounce = (delay: number = 100): MethodDecorator => {
-  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+/* tslint:disable */
+export function debounce(delay: number = 100): MethodDecorator {
+  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const timeoutKey = Symbol();
 
     const original = descriptor.value;
 
-    descriptor.value = (...args) => {
+    descriptor.value = function(...args) {
       clearTimeout(this[timeoutKey]);
       this[timeoutKey] = setTimeout(() => original.apply(this, args), delay);
     };
 
     return descriptor;
   };
-};
+}
 
 @Component({
   selector: 'ofd-agregator-back-to-top',

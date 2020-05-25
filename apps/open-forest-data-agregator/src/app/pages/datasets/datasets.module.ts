@@ -18,6 +18,7 @@ import { DatasetsRangeComponent } from './filters/datasets-range/datasets-range.
 import { DatasetsTimeRangeComponent } from './filters/datasets-time-range/datasets-time-range.component';
 import { DatasetsTableComponent } from './datasets-table/datasets-table.component';
 import { DatasetsGalleryComponent } from './datasets-gallery/datasets-gallery.component';
+import { DatasetsMapComponent } from './datasets-map/datasets-map.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DatasetsGalleryComponent } from './datasets-gallery/datasets-gallery.co
     DatasetsRangeComponent,
     DatasetsTimeRangeComponent,
     DatasetsTableComponent,
-    DatasetsGalleryComponent
+    DatasetsGalleryComponent,
+    DatasetsMapComponent
   ],
   imports: [CommonModule, DatasetsRoutingModule, SharedModule, LeafletModule, LeafletDrawModule, DataTablesModule]
 })

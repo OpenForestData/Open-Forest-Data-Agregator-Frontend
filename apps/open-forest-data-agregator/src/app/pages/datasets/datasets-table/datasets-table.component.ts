@@ -17,7 +17,7 @@ export class DatasetsTableComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       dom: 'Bfrtip',
-      buttons: ['copy', 'print', 'excel']
+      buttons: ['copy', 'print', 'excel', 'pdfHtml5']
     };
   }
 }

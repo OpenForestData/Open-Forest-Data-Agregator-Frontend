@@ -41,5 +41,8 @@
     <div class="datasets__table" *ngIf="datasets.mode === 'gallery'">
       <ofd-agregator-datasets-gallery [datasets]="datasetsItems"></ofd-agregator-datasets-gallery>
     </div>
+    <div class="datasets__table" *ngIf="datasets.mode === 'map'">
+      <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
+    </div>
   </div>
 </main>
