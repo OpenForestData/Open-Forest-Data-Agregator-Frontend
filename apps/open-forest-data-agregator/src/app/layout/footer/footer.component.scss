@@ -10,14 +10,6 @@
     align-items: center;
   }
 
-  &__left-col {
-    width: 45%;
-  }
-
-  &__right-col {
-    width: 55%;
-  }
-
   &__top-logos {
     img {
       width: 50%;
@@ -27,6 +19,7 @@
       &:first-child {
         height: 37px;
       }
+
       &:nth-child(2) {
         height: 33px;
       }
@@ -51,7 +44,7 @@ ofd-agregator-footer-navigation-items {
 }
 
 .right-side {
-  margin-top: 38px;
+  // margin-top: 38px;
 
   .image-wrapp {
     img:first-child {
@@ -77,6 +70,7 @@ ofd-agregator-footer-navigation-items {
 .ue-logo {
   width: 100%;
 }
+
 .project-text {
   font-size: 14px;
 }

@@ -1,0 +1,13 @@
+<ofd-agregator-chart-filters (filtersChanged)="getData($event)"></ofd-agregator-chart-filters>
+
+<div class="chart-wrapper">
+  <canvas
+    baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"
+  >
+  </canvas>
+</div>

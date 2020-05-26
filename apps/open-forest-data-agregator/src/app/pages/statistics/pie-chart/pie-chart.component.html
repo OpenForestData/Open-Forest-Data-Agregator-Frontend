@@ -1,0 +1,17 @@
+<ofd-agregator-chart-filters (filtersChanged)="getData($event)" [showRange]="false"></ofd-agregator-chart-filters>
+
+<div class="chart-wrapper">
+  <canvas
+    baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend"
+  >
+  </canvas>
+
+  <!-- <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"> </canvas> -->
+</div>

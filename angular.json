@@ -54,8 +54,12 @@
               "./node_modules/jquery/dist/jquery.js",
               "./node_modules/datatables.net/js/jquery.dataTables.js",
               "./node_modules/jszip/dist/jszip.js",
+<<<<<<< HEAD
               "./node_modules/pdfmake/build/pdfmake.js",
               "./node_modules/pdfmake/build/vfs_fonts.js",
+=======
+              "./node_modules/chart.js/dist/chart.js",
+>>>>>>> Statistic page, mobile statistics, datepicker example
               "./node_modules/datatables.net-buttons/js/dataTables.buttons.js",
               "./node_modules/datatables.net-buttons/js/buttons.colVis.js",
               "./node_modules/datatables.net-buttons/js/buttons.flash.js",
