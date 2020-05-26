@@ -238,6 +238,7 @@
     "chart_2_2": "Liczba dodanych plików w czasie",
     "chart_3_1": "Liczba pobranych plików w podziale na kategorie",
     "chart_3_2": "Liczba pobranych plików w czasie"
+<<<<<<< HEAD
   },
   "misc": {
     "partners_title": "O partnerach",
@@ -246,5 +247,7 @@
     "instructions_title": "Instrukcje",
     "faq_title": "FAQ",
     "about_project": "O projekcie"
+=======
+>>>>>>> Statistic page, mobile statistics, datepicker example
   }
 }
