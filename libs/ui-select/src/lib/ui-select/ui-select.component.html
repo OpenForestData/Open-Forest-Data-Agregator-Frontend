@@ -1,5 +1,5 @@
 <div class="ui-select" #selectRef (clickOutside)="close()">
-  <button type="button" class="ui-select__selected-item" (click)="openSelect()">
+  <button type="button" class="ui-select__selected-item {{ options.class }}" (click)="openSelect()">
     {{ value && value != '' ? (value[displayName] ? value[displayName] : value) : options.placeholder }}
     <svg-icon src="/assets/images/select-arrow.svg" [applyCss]="true"></svg-icon>
   </button>

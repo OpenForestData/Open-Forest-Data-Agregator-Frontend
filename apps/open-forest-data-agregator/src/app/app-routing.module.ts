@@ -10,6 +10,7 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', loadChildren: '../app/pages/home/home.module#HomeModule' },
+      { path: 'statistics', loadChildren: '../app/pages/statistics/statistics.module#StatisticsModule' },
       { path: 'auth', loadChildren: '../app/auth/auth.module#AuthModule' },
       { path: 'datasets', loadChildren: '../app/pages/datasets/datasets.module#DatasetsModule' },
       { path: '**', component: NotFoundComponent }

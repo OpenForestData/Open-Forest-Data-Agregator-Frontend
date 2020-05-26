@@ -15,6 +15,7 @@ import { HomeFaqContactComponent } from './home-faq-contact/home-faq-contact.com
 import { HomeContactFormComponent } from './home-contact-form/home-contact-form.component';
 import { HomeNewsMobileComponent } from './home-news-mobile/home-news-mobile.component';
 import { NewDataMobileComponent } from './new-data-mobile/new-data-mobile.component';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 const components = [
   HomeComponent,

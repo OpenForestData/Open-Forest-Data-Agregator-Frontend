@@ -28,7 +28,7 @@ export class HeaderNavigationItemsComponent implements OnInit {
     },
     {
       name: '',
-      path: '/stats',
+      path: '/statistics',
       key: 'stats'
     },
     {

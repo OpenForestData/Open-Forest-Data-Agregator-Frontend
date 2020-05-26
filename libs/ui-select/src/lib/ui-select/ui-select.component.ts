@@ -13,6 +13,7 @@ import {
 
 export interface IUISelectOptions {
   bold?: boolean;
+  class?: string;
   placeholder?: string;
 }
 

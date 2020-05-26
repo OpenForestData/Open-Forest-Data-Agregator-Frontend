@@ -56,6 +56,7 @@
               "./node_modules/jszip/dist/jszip.js",
               "./node_modules/pdfmake/build/pdfmake.js",
               "./node_modules/pdfmake/build/vfs_fonts.js",
+              "./node_modules/chart.js/dist/chart.js",
               "./node_modules/datatables.net-buttons/js/dataTables.buttons.js",
               "./node_modules/datatables.net-buttons/js/buttons.colVis.js",
               "./node_modules/datatables.net-buttons/js/buttons.flash.js",
