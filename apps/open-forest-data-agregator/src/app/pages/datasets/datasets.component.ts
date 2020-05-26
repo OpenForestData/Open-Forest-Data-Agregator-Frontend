@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { datasetsMock } from '@app/pages/datasets/datasets.mock';
 import { AppState } from '@app/store';
+import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 
 /**
  * Datasets Component
@@ -94,5 +95,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+
+    this.store.dispatch(new DatasetsChangeViewMode('list'));
   }
 }
