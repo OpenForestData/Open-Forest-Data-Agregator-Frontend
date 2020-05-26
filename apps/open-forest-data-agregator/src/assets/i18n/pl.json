@@ -171,7 +171,7 @@
     "subtitle_slogan": "Podlaskie cyfrowe repozytorium przyrodniczych danych naukowych.",
     "all": "Wszystkie",
     "news": "Aktualności",
-    "read_more": "Czytaj więcej",
+    "read_more": "Czytaj dalej",
     "tags": "Tagi",
     "all_news": "Wszystkie",
     "search_placeholder": "Szukaj danych...",
@@ -238,7 +238,6 @@
     "chart_2_2": "Liczba dodanych plików w czasie",
     "chart_3_1": "Liczba pobranych plików w podziale na kategorie",
     "chart_3_2": "Liczba pobranych plików w czasie"
-<<<<<<< HEAD
   },
   "misc": {
     "partners_title": "O partnerach",
@@ -247,7 +246,12 @@
     "instructions_title": "Instrukcje",
     "faq_title": "FAQ",
     "about_project": "O projekcie"
-=======
->>>>>>> Statistic page, mobile statistics, datepicker example
+  },
+  "blog": {
+    "blog": "Blog",
+    "read_more": "Czytaj dalej",
+    "previous": "Poprzedni",
+    "next": "Następny",
+    "similar": "Proponowane post"
   }
 }

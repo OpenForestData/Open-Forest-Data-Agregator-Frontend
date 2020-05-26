@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class SectionTitleComponent {
   @Input() iconURL = '';
   @Input() titleText = '';
+  @Input() dobuleSideLine = false;
 }
