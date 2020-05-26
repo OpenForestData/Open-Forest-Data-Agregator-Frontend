@@ -51,3 +51,22 @@
   overflow: hidden;
   display: block;
 }
+
+@media (max-width: 1200px) {
+  :host {
+    background-color: #fff;
+  }
+
+  .datasets {
+    display: block;
+    width: 100%;
+
+    &__filters {
+      display: none;
+    }
+
+    &__content {
+      width: 100%;
+    }
+  }
+}

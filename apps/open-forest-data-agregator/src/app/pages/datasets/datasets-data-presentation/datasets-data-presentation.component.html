@@ -41,4 +41,12 @@
     </button>
     <div class="selector" #selector></div>
   </div>
+  <div class="datasets-presentation__views--mobile">
+    <select (change)="selectPresentation($event.target['value'])" [(ngModel)]="presentation">
+      <option value="list">{{ 'datasets.presentation.list' | translate }}</option>
+      <option value="table">{{ 'datasets.presentation.table' | translate }}</option>
+      <option value="gallery">{{ 'datasets.presentation.gallery' | translate }}</option>
+      <option value="map">{{ 'datasets.presentation.map' | translate }}</option>
+    </select>
+  </div>
 </div>

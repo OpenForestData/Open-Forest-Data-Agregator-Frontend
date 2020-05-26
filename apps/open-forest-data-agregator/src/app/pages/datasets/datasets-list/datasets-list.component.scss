@@ -36,7 +36,8 @@
       font-size: 12px;
       line-height: 18px;
 
-      &__picture {
+      &__picture,
+      &__picture--mobile {
         padding-right: 20px;
         img {
           width: 56px;
@@ -47,6 +48,10 @@
           box-sizing: border-box;
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
         }
+      }
+
+      &__picture--mobile {
+        display: none;
       }
 
       &__title {
@@ -75,6 +80,57 @@
           margin-right: 8px;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .datasets-list {
+    &__container {
+      background-color: #fff;
+      padding: 32px 0 64px 0;
+    }
+
+    &__header {
+      flex-direction: column-reverse;
+      flex-wrap: wrap;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+      }
+    }
+
+    &__export {
+      margin-bottom: 15px;
+    }
+
+    &__datasets {
+      padding: 0 18px;
+      &__item {
+        &__picture {
+          display: none;
+
+          &--mobile {
+            display: block;
+          }
+        }
+
+        &__title {
+          display: flex;
+          align-items: center;
+        }
+
+        &__description {
+          margin: 10px 0;
+        }
+      }
+    }
+
+    &__pagination {
+      padding: 0 18px;
     }
   }
 }

@@ -94,3 +94,36 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .pagination {
+    flex-wrap: wrap;
+    font-size: 14px;
+    justify-content: space-between;
+
+    &__pages {
+      order: 1;
+      width: 100%;
+    }
+
+    &__go-to-page {
+      order: 2;
+      text-align: center;
+    }
+
+    &__queries {
+      order: 3;
+      text-align: center;
+
+      ui-select {
+        margin-left: 0;
+      }
+    }
+
+    .input {
+      width: 57px;
+      margin-left: 0;
+      box-sizing: border-box;
+    }
+  }
+}

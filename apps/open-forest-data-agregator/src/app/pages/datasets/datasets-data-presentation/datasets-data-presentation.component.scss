@@ -29,6 +29,11 @@
     display: flex;
     align-items: center;
     position: relative;
+
+    &--mobile {
+      display: none;
+    }
+
     &:after {
       content: '';
       position: absolute;
@@ -98,4 +103,35 @@
   transform: translate(0, 0);
   width: 140px;
   border-radius: 3px;
+}
+
+@media (max-width: 1200px) {
+  .datasets-presentation {
+    background-color: $light-gray-color;
+    padding: 15px 0;
+
+    &__header {
+      &:after {
+        display: none;
+      }
+    }
+
+    &__views {
+      display: none;
+
+      &--mobile {
+        display: block;
+
+        select {
+          border: 1px solid $text-color;
+          color: $text-color;
+          border-radius: 50px;
+          padding: 8px 12px;
+          font-size: 14px;
+          background-color: transparent;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
 }

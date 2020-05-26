@@ -1,7 +1,7 @@
 <div class="datasets-list__container">
   <div class="datasets-list__header">
     <div>
-      <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
+      <span class="datasets-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
       <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
     </div>
     <button class="button datasets-list__export">
@@ -18,6 +18,9 @@
       <article>
         <header>
           <h3 class="datasets-list__datasets__item__title">
+            <picture class="datasets-list__datasets__item__picture--mobile">
+              <img [src]="dataset.preview" [alt]="dataset.title" />
+            </picture>
             <a routerLink="/datasets/dataset"> {{ dataset.title }} </a>
           </h3>
           <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
