@@ -1,0 +1,56 @@
+@import '../../../../../../../resources/colors';
+
+.post-link {
+  color: $accent-color;
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  align-items: center;
+  &.end {
+    justify-content: flex-end;
+  }
+  img {
+    width: 16px;
+    height: 11px;
+  }
+}
+
+.m-l-25 {
+  margin-left: 25px;
+}
+
+.m-r-25 {
+  margin-right: 25px;
+}
+
+.post-links {
+  margin-bottom: 30px;
+}
+
+.news-body {
+  .news-social {
+    justify-content: flex-end;
+  }
+
+  .news-title {
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 0;
+  }
+
+  .news-date {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    display: block;
+  }
+
+  .news-content {
+    margin-top: 0;
+  }
+}
+
+.row.tag-row {
+  margin-bottom: 20px;
+}
