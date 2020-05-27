@@ -38,19 +38,19 @@ export class HeaderNavigationItemsComponent implements OnInit {
     },
     {
       name: '',
-      path: '/',
+      path: '/more/about-project',
       key: 'more',
       children: [
-        { name: '', path: 'about-project', key: 'about-project' },
-        { name: '', path: 'about-partners', key: 'about-partners' },
+        { name: '', path: '/more/about-project', key: 'about-project' },
+        { name: '', path: '/more/partners', key: 'about-partners' },
         {
           name: '',
-          path: 'about-datasets',
+          path: '/more/about-resources',
           key: 'about-datasets'
         },
         {
           name: '',
-          path: 'instructions',
+          path: '/more/instructions',
           key: 'instructions'
         }
       ]

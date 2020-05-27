@@ -17,6 +17,23 @@ import { SocialComponent } from './social/social.component';
 import { UISelectModule } from '@libs/ui-select/src/lib/ui-select.module';
 import { SectionTitleComponent } from './section-title/section-title.component';
 import { UIModalComponent } from './ui-modal/ui-modal.component';
+import { PageTemplateComponent } from './page-template/page-template.component';
+import { NewDataComponent } from '@app/pages/home/new-data/new-data.component';
+import { NewDataMobileComponent } from '@app/pages/home/new-data-mobile/new-data-mobile.component';
+import { AccordionComponent } from './accordion/accordion.component';
+
+const components = [
+  PageNavComponent,
+  PaginationComponent,
+  SectionTitleComponent,
+  UIModalComponent,
+  HeaderBarComponent,
+  PageTemplateComponent,
+  SocialComponent,
+  NewDataMobileComponent,
+  NewDataComponent,
+  AccordionComponent
+];
 
 @NgModule({
   imports: [
@@ -30,27 +47,15 @@ import { UIModalComponent } from './ui-modal/ui-modal.component';
     UICheckboxModule,
     UISelectModule
   ],
-  declarations: [
-    PageNavComponent,
-    PaginationComponent,
-    SectionTitleComponent,
-    UIModalComponent,
-    HeaderBarComponent,
-    SocialComponent
-  ],
+  declarations: [...components],
   exports: [
     CommonModule,
     TranslateModule,
     AngularSvgIconModule,
     FormsModule,
-    PageNavComponent,
-    PaginationComponent,
-    HeaderBarComponent,
     UICheckboxModule,
     UISelectModule,
-    SectionTitleComponent,
-    UIModalComponent,
-    SocialComponent
+    ...components
   ]
 })
 export class SharedModule {}
