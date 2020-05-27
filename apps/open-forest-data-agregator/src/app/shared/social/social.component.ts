@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./social.component.scss']
 })
 export class SocialComponent implements OnInit {
-  links: object = {
+  public links = {
     fbLink: 'https://whiteaster.com/',
     instaLink: 'https://whiteaster.com/',
     twitterLink: 'https://whiteaster.com/',
