@@ -15,11 +15,11 @@ interface NavigationItem {
 })
 export class FooterNavigationItemsComponent implements OnInit {
   public items: NavigationItem[] = [
-    { name: '', path: 'datasets', key: 'datasets' },
+    { name: '', path: '/more/about-resources', key: 'datasets' },
     { name: '', path: 'about-page', key: 'about-page' },
     { name: '', path: 'privacy-policy', key: 'policy' },
     { name: '', path: 'api-docs', key: 'api' },
-    { name: '', path: 'faq', key: 'faq' }
+    { name: '', path: '/more/faq', key: 'faq' }
   ];
 
   constructor(public translateService: TranslateService) {

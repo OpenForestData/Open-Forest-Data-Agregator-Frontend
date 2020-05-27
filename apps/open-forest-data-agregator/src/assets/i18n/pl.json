@@ -224,5 +224,13 @@
     "chart_2_2": "Liczba dodanych plików w czasie",
     "chart_3_1": "Liczba pobranych plików w podziale na kategorie",
     "chart_3_2": "Liczba pobranych plików w czasie"
+  },
+  "misc": {
+    "partners_title": "O partnerach",
+    "resources_title": "O zasobach danych",
+    "lastest_resources_title": "Ostatnio dodane dane",
+    "instructions_title": "Instrukcje",
+    "faq_title": "FAQ",
+    "about_project": "O projekcie"
   }
 }
