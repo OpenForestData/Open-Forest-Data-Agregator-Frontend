@@ -65,12 +65,13 @@ export class DatasetComponent implements OnInit {
     { name: 'Zasoby danych', href: '/datasets' }
   ];
 
-  testData: object = {
+  testData = {
     header: {
       title: 'Jam Łasica(Pawian Pospolity)',
       body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Mauris vitae magna sodales, dapibus metus quis, scelerisque nulla. Maecenas nec orci at dui l`,
-      api: 'http://whiteaster.com'
+      api: 'http://whiteaster.com',
+      apiUrl: 'http://whiteaster.com'
     },
     body: {
       name: 'abc'
