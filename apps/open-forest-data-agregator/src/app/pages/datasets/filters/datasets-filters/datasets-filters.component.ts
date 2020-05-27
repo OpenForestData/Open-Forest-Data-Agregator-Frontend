@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { categoriesMock } from '@app/pages/datasets/datasets.mock';
 
 @Component({
   selector: 'ofd-agregator-datasets-filters',
@@ -108,12 +109,40 @@ export class DatasetsFiltersComponent implements OnInit {
       key: 'time-range',
       value: { from: '', to: '' },
       data: null
+    },
+    categories: {
+      isExpanded: false,
+      key: 'category',
+      value: null,
+      multiple: false,
+      data: categoriesMock
     }
   };
 
   public moreFilters = false;
 
+  public isMobile = false;
+
+  // tslint:disable-next-line
+  @Output() onDisplayModeChange: EventEmitter<any> = new EventEmitter<any>();
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.checkMobile();
+  }
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkMobile();
+  }
+
+  checkMobile() {
+    if (this.isMobile !== window.innerWidth <= 1200) {
+      this.isMobile = window.innerWidth <= 1200;
+      this.moreFilters = this.isMobile;
+
+      this.onDisplayModeChange.emit(this.isMobile ? 'mobile' : 'desktop');
+    }
+  }
 }

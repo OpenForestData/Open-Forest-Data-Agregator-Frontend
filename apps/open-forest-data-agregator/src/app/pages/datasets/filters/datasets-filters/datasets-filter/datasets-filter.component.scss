@@ -10,6 +10,8 @@
     border-radius: 5px;
     position: relative;
     margin: 10px 0 0 0;
+    cursor: pointer;
+    user-select: none;
   }
 
   &__arrow {
@@ -102,6 +104,61 @@
 
     &.selected {
       color: $accent-color;
+    }
+  }
+}
+
+::ng-deep {
+  @media (max-width: 1200px) {
+    .filter {
+      label.ui-checkbox {
+        color: #fff !important;
+
+        span {
+          border-color: #fff !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .filter {
+    &__data {
+      padding: 20px 0;
+
+      label.ui-checkbox {
+        color: #fff !important;
+        span {
+          border-color: #fff !important;
+        }
+      }
+    }
+
+    &__show-more {
+      color: #fff;
+
+      svg {
+        line {
+          stroke: #fff;
+        }
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
+    &__select-all {
+      color: #fff;
+    }
+  }
+
+  .datasets-filter {
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      color: #fff;
     }
   }
 }

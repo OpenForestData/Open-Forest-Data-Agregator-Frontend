@@ -1,3 +1,5 @@
+@import '../../../../../../../../resources/_colors.scss';
+
 .datasets-filters {
   &__type {
     padding: 21px 15px 39px 15px;
@@ -13,5 +15,29 @@
 
   &__more-filters {
     margin-top: 20px;
+  }
+}
+
+::ng-deep {
+  @media (max-width: 1200px) {
+    .datasets-filters {
+      &__type {
+        padding-bottom: 15px !important;
+        label.ui-checkbox {
+          color: #fff !important;
+          span {
+            border-color: #fff !important;
+          }
+        }
+      }
+
+      &__filters {
+        padding-bottom: 20px;
+      }
+
+      &__more-filters {
+        display: none;
+      }
+    }
   }
 }

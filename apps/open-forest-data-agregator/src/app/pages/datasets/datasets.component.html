@@ -26,7 +26,11 @@
       >
         {{ 'datasets.filters.' + filters.filters.key | translate }}
       </ofd-agregator-header-bar>
-      <ofd-agregator-datasets-filters *ngIf="filters.filters.isExpanded"> </ofd-agregator-datasets-filters>
+      <ofd-agregator-datasets-filters
+        (onDisplayModeChange)="filters.filters.isExpanded = $event === 'desktop'"
+        [hidden]="!filters.filters.isExpanded"
+      >
+      </ofd-agregator-datasets-filters>
     </div>
   </div>
   <div class="datasets__content">

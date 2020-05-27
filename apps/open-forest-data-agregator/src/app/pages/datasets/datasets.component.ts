@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
-import { datasetsMock } from '@app/pages/datasets/datasets.mock';
+import { datasetsMock, categoriesMock } from '@app/pages/datasets/datasets.mock';
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 
@@ -45,20 +45,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   /**
    * Mock categories
    */
-  public categories = [
-    { name: 'Kolekcja zoologiczna IBS PAN', value: 0 },
-    { name: 'Kolekcja roślin naczyniowych INL PB', value: 1 },
-    { name: 'Kolekcja owadów saproksylicznych', value: 2 },
-    { name: 'Kolekcja grzybów INL PB', value: 3 },
-    { name: 'Kolekcja grzybów INL PB', value: 4 },
-    { name: 'Kolekcja ptaków', value: 5 },
-    { name: 'Mapy', value: 6 },
-    { name: 'Fotopułapki', value: 7 },
-    { name: 'Dane meteorologiczne', value: 8 },
-    { name: 'Śledzenie zwierząt', value: 9 },
-    { name: 'Bazy danych IBS PAN', value: 10 },
-    { name: 'Bazy danych INL PB', value: 11 }
-  ];
+  public categories = categoriesMock;
 
   /**
    * Mock datasets items
