@@ -142,3 +142,31 @@
     width: 100%;
   }
 }
+
+@media (max-width: 1200px) {
+  .datasets-map {
+    &__container {
+      height: auto;
+    }
+
+    &__header {
+      flex-direction: column-reverse;
+    }
+
+    &__map__container {
+      height: 420px;
+    }
+
+    &__export {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .datasets-map {
+    &__details {
+      width: 100%;
+    }
+  }
+}

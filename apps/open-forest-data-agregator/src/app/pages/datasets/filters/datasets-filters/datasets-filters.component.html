@@ -7,6 +7,16 @@
   </ui-checkbox>
 </div>
 <div class="datasets-filters__filters">
+  <div class="datasets-filters__filters__mobile">
+    <ofd-agregator-datasets-filter
+      header="{{ 'datasets.filters.' + filters['categories'].key | translate }}"
+      [data]="filters['categories'].data"
+      [key]="filters['categories'].key"
+      [(value)]="filters['categories'].value"
+      [isExpanded]="filters['categories'].isExpanded"
+      [multiple]="filters['categories'].multiple"
+    ></ofd-agregator-datasets-filter>
+  </div>
   <ng-container *ngFor="let filter of ['organization', 'format', 'type']">
     <ofd-agregator-datasets-filter
       header="{{ 'datasets.filters.' + filters[filter].key | translate }}"

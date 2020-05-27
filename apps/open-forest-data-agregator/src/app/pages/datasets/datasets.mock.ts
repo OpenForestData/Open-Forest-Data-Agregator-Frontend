@@ -95,3 +95,18 @@ export const datasetsMock = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla sed eros ac rhoncus. Duis molestie turpis at lectus facilisis porttitor. Praesent eu ornare risus. Donec ac nisl eu elit suscipit porta. Nulla lacinia aliquet nisl ut faucibus. Quisque convallis mi ac arcu fermentum gravida. '
   }
 ];
+
+export const categoriesMock = [
+  { name: 'Kolekcja zoologiczna IBS PAN', value: 0 },
+  { name: 'Kolekcja roślin naczyniowych INL PB', value: 1 },
+  { name: 'Kolekcja owadów saproksylicznych', value: 2 },
+  { name: 'Kolekcja grzybów INL PB', value: 3 },
+  { name: 'Kolekcja grzybów INL PB', value: 4 },
+  { name: 'Kolekcja ptaków', value: 5 },
+  { name: 'Mapy', value: 6 },
+  { name: 'Fotopułapki', value: 7 },
+  { name: 'Dane meteorologiczne', value: 8 },
+  { name: 'Śledzenie zwierząt', value: 9 },
+  { name: 'Bazy danych IBS PAN', value: 10 },
+  { name: 'Bazy danych INL PB', value: 11 }
+];
