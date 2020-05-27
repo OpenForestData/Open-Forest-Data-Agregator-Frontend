@@ -1,0 +1,14 @@
+<ul class="accordion">
+  <li *ngFor="let item of accordionContent; let i = index" [ngClass]="{ active: activeAccordion == i }">
+    <h3>
+      <span>{{ item.title }}</span>
+      <img
+        src="assets/modules/generic/chevron_down.png"
+        class="chevron"
+        [alt]="item.title | translate"
+        (click)="activeAccordion = i"
+      />
+    </h3>
+    <div [innerHTML]="item.content"></div>
+  </li>
+</ul>
