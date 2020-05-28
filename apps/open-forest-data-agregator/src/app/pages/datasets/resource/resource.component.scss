@@ -20,39 +20,67 @@
   padding-bottom: 60px;
 }
 
-.metric {
-  &__header {
-    display: block;
-  }
-  &__content {
-    padding-left: 5px;
-  }
-  &__content > p {
-    display: block;
-    font-size: 14px;
-  }
-  &__social {
-    display: block;
-  }
-}
+.header-bar-dataset::ng-deep {
+  button {
+    visibility: hidden;
+    color: white;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
 
-.versions {
-  &__content {
-    padding: 20px 0 0 5px;
-    height: 20px;
-    font-size: 14px;
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
   }
-  &__content > p {
-    display: inline;
-  }
-  &__content > a {
-    text-decoration: underline;
-  }
-}
+  .header-bar {
+    border-radius: 5px;
+    background-color: $accent-color;
+    color: white;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
 
-.header-bar-dataset::ng-deep h3 {
-  text-transform: capitalize;
-  font-weight: 400;
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+  .metric {
+    &__header {
+      display: block;
+    }
+    &__content {
+      padding-left: 5px;
+    }
+    &__content > p {
+      display: block;
+      font-size: 14px;
+    }
+    &__social {
+      display: block;
+    }
+  }
+
+  .versions {
+    &__content {
+      padding: 20px 0 0 5px;
+      height: 20px;
+      font-size: 14px;
+    }
+    &__content > p {
+      display: inline;
+    }
+    &__content > a {
+      text-decoration: underline;
+    }
+  }
 }
 
 .right-container {
@@ -206,9 +234,11 @@
     flex-direction: row;
     font-size: 12px;
     padding: 16px 0 0 14px;
-    &__img {
-      width: 95px;
-      height: 132px;
+    &__values {
+      &__img {
+        width: 95px;
+        height: 132px;
+      }
     }
   }
   .meta-citation__row__keys,
@@ -390,5 +420,74 @@
 .button {
   svg {
     margin-left: 0px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    background-color: white;
+    width: 375px;
+  }
+
+  .dataset-left {
+    width: 100%;
+  }
+
+  .dataset-right {
+    width: 100%;
+  }
+  .breadcrumbs::ng-deep {
+    .container {
+      width: 375px;
+    }
+  }
+  .right-container {
+    padding: 0;
+  }
+  .meta-citation__look-up {
+    flex-direction: column;
+  }
+  .meta-citation__row {
+    flex-direction: column;
+  }
+  .meta-citation__look-up__values {
+    display: flex;
+    justify-content: center;
+  }
+  .dataset-left {
+    margin-bottom: 40px;
+  }
+  .header-bar-dataset::ng-deep {
+    button {
+      visibility: visible;
+      color: white;
+      > svg-icon {
+        height: 18px;
+        margin-right: 13px;
+        display: block;
+
+        svg {
+          path {
+            fill: #fff !important;
+          }
+        }
+      }
+    }
+    .header-bar {
+      background-color: $accent-color;
+      color: white;
+      > svg-icon {
+        height: 18px;
+        margin-right: 13px;
+        display: block;
+
+        svg {
+          path {
+            fill: #fff !important;
+          }
+        }
+      }
+    }
   }
 }
