@@ -72,7 +72,13 @@ export class ResourceComponent implements OnInit {
     type: 'JPG',
     'deposit-date': '2020-05-20'
   };
+  mobile = false;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (window.screen.width < 1200) {
+      this.mobile = true;
+    }
+  }
 }
