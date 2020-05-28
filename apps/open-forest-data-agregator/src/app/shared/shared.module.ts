@@ -21,6 +21,7 @@ import { PageTemplateComponent } from './page-template/page-template.component';
 import { NewDataComponent } from '@app/pages/home/new-data/new-data.component';
 import { NewDataMobileComponent } from '@app/pages/home/new-data-mobile/new-data-mobile.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { DataContainerComponent } from './data-container/data-container.component';
 
 const components = [
   PageNavComponent,
@@ -32,7 +33,8 @@ const components = [
   SocialComponent,
   NewDataMobileComponent,
   NewDataComponent,
-  AccordionComponent
+  AccordionComponent,
+  DataContainerComponent
 ];
 
 @NgModule({
