@@ -4,7 +4,8 @@ import { DatasetsComponent } from './datasets.component';
 
 const routes: Routes = [
   { path: '', component: DatasetsComponent },
-  { path: 'dataset', loadChildren: './dataset/dataset.module#DatasetModule' }
+  { path: 'dataset', loadChildren: './dataset/dataset.module#DatasetModule' },
+  { path: 'resource', loadChildren: './resource/resource.module#ResourceModule' }
 ];
 
 @NgModule({

@@ -136,6 +136,20 @@
         "latina-title": "Sex"
       }
     },
+    "resource": {
+      "headers": {
+        "look-up": "Podgląd"
+      },
+      "metadata": {
+        "look-up": "Podgląd",
+        "download-url": "Download URL",
+        "MD5": "MD5",
+        "publication-date": "Publication Date",
+        "size": "Size",
+        "type": "Type",
+        "deposit-date": "Deposit Date"
+      }
+    },
     "add-data": "Dodaj dane",
     "search-placeholder": "Szukaj",
     "advanced-search": "Wyszukiwanie zaawansowane",
