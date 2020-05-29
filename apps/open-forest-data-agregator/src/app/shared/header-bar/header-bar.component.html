@@ -2,7 +2,7 @@
   <svg-icon [src]="iconSrc" [applyCss]="true"></svg-icon>
   <ng-content></ng-content>
   <ng-container *ngIf="expandable">
-    <button (click)="onToggle()">
+    <button>
       <svg-icon
         [src]="'/assets/images/dark_arrow_down.svg'"
         [svgStyle]="{ 'width.px': 11, 'heigth.px': 6 }"

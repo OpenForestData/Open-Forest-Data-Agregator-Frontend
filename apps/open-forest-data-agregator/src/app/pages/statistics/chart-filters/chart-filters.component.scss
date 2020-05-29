@@ -85,6 +85,7 @@
     width: 100%;
     position: relative !important;
     text-align: center;
+
     button {
       border: none;
       background: transparent;
@@ -137,5 +138,16 @@
     padding: 0;
     width: 20px;
     transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .phone-xs {
+    width: 100%;
+    margin-top: 25px;
+    justify-content: flex-start;
+    flex-basis: 100%;
+    max-width: 100%;
+    display: flex;
   }
 }

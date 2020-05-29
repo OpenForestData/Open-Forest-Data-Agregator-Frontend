@@ -75,8 +75,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {}
 
-  toggleFilter(name) {
-    this.filters[name].isExpanded = !this.filters[name].isExpanded;
+  toggleFilter(payload, name) {
+    this.filters[name].isExpanded = payload;
     this.changeDetectorRef.detectChanges();
   }
 

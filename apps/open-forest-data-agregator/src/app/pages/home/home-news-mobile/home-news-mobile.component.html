@@ -66,9 +66,9 @@
 </div>
 
 <div class="load-all-wrapper">
-  <button class="btn">
+  <button class="btn svg-btn" [routerLink]="['/news']">
     {{ 'home.all_news' | translate }}
-    <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.all_news' | translate }}" />
+    <svg-icon src="assets/modules/home/arrow_right_green.svg" [applyCss]="true"></svg-icon>
   </button>
 </div>
 

@@ -253,5 +253,15 @@
     "previous": "Poprzedni",
     "next": "Następny",
     "similar": "Proponowane post"
+  },
+  "news": {
+    "similar": "Proponowane",
+    "tags": "Tagi",
+    "year": "Rok",
+    "clear": "Wyczyść",
+    "see_more": "Zobacz więcej",
+    "see_less": "Zobacz mniej",
+    "news": "Aktualności",
+    "search_placeholder": "Szukaj aktualności..."
   }
 }

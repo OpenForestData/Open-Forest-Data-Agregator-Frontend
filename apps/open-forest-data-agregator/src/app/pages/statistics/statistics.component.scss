@@ -30,3 +30,9 @@
 .m-b-60 {
   margin-bottom: 60px;
 }
+
+@media (max-width: 992px) {
+  .export-btn {
+    margin: auto;
+  }
+}
