@@ -54,7 +54,7 @@
     background-color: ghostwhite;
     box-sizing: border-box;
     padding: 45px;
-    margin: 15px 0 15px 0;
+    margin: 25px 0 25px 0;
     max-width: 500px;
     border-left: 6px solid lightgray;
     border-radius: 4px;
@@ -62,7 +62,7 @@
     p {
       margin: 0;
       line-height: 21px;
-      font-size: 16px;
+      font-size: 14px;
       font-style: italic;
       color: #555555;
       position: relative;
@@ -83,6 +83,7 @@
     margin: 30px 0;
 
     li {
+      font-size: 14px;
       margin-bottom: 15px;
     }
   }
