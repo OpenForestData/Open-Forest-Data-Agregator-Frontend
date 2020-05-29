@@ -1,0 +1,129 @@
+<div class="page">
+  <div class="container">
+    <div class="row">
+      <div class="mobile-only col-xs-12 m-b-20 mobile-filter-header">
+        <ofd-agregator-header-bar
+          [iconSrc]="filters.filters.iconSrc"
+          [expandable]="filters.filters.expandable"
+          [expanded]="filters.filters.isExpanded"
+          (toggle)="mobileFilters = !mobileFilters"
+        >
+          {{ 'datasets.filters.' + filters.filters.key | translate }}
+        </ofd-agregator-header-bar>
+      </div>
+
+      <div class="col-lg-3 col-md-3 mobile-filter-menu col-xs-12 p-r-20" [ngClass]="{ active: mobileFilters }">
+        <div class="times mobile-only">
+          <img (click)="mobileFilters = false" src="assets/modules/news/times_white.png" alt="Close" />
+        </div>
+
+        <div class="filter-title mobile-only">
+          <ofd-agregator-header-bar
+            [iconSrc]="filters.filters.iconSrc"
+            [expandable]="filters.filters.expandable"
+            [expanded]="filters.filters.isExpanded"
+          >
+            {{ 'datasets.filters.' + filters.filters.key | translate }}
+          </ofd-agregator-header-bar>
+        </div>
+
+        <section class="search-section">
+          <div class="search-wrapper">
+            <input type="text" class="search" [placeholder]="'news.search_placeholder' | translate" />
+            <button class="search-button">
+              <img src="assets/modules/home/search_icon.png" alt="{{ 'home.all_news' | translate }}" />
+            </button>
+          </div>
+        </section>
+
+        <div class="desktop-only">
+          <ofd-agregator-header-bar
+            [iconSrc]="filters.filters.iconSrc"
+            [expandable]="filters.filters.expandable"
+            [expanded]="filters.filters.isExpanded"
+            (toggle)="toggleFilter($event, 'filters')"
+          >
+            {{ 'datasets.filters.' + filters.filters.key | translate }}
+          </ofd-agregator-header-bar>
+        </div>
+
+        <div class="m-t-20"></div>
+
+        <div class="year-filter" *ngIf="filters.filters.isExpanded">
+          <h3 class="year-title">{{ 'news.year' | translate }}</h3>
+          <button class="clear" (click)="clearYear()">{{ 'news.clear' | translate }}</button>
+
+          <ul class="options" [ngClass]="{ collapsed: collapseYear || mobileFilters, 'mobile-white': mobileFilters }">
+            <li class="opt" *ngFor="let item of yearFilter">
+              <ui-checkbox [name]="'year-' + item.value" [(model)]="item.checked">
+                {{ item.name }}
+              </ui-checkbox>
+            </li>
+          </ul>
+
+          <button class="expand-years" (click)="collapseYear = !collapseYear">
+            <svg-icon
+              [src]="'/assets/modules/news/' + (collapseYear ? 'plus' : 'minus') + '.svg'"
+              [applyCss]="true"
+            ></svg-icon>
+            <span>
+              {{ (collapseYear ? 'news.see_more' : 'news.see_less') | translate }}
+            </span>
+          </button>
+        </div>
+
+        <div class="mobile-only filter-title">
+          <ofd-agregator-header-bar
+            [iconSrc]="filters.tags.iconSrc"
+            [expandable]="filters.tags.expandable"
+            [expanded]="filters.tags.isExpanded"
+            >{{ 'news.' + filters.tags.key | translate }}
+          </ofd-agregator-header-bar>
+        </div>
+
+        <div class="desktop-only">
+          <ofd-agregator-header-bar
+            [iconSrc]="filters.tags.iconSrc"
+            [expandable]="filters.tags.expandable"
+            [expanded]="filters.tags.isExpanded"
+            (toggle)="toggleFilter($event, 'tags')"
+          >
+            {{ 'news.' + filters.tags.key | translate }}
+          </ofd-agregator-header-bar>
+        </div>
+
+        <div class="tags-filter tag-wrapper" *ngIf="filters.tags.isExpanded">
+          <span
+            *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+            (click)="toogleTag(i)"
+            [ngClass]="{ active: hasTag(i) }"
+            class="tag"
+            >{{ i * 53 }}</span
+          >
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-9 col-xs-12 news-grid">
+        <div class="row">
+          <div class="col-lg-8 col-md-8 col-xs-12">
+            <ofd-agregator-section-title
+              [iconURL]="'assets/modules/home/book.png'"
+              [titleText]="'news.news' | translate"
+            ></ofd-agregator-section-title>
+          </div>
+        </div>
+
+        <div class="m-t-30"></div>
+
+        <div class="news-wrapper">
+          <div class="news-tile" *ngFor="let news of [0, 1, 2, 3]">
+            <ofd-agregator-news-tile-main></ofd-agregator-news-tile-main>
+            <hr class="news-separator-hr" />
+          </div>
+        </div>
+
+        <ofd-agregator-pagination [items]="50" [pageSize]="15" [(page)]="page" [showOffsets]="true">
+        </ofd-agregator-pagination>
+      </div>
+    </div>
+  </div>
+</div>

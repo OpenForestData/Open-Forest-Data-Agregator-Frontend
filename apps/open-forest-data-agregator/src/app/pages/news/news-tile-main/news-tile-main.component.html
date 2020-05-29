@@ -1,0 +1,43 @@
+<div class="row news-body">
+  <div class="col-lg-3 col-md-4 col-xs-12">
+    <div class="news-image-holder">
+      <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-8 col-xs-12 news-content">
+    <div class="news-social">
+      <span class="news-date">
+        04.04.2020 |
+        <span class="author">Daniel Pasoń</span>
+      </span>
+      <div class="news_social">
+        <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
+        <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
+        <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+      </div>
+    </div>
+
+    <p class="news-title">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+    </p>
+
+    <p class="news-content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique ab odit libero inventore consequuntur molestiae
+      nostrum nemo dolore unde accusamus impedit.
+    </p>
+
+    <p class="tags-p">
+      {{ 'home.tags' | translate }}:
+      <span class="news-tags">
+        <a href="#">Tag1</a>
+        <a href="#">Tag2</a>
+        <a href="#">Tag3</a>
+      </span>
+    </p>
+
+    <a href="#" class="read_more" [routerLink]="['1/1']">
+      {{ 'home.read_more' | translate }}
+      <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+    </a>
+  </div>
+</div>

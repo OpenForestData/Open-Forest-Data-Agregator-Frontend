@@ -23,9 +23,9 @@
 
         <p class="contact_info">{{ 'home.contact_info' | translate }}</p>
 
-        <button class="btn contact_button" (click)="modal.open('contact-modal')">
+        <button class="btn contact_button svg-btn" (click)="modal.open('contact-modal')">
           {{ 'home.contact_button' | translate }}
-          <img src="assets/modules/home/envelop_green.png" alt="{{ 'home.contact_button' | translate }}" />
+          <svg-icon src="assets/modules/home/envelop_green.svg" [applyCss]="true"></svg-icon>
         </button>
       </div>
     </div>

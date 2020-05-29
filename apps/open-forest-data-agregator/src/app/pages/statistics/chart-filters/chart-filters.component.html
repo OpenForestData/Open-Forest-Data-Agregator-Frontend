@@ -21,7 +21,7 @@
       ></dp-date-picker>
     </label>
   </div>
-  <div class="col-lg-4 col-md-3 col-xs-4 end-xs" *ngIf="showRange">
+  <div class="col-lg-4 col-md-3 col-xs-4 end-xs phone-xs" *ngIf="showRange">
     <ui-select (valueChange)="emitNewFilters()" [items]="selectItems" [options]="options" [(value)]="selectValue">
     </ui-select>
   </div>

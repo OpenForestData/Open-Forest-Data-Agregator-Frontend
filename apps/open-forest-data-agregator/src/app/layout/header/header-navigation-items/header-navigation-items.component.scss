@@ -46,6 +46,10 @@
         padding-top: 6px;
         display: block;
         padding-bottom: 6px;
+
+        &.active {
+          color: $accent-color;
+        }
       }
 
       &:hover {
@@ -55,12 +59,6 @@
 
         .navigation-items__dropdown-list {
           display: block;
-        }
-      }
-
-      &.active {
-        a {
-          color: $accent-color;
         }
       }
     }
