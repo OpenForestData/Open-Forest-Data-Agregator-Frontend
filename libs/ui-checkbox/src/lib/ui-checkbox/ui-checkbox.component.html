@@ -1,5 +1,12 @@
-<label class="ui-checkbox">
-  <ng-content></ng-content>
-  <input type="checkbox" [name]="name" [(ngModel)]="model" (ngModelChange)="onChange()" />
-  <span class="checkmark"></span>
-</label>
+<div class="field checkbox-field">
+  <input
+    type="checkbox"
+    [(ngModel)]="model"
+    (ngModelChange)="onChange()"
+    class="check_box"
+    [id]="name"
+    name="checkbox"
+  />
+  <label [for]="name"></label>
+  <label [for]="name" class="checkbox-label"><ng-content></ng-content></label>
+</div>

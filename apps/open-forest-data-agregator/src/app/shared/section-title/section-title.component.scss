@@ -21,7 +21,10 @@ h2 {
     width: 100%;
     margin-left: 25px;
     margin-top: 8px;
-
+    &.left {
+      margin-left: 0;
+      margin-right: 25px;
+    }
     hr {
       border: none;
       height: 1px;

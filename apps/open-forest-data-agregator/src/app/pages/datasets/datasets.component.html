@@ -1,13 +1,13 @@
 <ofd-page-nav [breadcrumbs]="breadcrumbs"></ofd-page-nav>
 <ofd-agregator-datasets-header></ofd-agregator-datasets-header>
-<main class="datasets container">
+<main class="datasets container mobile-white-1200">
   <div class="datasets__filters">
     <div class="datasets__filters__category-filter">
       <ofd-agregator-header-bar
         [iconSrc]="filters.category.iconSrc"
         [expandable]="filters.category.expandable"
         [expanded]="filters.category.isExpanded"
-        (toggle)="toggleFilter('category')"
+        (toggle)="toggleFilter($event, 'category')"
       >
         {{ 'datasets.filters.' + filters.category.key | translate }}
       </ofd-agregator-header-bar>
@@ -22,7 +22,7 @@
         [iconSrc]="filters.filters.iconSrc"
         [expanded]="filters.filters.isExpanded"
         [expandable]="filters.filters.expandable"
-        (toggle)="toggleFilter('filters')"
+        (toggle)="toggleFilter($event, 'filters')"
       >
         {{ 'datasets.filters.' + filters.filters.key | translate }}
       </ofd-agregator-header-bar>

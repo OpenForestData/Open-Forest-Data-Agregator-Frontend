@@ -45,7 +45,8 @@
     z-index: 2;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    padding: 13px 0;
+    padding: 13px 0 0 0;
+    overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
 
     &__list {

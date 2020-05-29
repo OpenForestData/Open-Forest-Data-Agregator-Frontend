@@ -106,3 +106,14 @@
     }
   }
 }
+
+.f-s-16 {
+  font-size: 16px;
+}
+::ng-deep {
+  .add-data {
+    svg {
+      margin-top: 3px;
+    }
+  }
+}

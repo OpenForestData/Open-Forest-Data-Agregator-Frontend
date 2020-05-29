@@ -1,7 +1,9 @@
 @import '../resources/colors';
 
 .ckeditor-content {
-  padding: 50px 0;
+  &.container {
+    padding: 50px 0;
+  }
 
   h1:not(.excluded) {
     font-size: 30px;

@@ -3,7 +3,7 @@
 .datasets-presentation {
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: space-between;
 
   &__header {
     font-size: 14px;
@@ -12,6 +12,7 @@
     padding: 0 6px 0 0;
     position: relative;
     display: flex;
+    width: 100%;
     align-items: center;
     &:after {
       content: '';
@@ -134,4 +135,8 @@
       }
     }
   }
+}
+
+span.flex {
+  display: flex;
 }

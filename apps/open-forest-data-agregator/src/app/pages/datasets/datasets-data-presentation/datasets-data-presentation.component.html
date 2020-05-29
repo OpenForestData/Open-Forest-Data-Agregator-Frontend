@@ -9,8 +9,10 @@
       [ngClass]="{ active: presentation === 'list' }"
       (click)="selectPresentation('list')"
     >
-      <svg-icon src="/assets/images/list-view.svg" [applyCss]="true"></svg-icon>
-      {{ 'datasets.presentation.list' | translate }}
+      <span class="flex">
+        <svg-icon src="/assets/images/list-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.list' | translate }}
+      </span>
     </button>
     <button
       class="datasets-presentation__view"
@@ -18,8 +20,10 @@
       [ngClass]="{ active: presentation === 'table' }"
       (click)="selectPresentation('table')"
     >
-      <svg-icon src="/assets/images/table-view.svg" [applyCss]="true"></svg-icon>
-      {{ 'datasets.presentation.table' | translate }}
+      <span class="flex">
+        <svg-icon src="/assets/images/table-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.table' | translate }}
+      </span>
     </button>
     <button
       class="datasets-presentation__view"
@@ -27,8 +31,10 @@
       [ngClass]="{ active: presentation === 'gallery' }"
       (click)="selectPresentation('gallery')"
     >
-      <svg-icon src="/assets/images/gallery-view.svg" [applyCss]="true"></svg-icon>
-      {{ 'datasets.presentation.gallery' | translate }}
+      <span class="flex">
+        <svg-icon src="/assets/images/gallery-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.gallery' | translate }}
+      </span>
     </button>
     <button
       class="datasets-presentation__view"
@@ -36,8 +42,10 @@
       [ngClass]="{ active: presentation === 'map' }"
       (click)="selectPresentation('map')"
     >
-      <svg-icon src="/assets/images/map-view.svg" [applyCss]="true"></svg-icon>
-      {{ 'datasets.presentation.map' | translate }}
+      <span class="flex">
+        <svg-icon src="/assets/images/map-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.map' | translate }}
+      </span>
     </button>
     <div class="selector" #selector></div>
   </div>

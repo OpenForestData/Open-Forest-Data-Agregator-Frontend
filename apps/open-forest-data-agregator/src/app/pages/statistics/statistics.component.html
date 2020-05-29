@@ -6,10 +6,11 @@
         [titleText]="'stats.datasets_stats_title' | translate"
       ></ofd-agregator-section-title>
     </div>
-    <div class="col-lg-offset-2 col-md-offset-0 col-lg-4 col-md-6 col-xs-12">
-      <button class="btn export-btn">
+    <div class="col-lg-offset-2 col-md-offset-0 col-lg-4 col-md-6 col-xs-12 center-xs">
+      <button class="btn export-btn svg-btn">
         {{ 'stats.export' | translate }}
-        <img src="assets/modules/stats/export.png" alt="{{ 'stats.export' | translate }}" />
+        <svg-icon src="assets/modules/stats/export.svg" [applyCss]="true"></svg-icon>
+        <!-- <img src="assets/modules/stats/export.png" alt="{{ 'stats.export' | translate }}" /> -->
       </button>
     </div>
   </div>

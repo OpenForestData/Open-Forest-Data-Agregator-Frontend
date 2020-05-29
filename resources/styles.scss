@@ -165,20 +165,26 @@ a {
     border: none;
   }
 
-  img {
+  img,
+  svg-icon {
     margin-left: 15px;
   }
 
-  /*
+  &.svg-btn {
+    svg-icon path {
+      transition: fill 0.6s ease;
+    }
+
     &:hover,
     &:active {
       background: $accent-color;
       color: white;
-      img {
-        filter: invert(100%);
+
+      svg-icon path {
+        fill: white;
       }
     }
-  */
+  }
 }
 
 .bold {
@@ -202,9 +208,19 @@ a {
   margin-right: 0;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 @media (max-width: 992px) {
   .mlr-0 {
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+ui-checkbox {
+  min-height: 20px;
+  display: flex !important;
+  align-items: center;
 }

@@ -12,6 +12,8 @@ const routes: Routes = [
       { path: '', loadChildren: '../app/pages/home/home.module#HomeModule' },
       { path: 'more', loadChildren: '../app/pages/generic-pages/generic.module#GenericModule' },
       { path: 'statistics', loadChildren: '../app/pages/statistics/statistics.module#StatisticsModule' },
+      { path: 'blog', loadChildren: '../app/pages/blog/blog.module#BlogModule' },
+      { path: 'news', loadChildren: '../app/pages/news/news.module#NewsModule' },
       { path: 'auth', loadChildren: '../app/auth/auth.module#AuthModule' },
       { path: 'datasets', loadChildren: '../app/pages/datasets/datasets.module#DatasetsModule' },
       { path: '**', component: NotFoundComponent }
