@@ -1,7 +1,61 @@
-<ofd-page-nav [breadcrumbs]="breadCrumbs"></ofd-page-nav>
+<ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
 <section class="container">
   <div class="dataset-left">
-    <div class="metric">
+    <ofd-agregator-data-container
+      class="header-bar-dataset"
+      [iconSrc]="'/assets/images/pencil.svg'"
+      [title]="'datasets.dataset.headers.metrics' | translate"
+      [expandable]="true"
+      [expanded]="!mobile"
+    >
+      <div class="metric">
+        <!-- <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/pencil.svg'">
+                {{ 'datasets.dataset.headers.metrics' | translate }}
+              </ofd-agregator-header-bar> -->
+
+        <div class="metric__content">
+          <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
+          <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ mockLeftSide.createdDate }}</p>
+          <p>
+            {{ 'datasets.dataset.metadata-all.source' | translate }}
+            <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
+          </p>
+          <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ mockLeftSide.author }}</p>
+          <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
+          <p>
+            {{ 'datasets.dataset.metadata-all.license' | translate }}
+            <a href="{{ mockLeftSide.license.link }}">{{ mockLeftSide.license.name }}</a>
+          </p>
+          <p>
+            {{ 'datasets.dataset.metadata-all.domain' | translate }}
+            <span *ngFor="let subject of mockLeftSide.subjects; let i = index"
+              >{{ subject }}<span *ngIf="i < mockLeftSide.subjects.length - 1">, </span>
+            </span>
+          </p>
+          <p>
+            {{ 'datasets.dataset.metadata-all.keywords' | translate }}
+            <span *ngFor="let keyword of mockLeftSide.keywords; let i = index"
+              >{{ keyword }}<span *ngIf="i < mockLeftSide.keywords.length - 1">, </span>
+            </span>
+          </p>
+        </div>
+
+        <div class="metric__social">
+          <ofd-agregator-social></ofd-agregator-social>
+        </div>
+      </div>
+      <div class="versions">
+        <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
+          {{ 'datasets.dataset.headers.versions' | translate }}
+        </ofd-agregator-header-bar>
+
+        <div class="versions__content">
+          <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
+          <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
+        </div>
+      </div>
+    </ofd-agregator-data-container>
+    <!-- <div class="metric">
       <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/pencil.svg'">
         {{ 'datasets.dataset.headers.metrics' | translate }}
       </ofd-agregator-header-bar>
@@ -47,7 +101,7 @@
         <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
         <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="dataset-right">
@@ -96,6 +150,33 @@
             </div>
           </div>
 
+          <div class="right-container__files__sorting__bar-mobile">
+            <div class="right-container__files__sorting__bar-mobile__filter-by">
+              <svg-icon
+                class="right-container__files__sorting__bar-right__filters"
+                [src]="'/assets/images/dataset/filters.svg'"
+              >
+              </svg-icon>
+              <p class="right-container__files__sorting__bar-right__filter-by">
+                {{ 'datasets.dataset.headers.filterBy' | translate }}
+              </p>
+            </div>
+
+            <div class="right-container__files__sorting__bar-mobile__container">
+              <div class="right-container__files__sorting__bar-right__file-type">
+                {{ 'datasets.dataset.headers.typeFile' | translate }}
+                <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortBy">
+                </ui-select>
+              </div>
+
+              <div class="right-container__files__sorting__bar-right__access">
+                {{ 'datasets.dataset.headers.access' | translate }}
+                <ui-select class="access-sort" [items]="sortItemsAccess" [options]="optionsAccess" [(value)]="sortBy">
+                </ui-select>
+              </div>
+            </div>
+          </div>
+
           <div class="right-container__files__sorting__bar-left">
             <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon>
             <div class="right-container__files__sorting__bar-left__sort-by">
@@ -118,7 +199,7 @@
 
         <div class="right-container__files__download-single">
           <div class="right-container__files__download-single__row" *ngFor="let file of testData.files">
-            <ui-checkbox [name]="'downloadAllFiles'" class="single-checkbox">
+            <ui-checkbox class="single-checkbox">
               <div class="background-gray">
                 {{ file.format | uppercase }}
               </div>
