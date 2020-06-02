@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'ofd-agregator-resource',
@@ -64,6 +65,38 @@ export class ResourceComponent implements OnInit {
     ]
   };
 
+  resources: any = [
+    {
+      format: 'jpg',
+      fileLink: 'https://picsum.photos/500/500'
+    },
+    {
+      format: 'txt',
+      fileLink: 'https://pastebin.com/raw/Khg3ZhXd'
+    },
+    {
+      format: 'pdf',
+      fileLink: 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
+    },
+    {
+      format: 'json',
+      fileLink: ''
+    },
+    {
+      format: 'csv',
+      fileLink: ''
+    }
+  ];
+  resource = this.resources[3];
+  contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
+  Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
+  Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
+  Donec sollicitudin nibh in nisl lacinia elementum. Cras commodo orci lacus, a congue lorem laoreet non. In congue non risus vel ornare.
+  Sed rhoncus eget dui sit amet pretium. Nunc nisl magna, sagittis ut ultricies ultrices, accumsan ut felis.
+  Sed id elit iaculis, malesuada metus quis, placerat leo. Curabitur porta convallis risus, lobortis mattis odio efficitur sed.`;
+
+  tableViewRaw: any = `{\"NAZWA PLAC\\u00d3WKI\": [\"SP NR 1\", \"SP NR 2\", \"SP NR 6\", \"SP NR 9\", \"SP NR 10\", \"SP NR 11\", \"SP NR 12\", \"SP NR 13\", \"GIM NR 1\", \"GIM NR 2\", \"GIM NR 3\", \"GIM NR 4\"], \"2015 r.\": [6, 0, 3, 5, 15, 2, 6, 6, 11, 18, 21, 13], \"I semestr 2016 r.\": [6, 0, 2, 4, 13, 1, 3, 4, 6, 14, 15, 11], \"II semestr 2016 r.\": [7, 1, 0, 2, 12, 1, 1, 4, 10, 8, 16, 9]}`;
+  tableView: any = [JSON.parse(this.tableViewRaw)];
   metaCitation = {
     'download-url': 'https://whiteaster.com',
     MD5: '4b46beba4a79e26745266e2221a09c52',
@@ -74,11 +107,12 @@ export class ResourceComponent implements OnInit {
   };
   mobile = false;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
     }
+    console.log('table view', this.tableView);
   }
 }

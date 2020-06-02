@@ -4,6 +4,7 @@
   background-color: #f6f4f2;
   display: flex;
   height: 100%;
+  padding: 0 0 30px 0;
 }
 
 .dataset-left {
@@ -84,7 +85,7 @@
 }
 
 .right-container {
-  padding: 15px 30px 0 30px;
+  padding: 15px 20px 0 30px;
   &__header {
     p {
       font-size: 14px;
@@ -111,6 +112,24 @@
     }
   }
   &__files {
+    &__file-viewer {
+      padding: 30px 0 30px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &__as-table {
+        max-width: 400px;
+      }
+      &__as-json {
+        max-width: 100%;
+      }
+      &__as-image {
+        &__source {
+          height: 400px;
+          width: 280px;
+        }
+      }
+    }
     &__image {
       display: flex;
       justify-content: center;
