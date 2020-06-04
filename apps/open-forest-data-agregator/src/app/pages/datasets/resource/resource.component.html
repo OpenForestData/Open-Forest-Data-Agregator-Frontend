@@ -97,6 +97,15 @@
           <div class="right-container__files__file-viewer__as-table" *ngIf="['csv'].indexOf(resource.format) >= 0">
             <ofd-agregator-table [resource]="tableView"></ofd-agregator-table>
           </div>
+          <div
+            class="right-container__files__file-viewer__as-docx"
+            *ngIf="['doc', 'docx', 'xls', 'xlsx'].indexOf(resource.format) >= 0"
+          >
+            <ofd-agregator-docs [resource]="resource.fileLink"></ofd-agregator-docs>
+          </div>
+          <div class="right-container__files__file-viewer__as-xml" *ngIf="['xml'].indexOf(resource.format) >= 0">
+            <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
+          </div>
         </div>
       </div>
 

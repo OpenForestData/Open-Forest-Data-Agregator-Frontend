@@ -117,6 +117,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &__as-docx {
+        max-width: 80%;
+        width: 100%;
+      }
       &__as-table {
         max-width: 400px;
       }

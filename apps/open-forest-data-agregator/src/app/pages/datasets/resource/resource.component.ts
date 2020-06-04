@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
+import hljs from 'highlight.js';
 
 @Component({
   selector: 'ofd-agregator-resource',
@@ -65,6 +66,16 @@ export class ResourceComponent implements OnInit {
     ]
   };
 
+  rdfContent = `
+<?xml version="1.0"?> 
+<RDF> 
+<Description about="http://pl.wikipedia.org/wiki/Filtr_rodzinny"> 
+    <autor>Jan Kowalski</autor> 
+    <utworzono>1 stycznia 1970</utworzono> 
+    <zmodyfikowano>1 stycznia 2000</zmodyfikowano> 
+</Description> 
+</RDF>`;
+
   resources: any = [
     {
       format: 'jpg',
@@ -85,9 +96,18 @@ export class ResourceComponent implements OnInit {
     {
       format: 'csv',
       fileLink: ''
+    },
+    {
+      format: 'docx',
+      fileLink: 'https://data-epuszcza.biaman.pl/api/access/datafile/223'
+    },
+    {
+      format: 'rdf',
+      fileLink: this.rdfContent
     }
   ];
-  resource = this.resources[3];
+
+  resource = this.resources[5];
   contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
   Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
   Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
@@ -113,6 +133,7 @@ export class ResourceComponent implements OnInit {
     if (window.screen.width < 1200) {
       this.mobile = true;
     }
+    hljs.initHighlightingOnLoad();
     console.log('table view', this.tableView);
   }
 }

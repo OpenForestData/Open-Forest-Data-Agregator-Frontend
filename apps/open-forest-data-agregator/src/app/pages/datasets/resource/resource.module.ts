@@ -9,9 +9,20 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { JsonComponent } from './json/json.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { TableComponent } from './table/table.component';
+import { DocsComponent } from './docs/docs.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { XmlComponent } from './xml/xml.component';
 
 @NgModule({
-  declarations: [ResourceComponent, TextComponent, PdfComponent, JsonComponent, TableComponent],
-  imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule]
+  declarations: [
+    ResourceComponent,
+    TextComponent,
+    PdfComponent,
+    JsonComponent,
+    TableComponent,
+    DocsComponent,
+    XmlComponent
+  ],
+  imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule, NgxDocViewerModule]
 })
 export class ResourceModule {}
