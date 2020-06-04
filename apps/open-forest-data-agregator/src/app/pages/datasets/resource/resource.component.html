@@ -106,7 +106,7 @@
           >
             <ofd-agregator-docs [resource]="resource.fileLink"></ofd-agregator-docs>
           </div>
-          <div class="right-container__files__file-viewer__as-xml" *ngIf="['xml'].indexOf(resource.format) >= 0">
+          <div class="right-container__files__file-viewer__as-xml" *ngIf="['xml', 'rdf'].indexOf(resource.format) >= 0">
             <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
           </div>
         </div>
