@@ -88,6 +88,7 @@
     "ngx-json-viewer": "^2.4.0",
     "ngx-pagination": "^5.0.0",
     "normalize.css": "^8.0.1",
+    "papaparse": "^5.2.0",
     "pdfmake": "^0.1.65",
     "rxjs": "6.5.4",
     "tslib": "^1.10.0",

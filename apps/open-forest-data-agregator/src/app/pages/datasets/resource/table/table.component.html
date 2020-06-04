@@ -2,13 +2,13 @@
   <table>
     <thead>
       <tr>
-        <th *ngFor="let title of tableHeader">{{ title }}</th>
+        <th *ngFor="let title of convertedData?.meta?.fields">{{ title }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of tableData; let i = index">
-        <td *ngFor="let key of tableHeader">
-          {{ row[key] }}
+      <tr *ngFor="let row of convertedData?.data; let i = index">
+        <td *ngFor="let details of row | keyvalue: keepOrder">
+          {{ details.value }}
         </td>
       </tr>
     </tbody>

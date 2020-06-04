@@ -95,7 +95,7 @@ export class ResourceComponent implements OnInit {
     },
     {
       format: 'csv',
-      fileLink: ''
+      fileLink: '/assets/.mocks/StoliceSredniki.csv'
     },
     {
       format: 'docx',
@@ -107,7 +107,7 @@ export class ResourceComponent implements OnInit {
     }
   ];
 
-  resource = this.resources[5];
+  resource = this.resources[4];
   contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
   Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
   Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
