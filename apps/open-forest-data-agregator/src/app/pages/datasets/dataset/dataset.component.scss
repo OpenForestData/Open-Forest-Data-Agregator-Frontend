@@ -1,7 +1,18 @@
 @import '../../../../../../../resources/colors';
 
+.main-container {
+  width: 100%;
+  background-color: $light-gray-color;
+}
+
+.breadcrumbs::ng-deep {
+  .page-nav {
+    padding: 24px 0 13px 0;
+  }
+}
+
 .container {
-  background-color: #f6f4f2;
+  background-color: $light-gray-color;
   display: flex;
   height: 100%;
 }
@@ -10,14 +21,15 @@
   width: 30%;
   background-color: inherit;
   height: inherit;
-  padding-right: 3.3%;
+  padding-right: 38px;
+  max-width: 290px;
 }
 
 .dataset-right {
-  width: 66.6%;
+  width: 70%;
   background-color: #ffffff;
   height: inherit;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
 
 .metric {
@@ -50,13 +62,73 @@
   }
 }
 
-.header-bar-dataset::ng-deep h3 {
-  text-transform: capitalize;
-  font-weight: 400;
+.header-bar-dataset::ng-deep {
+  button {
+    visibility: hidden;
+    color: white;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
+
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+  .header-bar {
+    border-radius: 5px;
+    background-color: $accent-color;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 400;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
+
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+  .metric {
+    &__header {
+      display: block;
+    }
+    &__content {
+      padding-left: 5px;
+    }
+    &__content > p {
+      display: block;
+      font-size: 14px;
+    }
+    &__social {
+      display: block;
+    }
+  }
+
+  .versions {
+    &__content {
+      padding: 23px 0 0 5px;
+      height: 20px;
+      font-size: 14px;
+    }
+    &__content > p {
+      display: inline;
+    }
+    &__content > a {
+      text-decoration: underline;
+    }
+  }
 }
 
 .right-container {
-  padding: 15px 30px 0 30px;
+  padding: 24px 100px 0 61px;
   &__header {
     p {
       font-size: 14px;
@@ -159,14 +231,14 @@
         display: flex;
         align-items: center;
         &__filters {
-          padding: 0 20px 0 10px;
+          padding: 0 10px 0 5px;
         }
         &__file-type {
           padding: 0 10px 0 0;
         }
         &__filter-by {
           margin: 0;
-          padding: 0 20px 0 0;
+          padding: 0 10px 0 0;
         }
       }
       &__bar-left {
@@ -284,6 +356,10 @@
       padding: 0;
       justify-content: center;
 
+      svg {
+        margin-left: 0px;
+      }
+
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -339,6 +415,9 @@
     &__selected-item {
       border: none;
       padding: 0;
+      svg-icon {
+        margin-left: 5px !important;
+      }
     }
   }
 }
@@ -348,6 +427,9 @@
     &__selected-item {
       border: none;
       padding: 0;
+      svg-icon {
+        margin-left: 5px !important;
+      }
     }
   }
 }
@@ -480,7 +562,7 @@
       }
     }
     .header-bar {
-      background-color: $accent-color;
+      background-color: $accent-color !important;
       color: white;
       border-radius: 5px;
       > svg-icon {

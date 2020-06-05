@@ -1,149 +1,154 @@
-<ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
-<section class="container">
-  <div class="dataset-left">
-    <ofd-agregator-data-container
-      class="header-bar-dataset"
-      [iconSrc]="'/assets/images/pencil.svg'"
-      [title]="'datasets.dataset.headers.metrics' | translate"
-      [expandable]="true"
-      [expanded]="!mobile"
-    >
-      <div class="metric">
-        <div class="metric__content">
-          <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
-          <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ mockLeftSide.createdDate }}</p>
-          <p>
-            {{ 'datasets.dataset.metadata-all.source' | translate }}
-            <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
-          </p>
-          <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ mockLeftSide.author }}</p>
-          <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
-          <p>
-            {{ 'datasets.dataset.metadata-all.license' | translate }}
-            <a href="{{ mockLeftSide.license.link }}">{{ mockLeftSide.license.name }}</a>
-          </p>
-          <p>
-            {{ 'datasets.dataset.metadata-all.domain' | translate }}
-            <span *ngFor="let subject of mockLeftSide.subjects; let i = index"
-              >{{ subject }}<span *ngIf="i < mockLeftSide.subjects.length - 1">, </span>
-            </span>
-          </p>
-          <p>
-            {{ 'datasets.dataset.metadata-all.keywords' | translate }}
-            <span *ngFor="let keyword of mockLeftSide.keywords; let i = index"
-              >{{ keyword }}<span *ngIf="i < mockLeftSide.keywords.length - 1">, </span>
-            </span>
-          </p>
-        </div>
+<section class="main-container">
+  <ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
+  <section class="container">
+    <div class="dataset-left">
+      <ofd-agregator-data-container
+        class="header-bar-dataset"
+        [iconSrc]="'/assets/images/pencil.svg'"
+        [title]="'datasets.dataset.headers.metrics' | translate"
+        [expandable]="true"
+        [expanded]="!mobile"
+      >
+        <div class="metric">
+          <div class="metric__content">
+            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ mockLeftSide.createdDate }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.source' | translate }}
+              <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
+            </p>
+            <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ mockLeftSide.author }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.license' | translate }}
+              <a href="{{ mockLeftSide.license.link }}">{{ mockLeftSide.license.name }}</a>
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.domain' | translate }}
+              <span *ngFor="let subject of mockLeftSide.subjects; let i = index"
+                >{{ subject }}<span *ngIf="i < mockLeftSide.subjects.length - 1">, </span>
+              </span>
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.keywords' | translate }}
+              <span *ngFor="let keyword of mockLeftSide.keywords; let i = index"
+                >{{ keyword }}<span *ngIf="i < mockLeftSide.keywords.length - 1">, </span>
+              </span>
+            </p>
+          </div>
 
-        <div class="metric__social">
-          <ofd-agregator-social></ofd-agregator-social>
-        </div>
-      </div>
-      <div class="versions">
-        <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
-          {{ 'datasets.dataset.headers.versions' | translate }}
-        </ofd-agregator-header-bar>
-
-        <div class="versions__content">
-          <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
-          <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
-        </div>
-      </div>
-    </ofd-agregator-data-container>
-  </div>
-
-  <div class="dataset-right">
-    <div class="right-container">
-      <div class="right-container__header">
-        <div class="right-container__header__title">
-          <div class="background-gray">
-            {{ metaCitation.type | lowercase }}
-          </div>
-          <p>{{ testData.header.title }}</p>
-        </div>
-        <p>{{ testData.header.body }}</p>
-        <div class="right-container__header__api">
-          <button class="button">
-            {{ 'home.download' | translate }}
-            <svg-icon [src]="'/assets/images/download.svg'" [applyCss]="true"></svg-icon>
-          </button>
-        </div>
-      </div>
-
-      <div class="right-container__files">
-        <ofd-agregator-data-container
-          [title]="'datasets.resource.headers.look-up' | translate"
-          [iconSrc]="'/assets/images/eye.svg'"
-        >
-        </ofd-agregator-data-container>
-
-        <div class="right-container__files__file-viewer" *ngIf="resource">
-          <div class="right-container__files__file-viewer__as-text" *ngIf="['txt'].indexOf(resource.format) >= 0">
-            <ofd-agregator-text [resource]="contentText"></ofd-agregator-text>
-          </div>
-          <div
-            class="right-container__files__file-viewer__as-image"
-            *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0"
-          >
-            <img class="right-container__files__file-viewer__as-image__source" [src]="resource.fileLink" />
-          </div>
-          <div class="right-container__files__file-viewer__as-pdf" *ngIf="['pdf'].indexOf(resource.format) >= 0">
-            <ofd-agregator-pdf [resource]="resource.fileLink"></ofd-agregator-pdf>
-          </div>
-          <div class="right-container__files__file-viewer__as-json" *ngIf="['json'].indexOf(resource.format) >= 0">
-            <ofd-agregator-json [resource]="testData"></ofd-agregator-json>
-          </div>
-          <div
-            class="right-container__files__file-viewer__as-table"
-            *ngIf="['csv', 'tsv'].indexOf(resource.format) >= 0"
-          >
-            <ofd-agregator-table [resource]="resource.fileLink"></ofd-agregator-table>
-          </div>
-          <div
-            class="right-container__files__file-viewer__as-docx"
-            *ngIf="['doc', 'docx', 'xls', 'xlsx'].indexOf(resource.format) >= 0"
-          >
-            <ofd-agregator-docs [resource]="resource.fileLink"></ofd-agregator-docs>
-          </div>
-          <div class="right-container__files__file-viewer__as-xml" *ngIf="['xml', 'rdf'].indexOf(resource.format) >= 0">
-            <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
+          <div class="metric__social">
+            <ofd-agregator-social></ofd-agregator-social>
           </div>
         </div>
-      </div>
+        <div class="versions">
+          <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
+            {{ 'datasets.dataset.headers.versions' | translate }}
+          </ofd-agregator-header-bar>
 
-      <div class="meta-citation-box">
-        <ofd-agregator-data-container
-          class="meta-citation"
-          [iconSrc]="'/assets/images/metadata-content.svg'"
-          [title]="'datasets.dataset.headers.metadata' | translate"
-          [expandable]="true"
-          [expanded]="false"
-        >
-          <div class="meta-citation__header">
+          <div class="versions__content">
+            <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
+            <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
+          </div>
+        </div>
+      </ofd-agregator-data-container>
+    </div>
+
+    <div class="dataset-right">
+      <div class="right-container">
+        <div class="right-container__header">
+          <div class="right-container__header__title">
+            <div class="background-gray">
+              {{ metaCitation.type | lowercase }}
+            </div>
+            <p>{{ testData.header.title }}</p>
+          </div>
+          <p>{{ testData.header.body }}</p>
+          <div class="right-container__header__api">
             <button class="button">
-              {{ 'global.export' | translate }}
-              <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
+              {{ 'home.download' | translate }}
+              <svg-icon [src]="'/assets/images/download.svg'" [applyCss]="true"></svg-icon>
             </button>
           </div>
-          <div class="meta-citation__look-up" *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0">
-            <div class="meta-citation__look-up__keys">
-              <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
+        </div>
+
+        <div class="right-container__files">
+          <ofd-agregator-data-container
+            [title]="'datasets.resource.headers.look-up' | translate"
+            [iconSrc]="'/assets/images/eye.svg'"
+          >
+          </ofd-agregator-data-container>
+
+          <div class="right-container__files__file-viewer" *ngIf="resource">
+            <div class="right-container__files__file-viewer__as-text" *ngIf="['txt'].indexOf(resource.format) >= 0">
+              <ofd-agregator-text [resource]="contentText"></ofd-agregator-text>
             </div>
-            <div class="meta-citation__look-up__values">
-              <img class="meta-citation__look-up__values__img" [src]="resource.fileLink" />
+            <div
+              class="right-container__files__file-viewer__as-image"
+              *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0"
+            >
+              <img class="right-container__files__file-viewer__as-image__source" [src]="resource.fileLink" />
+            </div>
+            <div class="right-container__files__file-viewer__as-pdf" *ngIf="['pdf'].indexOf(resource.format) >= 0">
+              <ofd-agregator-pdf [resource]="resource.fileLink"></ofd-agregator-pdf>
+            </div>
+            <div class="right-container__files__file-viewer__as-json" *ngIf="['json'].indexOf(resource.format) >= 0">
+              <ofd-agregator-json [resource]="testData"></ofd-agregator-json>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-table"
+              *ngIf="['csv', 'tsv'].indexOf(resource.format) >= 0"
+            >
+              <ofd-agregator-table [resource]="resource.fileLink"></ofd-agregator-table>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-docx"
+              *ngIf="['doc', 'docx', 'xls', 'xlsx'].indexOf(resource.format) >= 0"
+            >
+              <ofd-agregator-docs [resource]="resource.fileLink"></ofd-agregator-docs>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-xml"
+              *ngIf="['xml', 'rdf'].indexOf(resource.format) >= 0"
+            >
+              <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
             </div>
           </div>
-          <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: 0">
-            <div class="meta-citation__row__keys">
-              {{ 'datasets.resource.metadata.' + item.key | translate }}
+        </div>
+
+        <div class="meta-citation-box">
+          <ofd-agregator-data-container
+            class="meta-citation"
+            [iconSrc]="'/assets/images/metadata-content.svg'"
+            [title]="'datasets.dataset.headers.metadata' | translate"
+            [expandable]="true"
+            [expanded]="false"
+          >
+            <div class="meta-citation__header">
+              <button class="button">
+                {{ 'global.export' | translate }}
+                <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
+              </button>
             </div>
-            <div class="meta-citation__row__values">
-              {{ item.value }}
+            <div class="meta-citation__look-up" *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0">
+              <div class="meta-citation__look-up__keys">
+                <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
+              </div>
+              <div class="meta-citation__look-up__values">
+                <img class="meta-citation__look-up__values__img" [src]="resource.fileLink" />
+              </div>
             </div>
-          </div>
-        </ofd-agregator-data-container>
+            <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: 0">
+              <div class="meta-citation__row__keys">
+                {{ 'datasets.resource.metadata.' + item.key | translate }}
+              </div>
+              <div class="meta-citation__row__values">
+                {{ item.value }}
+              </div>
+            </div>
+          </ofd-agregator-data-container>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </section>

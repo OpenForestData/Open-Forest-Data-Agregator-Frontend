@@ -36,7 +36,6 @@ export class TableComponent implements OnInit {
       delimiter: ';',
       complete: result => {
         this.convertedData = result;
-        console.log(this.convertedData);
       }
     });
   }

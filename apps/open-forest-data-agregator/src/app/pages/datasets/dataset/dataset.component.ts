@@ -139,9 +139,14 @@ export class DatasetComponent implements OnInit {
   offset = 2;
   pagesArray = [1, 2, 3];
 
+  mobile = false;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (window.screen.width < 1200) {
+      this.mobile = true;
+    }
+  }
 
   pageClick(page) {}
 }
