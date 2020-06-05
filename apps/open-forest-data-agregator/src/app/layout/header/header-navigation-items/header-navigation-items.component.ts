@@ -62,19 +62,7 @@ export class HeaderNavigationItemsComponent implements OnInit {
     }
   ];
 
-  constructor(public translateService: TranslateService) {
-    this.translateService
-      .get('nav.items')
-      .subscribe(translations => this.setTranslationsToItems(this.items, translations));
-  }
+  constructor(public translateService: TranslateService) {}
 
   ngOnInit(): void {}
-
-  setTranslationsToItems(items: NavigationItem[], translations) {
-    items.forEach(item => {
-      if (translations[item['key']]) item.name = translations[item['key']];
-
-      if (item.children && item.children.length > 0) this.setTranslationsToItems(item.children, translations);
-    });
-  }
 }

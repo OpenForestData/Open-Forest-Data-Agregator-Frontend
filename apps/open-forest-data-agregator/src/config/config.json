@@ -1,5 +1,15 @@
 {
   "version": "Default",
   "language": "pl",
+  "languages": [
+    {
+      "key": "pl",
+      "value": "PL"
+    },
+    {
+      "key": "en",
+      "value": "EN"
+    }
+  ],
   "api": "http://localhost:8080/api/"
 }
