@@ -23,7 +23,13 @@ export class DatasetComponent implements OnInit {
     { name: 'Domain', value: 0 }
   ];
 
-  public sortBy = null;
+  public sortByType = null;
+  public sortByAccess = null;
+  public sortByFilter = null;
+
+  public optionsType: IUISelectOptions = {
+    placeholder: 'Filtruj wg'
+  };
 
   public optionsAccess: IUISelectOptions = {
     placeholder: 'Sortuj wg'
@@ -32,11 +38,6 @@ export class DatasetComponent implements OnInit {
   public optionsFilter: IUISelectOptions = {
     placeholder: 'Filtruj wg'
   };
-
-  public optionsType: IUISelectOptions = {
-    placeholder: 'Filtruj wg'
-  };
-
   mockLeftSide: any = {
     downloadAmount: 5,
     createdDate: '20.07.2019',

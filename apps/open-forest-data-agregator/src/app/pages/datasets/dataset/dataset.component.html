@@ -89,13 +89,18 @@
               </p>
               <div class="right-container__files__sorting__bar-right__file-type">
                 {{ 'datasets.dataset.headers.typeFile' | translate }}
-                <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortBy">
+                <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortByType">
                 </ui-select>
               </div>
 
               <div class="right-container__files__sorting__bar-right__access">
                 {{ 'datasets.dataset.headers.access' | translate }}
-                <ui-select class="access-sort" [items]="sortItemsAccess" [options]="optionsAccess" [(value)]="sortBy">
+                <ui-select
+                  class="access-sort"
+                  [items]="sortItemsAccess"
+                  [options]="optionsAccess"
+                  [(value)]="sortByAccess"
+                >
                 </ui-select>
               </div>
             </div>
@@ -115,13 +120,23 @@
               <div class="right-container__files__sorting__bar-mobile__container">
                 <div class="right-container__files__sorting__bar-right__file-type">
                   {{ 'datasets.dataset.headers.typeFile' | translate }}
-                  <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortBy">
+                  <ui-select
+                    class="type-sort"
+                    [items]="sortItemsFilter"
+                    [options]="optionsFilter"
+                    [(value)]="sortByType"
+                  >
                   </ui-select>
                 </div>
 
                 <div class="right-container__files__sorting__bar-right__access">
                   {{ 'datasets.dataset.headers.access' | translate }}
-                  <ui-select class="access-sort" [items]="sortItemsAccess" [options]="optionsAccess" [(value)]="sortBy">
+                  <ui-select
+                    class="access-sort"
+                    [items]="sortItemsAccess"
+                    [options]="optionsAccess"
+                    [(value)]="sortByAccess"
+                  >
                   </ui-select>
                 </div>
               </div>
@@ -130,7 +145,7 @@
             <div class="right-container__files__sorting__bar-left">
               <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon>
               <div class="right-container__files__sorting__bar-left__sort-by">
-                <ui-select [items]="sortItemsFilter" [options]="optionsFilter" [(value)]="sortBy"> </ui-select>
+                <ui-select [items]="sortItemsFilter" [options]="optionsFilter" [(value)]="sortByFilter"> </ui-select>
               </div>
             </div>
           </div>
