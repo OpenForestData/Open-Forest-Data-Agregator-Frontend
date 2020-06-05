@@ -1,11 +1,29 @@
-<button class="search-btn desktop-only">
-  <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
-</button>
-<a class="login-btn" routerLink="/auth/login">
-  {{ 'nav.login' | translate }}
-  <svg-icon src="/assets/images/lock.svg" [applyCss]="true"></svg-icon>
-</a>
-<button class="language-btn">
-  {{ languageService.language }}
-  <svg-icon src="/assets/images/dark_arrow_down.svg" [applyCss]="true"></svg-icon>
-</button>
+<div class="search-wrapper desktop-only">
+  <input
+    type="text"
+    [(ngModel)]="searchPhrase"
+    class="header-search"
+    [placeholder]="'global.search' | translate"
+    [ngClass]="{ active: searchActive }"
+  />
+
+  <button class="search-btn" (click)="searchClick()">
+    <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
+  </button>
+</div>
+
+<div class="mobile-flex">
+  <a class="login-btn" routerLink="/auth/login">
+    {{ 'nav.login' | translate }}
+    <svg-icon src="/assets/images/lock.svg" [applyCss]="true"></svg-icon>
+  </a>
+
+  <button
+    class="language-btn"
+    (click)="setNewLanguage(item.key)"
+    [ngClass]="{ active: item.key == languageService.language }"
+    *ngFor="let item of languageService.languages"
+  >
+    {{ item.value }}
+  </button>
+</div>

@@ -25,13 +25,15 @@ export class AppComponent implements OnInit {
    * @param {Router} router Router
    */
   constructor(
-    private renderer: Renderer2,
-    private translate: TranslateService,
     private languageService: LanguageService,
     @Inject(PLATFORM_ID) private platformId: string,
+    private renderer: Renderer2,
     public router: Router
   ) {
-    this.useLanguage(this.languageService.language);
+    this.languageService.language = this.languageService.language;
+    if (isPlatformBrowser(this.platformId)) {
+      this.renderer.setAttribute(document.documentElement, 'lang', this.languageService.language);
+    }
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -47,17 +49,4 @@ export class AppComponent implements OnInit {
    * @ignore
    */
   ngOnInit() {}
-
-  /**
-   * Change language and reload page
-   * @param {string} language Language
-   */
-  useLanguage(language: string): void {
-    this.translate.setDefaultLang(language);
-    this.translate.use(language);
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.renderer.setAttribute(document.documentElement, 'lang', language);
-    }
-  }
 }
