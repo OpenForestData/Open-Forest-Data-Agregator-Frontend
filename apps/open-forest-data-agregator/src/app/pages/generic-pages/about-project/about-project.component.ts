@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@app/services/language.service';
 
 @Component({
   selector: 'ofd-agregator-about-project',
   templateUrl: './about-project.component.html',
   styleUrls: ['./about-project.component.scss']
 })
-export class AboutProjectComponent implements OnInit {
+export class AboutProjectComponent implements OnInit, OnDestroy {
   public iconURL = 'assets/modules/generic/about_project.png';
   public pageTitle = 'misc.about_project';
   public pageContent = `
@@ -50,7 +52,13 @@ export class AboutProjectComponent implements OnInit {
 
   `;
 
-  constructor() {}
-
-  ngOnInit() {}
+  public languageSubscription: Subscription = new Subscription();
+  constructor(public languageService: LanguageService) {}
+  ngOnInit() {
+    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+  }
+  getData() {}
+  ngOnDestroy() {
+    this.languageSubscription.unsubscribe();
+  }
 }
