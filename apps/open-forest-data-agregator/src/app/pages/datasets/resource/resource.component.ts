@@ -104,10 +104,14 @@ export class ResourceComponent implements OnInit {
     {
       format: 'rdf',
       fileLink: this.rdfContent
+    },
+    {
+      format: 'map',
+      fileLink: '/assets/.mocks/small_geojson.geojson'
     }
   ];
 
-  resource = this.resources[4];
+  resource = this.resources[7];
   contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
   Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
   Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
@@ -134,6 +138,5 @@ export class ResourceComponent implements OnInit {
       this.mobile = true;
     }
     hljs.initHighlightingOnLoad();
-    console.log('table view', this.tableView);
   }
 }

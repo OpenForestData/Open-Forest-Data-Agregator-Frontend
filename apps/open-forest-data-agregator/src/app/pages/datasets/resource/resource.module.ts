@@ -12,6 +12,7 @@ import { TableComponent } from './table/table.component';
 import { DocsComponent } from './docs/docs.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { XmlComponent } from './xml/xml.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { XmlComponent } from './xml/xml.component';
     JsonComponent,
     TableComponent,
     DocsComponent,
-    XmlComponent
+    XmlComponent,
+    MapComponent
   ],
   imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule, NgxDocViewerModule]
 })

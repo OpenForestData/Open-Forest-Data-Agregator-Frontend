@@ -114,6 +114,9 @@
             >
               <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
             </div>
+            <div class="right-container__files__file-viewer__as-map" *ngIf="['map'].indexOf(resource.format) >= 0">
+              <ofd-agregator-map [resource]="resource.fileLink"></ofd-agregator-map>
+            </div>
           </div>
         </div>
 
