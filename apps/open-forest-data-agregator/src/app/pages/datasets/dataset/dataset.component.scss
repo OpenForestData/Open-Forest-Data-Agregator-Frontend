@@ -447,10 +447,13 @@
     flex-direction: column;
     background-color: white;
     width: 375px;
+    padding: 0;
   }
 
   .dataset-left {
     width: 100%;
+    padding-right: 0px;
+    max-width: none;
   }
 
   .dataset-right {
@@ -462,24 +465,35 @@
     }
   }
   .right-container {
-    padding: 0;
+    padding: 25px 28px 0px 36px;
+    &__header {
+      &__api {
+        a {
+          padding-right: 10px;
+        }
+      }
+    }
   }
   .meta-citation__look-up {
     flex-direction: column;
   }
   .meta-citation__row {
     flex-direction: column;
+    &__keys {
+      width: 80% !important;
+      padding-bottom: 5px;
+    }
   }
   .meta-citation__look-up__values {
     display: flex;
     justify-content: center;
   }
-  .dataset-left {
-    margin-bottom: 40px;
-  }
   .right-container__files__sorting {
     display: flex;
     flex-direction: column-reverse;
+  }
+  .right-container__files__download-all {
+    padding: 10px 0 10px 0;
   }
   .right-container__files__sorting__bar-right {
     display: none;
@@ -488,7 +502,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px 0 20px 20px;
     &__filter-by {
       display: flex;
       flex-direction: row;
@@ -500,7 +513,8 @@
     }
   }
   .right-container__files__sorting__bar-left {
-    width: 90%;
+    width: 100%;
+    padding-bottom: 20px;
   }
   .right-container__files__sorting__bar-right__filters {
     padding: 0 15px 0 0;
@@ -517,6 +531,7 @@
     }
     .checkbox-field {
       align-items: flex-start !important;
+      padding-left: 0;
     }
     .checkbox-field label {
       align-items: flex-start !important;
@@ -543,6 +558,7 @@
   }
   .right-container__files__download-single__row {
     align-items: flex-start;
+    padding: 10px 0;
   }
 
   .header-bar-dataset::ng-deep {
@@ -562,9 +578,8 @@
       }
     }
     .header-bar {
-      background-color: $accent-color !important;
-      color: white;
-      border-radius: 5px;
+      border-radius: 0px;
+      padding-left: 28px;
       > svg-icon {
         height: 18px;
         margin-right: 13px;
@@ -576,6 +591,46 @@
           }
         }
       }
+    }
+    .metric {
+      &__content {
+        padding-left: 28px;
+      }
+    }
+    .versions {
+      &__content {
+        padding-left: 28px;
+      }
+    }
+  }
+  .social-container::ng-deep {
+    .social-bar {
+      padding: 40px 28px;
+    }
+  }
+  .files-container::ng-deep {
+    .header-bar {
+      background-color: white;
+      padding: 20px 0;
+    }
+  }
+  .right-container__files__download-all__checkbox::ng-deep {
+    .checkbox-field {
+      padding-left: 0;
+    }
+  }
+  .metadata-header {
+    flex-direction: column;
+    align-items: unset;
+    padding: 10px 0 10px 0;
+    &__text {
+      display: flex;
+      flex-direction: row;
+    }
+    &__export {
+      display: flex;
+      justify-content: flex-end;
+      padding: 22px 0 26px 0;
     }
   }
 }
