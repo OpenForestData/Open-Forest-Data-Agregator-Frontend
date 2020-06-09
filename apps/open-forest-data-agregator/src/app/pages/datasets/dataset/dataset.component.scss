@@ -7,7 +7,7 @@
 
 .breadcrumbs::ng-deep {
   .page-nav {
-    padding: 24px 0 13px 0;
+    padding: 24px 0 13px 28px;
   }
 }
 
@@ -109,12 +109,13 @@
     }
     &__social {
       display: block;
+      padding-left: 14px;
     }
   }
 
   .versions {
     &__content {
-      padding: 23px 0 0 5px;
+      padding: 23px 0 0 14px;
       height: 20px;
       font-size: 14px;
     }
