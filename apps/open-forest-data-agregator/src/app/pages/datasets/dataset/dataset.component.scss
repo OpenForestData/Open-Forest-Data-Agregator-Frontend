@@ -101,7 +101,7 @@
       display: block;
     }
     &__content {
-      padding-left: 5px;
+      padding-left: 14px;
     }
     &__content > p {
       display: block;
@@ -128,8 +128,9 @@
 }
 
 .right-container {
-  padding: 24px 100px 0 61px;
+  padding: 24px 100px 0 36px;
   &__header {
+    padding: 10px 14px;
     p {
       font-size: 14px;
       padding-top: 10px;
@@ -152,7 +153,7 @@
         justify-content: center;
         float: right;
         color: $accent-color;
-        padding: 30px 0 30px 0;
+        padding: 30px 28px 30px 0;
         svg-icon {
           padding-left: 20px;
         }
@@ -161,7 +162,7 @@
   }
   &__files {
     &__download-all {
-      padding: 10px 20px 10px 10px;
+      padding: 10px 20px 10px 4px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -176,7 +177,7 @@
     }
     &__download-single {
       &__row::ng-deep {
-        padding: 10px 20px 10px 10px;
+        padding: 10px 20px 10px 4px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -222,7 +223,7 @@
     &__sorting {
       display: flex;
       flex-direction: row;
-      padding: 20px 0 10px 0;
+      padding: 20px 0 10px 14px;
       align-items: center;
       font-size: 14px;
       width: 100%;
@@ -231,7 +232,7 @@
         display: flex;
         align-items: center;
         &__filters {
-          padding: 0 10px 0 5px;
+          padding: 0 10px 0 0;
         }
         &__file-type {
           padding: 0 10px 0 0;
@@ -246,10 +247,11 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding-right: 30px;
         &__sort-by {
           display: flex;
           justify-content: flex-end;
-          padding-left: 20px;
+          padding-left: 5px;
         }
       }
     }
@@ -259,7 +261,10 @@
   margin-bottom: 20px;
 }
 
-.meta-citation {
+.meta-citation::ng-deep {
+  .header-bar {
+    padding: 11px 0;
+  }
   &__row::ng-deep {
     width: 100%;
     display: flex;
@@ -275,7 +280,10 @@
   }
 }
 
-.meta-darwin {
+.meta-darwin::ng-deep {
+  .header-bar {
+    padding: 11px 0;
+  }
   &__row::ng-deep {
     width: 100%;
     display: flex;
@@ -304,7 +312,7 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
-  padding: 10px 0 0 10px;
+  padding: 10px 0 0 14px;
   &__text {
     display: flex;
     flex-direction: row;
