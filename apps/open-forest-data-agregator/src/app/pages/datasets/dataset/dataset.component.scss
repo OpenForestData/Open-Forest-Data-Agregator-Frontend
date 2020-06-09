@@ -446,7 +446,7 @@
   .container {
     flex-direction: column;
     background-color: white;
-    width: 375px;
+    width: 100%;
     padding: 0;
   }
 
@@ -461,7 +461,8 @@
   }
   .breadcrumbs::ng-deep {
     .container {
-      width: 375px;
+      width: 100%;
+      padding-left: 36px;
     }
   }
   .right-container {
@@ -579,7 +580,7 @@
     }
     .header-bar {
       border-radius: 0px;
-      padding-left: 28px;
+      padding-left: 36px;
       > svg-icon {
         height: 18px;
         margin-right: 13px;
@@ -594,18 +595,18 @@
     }
     .metric {
       &__content {
-        padding-left: 28px;
+        padding-left: 36px;
       }
     }
     .versions {
       &__content {
-        padding-left: 28px;
+        padding-left: 36px;
       }
     }
   }
   .social-container::ng-deep {
     .social-bar {
-      padding: 40px 28px;
+      padding: 40px 36px;
     }
   }
   .files-container::ng-deep {

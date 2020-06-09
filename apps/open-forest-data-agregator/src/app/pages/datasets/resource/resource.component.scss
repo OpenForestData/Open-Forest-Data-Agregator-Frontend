@@ -3,6 +3,7 @@
 .main-container {
   width: 100%;
   background-color: $light-gray-color;
+  margin: 0 auto;
 }
 
 .breadcrumbs::ng-deep {
@@ -178,7 +179,7 @@
       }
       &__as-map {
         height: 800px;
-        width: 100%;
+        width: 80%;
       }
     }
     &__image {
@@ -497,14 +498,14 @@
   .container {
     flex-direction: column;
     background-color: white;
-    width: 375px;
+    width: 100%;
     padding: 0;
   }
 
   .dataset-left {
     width: 100%;
     padding-right: 0px;
-    max-width: none;
+    max-width: 1199px;
   }
 
   .dataset-right {
@@ -512,8 +513,8 @@
   }
   .breadcrumbs::ng-deep {
     .container {
-      width: 375px;
-      padding-right: 28px;
+      width: 100%;
+      padding-left: 28px;
     }
   }
   .right-container {
@@ -530,7 +531,7 @@
       &__file-viewer {
         padding: 28px;
         &__as-table {
-          max-width: 100%;
+          max-width: 80%;
         }
       }
     }
