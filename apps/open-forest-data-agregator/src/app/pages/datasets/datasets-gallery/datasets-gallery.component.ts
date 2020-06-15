@@ -13,12 +13,7 @@ import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.co
   templateUrl: './datasets-gallery.component.html',
   styleUrls: ['./datasets-gallery.component.scss']
 })
-export class DatasetsGalleryComponent implements OnInit, AfterViewInit {
-  /*
-   * MOCK
-   */
-  public page = 1;
-
+export class DatasetsGalleryComponent implements OnInit {
   public sortItems = [
     { name: 'A-Z', value: 0 },
     { name: 'Z-A', value: 0 }
@@ -38,12 +33,20 @@ export class DatasetsGalleryComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      // @ts-ignore
-      window.lightGallery(document.querySelector('.datasets-list__datasets'), {
-        selector: '.datasets-list__datasets__item__picture'
-      });
-    }, 0);
+  showGallery(index, el) {
+    const item = this.datasets[index];
+    const dynamicEl = item.images.map((img, imgIndex) =>
+      Object.create({
+        src: img,
+        thumb: img,
+        subHtml: `Dataset - ${index}, Img: ${imgIndex}`
+      })
+    );
+
+    // @ts-ignore
+    window.lightGallery(el, {
+      dynamic: true,
+      dynamicEl
+    });
   }
 }

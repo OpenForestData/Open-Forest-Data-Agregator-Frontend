@@ -3,7 +3,7 @@
 .datasets-list {
   &__container {
     background-color: #fff;
-    padding: 32px 40px 64px 40px;
+    padding: 32px 0 15px 40px;
   }
 
   &__header {
@@ -38,6 +38,7 @@
       &__picture,
       &__picture--mobile {
         padding-right: 20px;
+
         img {
           width: 56px;
           height: 56px;
@@ -94,11 +95,13 @@
     &__header {
       flex-direction: column-reverse;
       flex-wrap: wrap;
+      padding: 0 18px;
+      margin-bottom: 10px;
 
       div {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100%;
       }
     }
@@ -109,6 +112,7 @@
 
     &__datasets {
       padding: 0 18px;
+
       &__item {
         &__picture {
           display: none;

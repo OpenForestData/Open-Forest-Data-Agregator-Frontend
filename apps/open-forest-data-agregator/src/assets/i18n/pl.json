@@ -276,5 +276,8 @@
     "see_less": "Zobacz mniej",
     "news": "Aktualności",
     "search_placeholder": "Szukaj aktualności..."
+  },
+  "search": {
+    "advanced": "Wyszukiwanie zaawansowane"
   }
 }

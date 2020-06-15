@@ -9,6 +9,7 @@ import { featureGroup, latLng, tileLayer, Map, canvas, circleMarker } from 'leaf
 })
 export class DatasetsMapComponent implements OnInit, OnChanges {
   @Input() datasets: any = [];
+  public activeMarkes = 0;
 
   public options = {
     renderer: canvas(),
@@ -60,7 +61,10 @@ export class DatasetsMapComponent implements OnInit, OnChanges {
   }
 
   getMarkers() {
-    return this.datasets.map(dataset => {
+    const coords = this.datasets.filter(item => item['coordinates']);
+    this.activeMarkes = coords.length;
+
+    return coords.map(dataset => {
       const coordinates = dataset['coordinates'][0];
 
       return circleMarker([coordinates.lat, coordinates.long], {

@@ -85,7 +85,7 @@ header {
   height: 100%;
   width: 100%;
   background: white;
-  z-index: 2;
+  z-index: 200;
   padding: 30px 50px;
   box-sizing: border-box;
   transform: translateX(105%);
@@ -104,6 +104,10 @@ header {
     justify-content: flex-end;
     font-size: 50px;
     font-weight: 200;
+
+    span {
+      cursor: pointer;
+    }
   }
 
   .main-nav__controls {

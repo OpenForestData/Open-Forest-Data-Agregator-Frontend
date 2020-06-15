@@ -11,30 +11,28 @@
   </div>
 
   <div class="datasets-list__datasets" #galleryItems>
-    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
+    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets; let i = index">
       <a
-        [href]="dataset.preview"
-        class="datasets-list__datasets__item__picture"
+        class="datasets-list__datasets__item__picture thumbnail thumbnail-{{ i }}"
+        (click)="showGallery(i, $event.target)"
         [title]="dataset.title"
         [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
+        [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
       >
-        <img [src]="dataset.preview" [alt]="dataset.title" />
+        <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
+        <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+        <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
       </a>
       <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
-      <a routerLink="/datasets/" class="datasets-list__datasets__item__link">
+      <a
+        routerLink="/datasets/"
+        class="datasets-list__datasets__item__link"
+        *ngIf="dataset.preview && dataset.preview !== 'wait'"
+      >
         {{ 'global.see' | translate }}
 
         <svg-icon [src]="'/assets/images/arrow-green-right.svg'" [applyCss]="true"></svg-icon>
       </a>
     </div>
-  </div>
-
-  <div class="datasets-list__pagination">
-    <ofd-agregator-pagination
-      [items]="600"
-      [pageSize]="15"
-      [(page)]="page"
-      [showOffsets]="true"
-    ></ofd-agregator-pagination>
   </div>
 </div>

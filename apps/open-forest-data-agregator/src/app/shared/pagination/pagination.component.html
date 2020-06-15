@@ -3,7 +3,16 @@
     <label for="go-to-page">
       {{ 'pagination.go-to-page' | translate }}
     </label>
-    <input type="number" min="0" max="{{ pages }}" id="go-to-page" class="input" />
+    <input
+      type="number"
+      min="0"
+      (debounceInput)="debouncePage($event.target.value)"
+      [(ngModel)]="inputValue"
+      [debounceTime]="200"
+      max="{{ pages }}"
+      id="go-to-page"
+      class="input"
+    />
   </div>
   <ol class="pagination__pages">
     <li class="prev-page">
@@ -34,6 +43,6 @@
   </ol>
   <div class="pagination__queries">
     {{ 'pagination.show' | translate }}
-    <ui-select [items]="[15, 30]" [(value)]="pageSize"> </ui-select>
+    <ui-select (valueChange)="emitChanges($event)" [items]="[15, 30]" [(value)]="pageSize"> </ui-select>
   </div>
 </div>

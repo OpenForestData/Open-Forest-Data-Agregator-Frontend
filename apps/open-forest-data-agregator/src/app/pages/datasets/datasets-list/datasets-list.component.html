@@ -13,13 +13,19 @@
   <div class="datasets-list__datasets">
     <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
       <picture class="datasets-list__datasets__item__picture">
-        <img [src]="dataset.preview" [alt]="dataset.title" />
+        <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+        <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
       </picture>
       <article>
         <header>
           <h3 class="datasets-list__datasets__item__title">
             <picture class="datasets-list__datasets__item__picture--mobile">
-              <img [src]="dataset.preview" [alt]="dataset.title" />
+              <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+              <img
+                [src]="dataset.preview"
+                *ngIf="dataset.preview && dataset.preview !== 'wait'"
+                [alt]="dataset.title"
+              />
             </picture>
             <a routerLink="/datasets/detail" [queryParams]="{ doi: convertDOI(doi) }"> {{ dataset.title }} </a>
           </h3>
@@ -35,10 +41,5 @@
         </footer>
       </article>
     </div>
-  </div>
-
-  <div class="datasets-list__pagination">
-    <ofd-agregator-pagination [items]="600" [pageSize]="15" [(page)]="page" [showOffsets]="true">
-    </ofd-agregator-pagination>
   </div>
 </div>

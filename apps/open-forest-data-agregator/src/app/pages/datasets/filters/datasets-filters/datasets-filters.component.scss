@@ -2,7 +2,7 @@
 
 .datasets-filters {
   &__type {
-    padding: 21px 15px 39px 15px;
+    padding: 21px 15px 0 15px;
 
     ui-checkbox {
       display: block;
@@ -19,12 +19,35 @@
 }
 
 ::ng-deep {
+  .button-wrapper {
+    button {
+      &:hover {
+        svg path {
+          fill: $accent-color !important;
+        }
+      }
+    }
+  }
+
   @media (max-width: 1200px) {
+    .button-wrapper {
+      button {
+        padding: 9px 15px 9px 15px;
+        width: 175px;
+      }
+    }
+
+    .filter__show-more {
+      padding-left: 15px !important;
+    }
+
     .datasets-filters {
       &__type {
         padding-bottom: 15px !important;
+
         label.ui-checkbox {
           color: #fff !important;
+
           span {
             border-color: #fff !important;
           }
@@ -39,5 +62,24 @@
         display: none;
       }
     }
+  }
+}
+
+.m-l-10 {
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+.m-t--10 {
+  margin-top: -8px;
+}
+
+.datasets-filters__filters__mobile {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .datasets-filters__filters__mobile {
+    display: block;
   }
 }

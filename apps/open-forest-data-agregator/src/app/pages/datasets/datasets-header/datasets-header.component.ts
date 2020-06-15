@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatasetsService } from '../datasets.service';
 
 @Component({
   selector: 'ofd-agregator-datasets-header',
@@ -6,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datasets-header.component.scss']
 })
 export class DatasetsHeaderComponent implements OnInit {
-  constructor() {}
+  public searchValue = '';
+
+  constructor(public DSService: DatasetsService) {}
 
   ngOnInit(): void {}
+
+  search() {
+    this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+  }
 }

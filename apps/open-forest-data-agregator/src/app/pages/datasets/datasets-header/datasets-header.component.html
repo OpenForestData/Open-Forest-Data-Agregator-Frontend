@@ -1,13 +1,33 @@
 <div class="container">
-  <button class="button add-data">
-    <span class="f-s-16">
-      {{ 'datasets.add-data' | translate }}
-    </span>
-    <svg-icon [src]="'/assets/images/plus.svg'" [applyCss]="true"></svg-icon>
-  </button>
+  <div class="button-wrapper">
+    <button class="button">
+      {{ 'home.add_data' | translate }}
+      <svg-icon src="assets/images/plus.svg" class="m-t-3" [applyCss]="true"></svg-icon>
+
+      <ul class="drop-down excluded">
+        <li>
+          <a href="#">{{ 'home.science' | translate }}</a>
+        </li>
+        <li>
+          <a href="#">{{ 'home.dim' | translate }}</a>
+        </li>
+        <li>
+          <a href="#">{{ 'home.metric' | translate }}</a>
+        </li>
+      </ul>
+    </button>
+  </div>
+
   <form class="search-section">
     <label>
-      <input class="search-section__input" type="text" placeholder="{{ 'datasets.search-placeholder' | translate }}" />
+      <input
+        class="search-section__input"
+        (debounceInput)="search()"
+        name="datasetSearch"
+        [(ngModel)]="searchValue"
+        type="text"
+        placeholder="{{ 'datasets.search-placeholder' | translate }}"
+      />
       <button class="search-section__button" type="submit">
         <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
       </button>

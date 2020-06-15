@@ -1,107 +1,94 @@
 <div class="datasets-filters__type">
-  <ui-checkbox [name]="'media'" [(model)]="filters.media.value">
-    {{ 'datasets.filters.' + filters.media.key | translate }}
-  </ui-checkbox>
-  <ui-checkbox [name]="'coordinates'" [(model)]="filters.coordinates.value">
-    {{ 'datasets.filters.' + filters.coordinates.key | translate }}
-  </ui-checkbox>
+  <!-- <ui-checkbox [name]="'media'" [(model)]="checkbox.media.value">
+    {{ 'datasets.filters.' + checkbox.media.key | translate }}
+  </ui-checkbox> -->
+  <!-- <ui-checkbox [name]="'coordinates'" [(model)]="checkbox.coordinates.value">
+    {{ 'datasets.filters.' + checkbox.coordinates.key | translate }}
+  </ui-checkbox> -->
 </div>
 <div class="datasets-filters__filters">
   <div class="datasets-filters__filters__mobile">
     <ofd-agregator-datasets-filter
-      header="{{ 'datasets.filters.' + filters['categories'].key | translate }}"
-      [data]="filters['categories'].data"
-      [key]="filters['categories'].key"
-      [(value)]="filters['categories'].value"
-      [isExpanded]="filters['categories'].isExpanded"
-      [multiple]="filters['categories'].multiple"
+      header="{{ 'datasets.filters.' + categories.key | translate }}"
+      [data]="categories.data()"
+      [key]="categories.key"
+      [value]="selectedCategory"
+      [isExpanded]="categories.isExpanded"
+      [multiple]="categories.multiple"
+      (valueChange)="categoryChanged($event)"
     ></ofd-agregator-datasets-filter>
   </div>
-  <ng-container *ngFor="let filter of ['organization', 'format', 'type']">
+  <ng-container *ngFor="let key of getFilters()">
     <ofd-agregator-datasets-filter
-      header="{{ 'datasets.filters.' + filters[filter].key | translate }}"
-      [data]="filters[filter].data"
-      [key]="filters[filter].key"
-      [(value)]="filters[filter].value"
-      [isExpanded]="filters[filter].isExpanded"
-      [multiple]="filters[filter].multiple"
+      header="{{ filters[key].name }}"
+      [data]="filters[key].data()"
+      [key]="filters[key].key"
+      [(value)]="filters[key].value"
+      [isExpanded]="filters[key].isExpanded"
+      [multiple]="filters[key].multiple"
+      (valueChange)="filtersChanged($event)"
     ></ofd-agregator-datasets-filter>
   </ng-container>
   <ng-container *ngIf="moreFilters">
-    <ng-container *ngFor="let filter of ['license', 'species', 'gender', 'keywords']">
+    <ng-container *ngFor="let key of getFilters(false)">
       <ofd-agregator-datasets-filter
-        header="{{ 'datasets.filters.' + filters[filter].key | translate }}"
-        [data]="filters[filter].data"
-        [key]="filters[filter].key"
-        [(value)]="filters[filter].value"
-        [isExpanded]="filters[filter].isExpanded"
-        [multiple]="filters[filter].multiple"
-      ></ofd-agregator-datasets-filter>
-    </ng-container>
-
-    <ofd-agregator-datasets-range
-      header="{{ 'datasets.filters.' + filters.range.key | translate }}"
-      [data]="filters.range.data"
-      [key]="filters.range.key"
-      [(value)]="filters.range.value"
-      [isExpanded]="filters.range.isExpanded"
-      [multiple]="filters.range.multiple"
-    ></ofd-agregator-datasets-range>
-
-    <ofd-agregator-datasets-time-range
-      header="{{ 'datasets.filters.' + filters.timeRange.key | translate }}"
-      [key]="filters.timeRange.key"
-      [(value)]="filters.timeRange.value"
-      [isExpanded]="filters.timeRange.isExpanded"
-    ></ofd-agregator-datasets-time-range>
-
-    <ng-container *ngFor="let filter of ['createdYear', 'author']">
-      <ofd-agregator-datasets-filter
-        header="{{ 'datasets.filters.' + filters[filter].key | translate }}"
-        [data]="filters[filter].data"
-        [key]="filters[filter].key"
-        [(value)]="filters[filter].value"
-        [isExpanded]="filters[filter].isExpanded"
-        [multiple]="filters[filter].multiple"
+        header="{{ filters[key].name }}"
+        [data]="filters[key].data()"
+        [key]="filters[key].key"
+        [(value)]="filters[key].value"
+        [isExpanded]="filters[key].isExpanded"
+        [multiple]="filters[key].multiple"
+        (valueChange)="filtersChanged($event)"
       ></ofd-agregator-datasets-filter>
     </ng-container>
   </ng-container>
 
-  <button class="button datasets-filters__more-filters" (click)="moreFilters = !moreFilters">
+  <button
+    class="button datasets-filters__more-filters"
+    *ngIf="keys(this.filters).length > moreCountStart"
+    (click)="moreFilters = !moreFilters"
+  >
     <ng-container *ngIf="!moreFilters">
       {{ 'global.more-filters' | translate }}
-      <svg xmlns="http://www.w3.org/2000/svg" width="13.241" height="13.241" viewBox="0 0 13.241 13.241">
-        <g id="Group_839" data-name="Group 839" transform="translate(-7.475 -8.854)">
-          <line
-            id="Line_43"
-            data-name="Line 43"
-            y2="11.241"
-            transform="translate(14.096 9.854)"
-            fill="none"
-            stroke="#019544"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-          <line
-            id="Line_44"
-            data-name="Line 44"
-            x2="11.241"
-            transform="translate(8.475 15.475)"
-            fill="none"
-            stroke="#019544"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </g>
-      </svg>
+      <svg-icon src="assets/images/plus.svg" class="m-l-10" [applyCss]="true"></svg-icon>
     </ng-container>
     <ng-container *ngIf="moreFilters">
       {{ 'global.less-filters' | translate }}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="2" viewBox="0 0 16 2">
-        <path fill="#019544" d="m15,0s0.169,0.188 -14,0a1,1 0 0 0 0,2l14,0a1,1 0 0 0 0,-2z" id="Path_1070" />
-      </svg>
+      <svg-icon src="assets/images/minus.svg" class="m-l-10 m-t--10" [applyCss]="true"></svg-icon>
     </ng-container>
   </button>
+</div>
+
+<div class="advanced" [ngClass]="{ active: showAdvanced }">
+  <div class="row">
+    <div class="col-xs-12 end-xs">
+      <img src="assets/modules/search/times.png" class="times" alt="Close" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ofd-agregator-section-title
+        [iconURL]="'assets/modules/search/search_title.png'"
+        [titleText]="'search.advanced' | translate"
+      ></ofd-agregator-section-title>
+    </div>
+  </div>
+
+  <ng-select
+    [items]="people"
+    [multiple]="true"
+    bindLabel="name"
+    [addTag]="true"
+    [selectableGroup]="true"
+    [closeOnSelect]="false"
+    bindValue="id"
+    [(ngModel)]="selectedPeople"
+  >
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.gender | uppercase }}
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
+    </ng-template>
+  </ng-select>
 </div>

@@ -17,9 +17,11 @@
 
         <div class="mobile-flex-only middle-md">
           <div class="hamburger" (click)="showMobileMenu = true">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+            <svg-icon
+              src="/assets/images/hamburger.svg"
+              [svgStyle]="{ 'width.px': 36, 'height.px': 50, 'marginTop.px': -25 }"
+              [applyCss]="true"
+            ></svg-icon>
           </div>
         </div>
 
