@@ -13,6 +13,7 @@ import { DocsComponent } from './docs/docs.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { XmlComponent } from './xml/xml.component';
 import { MapComponent } from './map/map.component';
+import { IframeComponent } from './iframe/iframe.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MapComponent } from './map/map.component';
     TableComponent,
     DocsComponent,
     XmlComponent,
-    MapComponent
+    MapComponent,
+    IframeComponent
   ],
   imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule, NgxDocViewerModule]
 })

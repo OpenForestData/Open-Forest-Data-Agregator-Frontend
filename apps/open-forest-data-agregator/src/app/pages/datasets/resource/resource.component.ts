@@ -106,12 +106,44 @@ export class ResourceComponent implements OnInit {
       fileLink: this.rdfContent
     },
     {
-      format: 'map',
+      format: 'geojson',
       fileLink: '/assets/.mocks/small_geojson.geojson'
+    },
+    {
+      format: 'geotiff',
+      fileLink: '/assets/.mocks/cea.tif'
+    },
+    {
+      format: 'kml',
+      fileLink: '/assets/.mocks/kml_example.kml'
+    },
+    {
+      format: 'geotiff',
+      fileLink: '/assets/.mocks/example_4269.tif'
+    },
+    {
+      format: 'wkt',
+      fileLink: '/assets/.mocks/geometry.wkt'
+    },
+    {
+      format: 'gml',
+      fileLink: '/assets/.mocks/gml2.gml'
+    },
+    {
+      format: 'shp',
+      fileLink: '/assets/.mocks/gis_osm_water_a_07_1.shp'
+    },
+    {
+      format: '3d',
+      fileLink: `https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0`
+    },
+    {
+      format: 'tiff',
+      fileLink: `https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1`
     }
   ];
 
-  resource = this.resources[7];
+  resource = this.resources[14];
   contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
   Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
   Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
@@ -130,6 +162,26 @@ export class ResourceComponent implements OnInit {
     'deposit-date': '2020-05-20'
   };
   mobile = false;
+
+  externalTools = `
+3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
+Micro: https://data-epuszcza.biaman.pl/tools/microViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
+Tiff: https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1
+Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=232&datasetid=231&datasetversion=1.0
+Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
+  `;
+
+  externalToolExplanation = `
+  EXTERNAL_URL to adres strony ggdzie są external toole, to chyba będzie statyczne albo przekazane przez Olka
+  potem masz typ external toola (3dViewer, microViewer itp...)
+  to będziesz musiał wstawiać w zależności od typu pliku
+  stale: SITE_URL, FILE_ID, DATASET_ID i DATASET_VERSION
+  będziesz musiał wyciągnąć sobie od Olka
+  SITE_URL to adres datavers'a
+  FILE_ID to ID pliku
+  DATASET_ID to id datasetu (nie DOI!!!!!)
+  DATASET_VERSION to wersja datasetu (1.0, 1.1 itp. nie ID wersji a wersja)
+  `;
 
   constructor(private http: HttpClient) {}
 

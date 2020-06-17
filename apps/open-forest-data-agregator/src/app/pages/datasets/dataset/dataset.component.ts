@@ -38,6 +38,7 @@ export class DatasetComponent implements OnInit {
   public optionsFilter: IUISelectOptions = {
     placeholder: 'Filtruj wg'
   };
+
   mockLeftSide: any = {
     downloadAmount: 5,
     createdDate: '20.07.2019',
@@ -150,4 +151,10 @@ export class DatasetComponent implements OnInit {
   }
 
   pageClick(page) {}
+
+  // TODO: Add functionality to get identifier from route
+  getParams() {}
+
+  // TODO: Get dataset data from given DOI
+  getFilesAndMetadata(doi) {}
 }

@@ -64,7 +64,11 @@
               "./node_modules/datatables.net-buttons/js/buttons.flash.js",
               "./node_modules/datatables.net-buttons/js/buttons.html5.js",
               "./node_modules/datatables.net-buttons/js/buttons.print.js",
-              "resources/vendors/hammer.min.js"
+              "resources/vendors/hammer.min.js",
+              "./node_modules/georaster/dist/georaster.browser.bundle.min.js",
+              "./node_modules/proj4/dist/proj4.js",
+              "./node_modules/@mapbox/leaflet-omnivore/leaflet-omnivore.min.js",
+              "./node_modules/shpjs/dist/shp.min.js"
             ],
             "es5BrowserSupport": true
           },

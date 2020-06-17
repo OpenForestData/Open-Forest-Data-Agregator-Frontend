@@ -114,8 +114,17 @@
             >
               <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
             </div>
-            <div class="right-container__files__file-viewer__as-map" *ngIf="['map'].indexOf(resource.format) >= 0">
-              <ofd-agregator-map [resource]="resource.fileLink"></ofd-agregator-map>
+            <div
+              class="right-container__files__file-viewer__as-map"
+              *ngIf="['geojson', 'geotiff', 'kml', 'wkt', 'gml', 'shp'].indexOf(resource.format) >= 0"
+            >
+              <ofd-agregator-map [resource]="resource.fileLink" [type]="resource.format"></ofd-agregator-map>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-iframe"
+              *ngIf="['3d', 'tiff', 'micro', 'geonode', 'grafana'].indexOf(resource.format) >= 0"
+            >
+              <ofd-agregator-iframe [iframeUrl]="resource.fileLink" [type]="resource.format"></ofd-agregator-iframe>
             </div>
           </div>
         </div>

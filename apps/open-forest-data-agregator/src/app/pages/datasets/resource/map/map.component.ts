@@ -1,7 +1,26 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { featureGroup, latLng, tileLayer, Map, canvas, circleMarker, map, marker, geoJSON } from 'leaflet';
+import {
+  featureGroup,
+  latLng,
+  tileLayer,
+  Map,
+  canvas,
+  circleMarker,
+  map,
+  icon,
+  Marker,
+  geoJSON,
+  TileLayer
+} from 'leaflet';
 import { HttpClient } from '@angular/common/http';
-
+import '@asymmetrik/ngx-leaflet';
+import 'leaflet-kml';
+import 'georaster-layer-for-leaflet';
+import * as omnivore from '@mapbox/leaflet-omnivore';
+import shapefile from 'shapefile';
+declare let GeoRasterLayer;
+declare let parseGeoraster;
+declare let L;
 @Component({
   selector: 'ofd-agregator-map',
   templateUrl: './map.component.html',
@@ -9,38 +28,106 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MapComponent implements OnInit {
   private map;
+  tiles;
   @Input() resource;
+  @Input() type;
   markerContainer: any = [];
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.setMarker();
     this.initMap();
-    console.log('resource:', this.resource);
     this.getMarkers(this.resource);
   }
 
-  getMarkers(path: string) {
-    this.http.get(path).subscribe((results: any) => {
-      // console.log('markers: ', results);
-      for (const i of results.features) {
-        geoJSON(i).addTo(this.map);
-        // console.log('i: ', i.geometry.coordinates[0]);
-        // let lat = i.geometry.coordinates[0];
-        // let lon = i.geometry.coordinates[1];
-        // const markers = marker([lon, lat]).addTo(this.map);
-      }
+  setMarker() {
+    const iconRetinaUrl = '/assets/images/marker-icon-2x.png';
+    const iconUrl = '/assets/images/marker-icon.png';
+    const shadowUrl = '/assets/images/marker-shadow.png';
+    const iconDefault = icon({
+      iconRetinaUrl,
+      iconUrl,
+      shadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      tooltipAnchor: [16, -28],
+      shadowSize: [41, 41]
     });
+    Marker.prototype.options.icon = iconDefault;
+  }
+
+  getMarkers(path: string) {
+    if (this.type === 'geojson') {
+      this.http.get(path).subscribe((results: any) => {
+        for (const i of results.features) {
+          geoJSON(i).addTo(this.map);
+        }
+      });
+    } else if (this.type === 'geotiff') {
+      this.fetchGeoTiff(path);
+      console.log('Not done yet');
+    } else if (this.type === 'kml') {
+      this.fetchKML(this.resource);
+    } else if (this.type === 'wkt') {
+      omnivore.wkt(path).addTo(this.map);
+    } else if (this.type === 'shp') {
+      console.log('IM IN SHP ELSE IF');
+      this.getShp(path);
+    }
+  }
+
+  getShp(path) {
+    console.log('shp path: ', path);
+    const shpLayer = L.geoJSON().addTo(this.map);
+    shapefile
+      .open(path)
+      .then(source =>
+        source.read().then(function log(result) {
+          if (result.done) return;
+          shpLayer.addData(result.value);
+          return source.read().then(log);
+        })
+      )
+      .catch(error => console.error(error.stack));
+  }
+
+  fetchGeoTiff(path) {
+    console.log('parseGeoraster: ', L);
+    fetch(path)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+          console.log('georaster: ', georaster);
+          const layer = new GeoRasterLayer({
+            georaster,
+            opacity: 0.7,
+            pixelValuesToColorFn: values => (values[0] === 42 ? '#ffffff' : '#000000'),
+            resolution: 64 // optional parameter for adjusting display resolution
+          });
+          layer.addTo(this.map);
+          this.map.fitBounds(layer.getBounds());
+        });
+      });
+  }
+
+  fetchKML(path) {
+    fetch(path)
+      .then(response => response.text())
+      .then(kmltext => {
+        const parser = new DOMParser();
+        const kml = parser.parseFromString(kmltext, 'text/xml');
+        const track = new L.KML(kml);
+        this.map.addLayer(track);
+        const bounds = track.getBounds();
+        this.map.fitBounds(bounds);
+      });
   }
 
   private initMap(): void {
-    this.map = map('map', {
-      center: [39.8282, -98.5795],
-      zoom: 3
-    });
-    const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-    tiles.addTo(this.map);
+    this.map = new L.Map('map', { center: new L.LatLng(58.4, 43.0), zoom: 11 });
+    this.tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    this.map.addLayer(this.tiles);
   }
 }

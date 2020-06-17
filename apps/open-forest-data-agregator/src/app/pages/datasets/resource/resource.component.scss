@@ -181,6 +181,11 @@
         height: 800px;
         width: 80%;
       }
+      &__as-iframe {
+        height: 800px;
+        width: 100%;
+        justify-content: none;
+      }
     }
     &__image {
       display: flex;
