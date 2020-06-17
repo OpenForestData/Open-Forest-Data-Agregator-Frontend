@@ -1,120 +1,268 @@
 {
-  "GLOBALS": {
-    "login": "Login",
-    "search": "Search"
+  "global": {
+    "export": "Export",
+    "sort-by": "Sort",
+    "show-more": "See more",
+    "show-less": "See less",
+    "more-filters": "More filters",
+    "less-filters": "Less filters",
+    "from": "From",
+    "to": "To",
+    "source": "Source",
+    "show": "Show",
+    "search": "Search",
+    "see": "See"
   },
-  "FILTERS": {
-    "show_filters": "Show filters",
-    "hide_filters": "Hide filters",
-    "ordering": {
-      "sort_by": "Sort by",
-      "most_popular": "Most popular",
-      "last_updated": "Last updated",
-      "name_desc": "Name decreasing",
-      "name_asc": "Name increasing",
-      "newest": "Newest",
-      "oldest": "Oldest",
-      "no_downloads": "Number of downloads"
-    }
+  "nav": {
+    "items": {
+      "start": "Start",
+      "datasets": "Datasets",
+      "stats": "Statistics",
+      "mobile-application": "Mobile application",
+      "more": "See more",
+      "about-project": "About project",
+      "about-partners": "Partners",
+      "about-datasets": "About datasets",
+      "instructions": "Instructions",
+      "blog": "Blog"
+    },
+    "login": "Sign in"
   },
-  "NAV": {
-    "datasets": "Datasets",
-    "statistics": "Statistics",
-    "articles": "Articles"
+  "footer": {
+    "items": {
+      "datasets": "Datasets",
+      "about-page": "About",
+      "policy": "Privacy politics",
+      "api": "API",
+      "faq": "FAQ"
+    },
+    "project-text": "Projekt „e-Puszcza. Podlaskie cyfrowe repozytorium przyrodniczych danych naukowych” \njest realizowany w ramach Programu Operacyjnego Polska Cyfrowa na lata 2014-2020 przez Instytut Biologii Ssaków PAN w Białowieży.",
+    "logo-text": "Designed and developed by"
   },
-  "HOME": {
-    "header": [
-      "Dane publiczne",
-      "gromaczone przez miasto.",
-      "Wyszukaj, przeglądaj i pobieraj"
-    ],
-    "most_viewed_datasets": "Most viewed datasets",
-    "last_added_datasets": "Last added datasets",
-    "form": {
-      "header": "Nie znalazłeś danych? Napisz do nas.",
-      "first_name": "Imię",
-      "last_name": "Nazwisko",
-      "email": "Email",
-      "message": "Treść",
-      "policy": "Wyrażam zgodę, aby moje dane osobowe w zakresie obejmującym: e-mail, imię i nazwisko były przetwarzane przez Urząd Miasta w celu obsługi wniosku dotyczącego danych w portalu Open Data. Zgoda może być w każdym momencie wycofana poprzez wysłanie drogą e-mailową zgłoszenia na adres otwarte.dane@whiteaster.com. Administratorem danych osobowych jest Whiteaster Sp. Z o.o. z siedzibą w 41-500 Chorzów, ul. Gałeczki 61. Dane wpisane do formularza będą przetwarzane w celu udzielenia odpowiedzi na przesłane zgłoszenie zgodnie z polityką prywatności.",
-      "send": "Wyślij"
-    }
-  },
-  "FAQ": [
-    {
-      "question": "Jak mogę zgłosić brak interesujących mnie danych?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+  "datasets": {
+    "breadcrumbs": {
+      "start": "Start",
+      "datasets": "Datasets"
     },
-    {
-      "question": "Czy jako niezalogowany użytkownik mogę publikować dane?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
+    "filters": {
+      "category": "Category",
+      "filters": "Filters",
+      "media": "Photo / Media",
+      "coordinates": "Coordinates",
+      "organization": "Data supplier",
+      "format": "Data format",
+      "license": "Licence",
+      "type": "Dataset type",
+      "species": "Species",
+      "gender": "Gender",
+      "keywords": "Keywords",
+      "created-year": "Created at",
+      "author": "Author",
+      "range": "Range",
+      "time-range": "Time period"
     },
-    {
-      "question": "Kto jest odpowiedzialny za administrację tego portalu?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Czym jest stopień otwartości danych?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Jak często dane są aktualizowane?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Czym są tagi?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Czy statystyki portalu generowane są automatycznie i na bieżąco aktualizowane?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Jaką korzyść z portalu Open Data mają mieszkańcy miasta?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    },
-    {
-      "question": "Czym jest polityka otwartości?",
-      "answer": "Bacon ipsum dolor amet picanha shankle venison sirloin tenderloin beef. Short ribs pastrami cupim strip steak drumstick, chicken filet mignon. Tenderloin sirloin porchetta frankfurter, cupim strip steak drumstick corned beef ball tip. Buffalo sausage tri-tip salami bacon ground round chicken beef andouille filet mignon strip steak hamburger flank biltong."
-    }
-  ],
-  "CONTACT": {
-    "header": "Contact",
-    "address": [
-      "Whiteaster Sp. z o.o.",
-      "ul. ks. J. Gałeczki 61",
-      "41-500 Chorzów"
-    ],
-    "email": "otwartedane@whiteaster.com",
-    "links": [
-      {
-        "href": "/faq",
-        "name": "FAQ"
+    "dataset": {
+      "headers": {
+        "metadata": "Metadata",
+        "metrics": "Metrics",
+        "versions": "Versions",
+        "api": "API ",
+        "files": "Files",
+        "metadata-citation": "Metadane Citation",
+        "metadata-darwin": "Metadane Darwin Core",
+        "filterBy": "Filter by: ",
+        "typeFile": "File type: ",
+        "access": "Access: ",
+        "sortBy": "Sort by",
+        "download": "Downloads",
+        "records": "Records",
+        "goto": "Go to page"
       },
-      {
-        "href": "/datasets",
-        "name": "Datasets"
+      "filters": {
+        "types": {
+          "all": "All",
+          "none": "None",
+          "image": "Photo",
+          "video": "Video",
+          "document": "Document"
+        },
+        "access": {
+          "all": "All",
+          "public": "Public",
+          "private": "Private",
+          "global": "Global"
+        }
       },
-      {
-        "href": "/articles",
-        "name": "Articles"
+      "metadata-all": {
+        "downloads": "Download counter:",
+        "created": "Created at:",
+        "source": "Source:",
+        "author": "Author:",
+        "data-openness": "Degree of data openness:",
+        "license": "Licence:",
+        "domain": "Domain:",
+        "keywords": "Keywords:"
       },
-      {
-        "href": "/statistics",
-        "name": "Statistics"
+      "metadata-citation": {
+        "id": "Dataset Persistent ID",
+        "publication-date": "Publication Date",
+        "title": "Title",
+        "author": "Author",
+        "description": "Description",
+        "subject": "Subject",
+        "keyword": "Keyword",
+        "depositor": "Depositor",
+        "deposit-date": "Deposit Date"
       },
-      {
-        "href": "/about",
-        "name": "About service"
-      },
-      {
-        "href": "/privacy",
-        "name": "Privacy policy"
-      },
-      {
-        "href": "https://whiteaster.com/files/Open%20Data%20-%20Dokumentacja%20techniczna%20-%20API%20endpoints.pdf",
-        "name": "API technical documentation"
+      "metadata-darwin": {
+        "type": "Type",
+        "license": "License",
+        "rights-holder": "Rights holder",
+        "institution-code": "Institution code",
+        "collection-code": "Collection code",
+        "dataset-name": "Dataset Name",
+        "basis-of-record": "Basis of Record",
+        "catalog-number": "Catalog Number",
+        "sex": "Sex",
+        "life-stage": "Life Stage",
+        "event": "Event Date",
+        "year": "Year",
+        "month": "Month",
+        "day": "Day",
+        "continent": "Continent",
+        "country": "Country",
+        "locality": "Locality",
+        "latitude": "Decimal Latitude",
+        "longtiude": "Decimal Longitude",
+        "latina-title": "Sex"
       }
-    ]
+    },
+    "resource": {
+      "headers": {
+        "look-up": "Preview"
+      },
+      "metadata": {
+        "look-up": "Preview",
+        "download-url": "Download URL",
+        "MD5": "MD5",
+        "publication-date": "Publication Date",
+        "size": "Size",
+        "type": "Type",
+        "deposit-date": "Deposit Date"
+      }
+    },
+    "add-data": "Add data",
+    "search-placeholder": "Search",
+    "advanced-search": "Advanced search",
+    "presentation-header": "Show data as:",
+    "see-details": "Show details",
+    "presentation": {
+      "list": "List",
+      "table": "Table",
+      "gallery": "Gallery",
+      "map": "Map"
+    },
+    "count": "Items"
+  },
+  "pagination": {
+    "show": "Show",
+    "go-to-page": "Go to page"
+  },
+  "home": {
+    "subtitle_slogan": "Digital repository of natural scientific data.",
+    "all": "All",
+    "news": "News",
+    "read_more": "Read more",
+    "tags": "Tags",
+    "all_news": "All",
+    "search_placeholder": "Search for data...",
+    "advanced_search": "Advanced search",
+    "animal_of_the_day": "Object of teh day",
+    "animal_length": "Body length",
+    "animal_weight": "Body weight",
+    "animal_age_grow": "Adult",
+    "details": "Details",
+    "latest_added": "Latest added",
+    "owner": "Owner",
+    "see": "See",
+    "add_data": "Add data",
+    "add_data_info_1": "To",
+    "add_data_info_2": "add dataset",
+    "add_data_info_3": "to Open Forest Data click a button and next choose dataset type.",
+    "mobile_app": "Mobile application",
+    "download": "Download",
+    "youtube": "Youtube",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "contact_info": "Do you have questions about data sets? Did not find the information you were looking for? Contact us.",
+    "contact_button": "Contact us",
+    "contact_header": "Contact us",
+    "science": "Scientific",
+    "dim": "Spatial",
+    "metric": "Metric",
+    "categories": "Categories",
+    "menu": "Menu",
+    "contact_form": {
+      "name": "Name",
+      "surname": "Surname",
+      "email": "E-mail",
+      "text": "Message",
+      "send": "Send",
+      "checkbox": "I agree that my personal data in the scope including: e-mail, name and surname should be processed by the Mammal Research Institute of the Polish Academy of Sciences in Białowieża in order to process the data request in the Open Forest Data portal. Consent may be withdrawn at any time by sending an e-mail application to ofd@whiteaster.com. The administrator of personal data is Whiteaster Sp. Z o.o. with its registered office in 41-500 Chorzów, ul. Gałeczki 61. The data entered in the form will be processed in order to answer the submitted notification in accordance with the privacy policy.      "
+    }
+  },
+  "auth": {
+    "login": "Sign in",
+    "login_button": "Sign in",
+    "remember_me": "Remember me",
+    "username": "Username",
+    "username_placeholder": "Login",
+    "password": "Password",
+    "password_placeholder": "Password",
+    "have_account": "You do not have an account?",
+    "register": "Sign up",
+    "forgott_password": "Forgott password?"
+  },
+  "stats": {
+    "datasets_stats_title": "Datasets statistics",
+    "file_stats_title": "Files statistics",
+    "from": "From",
+    "to": "TO",
+    "range": "Time period",
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "export": "Export",
+    "chart_1_1": "The number of datasets added per categories",
+    "chart_1_2": "The number of datasets added in time",
+    "chart_2_1": "The number of files added per category",
+    "chart_2_2": "The number of files added in time",
+    "chart_3_1": "The number of downloaded files per categories",
+    "chart_3_2": "The number of downloaded files over time"
+  },
+  "misc": {
+    "partners_title": "Partners",
+    "resources_title": "About datasets",
+    "lastest_resources_title": "Latest added datasets",
+    "instructions_title": "Instructions",
+    "faq_title": "FAQ",
+    "about_project": "About project"
+  },
+  "blog": {
+    "blog": "Blog",
+    "read_more": "Read more",
+    "previous": "Previous",
+    "next": "Next",
+    "similar": "Read also"
+  },
+  "news": {
+    "similar": "Similar posts",
+    "tags": "Tags",
+    "year": "Year",
+    "clear": "Clear",
+    "see_more": "See more",
+    "see_less": "See less",
+    "news": "News",
+    "search_placeholder": "Search for news..."
   }
 }

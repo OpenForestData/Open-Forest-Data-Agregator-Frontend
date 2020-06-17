@@ -140,3 +140,12 @@
 span.flex {
   display: flex;
 }
+
+@media (max-width: 1200px) {
+  .datasets-presentation {
+    &__header {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+}
