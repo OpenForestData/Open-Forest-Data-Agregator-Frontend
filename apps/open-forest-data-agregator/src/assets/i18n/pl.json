@@ -103,7 +103,7 @@
         "domain": "Dziedzina:",
         "keywords": "Słowa kluczowe:"
       },
-      "metadata-citation": {
+      "metadata": {
         "id": "Dataset Persistent ID",
         "publication-date": "Publication Date",
         "title": "Title",
@@ -112,9 +112,7 @@
         "subject": "Subject",
         "keyword": "Keyword",
         "depositor": "Depositor",
-        "deposit-date": "Deposit Date"
-      },
-      "metadata-darwin": {
+        "deposit-date": "Deposit Date",
         "type": "Type",
         "license": "License",
         "rights-holder": "Rights holder",
@@ -134,7 +132,21 @@
         "locality": "Locality",
         "latitude": "Decimal Latitude",
         "longtiude": "Decimal Longitude",
-        "latina-title": "Sex"
+        "latina-title": "Sex",
+        "authorAffiliation": "Author Affiliation",
+        "authorName": "Author Name",
+        "datasetContactAffiliation": "Dataset Contact Affiliation",
+        "datasetContactEmail": "Dataset Contact Email",
+        "datasetContactName": "Dataset Contact Name",
+        "dsDescriptionValue": "Description",
+        "dateOfDeposit": "Date of deposit",
+        "state": "State",
+        "city": "City",
+        "otherGeographicCoverage": "Geographic Coverage",
+        "eastLongitude": "East Longitude",
+        "northLongitude": "North Longitude",
+        "southLongitude": "South Longitude",
+        "westLongitude": "West Longitude"
       }
     },
     "resource": {

@@ -93,17 +93,13 @@
           "global": "Global"
         }
       },
-      "metadata-all": {
+      "metadata": {
         "downloads": "Download counter:",
         "created": "Created at:",
         "source": "Source:",
-        "author": "Author:",
         "data-openness": "Degree of data openness:",
-        "license": "Licence:",
         "domain": "Domain:",
-        "keywords": "Keywords:"
-      },
-      "metadata-citation": {
+        "keywords": "Keywords:",
         "id": "Dataset Persistent ID",
         "publication-date": "Publication Date",
         "title": "Title",
@@ -112,9 +108,7 @@
         "subject": "Subject",
         "keyword": "Keyword",
         "depositor": "Depositor",
-        "deposit-date": "Deposit Date"
-      },
-      "metadata-darwin": {
+        "deposit-date": "Deposit Date",
         "type": "Type",
         "license": "License",
         "rights-holder": "Rights holder",

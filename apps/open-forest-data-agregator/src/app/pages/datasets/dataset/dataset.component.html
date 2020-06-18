@@ -11,17 +11,20 @@
       >
         <div class="metric">
           <div class="metric__content">
-            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
-            <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ mockLeftSide.createdDate }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ 3 }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.created' | translate }}
+              {{ dataset.latestVersion?.createTime | date: 'dd.MM.yyyy' }}
+            </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
               <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
             </p>
-            <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ mockLeftSide.author }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ dataset.publisher }}</p>
             <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
-              <a href="{{ mockLeftSide.license.link }}">{{ mockLeftSide.license.name }}</a>
+              <a href="{{ mockLeftSide.license.link }}">{{ dataset.latestVersion?.license }}</a>
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.domain' | translate }}
@@ -47,8 +50,8 @@
           </ofd-agregator-header-bar>
 
           <div class="versions__content">
-            <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
-            <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
+            <a href="{{ mockLeftSide.version.link }}"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
+            <p>{{ ' - ' + (dataset.latestVersion?.releaseTime | date: 'dd.MM.yyyy') + ' | ' + dataset.publisher }}</p>
           </div>
         </div>
       </ofd-agregator-data-container>
@@ -152,11 +155,16 @@
           </div>
 
           <div class="right-container__files__download-all">
-            <ui-checkbox [name]="'downloadAllFiles'" class="right-container__files__download-all__checkbox">
-              3 {{ 'datasets.dataset.headers.records' | translate | lowercase }}
+            <ui-checkbox
+              [name]="'downloadAllFiles'"
+              class="right-container__files__download-all__checkbox"
+              (modelChange)="toggleAllCheckboxes()"
+              [(model)]="allFilesCheckboxState"
+            >
+              {{ dataset.latestVersion?.files.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
             </ui-checkbox>
             <div class="right-container__files__download-all__buttons">
-              <button class="right-container__files__download-all__buttons__download">
+              <button class="right-container__files__download-all__buttons__download" (click)="downloadCheckedFiles()">
                 {{ 'datasets.dataset.headers.download' | translate }}
                 <svg-icon [src]="'/assets/images/dataset/download.svg'"></svg-icon>
               </button>
@@ -164,25 +172,42 @@
           </div>
 
           <div class="right-container__files__download-single">
-            <div class="right-container__files__download-single__row" *ngFor="let file of testData.files">
-              <ui-checkbox class="single-checkbox">
+            <div
+              class="right-container__files__download-single__row"
+              *ngFor="let file of dataset.latestVersion?.files; let i = index"
+            >
+              <ui-checkbox [name]="i" class="single-checkbox" [(model)]="file.isChecked">
                 <div class="background-gray">
-                  {{ file.format | uppercase }}
+                  {{ formatConverter(file.label) | uppercase }}
                 </div>
-                <p class="title">{{ file.title }}</p>
+                <p class="title">{{ file.label }}</p>
               </ui-checkbox>
               <div class="buttons-download">
                 <button class="buttons-download__style">
-                  <svg-icon [src]="'/assets/images/dataset/download.svg'" [applyCss]="true"></svg-icon>
+                  <svg-icon
+                    [src]="'/assets/images/dataset/download.svg'"
+                    [applyCss]="true"
+                    (click)="downloadSingleResource(file.download_url)"
+                  ></svg-icon>
                 </button>
                 <button class="buttons-download__style">
-                  <svg-icon [src]="'/assets/images/dataset/look.svg'" [applyCss]="true"></svg-icon>
+                  <svg-icon
+                    [src]="'/assets/images/dataset/look.svg'"
+                    [applyCss]="true"
+                    routerLink="/datasets/resource/{{ file.dataFile.id }}"
+                  ></svg-icon>
                 </button>
               </div>
             </div>
           </div>
 
-          <ofd-agregator-pagination [items]="50" [pageSize]="15" [(page)]="page" [showOffsets]="true">
+          <ofd-agregator-pagination
+            [items]="50"
+            [pageSize]="15"
+            [(page)]="page"
+            [showOffsets]="true"
+            *ngIf="dataset.latestVersion?.files.length > 15"
+          >
           </ofd-agregator-pagination>
         </div>
 
@@ -199,38 +224,38 @@
           </div>
         </h3>
 
-        <div class="meta-citation-box">
+        <div class="meta-citation-box" *ngFor="let meta of dataset.latestVersion?.metadataBlocks | keyvalue">
           <ofd-agregator-data-container
             class="meta-citation"
-            [title]="'datasets.dataset.headers.metadata-citation' | translate"
+            [title]="meta.value.displayName"
             [expandable]="true"
             [expanded]="false"
           >
-            <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: 0">
-              <div class="meta-citation__row__keys">
-                {{ 'datasets.dataset.metadata-citation.' + item.key | translate }}
+            <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple">
+                <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ value.value.value }}
+                  </div>
+                </div>
               </div>
-              <div class="meta-citation__row__values">
-                {{ item.value }}
+
+              <div class="meta-citation__row__multiple" *ngIf="!field.multiple">
+                <div class="meta-citation__row__container">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ field.value }}
+                  </div>
+                </div>
               </div>
             </div>
           </ofd-agregator-data-container>
         </div>
-        <ofd-agregator-data-container
-          class="meta-darwin"
-          [title]="'datasets.dataset.headers.metadata-darwin' | translate"
-          [expandable]="true"
-          [expanded]="false"
-        >
-          <div class="meta-citation__row" *ngFor="let item of metaDarwin | keyvalue: 0">
-            <div class="meta-citation__row__keys">
-              {{ 'datasets.dataset.metadata-darwin.' + item.key | translate }}
-            </div>
-            <div class="meta-citation__row__values">
-              {{ item.value }}
-            </div>
-          </div>
-        </ofd-agregator-data-container>
       </div>
     </div>
   </section>

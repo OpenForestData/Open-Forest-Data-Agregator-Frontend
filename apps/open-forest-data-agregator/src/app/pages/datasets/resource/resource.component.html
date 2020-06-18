@@ -47,8 +47,10 @@
           </ofd-agregator-header-bar>
 
           <div class="versions__content">
-            <a href="{{ mockLeftSide.version.link }}">ver {{ mockLeftSide.version.number }}</a>
-            <p>- {{ mockLeftSide.version.date | date: 'dd.MM.yyyy' }} | {{ mockLeftSide.version.acceptedBy }}</p>
+            <a href="{{ mockLeftSide.version.link }}"> {{ 'ver ' + mockLeftSide.version.number }}</a>
+            <p>
+              {{ ' - ' + (mockLeftSide.version.date | date: 'dd.MM.yyyy') + ' | ' + mockLeftSide.version.acceptedBy }}
+            </p>
           </div>
         </div>
       </ofd-agregator-data-container>

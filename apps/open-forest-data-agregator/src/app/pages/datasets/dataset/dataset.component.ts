@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
+import { DatasetService } from '@app/services/dataset.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ofd-agregator-dataset',
@@ -142,19 +144,61 @@ export class DatasetComponent implements OnInit {
   pagesArray = [1, 2, 3];
 
   mobile = false;
-  constructor() {}
+
+  dataset: any = {};
+  urlToDataset: any = '';
+  checkboxList = [];
+  allFilesCheckboxState = false;
+
+  constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
     }
+    this.route.queryParams.subscribe((queryParams): any => {
+      this.getDatasetDetails(queryParams.doi);
+    });
   }
 
   pageClick(page) {}
 
-  // TODO: Add functionality to get identifier from route
-  getParams() {}
-
   // TODO: Get dataset data from given DOI
-  getFilesAndMetadata(doi) {}
+  getDatasetDetails(doi) {
+    this.datasetService.getDatasetByDOI(doi).subscribe(response => {
+      this.dataset = response;
+      this.dataset.latestVersion.files = this.dataset.latestVersion.files.map(file => {
+        file.isChecked = false;
+        return file;
+      });
+      this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
+      console.log('dataset: ', this.dataset);
+    });
+  }
+
+  formatConverter(filename: string) {
+    let format = filename;
+    format = format.substring(format.indexOf('.') + 1);
+    return format;
+  }
+
+  downloadSingleResource(file: any) {
+    return window.open(file, '_blank');
+  }
+
+  toggleAllCheckboxes() {
+    this.allFilesCheckboxState = !this.allFilesCheckboxState;
+    this.dataset.latestVersion.files = this.dataset.latestVersion.files.map(file => {
+      file.isChecked = this.allFilesCheckboxState;
+      return file;
+    });
+  }
+
+  downloadCheckedFiles() {
+    this.dataset.latestVersion.files.forEach(file => {
+      if (file.isChecked) {
+        this.downloadSingleResource(file.download_url);
+      }
+    });
+  }
 }
