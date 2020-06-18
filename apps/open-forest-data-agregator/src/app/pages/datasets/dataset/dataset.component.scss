@@ -1,7 +1,18 @@
 @import '../../../../../../../resources/colors';
 
+.main-container {
+  width: 100%;
+  background-color: $light-gray-color;
+}
+
+.breadcrumbs::ng-deep {
+  .page-nav {
+    padding: 24px 0 13px 28px;
+  }
+}
+
 .container {
-  background-color: #f6f4f2;
+  background-color: $light-gray-color;
   display: flex;
   height: 100%;
 }
@@ -10,14 +21,15 @@
   width: 30%;
   background-color: inherit;
   height: inherit;
-  padding-right: 3.3%;
+  padding-right: 38px;
+  max-width: 290px;
 }
 
 .dataset-right {
-  width: 66.6%;
+  width: 70%;
   background-color: #ffffff;
   height: inherit;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
 
 .metric {
@@ -50,14 +62,76 @@
   }
 }
 
-.header-bar-dataset::ng-deep h3 {
-  text-transform: capitalize;
-  font-weight: 400;
+.header-bar-dataset::ng-deep {
+  button {
+    visibility: hidden;
+    color: white;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
+
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+  .header-bar {
+    border-radius: 5px;
+    background-color: $accent-color;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 400;
+    > svg-icon {
+      height: 18px;
+      margin-right: 13px;
+      display: block;
+
+      svg {
+        path {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+  .metric {
+    &__header {
+      display: block;
+    }
+    &__content {
+      padding-left: 14px;
+    }
+    &__content > p {
+      display: block;
+      font-size: 14px;
+    }
+    &__social {
+      display: block;
+      padding-left: 14px;
+    }
+  }
+
+  .versions {
+    &__content {
+      padding: 23px 0 0 14px;
+      height: 20px;
+      font-size: 14px;
+    }
+    &__content > p {
+      display: inline;
+    }
+    &__content > a {
+      text-decoration: underline;
+    }
+  }
 }
 
 .right-container {
-  padding: 15px 30px 0 30px;
+  padding: 24px 100px 0 36px;
   &__header {
+    padding: 10px 14px;
     p {
       font-size: 14px;
       padding-top: 10px;
@@ -80,7 +154,7 @@
         justify-content: center;
         float: right;
         color: $accent-color;
-        padding: 30px 0 30px 0;
+        padding: 30px 28px 30px 0;
         svg-icon {
           padding-left: 20px;
         }
@@ -89,7 +163,7 @@
   }
   &__files {
     &__download-all {
-      padding: 10px 20px 10px 10px;
+      padding: 10px 20px 10px 4px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -104,7 +178,7 @@
     }
     &__download-single {
       &__row::ng-deep {
-        padding: 10px 20px 10px 10px;
+        padding: 10px 20px 10px 4px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -122,10 +196,13 @@
         .single-checkbox {
           font-size: 12px;
           width: 90%;
+          .field label {
+            min-width: 20px;
+          }
           .background-gray {
             font-size: 9px;
             text-decoration: none !important;
-            min-width: 40px;
+            min-width: 80px;
             display: flex;
             justify-content: center;
             margin-right: 10px;
@@ -147,7 +224,7 @@
     &__sorting {
       display: flex;
       flex-direction: row;
-      padding: 20px 0 10px 0;
+      padding: 20px 0 10px 14px;
       align-items: center;
       font-size: 14px;
       width: 100%;
@@ -156,14 +233,14 @@
         display: flex;
         align-items: center;
         &__filters {
-          padding: 0 20px 0 10px;
+          padding: 0 10px 0 0;
         }
         &__file-type {
           padding: 0 10px 0 0;
         }
         &__filter-by {
           margin: 0;
-          padding: 0 20px 0 0;
+          padding: 0 10px 0 0;
         }
       }
       &__bar-left {
@@ -171,10 +248,11 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding-right: 30px;
         &__sort-by {
           display: flex;
           justify-content: flex-end;
-          padding-left: 20px;
+          padding-left: 5px;
         }
       }
     }
@@ -184,8 +262,24 @@
   margin-bottom: 20px;
 }
 
+.meta-citation::ng-deep {
+  .header-bar::ng-deep {
+    padding: 11px 0;
+  }
+}
+
 .meta-citation {
   &__row::ng-deep {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+  }
+  .meta-citation__row__multiple {
+    flex-direction: column;
+    width: 100%;
+  }
+  .meta-citation__row__container {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -193,10 +287,16 @@
     padding: 16px 0 0 14px;
   }
   .meta-citation__row__keys {
-    width: 20%;
+    width: 30%;
   }
   .meta-citation__row__values {
-    width: 80%;
+    width: 70%;
+  }
+}
+
+.meta-darwin::ng-deep {
+  .header-bar {
+    padding: 11px 0;
   }
 }
 
@@ -229,7 +329,7 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
-  padding: 10px 0 0 10px;
+  padding: 10px 0 0 14px;
   &__text {
     display: flex;
     flex-direction: row;
@@ -280,6 +380,10 @@
       align-items: center;
       padding: 0;
       justify-content: center;
+
+      svg {
+        margin-left: 0px;
+      }
 
       &:disabled {
         opacity: 0.5;
@@ -336,6 +440,9 @@
     &__selected-item {
       border: none;
       padding: 0;
+      svg-icon {
+        margin-left: 5px !important;
+      }
     }
   }
 }
@@ -345,10 +452,211 @@
     &__selected-item {
       border: none;
       padding: 0;
+      svg-icon {
+        margin-left: 5px !important;
+      }
     }
   }
 }
 
 .header-text {
   padding: 0 10px 0 0;
+}
+
+.right-container__files__sorting__bar-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    padding: 0;
+  }
+
+  .dataset-left {
+    width: 100%;
+    padding-right: 0px;
+    max-width: none;
+  }
+
+  .dataset-right {
+    width: 100%;
+  }
+  .breadcrumbs::ng-deep {
+    .container {
+      width: 100%;
+      padding-left: 36px;
+    }
+  }
+  .right-container {
+    padding: 25px 28px 0px 36px;
+    &__header {
+      &__api {
+        a {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+  .meta-citation__look-up {
+    flex-direction: column;
+  }
+  .meta-citation__row {
+    flex-direction: column;
+    &__keys {
+      width: 80% !important;
+      padding-bottom: 5px;
+    }
+  }
+  .meta-citation__look-up__values {
+    display: flex;
+    justify-content: center;
+  }
+  .right-container__files__sorting {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .right-container__files__download-all {
+    padding: 10px 0 10px 0;
+  }
+  .right-container__files__sorting__bar-right {
+    display: none;
+  }
+  .right-container__files__sorting__bar-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__filter-by {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 10px;
+    }
+    &__container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .right-container__files__sorting__bar-left {
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .right-container__files__sorting__bar-right__filters {
+    padding: 0 15px 0 0;
+  }
+
+  .single-checkbox::ng-deep {
+    font-size: 12px;
+    width: 90%;
+    .checkbox-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .checkbox-field {
+      align-items: flex-start !important;
+      padding-left: 0;
+    }
+    .checkbox-field label {
+      align-items: flex-start !important;
+    }
+    .field label {
+      min-width: 20px;
+    }
+    .background-gray {
+      font-size: 9px;
+      text-decoration: none !important;
+      min-width: 80px;
+      display: flex;
+      justify-content: center;
+      margin-right: 10px;
+      background-color: $light-gray-color;
+      border: 1px solid $light-gray-color;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    .title {
+      text-decoration: underline;
+      word-break: break-all;
+    }
+  }
+  .right-container__files__download-single__row {
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .header-bar-dataset::ng-deep {
+    button {
+      visibility: visible;
+      color: white;
+      > svg-icon {
+        height: 18px;
+        margin-right: 13px;
+        display: block;
+
+        svg {
+          path {
+            fill: #fff !important;
+          }
+        }
+      }
+    }
+    .header-bar {
+      border-radius: 0px;
+      padding-left: 36px;
+      > svg-icon {
+        height: 18px;
+        margin-right: 13px;
+        display: block;
+
+        svg {
+          path {
+            fill: #fff !important;
+          }
+        }
+      }
+    }
+    .metric {
+      &__content {
+        padding-left: 36px;
+      }
+    }
+    .versions {
+      &__content {
+        padding-left: 36px;
+      }
+    }
+  }
+  .social-container::ng-deep {
+    .social-bar {
+      padding: 40px 36px;
+    }
+  }
+  .files-container::ng-deep {
+    .header-bar {
+      background-color: white;
+      padding: 20px 0;
+    }
+  }
+  .right-container__files__download-all__checkbox::ng-deep {
+    .checkbox-field {
+      padding-left: 0;
+    }
+  }
+  .metadata-header {
+    flex-direction: column;
+    align-items: unset;
+    padding: 10px 0 10px 0;
+    &__text {
+      display: flex;
+      flex-direction: row;
+    }
+    &__export {
+      display: flex;
+      justify-content: flex-end;
+      padding: 22px 0 26px 0;
+    }
+  }
 }

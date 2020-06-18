@@ -1,52 +1,54 @@
 <ofd-page-nav [breadcrumbs]="breadcrumbs"></ofd-page-nav>
 <ofd-agregator-datasets-header></ofd-agregator-datasets-header>
-<main class="datasets container mobile-white-1200">
-  <div class="datasets__filters">
-    <div class="datasets__filters__category-filter">
-      <ofd-agregator-header-bar
-        [iconSrc]="filters.category.iconSrc"
-        [expandable]="filters.category.expandable"
-        [expanded]="filters.category.isExpanded"
-        (toggle)="toggleFilter($event, 'category')"
-      >
-        {{ 'datasets.filters.' + filters.category.key | translate }}
-      </ofd-agregator-header-bar>
-      <ofd-agregator-datasets-category
-        *ngIf="filters.category.isExpanded"
-        [categories]="categories"
-        [(selectedCategory)]="filters.category.value"
-      ></ofd-agregator-datasets-category>
+<section class="main-container">
+  <main class="datasets container mobile-white-1200">
+    <div class="datasets__filters">
+      <div class="datasets__filters__category-filter">
+        <ofd-agregator-header-bar
+          [iconSrc]="filters.category.iconSrc"
+          [expandable]="filters.category.expandable"
+          [expanded]="filters.category.isExpanded"
+          (toggle)="toggleFilter($event, 'category')"
+        >
+          {{ 'datasets.filters.' + filters.category.key | translate }}
+        </ofd-agregator-header-bar>
+        <ofd-agregator-datasets-category
+          *ngIf="filters.category.isExpanded"
+          [categories]="categories"
+          [(selectedCategory)]="filters.category.value"
+        ></ofd-agregator-datasets-category>
+      </div>
+      <div class="datasets__filters__filters">
+        <ofd-agregator-header-bar
+          [iconSrc]="filters.filters.iconSrc"
+          [expanded]="filters.filters.isExpanded"
+          [expandable]="filters.filters.expandable"
+          (toggle)="toggleFilter($event, 'filters')"
+        >
+          {{ 'datasets.filters.' + filters.filters.key | translate }}
+        </ofd-agregator-header-bar>
+        <ofd-agregator-datasets-filters
+          (onDisplayModeChange)="filters.filters.isExpanded = $event === 'desktop'"
+          [hidden]="!filters.filters.isExpanded"
+        >
+        </ofd-agregator-datasets-filters>
+      </div>
     </div>
-    <div class="datasets__filters__filters">
-      <ofd-agregator-header-bar
-        [iconSrc]="filters.filters.iconSrc"
-        [expanded]="filters.filters.isExpanded"
-        [expandable]="filters.filters.expandable"
-        (toggle)="toggleFilter($event, 'filters')"
-      >
-        {{ 'datasets.filters.' + filters.filters.key | translate }}
-      </ofd-agregator-header-bar>
-      <ofd-agregator-datasets-filters
-        (onDisplayModeChange)="filters.filters.isExpanded = $event === 'desktop'"
-        [hidden]="!filters.filters.isExpanded"
-      >
-      </ofd-agregator-datasets-filters>
-    </div>
-  </div>
-  <div class="datasets__content">
-    <ofd-agregator-datasets-data-presentation></ofd-agregator-datasets-data-presentation>
+    <div class="datasets__content">
+      <ofd-agregator-datasets-data-presentation></ofd-agregator-datasets-data-presentation>
 
-    <div class="datasets__list" *ngIf="datasets.mode === 'list'">
-      <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
+      <div class="datasets__list" *ngIf="datasets.mode === 'list'">
+        <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
+      </div>
+      <div class="datasets__table" *ngIf="datasets.mode === 'table'">
+        <ofd-agregator-datasets-table [datasets]="datasetsItems"></ofd-agregator-datasets-table>
+      </div>
+      <div class="datasets__table" *ngIf="datasets.mode === 'gallery'">
+        <ofd-agregator-datasets-gallery [datasets]="datasetsItems"></ofd-agregator-datasets-gallery>
+      </div>
+      <div class="datasets__table" *ngIf="datasets.mode === 'map'">
+        <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
+      </div>
     </div>
-    <div class="datasets__table" *ngIf="datasets.mode === 'table'">
-      <ofd-agregator-datasets-table [datasets]="datasetsItems"></ofd-agregator-datasets-table>
-    </div>
-    <div class="datasets__table" *ngIf="datasets.mode === 'gallery'">
-      <ofd-agregator-datasets-gallery [datasets]="datasetsItems"></ofd-agregator-datasets-gallery>
-    </div>
-    <div class="datasets__table" *ngIf="datasets.mode === 'map'">
-      <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
-    </div>
-  </div>
-</main>
+  </main>
+</section>

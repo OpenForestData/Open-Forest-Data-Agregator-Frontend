@@ -1,0 +1,37 @@
+@import '../../../../../../../../resources/_colors.scss';
+
+.file-as-table {
+  max-width: 100%;
+  overflow-x: auto;
+  position: relative;
+
+  table {
+    border-collapse: collapse;
+
+    th {
+      background-color: $accent-color;
+      padding: 0.75rem;
+      color: white;
+      min-width: 300px;
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    td {
+      padding: 5px 10px;
+      min-width: 300px;
+      width: 300px;
+      box-sizing: border-box;
+      word-break: break-all;
+      color: #3c3c3c;
+    }
+
+    tr {
+      &:nth-child(odd) {
+        td {
+          background-color: #e6e7e8;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
+import { HttpClient } from '@angular/common/http';
+import hljs from 'highlight.js';
 
 @Component({
   selector: 'ofd-agregator-resource',
@@ -64,6 +66,93 @@ export class ResourceComponent implements OnInit {
     ]
   };
 
+  rdfContent = `
+<?xml version="1.0"?> 
+<RDF> 
+<Description about="http://pl.wikipedia.org/wiki/Filtr_rodzinny"> 
+    <autor>Jan Kowalski</autor> 
+    <utworzono>1 stycznia 1970</utworzono> 
+    <zmodyfikowano>1 stycznia 2000</zmodyfikowano> 
+</Description> 
+</RDF>`;
+
+  resources: any = [
+    {
+      format: 'jpg',
+      fileLink: 'https://picsum.photos/500/500'
+    },
+    {
+      format: 'txt',
+      fileLink: 'https://pastebin.com/raw/Khg3ZhXd'
+    },
+    {
+      format: 'pdf',
+      fileLink: 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
+    },
+    {
+      format: 'json',
+      fileLink: ''
+    },
+    {
+      format: 'csv',
+      fileLink: '/assets/.mocks/StoliceSredniki.csv'
+    },
+    {
+      format: 'docx',
+      fileLink: 'https://data-epuszcza.biaman.pl/api/access/datafile/223'
+    },
+    {
+      format: 'rdf',
+      fileLink: this.rdfContent
+    },
+    {
+      format: 'geojson',
+      fileLink: '/assets/.mocks/small_geojson.geojson'
+    },
+    {
+      format: 'geotiff',
+      fileLink: '/assets/.mocks/cea.tif'
+    },
+    {
+      format: 'kml',
+      fileLink: '/assets/.mocks/kml_example.kml'
+    },
+    {
+      format: 'geotiff',
+      fileLink: '/assets/.mocks/example_4269.tif'
+    },
+    {
+      format: 'wkt',
+      fileLink: '/assets/.mocks/geometry.wkt'
+    },
+    {
+      format: 'gml',
+      fileLink: '/assets/.mocks/gml2.gml'
+    },
+    {
+      format: 'shp',
+      fileLink: '/assets/.mocks/gis_osm_water_a_07_1.shp'
+    },
+    {
+      format: '3d',
+      fileLink: `https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0`
+    },
+    {
+      format: 'tiff',
+      fileLink: `https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1`
+    }
+  ];
+
+  resource = this.resources[14];
+  contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
+  Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
+  Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
+  Donec sollicitudin nibh in nisl lacinia elementum. Cras commodo orci lacus, a congue lorem laoreet non. In congue non risus vel ornare.
+  Sed rhoncus eget dui sit amet pretium. Nunc nisl magna, sagittis ut ultricies ultrices, accumsan ut felis.
+  Sed id elit iaculis, malesuada metus quis, placerat leo. Curabitur porta convallis risus, lobortis mattis odio efficitur sed.`;
+
+  tableViewRaw: any = `{\"NAZWA PLAC\\u00d3WKI\": [\"SP NR 1\", \"SP NR 2\", \"SP NR 6\", \"SP NR 9\", \"SP NR 10\", \"SP NR 11\", \"SP NR 12\", \"SP NR 13\", \"GIM NR 1\", \"GIM NR 2\", \"GIM NR 3\", \"GIM NR 4\"], \"2015 r.\": [6, 0, 3, 5, 15, 2, 6, 6, 11, 18, 21, 13], \"I semestr 2016 r.\": [6, 0, 2, 4, 13, 1, 3, 4, 6, 14, 15, 11], \"II semestr 2016 r.\": [7, 1, 0, 2, 12, 1, 1, 4, 10, 8, 16, 9]}`;
+  tableView: any = [JSON.parse(this.tableViewRaw)];
   metaCitation = {
     'download-url': 'https://whiteaster.com',
     MD5: '4b46beba4a79e26745266e2221a09c52',
@@ -74,11 +163,32 @@ export class ResourceComponent implements OnInit {
   };
   mobile = false;
 
-  constructor() {}
+  externalTools = `
+3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
+Micro: https://data-epuszcza.biaman.pl/tools/microViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
+Tiff: https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1
+Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=232&datasetid=231&datasetversion=1.0
+Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
+  `;
+
+  externalToolExplanation = `
+  EXTERNAL_URL to adres strony ggdzie są external toole, to chyba będzie statyczne albo przekazane przez Olka
+  potem masz typ external toola (3dViewer, microViewer itp...)
+  to będziesz musiał wstawiać w zależności od typu pliku
+  stale: SITE_URL, FILE_ID, DATASET_ID i DATASET_VERSION
+  będziesz musiał wyciągnąć sobie od Olka
+  SITE_URL to adres datavers'a
+  FILE_ID to ID pliku
+  DATASET_ID to id datasetu (nie DOI!!!!!)
+  DATASET_VERSION to wersja datasetu (1.0, 1.1 itp. nie ID wersji a wersja)
+  `;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
     }
+    hljs.initHighlightingOnLoad();
   }
 }

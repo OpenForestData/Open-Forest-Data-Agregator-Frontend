@@ -25,6 +25,8 @@ export class DatasetsListComponent implements OnInit {
 
   @Input() datasets: any[];
 
+  public doi = 'doi:10.5072/FK2/MDWWUY';
+
   constructor() {}
 
   ngOnInit(): void {}
