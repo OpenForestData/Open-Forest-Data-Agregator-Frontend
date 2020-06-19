@@ -55,7 +55,6 @@
     "@ngx-translate/core": "^12.1.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@nrwl/angular": "9.0.1",
-    "@permettezmoideconstruire/gml-to-geojson": "0.0.5",
     "@types/chart.js": "^2.9.21",
     "@types/proj4": "^2.5.0",
     "angular-datatables": "^9.0.2",
