@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
 import hljs from 'highlight.js';
+import { DatasetService } from '@app/services/dataset.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ofd-agregator-resource',
@@ -9,6 +11,15 @@ import hljs from 'highlight.js';
   styleUrls: ['./resource.component.scss']
 })
 export class ResourceComponent implements OnInit {
+  resource: any = [];
+  resourceContent = {
+    plain_text: '',
+    image: null,
+    pdf: null,
+    json: null,
+    csv: null,
+    doc: null
+  };
   mockLeftSide = {
     downloadAmount: 5,
     createdDate: '20.07.2019',
@@ -78,32 +89,12 @@ export class ResourceComponent implements OnInit {
 
   resources: any = [
     {
-      format: 'jpg',
-      fileLink: 'https://picsum.photos/500/500'
-    },
-    {
-      format: 'txt',
-      fileLink: 'https://pastebin.com/raw/Khg3ZhXd'
-    },
-    {
-      format: 'pdf',
-      fileLink: 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'
-    },
-    {
-      format: 'json',
-      fileLink: ''
-    },
-    {
       format: 'csv',
       fileLink: '/assets/.mocks/StoliceSredniki.csv'
     },
     {
       format: 'docx',
       fileLink: 'https://data-epuszcza.biaman.pl/api/access/datafile/223'
-    },
-    {
-      format: 'rdf',
-      fileLink: this.rdfContent
     },
     {
       format: 'geojson',
@@ -143,7 +134,7 @@ export class ResourceComponent implements OnInit {
     }
   ];
 
-  resource = this.resources[14];
+  // resource = this.resources[14];
   contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
   Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
   Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
@@ -183,12 +174,44 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   DATASET_VERSION to wersja datasetu (1.0, 1.1 itp. nie ID wersji a wersja)
   `;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private datasetService: DatasetService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
     }
-    hljs.initHighlightingOnLoad();
+    this.getResourceByID(this.route.snapshot.paramMap.get('id'));
+  }
+
+  getResourceByID(id: any) {
+    this.datasetService.getResourceByID(id).subscribe(response => {
+      this.resource = response;
+      console.log('TYPE: ', this.resource.details.fileTypeDisplay);
+      console.log('this.resource: ', this.resource);
+      if (this.resource.details.fileTypeDisplay === 'Plain Text') {
+        this.getTextFromURL(this.resource.download_url);
+      } else if (this.resource.details.fileTypeDisplay === 'JPEG Image') {
+        this.resourceContent.image = this.resource.download_url;
+      } else if (this.resource.details.fileTypeDisplay === 'Adobe PDF') {
+        this.resourceContent.pdf = this.resource.download_url;
+      } else if (this.resource.details.fileTypeDisplay === 'JSON') {
+        this.getTextFromURL(this.resource.download_url);
+      } else if (this.resource.details.fileTypeDisplay === 'application/rdf+xml') {
+        this.getTextFromURL(this.resource.download_url);
+      } else if (this.resource.details.fileTypeDisplay === 'Comma Separated Values') {
+        this.resourceContent.csv = this.resource.download_url;
+      } else if (this.resource.details.fileTypeDisplay === 'MS Word') {
+        this.resourceContent.doc = 'https://data-epuszcza.biaman.pl/api/access/datafile/223';
+        // this.resourceContent.doc = this.resource.download_url;
+        // STATIC LINK BECAUSE OUR DATAVERSE IS NOT VISIBLE OUTSIDE OUR NETWORK
+      }
+    });
+  }
+
+  getTextFromURL(url: string) {
+    this.http.get(url, { responseType: 'text' }).subscribe(response => {
+      this.resourceContent.plain_text = response;
+      console.log('test: ', this.resourceContent.plain_text);
+    });
   }
 }

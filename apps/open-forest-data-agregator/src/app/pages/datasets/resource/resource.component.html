@@ -83,50 +83,61 @@
           </ofd-agregator-data-container>
 
           <div class="right-container__files__file-viewer" *ngIf="resource">
-            <div class="right-container__files__file-viewer__as-text" *ngIf="['txt'].indexOf(resource.format) >= 0">
-              <ofd-agregator-text [resource]="contentText"></ofd-agregator-text>
+            <div
+              class="right-container__files__file-viewer__as-text"
+              *ngIf="['Plain Text'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-text [resource]="resourceContent.plain_text"></ofd-agregator-text>
             </div>
             <div
               class="right-container__files__file-viewer__as-image"
-              *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0"
+              *ngIf="['JPEG Image'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <img class="right-container__files__file-viewer__as-image__source" [src]="resource.fileLink" />
+              <img class="right-container__files__file-viewer__as-image__source" [src]="resourceContent.image" />
             </div>
-            <div class="right-container__files__file-viewer__as-pdf" *ngIf="['pdf'].indexOf(resource.format) >= 0">
-              <ofd-agregator-pdf [resource]="resource.fileLink"></ofd-agregator-pdf>
+            <div
+              class="right-container__files__file-viewer__as-pdf"
+              *ngIf="['Adobe PDF'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-pdf [resource]="resourceContent.pdf"></ofd-agregator-pdf>
             </div>
-            <div class="right-container__files__file-viewer__as-json" *ngIf="['json'].indexOf(resource.format) >= 0">
-              <ofd-agregator-json [resource]="testData"></ofd-agregator-json>
+            <div
+              class="right-container__files__file-viewer__as-json"
+              *ngIf="['JSON'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-json [resource]="resourceContent.plain_text"></ofd-agregator-json>
             </div>
             <div
               class="right-container__files__file-viewer__as-table"
-              *ngIf="['csv', 'tsv'].indexOf(resource.format) >= 0"
+              *ngIf="['Comma Separated Values', 'tsv'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <ofd-agregator-table [resource]="resource.fileLink"></ofd-agregator-table>
+              <ofd-agregator-table [resource]="resourceContent.csv"></ofd-agregator-table>
             </div>
             <div
               class="right-container__files__file-viewer__as-docx"
-              *ngIf="['doc', 'docx', 'xls', 'xlsx'].indexOf(resource.format) >= 0"
+              *ngIf="['MS Word', 'docx', 'xls', 'xlsx'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <ofd-agregator-docs [resource]="resource.fileLink"></ofd-agregator-docs>
+              <ofd-agregator-docs [resource]="resourceContent.doc"></ofd-agregator-docs>
             </div>
             <div
               class="right-container__files__file-viewer__as-xml"
-              *ngIf="['xml', 'rdf'].indexOf(resource.format) >= 0"
+              *ngIf="['xml', 'application/rdf+xml'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <ofd-agregator-xml [resource]="resource.fileLink"></ofd-agregator-xml>
+              <ofd-agregator-xml [resource]="resourceContent.plain_text"></ofd-agregator-xml>
             </div>
             <div
               class="right-container__files__file-viewer__as-map"
-              *ngIf="['geojson', 'geotiff', 'kml', 'wkt', 'gml', 'shp'].indexOf(resource.format) >= 0"
+              *ngIf="['geojson', 'geotiff', 'kml', 'wkt', 'gml', 'shp'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <ofd-agregator-map [resource]="resource.fileLink" [type]="resource.format"></ofd-agregator-map>
+              <ofd-agregator-map [resource]="resource.fileLink" [type]="resource.details?.fileTypeDisplay">
+              </ofd-agregator-map>
             </div>
             <div
               class="right-container__files__file-viewer__as-iframe"
-              *ngIf="['3d', 'tiff', 'micro', 'geonode', 'grafana'].indexOf(resource.format) >= 0"
+              *ngIf="['3d', 'tiff', 'micro', 'geonode', 'grafana'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <ofd-agregator-iframe [iframeUrl]="resource.fileLink" [type]="resource.format"></ofd-agregator-iframe>
+              <ofd-agregator-iframe [iframeUrl]="resource.fileLink" [type]="resource.details?.fileTypeDisplay">
+              </ofd-agregator-iframe>
             </div>
           </div>
         </div>
@@ -145,7 +156,10 @@
                 <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
               </button>
             </div>
-            <div class="meta-citation__look-up" *ngIf="['jpg', 'png', 'gif'].indexOf(resource.format) >= 0">
+            <div
+              class="meta-citation__look-up"
+              *ngIf="['jpg', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
               <div class="meta-citation__look-up__keys">
                 <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
               </div>

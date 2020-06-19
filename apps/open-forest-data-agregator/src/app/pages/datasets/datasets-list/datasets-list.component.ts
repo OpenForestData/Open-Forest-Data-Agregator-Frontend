@@ -27,6 +27,11 @@ export class DatasetsListComponent implements OnInit {
 
   public doi = 'doi:10.5072/FK2/MDWWUY';
 
+  convertDOI(doi) {
+    const convertedDOI = window.btoa(doi);
+    return convertedDOI;
+  }
+
   constructor() {}
 
   ngOnInit(): void {}

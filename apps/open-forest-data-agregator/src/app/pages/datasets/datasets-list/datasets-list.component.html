@@ -21,7 +21,7 @@
             <picture class="datasets-list__datasets__item__picture--mobile">
               <img [src]="dataset.preview" [alt]="dataset.title" />
             </picture>
-            <a routerLink="/datasets/detail" [queryParams]="{ doi: doi }"> {{ dataset.title }} </a>
+            <a routerLink="/datasets/detail" [queryParams]="{ doi: convertDOI(doi) }"> {{ dataset.title }} </a>
           </h3>
           <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
           <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>

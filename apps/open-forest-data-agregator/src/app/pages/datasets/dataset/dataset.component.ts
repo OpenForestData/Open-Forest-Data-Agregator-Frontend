@@ -157,7 +157,8 @@ export class DatasetComponent implements OnInit {
       this.mobile = true;
     }
     this.route.queryParams.subscribe((queryParams): any => {
-      this.getDatasetDetails(queryParams.doi);
+      const doi = atob(queryParams.doi);
+      this.getDatasetDetails(doi);
     });
   }
 
