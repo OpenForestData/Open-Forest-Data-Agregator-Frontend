@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let dataset of datasets" [routerLink]="['dataset', dataset.identifier64]">
+      <tr *ngFor="let dataset of datasets" [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
         <td class="datasets-table__td">{{ dataset.datasetPersistentID }}</td>
         <td class="datasets-table__td">{{ dataset.title }}</td>
         <td class="datasets-table__td">{{ dataset.createdAt }}</td>

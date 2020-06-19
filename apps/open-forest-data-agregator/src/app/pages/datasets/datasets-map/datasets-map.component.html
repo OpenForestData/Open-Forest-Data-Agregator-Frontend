@@ -13,7 +13,11 @@
         <button class="datasets-map__dataset-item__close" (click)="closeDetails()">
           <svg-icon src="/assets/images/close.svg" [applyCss]="true"></svg-icon>
         </button>
-        <a class="datasets-map__dataset-item__details" routerLink="/datasets">
+        <a
+          class="datasets-map__dataset-item__details"
+          [routerLink]="['detail']"
+          [queryParams]="{ doi: datasetDetails.dataset.identifier64 }"
+        >
           {{ 'datasets.see-details' | translate }}
           <svg-icon src="/assets/images/arrow-green-right.svg" [applyCss]="true"></svg-icon>
         </a>
