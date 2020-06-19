@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@app/services/language.service';
 
 @Component({
   selector: 'ofd-agregator-home-news-mobile',
@@ -9,12 +11,21 @@ import { Component, OnInit } from '@angular/core';
     './home-news-mobile.component.scss'
   ]
 })
-export class HomeNewsMobileComponent implements OnInit {
+export class HomeNewsMobileComponent implements OnInit, OnDestroy {
   public mobileActiveNews = 0;
+  public languageSubscription: Subscription = new Subscription();
 
-  constructor() {}
+  constructor(public languageService: LanguageService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+  }
+
+  getData() {}
+
+  ngOnDestroy() {
+    this.languageSubscription.unsubscribe();
+  }
 
   swipeLeftNews() {
     this.mobileActiveNews += 1;

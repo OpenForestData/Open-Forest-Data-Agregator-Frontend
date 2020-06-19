@@ -1,5 +1,9 @@
 @import '../../../../../../resources/_colors.scss';
 
+.relative {
+  position: relative;
+}
+
 .datasets {
   display: flex;
   align-items: flex-start;
@@ -103,4 +107,14 @@
       display: none;
     }
   }
+}
+
+.datasets-list__pagination {
+  padding-left: 40px;
+}
+
+.datasets__map {
+  position: relative;
+  height: 100%;
+  margin-bottom: 60px;
 }

@@ -17,6 +17,6 @@ export class DatasetsCategoryComponent implements OnInit {
   ngOnInit(): void {}
 
   selectValue(value) {
-    this.selectedCategoryChange.emit(value);
+    if (value !== this.selectedCategory) this.selectedCategoryChange.emit(value);
   }
 }

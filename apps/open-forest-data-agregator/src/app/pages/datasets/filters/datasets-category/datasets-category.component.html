@@ -6,5 +6,7 @@
     (click)="selectValue(category.value)"
   >
     {{ category.name }}
+
+    <span class="times" *ngIf="category.value === selectedCategory" (click)="selectValue(null)">&times;</span>
   </li>
 </ol>

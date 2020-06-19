@@ -32,13 +32,17 @@ export class DatasetsFilterComponent implements OnInit {
 
   changeFilter(event, value) {
     this.value = this.multiple ? (event ? [...this.value, value] : this.value.filter(val => val !== value)) : value;
+    if (this.multiple) {
+      this.showAll = this.value.length === this.data.length ? true : this.value.length === 0 ? false : this.showAll;
+    }
+
+    this.valueChange.emit(this.value);
   }
 
   toggleAllFilters() {
     if (!this.multiple) return;
-
     this.showAll = !this.showAll;
-
     this.value = this.showAll ? this.data.map(val => val.value) : [];
+    this.valueChange.emit(this.value);
   }
 }

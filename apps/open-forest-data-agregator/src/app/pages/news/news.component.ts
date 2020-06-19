@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@app/services/language.service';
 
 @Component({
   selector: 'ofd-agregator-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
   public activeTags = new Set();
   public collapseYear = true;
   public mobileFilters = false;
@@ -37,9 +39,15 @@ export class NewsComponent implements OnInit {
 
   public page = 1;
 
-  constructor() {}
-
-  ngOnInit() {}
+  public languageSubscription: Subscription = new Subscription();
+  constructor(public languageService: LanguageService) {}
+  ngOnInit() {
+    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+  }
+  getData() {}
+  ngOnDestroy() {
+    this.languageSubscription.unsubscribe();
+  }
 
   clearYear() {
     this.yearFilter = this.yearFilter.map(item => ({ ...item, checked: false }));

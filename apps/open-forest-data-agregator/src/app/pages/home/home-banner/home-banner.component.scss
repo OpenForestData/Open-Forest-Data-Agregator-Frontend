@@ -34,13 +34,14 @@
     justify-content: center;
 
     .animal-box {
-      width: calc(100% / 8);
+      width: calc(100% / 7);
       height: 75px;
       display: flex;
       align-items: center;
 
       &.show-all {
         margin-left: auto;
+        justify-content: flex-end;
 
         img {
           height: 36px;
@@ -54,7 +55,6 @@
     }
 
     .animal-name {
-      margin-left: 15px;
       font-weight: 600;
       font-size: 16px;
       color: white;

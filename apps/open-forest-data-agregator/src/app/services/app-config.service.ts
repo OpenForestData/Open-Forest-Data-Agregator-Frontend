@@ -28,11 +28,9 @@ export class AppConfigService {
         .toPromise()
         .then(response => {
           AppConfigService.config = response;
-          console.log('RESOLVE');
           resolve();
         })
         .catch((error: any) => {
-          console.log(error);
           reject('No config provided!');
         });
     });

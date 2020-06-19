@@ -41,7 +41,5 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.barChartData[0].backgroundColor = this.colorsArray[this.bgColor];
   }
 
-  getData(payload) {
-    console.log(payload);
-  }
+  getData(payload) {}
 }

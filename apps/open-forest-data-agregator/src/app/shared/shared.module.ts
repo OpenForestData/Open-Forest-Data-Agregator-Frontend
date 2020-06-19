@@ -22,6 +22,8 @@ import { NewDataComponent } from '@app/pages/home/new-data/new-data.component';
 import { NewDataMobileComponent } from '@app/pages/home/new-data-mobile/new-data-mobile.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { DataContainerComponent } from './data-container/data-container.component';
+import { DebounceKeyupDirective } from '@app/directives/debonuce-keyup.directive';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const components = [
   PageNavComponent,
@@ -34,7 +36,8 @@ const components = [
   NewDataMobileComponent,
   NewDataComponent,
   AccordionComponent,
-  DataContainerComponent
+  DataContainerComponent,
+  DebounceKeyupDirective
 ];
 
 @NgModule({
@@ -43,6 +46,7 @@ const components = [
     HttpClientModule,
     RouterModule,
     FormsModule,
+    NgSelectModule,
     AngularSvgIconModule,
     TranslateModule,
     NgxPaginationModule,
@@ -55,6 +59,7 @@ const components = [
     TranslateModule,
     AngularSvgIconModule,
     FormsModule,
+    NgSelectModule,
     UICheckboxModule,
     UISelectModule,
     ...components

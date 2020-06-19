@@ -1,16 +1,17 @@
-import { Injectable, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppConfigService } from './app-config.service';
 import { TranslateService } from '@ngx-translate/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
 
 /**
  * Language service
  */
 @Injectable()
 export class LanguageService {
+  public changeLanguage: Subject<any> = new Subject();
   /**
    * Application language
    */
@@ -26,6 +27,8 @@ export class LanguageService {
     this.cookieService.set('language', value);
     this.translate.setDefaultLang(value);
     this.translate.use(value);
+
+    this.changeLanguage.next();
   }
 
   /**

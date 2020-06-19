@@ -1,7 +1,9 @@
 <div class="datasets-list__container">
   <div class="datasets-list__header">
     <div>
-      <span class="datasets-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
+      <span class="datasets-list__count">
+        {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
+      </span>
       <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
     </div>
     <button class="button datasets-list__export">
@@ -12,33 +14,36 @@
 
   <div class="datasets-list__datasets">
     <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
-      <picture class="datasets-list__datasets__item__picture">
-        <img [src]="dataset.preview" [alt]="dataset.title" />
-      </picture>
-      <article>
-        <header>
-          <h3 class="datasets-list__datasets__item__title">
-            <picture class="datasets-list__datasets__item__picture--mobile">
-              <img [src]="dataset.preview" [alt]="dataset.title" />
-            </picture>
-            <a routerLink="/datasets/detail" [queryParams]="{ doi: convertDOI(doi) }"> {{ dataset.title }} </a>
-          </h3>
-          <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
-          <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>
-        </header>
-        <p class="datasets-list__datasets__item__description">
-          {{ dataset.description }}
-        </p>
-        <footer class="datasets-list__datasets__item__source">
-          <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
-          {{ 'global.source' | translate }}: <b>{{ dataset.source }}</b>
-        </footer>
-      </article>
+      <a [routerLink]="['dataset', dataset.identifier64]">
+        <picture class="datasets-list__datasets__item__picture">
+          <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+        </picture>
+        <article>
+          <header>
+            <h3 class="datasets-list__datasets__item__title">
+              <picture class="datasets-list__datasets__item__picture--mobile">
+                <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+                <img
+                  [src]="dataset.preview"
+                  *ngIf="dataset.preview && dataset.preview !== 'wait'"
+                  [alt]="dataset.title"
+                />
+              </picture>
+              <a> {{ dataset.title }} </a>
+            </h3>
+            <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
+            <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>
+          </header>
+          <p class="datasets-list__datasets__item__description">
+            {{ dataset.description }}
+          </p>
+          <footer class="datasets-list__datasets__item__source">
+            <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+            {{ 'global.source' | translate }}: <b>{{ dataset.source }}</b>
+          </footer>
+        </article>
+      </a>
     </div>
-  </div>
-
-  <div class="datasets-list__pagination">
-    <ofd-agregator-pagination [items]="600" [pageSize]="15" [(page)]="page" [showOffsets]="true">
-    </ofd-agregator-pagination>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DatasetsService } from '../datasets.service';
 
 @Component({
   selector: 'ofd-agregator-datasets-table',
@@ -10,13 +11,19 @@ export class DatasetsTableComponent implements OnInit {
 
   dtOptions: any = {};
 
-  constructor() {}
+  constructor(public DSService: DatasetsService) {}
+
+  public get paginationsSize() {
+    return this.DSService.searchFilters.data.rows;
+  }
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: this.paginationsSize,
       dom: 'Bfrtip',
+      bPaginate: false,
+      bInfo: false,
       responsive: true,
       buttons: ['copy', 'print', 'excel', 'pdfHtml5']
     };

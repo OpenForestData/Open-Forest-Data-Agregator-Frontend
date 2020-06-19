@@ -17,8 +17,21 @@
   <div class="container green-container">
     <div class="row animals-container">
       <div class="col-lg-12 col-md-12 middle-md animal-box-wrapper">
-        <div class="animal-box desktop-flex-only" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]">
-          <img src="assets/modules/home/rat_icon.png" alt="Animal name" />
+        <div
+          class="animal-box desktop-flex-only"
+          *ngFor="
+            let i of [
+              'birds_icon',
+              'insects_icon',
+              'mammals_icon',
+              'mushrooms_icon',
+              'map_icon',
+              'phototrap_icon',
+              'plants_icon'
+            ]
+          "
+        >
+          <img src="assets/modules/home/categories/{{ i }}.png" alt="Animal name" />
           <p class="animal-name">Ssaki</p>
         </div>
 
@@ -49,9 +62,22 @@
     {{ 'home.categories' | translate }}
   </h3>
   <div class="mobile-categories-wrapper">
-    <div class="animal-box" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
-      <img src="assets/modules/home/rat_icon.png" alt="Animal name" />
-      <p class="animal-name">Ssaki</p>
+    <div
+      class="animal-box"
+      *ngFor="
+        let i of [
+          'birds_icon',
+          'insects_icon',
+          'mammals_icon',
+          'mushrooms_icon',
+          'map_icon',
+          'phototrap_icon',
+          'plants_icon'
+        ]
+      "
+    >
+      <img src="assets/modules/home/categories/{{ i }}.png" alt="Animal name" />
+      <p class="animal-name">{{ i }}</p>
     </div>
 
     <div class="animal-box show-all">

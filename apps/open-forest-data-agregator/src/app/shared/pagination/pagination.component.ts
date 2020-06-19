@@ -34,6 +34,8 @@ export class PaginationComponent implements OnInit, OnChanges {
    */
   @Output() pageChange = new EventEmitter();
 
+  @Output() changes = new EventEmitter();
+
   /**
    * Array of pages
    */
@@ -50,6 +52,8 @@ export class PaginationComponent implements OnInit, OnChanges {
    * Pagination end number
    */
   public end: number;
+
+  public inputValue = 1;
 
   /**
    * @ignore
@@ -88,5 +92,27 @@ export class PaginationComponent implements OnInit, OnChanges {
    */
   pageClick(page: number) {
     this.pageChange.emit(page);
+    this.page = page;
+    this.emitChanges(this.pageSize);
+  }
+
+  debouncePage(newPage: number) {
+    newPage = Number(newPage);
+    if (Number.isInteger(newPage) && newPage > 0) {
+      if (newPage > this.pages) newPage = this.pages;
+
+      this.pageClick(newPage);
+    } else {
+      this.inputValue = this.page;
+    }
+  }
+
+  emitChanges(pageSize) {
+    this.inputValue = this.page;
+
+    this.changes.emit({
+      page: this.page,
+      limit: pageSize
+    });
   }
 }

@@ -1,8 +1,6 @@
 <div class="datasets-map__container">
   <div class="datasets-map__header">
-    <div class="datasets-map__showed-datasets">
-      Zaprezentowano 29 z 35 rekordów
-    </div>
+    <div class="datasets-map__showed-datasets">Zaprezentowano {{ activeMarkes }} z {{ datasets.length }} rekordów</div>
     <button class="button datasets-map__export">
       {{ 'global.export' | translate }}
       <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
