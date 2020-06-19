@@ -11,5 +11,5 @@
       "value": "EN"
     }
   ],
-  "api": "http://localhost:8080/api/"
+  "api": "https://agregator.whiteaster.com/api/v1/"
 }
