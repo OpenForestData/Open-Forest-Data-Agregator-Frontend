@@ -1,7 +1,9 @@
 <div class="datasets-list__container">
   <div class="datasets-list__header">
     <div>
-      <span class="dataset-list__count"> 10235 {{ 'datasets.count' | translate }} </span>
+      <span class="dataset-list__count">
+        {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
+      </span>
       <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
     </div>
     <button class="button datasets-list__export">
@@ -25,7 +27,7 @@
       </a>
       <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
       <a
-        routerLink="/datasets/"
+        [routerLink]="['dataset', dataset.identifier64]"
         class="datasets-list__datasets__item__link"
         *ngIf="dataset.preview && dataset.preview !== 'wait'"
       >

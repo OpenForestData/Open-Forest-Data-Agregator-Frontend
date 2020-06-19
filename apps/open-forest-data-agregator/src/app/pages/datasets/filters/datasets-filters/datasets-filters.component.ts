@@ -41,78 +41,106 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
   public keys = Object.keys;
   public moreFilters = false;
   public isMobile = false;
+  public showAdvanced = false;
+  public searchFilterValue = '';
+  public searchValue = '';
+  public orderCounter = 1;
+  public queryVisible = false;
 
-  public showAdvanced = true;
-  public selectedPeople = [];
-  public people = [
-    {
-      id: '5a15b13c36e7a7f00cf0d7cb',
-      name: 'Karyn Wright'
-    },
-    {
-      id: '5a15b13c2340978ec3d2c0ea',
-      name: 'Rochelle Estes'
-    },
-    {
-      id: '5a15b13c663ea0af9ad0dae8',
-      name: 'Mendoza Ruiz'
-    },
-    {
-      id: '5a15b13cc9eeb36511d65acf',
-      name: 'Rosales Russell'
-    },
-    {
-      id: '5a15b13c728cd3f43cc0fe8a',
-      name: 'Marquez Nolan'
-    },
-    {
-      id: '5a15b13ca51b0aaf8a99c05a',
-      name: 'Franklin James'
-    },
-    {
-      id: '5a15b13cc3b9381ffcb1d6f7',
-      name: 'Elsa Bradley'
-    },
-    {
-      id: '5a15b13ce58cb6ff62c65164',
-      name: 'Pearson Thompson'
-    },
-    {
-      id: '5a15b13c90b95eb68010c86e',
-      name: 'Ina Pugh'
-    },
-    {
-      id: '5a15b13c2b1746e12788711f',
-      name: 'Nguyen Elliott'
-    },
-    {
-      id: '5a15b13c605403381eec5019',
-      name: 'Mills Barnett'
-    },
-    {
-      id: '5a15b13c67e2e6d1a3cd6ca5',
-      name: 'Margaret Reynolds'
-    },
-    {
-      id: '5a15b13c947c836d177aa85c',
-      name: 'Yvette Navarro'
-    },
-    {
-      id: '5a15b13c5dbbe61245c1fb73',
-      name: 'Elisa Guzman'
-    },
-    {
-      id: '5a15b13c38fd49fefea8db80',
-      name: 'Jodie Bowman'
-    },
-    {
-      id: '5a15b13c9680913c470eb8fd',
-      name: 'Diann Booker'
-    }
-  ];
+  private advancedByKey = {};
+  private advancedFiltersConfig = [];
+
+  public datePickerConfig = {
+    locale: 'pl-PL',
+    disableKeypress: true,
+    unSelectOnClick: false,
+    firstDayOfWeek: 'mo'
+  };
 
   public get selectedCategory() {
     return this.DSService.searchFilters.data.category;
+  }
+
+  public get advancedFilters() {
+    this.advancedFiltersConfig.forEach(group => {
+      group.items = this.searchFilterValue
+        ? group.data.filter((item: any) => item.name.toLowerCase().includes(this.searchFilterValue.toLowerCase()))
+        : group.data;
+    });
+
+    return this.advancedFiltersConfig;
+  }
+
+  public get getActiveFilters() {
+    let activeArr = [
+      {
+        name: 'search.search',
+        type: 'SELECT',
+        values: [this.searchValue].filter(item => item.length)
+      }
+    ];
+    this.advancedFiltersConfig.forEach(group => {
+      // @ts-ignore
+      group.data.forEach(item => {
+        activeArr.push({
+          name: item.name,
+          type: item.type,
+          values: Array.isArray(item.values)
+            ? item.values.filter((_: any) => (_ === undefined ? false : _.length))
+            : [item.values].filter((_: any) => (_ === undefined ? false : _.length))
+        });
+      });
+    });
+
+    activeArr = activeArr.filter(item => item.values.length);
+
+    return activeArr;
+  }
+
+  public get queryArray() {
+    let queryArr = [
+      {
+        key: 'Q',
+        type: 'SELECT',
+        values: [this.searchValue].filter(item => item.length)
+      }
+    ];
+    this.advancedFiltersConfig.forEach(group => {
+      // @ts-ignore
+      group.data.forEach(item => {
+        queryArr.push({
+          key: item.key,
+          type: item.type,
+          values: Array.isArray(item.values)
+            ? item.values.filter((_: any) => (_ === undefined ? false : _.length))
+            : [item.values].filter((_: any) => (_ === undefined ? false : _.length))
+        });
+      });
+    });
+
+    queryArr = queryArr.filter(item => item.values.length);
+
+    return queryArr.map(item => {
+      if (item.values.length > 1) {
+        if (item.type === 'DATE') {
+          // item.values = ['FROM', item.values[0], 'TO', item.values[1]];
+          item.values = [item.values[0]];
+        } else {
+          item.values = item.values.join('OR').split(',');
+          item.values[0] = '(' + item.values[0];
+          item.values[item.values.length - 1] += ')';
+        }
+      }
+      item.values = item.values.map(_ => _.trim());
+      return item;
+    });
+  }
+
+  public get advancedSelected() {
+    return []
+      .concat(...this.advancedFiltersConfig.map(item => item.items))
+      .filter(item => item.activeOrder)
+      .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
   }
 
   // tslint:disable-next-line
@@ -125,13 +153,100 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
 
   constructor(public DSService: DatasetsService, public cd: ChangeDetectorRef, private route: ActivatedRoute) {
     this.subs.add(
+      this.DSService.showAdvancedSubject.subscribe(() => {
+        this.showAdvanced = true;
+        this.cd.detectChanges();
+      })
+    );
+
+    this.subs.add(
+      this.DSService.updateQuerySubject.subscribe(query => {
+        this.searchValue = query;
+        this.cd.detectChanges();
+      })
+    );
+
+    this.subs.add(
       this.DSService.dataChangedSubject.subscribe(() => {
+        if (!this.advancedFiltersConfig.length) {
+          this.searchValue = this.DSService.searchFilters.data['q'];
+          const data = this.DSService.searchData['list'];
+          const groupOrder = {};
+          const typeConversion = {
+            TEXT: 'INPUT',
+            NONE: 'INPUT',
+            TEXTBOX: 'SELECT',
+            DATE: 'DATE'
+          };
+          const advKey = 'listing_filter_fields';
+
+          this.advancedFiltersConfig = [
+            {
+              title: '',
+              headerVisible: false,
+              items: [],
+              data: [
+                {
+                  key: 'category',
+                  name: 'search.categories',
+                  values: this.queryParams['category'] || [],
+                  items: Object.keys(data[advKey]['category']).map(i =>
+                    Object.create({
+                      id: data[advKey]['category'][i]['name'],
+                      label: data[advKey]['category'][i]['friendly_name']
+                    })
+                  ),
+                  type: 'SIGNLE-SELECT',
+                  activeOrder: this.queryParams['category'] ? this.orderCounter : null
+                }
+              ]
+            }
+          ];
+
+          this.advancedByKey['category'] = this.advancedFiltersConfig[0].data[0];
+
+          if (this.queryParams['category']) this.orderCounter += 1;
+
+          Object.keys(data['filter_groups']).forEach((key, i) => {
+            this.advancedFiltersConfig.push({
+              title: data['filter_groups'][key]['friendly_name'],
+              headerVisible: true,
+              items: [],
+              data: []
+            });
+            groupOrder[data['filter_groups'][key]['id']] = i + 1;
+          });
+
+          Object.keys(data[advKey]).forEach(index => {
+            if (index !== 'category') {
+              const filter = data[advKey][index];
+              const groupIndex = groupOrder[filter['filter_group_id']];
+              const config = this.advancedFiltersConfig[groupIndex];
+              const filterObj = {
+                key: filter['field_name'],
+                name: filter['friendly_name'],
+                values: this.queryParams[filter['field_name']] || [],
+                items: filter['attributes'].map(_ => _.name),
+                type: typeConversion[filter.type] || 'INPUT',
+                activeOrder: this.queryParams[filter['field_name']] ? this.orderCounter : null
+              };
+
+              this.advancedByKey[filter['field_name']] = filterObj;
+
+              config.data.push(filterObj);
+
+              if (this.queryParams[filter['field_name']]) this.orderCounter += 1;
+            }
+          });
+
+          this.searchAdvenced();
+        }
         this.cd.detectChanges();
       })
     );
 
     this.route.queryParams.subscribe(params => {
-      const exclude = ['start', 'rows', 'category'];
+      const exclude = ['start', 'rows', 'category', 'q'];
       const p = {};
       // tslint:disable-next-line: forin
       for (const index in params) {
@@ -146,6 +261,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     });
 
     if (this.queryParams['category']) this.categoryChanged(this.queryParams['category']);
+    if (this.queryParams['q']) this.DSService.searchFilters = { field: 'q', data: this.queryParams['q'] };
     if (this.queryParams['start']) this.DSService.searchFilters = { field: 'start', data: this.queryParams['start'] };
     if (this.queryParams['rows']) this.DSService.searchFilters = { field: 'rows', data: this.queryParams['rows'] };
 
@@ -160,9 +276,34 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     }, 0);
   }
 
-  public getFilters(beginning = true) {
-    const filter = this.DSService.searchData.list.available_filter_fields;
+  updateBasic() {
+    const currentState = this.DSService.searchFilters.data;
+    this.DSService.updateQuerySubject.next(this.searchValue);
+    Object.keys(this.filters).forEach(key => {
+      this.filters[key].value = this.advancedByKey[key].values;
+    });
+  }
 
+  updateAdvanced() {
+    const currentState = this.DSService.searchFilters.data;
+    this.DSService.updateQuerySubject.next(this.searchValue);
+    Object.keys(this.filters).forEach(key => {
+      if (this.advancedByKey[key]) {
+        this.advancedByKey[key].values = this.filters[key].value;
+        if (this.filters[key].value.length) {
+          this.advancedByKey[key].activeOrder = this.orderCounter;
+          this.orderCounter += 1;
+        }
+      }
+    });
+  }
+
+  search() {
+    this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+  }
+
+  getFilters(beginning = true) {
+    const filter = this.DSService.searchData.list.available_filter_fields;
     Object.keys(filter).forEach(key => {
       const obj = {
         isExpanded: this.filters[key] ? this.filters[key].isExpanded : this.queryParams[key] ? true : false,
@@ -180,7 +321,9 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       if (key === 'category') {
         obj.multiple = false;
         obj.data = () => {
-          return filter[key].map(item => Object.create({ name: item.friendly_name, value: item.id }));
+          return Object.keys(filter[key]).map(k2 =>
+            Object.create({ name: filter['category'][k2].friendly_name, value: filter['category'][k2].id })
+          );
         };
         this.categories = obj;
       } else {
@@ -193,12 +336,57 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       : Object.keys(this.filters).slice(this.moreCountStart);
   }
 
+  toogleFilter(item) {
+    if (item.activeOrder) {
+      item.activeOrder = null;
+      item.values = [];
+    } else {
+      this.orderCounter += 1;
+      item.activeOrder = this.orderCounter;
+    }
+  }
+
   categoryChanged(value) {
     this.DSService.searchFilters = { field: 'category', data: value };
   }
 
   filtersChanged(payload) {
+    this.updateAdvanced();
     this.DSService.searchFilters = { field: 'basic', data: this.filters };
+  }
+
+  searchAdvenced() {
+    const activeArr = {};
+    let catValue = null;
+
+    this.advancedFiltersConfig.forEach(group => {
+      group.data
+        .filter(item => item.activeOrder)
+        .forEach(item => {
+          let values = Array.isArray(item.values) ? item.values : [item.values];
+          if (item.type === 'DATE') {
+            values = values.map(_ => _.format('YYYY-MM-DD'));
+          }
+          if (item.key === 'category') {
+            catValue = values[0];
+          } else {
+            activeArr[item.key] = { key: item.key, value: values };
+          }
+        });
+    });
+
+    if (this.searchValue) {
+      this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+    }
+
+    if (catValue) {
+      this.DSService.searchFilters = { field: 'category', data: catValue };
+    }
+
+    this.showAdvanced = false;
+    this.DSService.searchFilters = { field: 'basic', data: activeArr };
+
+    this.updateBasic();
   }
 
   ngOnDestroy() {

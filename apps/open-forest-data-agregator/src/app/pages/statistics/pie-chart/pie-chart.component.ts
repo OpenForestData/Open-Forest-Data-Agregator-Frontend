@@ -15,7 +15,6 @@ export class PieChartComponent implements OnInit {
       enabled: true,
       callbacks: {
         label: tooltipItem => {
-          console.log(tooltipItem);
           return `${this.pieChartLabels[tooltipItem.index]}: ${this.pieChartData[tooltipItem.index]}`;
         },
         title: () => null
@@ -83,7 +82,5 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit() {}
 
-  getData(payload) {
-    console.log(payload);
-  }
+  getData(payload) {}
 }

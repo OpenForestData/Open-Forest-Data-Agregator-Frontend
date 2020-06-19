@@ -12,6 +12,8 @@ import { Location } from '@angular/common';
 export class DatasetsService {
   public dataChangedSubject: Subject<any> = new Subject();
   public triggerSearchSubject: Subject<any> = new Subject();
+  public showAdvancedSubject: Subject<any> = new Subject();
+  public updateQuerySubject: Subject<any> = new Subject();
 
   private searchDebounceTimeout = null;
 
@@ -45,7 +47,13 @@ export class DatasetsService {
   }
 
   public set searchFilters(value: { field: string; data: any }) {
-    this._searchFilters[value.field] = value.data;
+    if (value.field === 'basic') {
+      Object.keys(value.data).forEach(key => {
+        this._searchFilters[value.field][key] = value.data[key];
+      });
+    } else {
+      this._searchFilters[value.field] = value.data;
+    }
 
     if (this.searchDebounceTimeout) {
       clearTimeout(this.searchDebounceTimeout);

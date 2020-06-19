@@ -25,6 +25,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     { name: 'Zbiory danych', href: '/datasets' }
   ];
 
+  public pageCount = 0;
+
   public filters = {
     category: {
       key: 'category',
@@ -79,8 +81,11 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
   public get categories() {
     const filter = this.DSService.searchData.list.available_filter_fields;
+
     return filter['category']
-      ? filter['category'].map(item => Object.create({ name: item.friendly_name, value: item.id }))
+      ? Object.keys(filter['category']).map(key =>
+          Object.create({ name: filter['category'][key].friendly_name, value: filter['category'][key].id })
+        )
       : [];
   }
 
@@ -101,6 +106,9 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       this.DSService.searchData = response;
       const identifiers = [];
       const identifiersIndex = {};
+
+      this.pageCount = response['list']['amount'];
+
       this.datasetsItems = response['list']['results'].map((item, index) => {
         identifiers.push(item.identifier);
         identifiersIndex[item.identifier] = index;
@@ -109,36 +117,49 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           id: item.id,
           datasetPersistentID: item.dsPersistentId,
           title: item.title,
+          identifier: item.identifier,
+          identifier64: btoa(item.identifier),
           createdAt: '',
-          author: item.authorName.join(', '),
+          author: item.authorName ? item.authorName.join(', ') : '',
           category: item.dvName,
           source: 'Dataverse',
-          preview: 'https://sachinchoolur.github.io/lightGallery/static/img/1.jpg',
-          images: [
-            'https://sachinchoolur.github.io/lightGallery/static/img/1.jpg',
-            'https://sachinchoolur.github.io/lightGallery/static/img/2.jpg',
-            'https://sachinchoolur.github.io/lightGallery/static/img/13.jpg'
-          ],
-          subject: item.subject.join(', '),
+          preview: 'wait',
+          files: [],
+          images: [],
+          subject: item.subject ? item.subject.join(', ') : '',
           coordinates: [
             {
               lat: 50.2137612,
               long: 18.9371533
             }
           ],
-          description: item.dsDescriptionValue.join(', ')
+          description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : ''
         };
       });
 
       if (identifiers.length) {
         this.DSService.details(identifiers).subscribe((details: any) => {
-          console.log(details);
-          Object.keys(details).forEach(index => {
-            const item = details[index];
+          this.datasetsItems.forEach(item => {
+            const singlDetails = details[item.identifier];
+            if (singlDetails) {
+              if (!singlDetails.latestVersion) {
+                singlDetails.latestVersion = {
+                  files: []
+                };
+              }
 
-            this.datasetsItems[identifiersIndex[index]].createdAt = item.data.latestVersion.createTime;
+              if (!singlDetails.latestVersion.files) {
+                singlDetails.latestVersion.files = [];
+              }
+
+              item.createdAt = singlDetails.latestVersion.createTime;
+              item.files = singlDetails.latestVersion.files;
+              item.images = singlDetails.latestVersion.files
+                .filter((_: any) => _.thumbnail_url)
+                .map((_: any) => _.thumbnail_url);
+              item.preview = item.images[0] || null;
+            }
           });
-
           this.changeDetectorRef.detectChanges();
         });
       }

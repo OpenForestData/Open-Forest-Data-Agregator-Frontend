@@ -1,3 +1,4 @@
+@import '~@ng-select/ng-select/themes/default.theme.css';
 @import '_fonts.scss';
 @import '_variables.scss';
 @import '_buttons.scss';
@@ -305,4 +306,124 @@ ui-checkbox {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.datepicker-label input {
+  padding: 7px 14px;
+  border: 1px solid $text-color;
+  border-radius: 20px;
+  width: 90px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.dp-popup {
+  border: none;
+  padding: 5px;
+}
+
+.dp-calendar-wrapper {
+  border: none;
+}
+
+.dp-calendar-day {
+  height: 45px !important;
+  width: 45px !important;
+  padding: 0 !important;
+  color: $text-color;
+
+  &:disabled {
+    opacity: 0.5 !important;
+    background: $light-gray-color !important;
+  }
+
+  &:hover,
+  &.dp-selected {
+    opacity: 1 !important;
+    background-color: $accent-color !important;
+    border-radius: 25px;
+    color: white !important;
+  }
+}
+
+.dp-calendar-day.dp-prev-month,
+.dp-calendar-day.dp-next-month {
+  opacity: 0.5;
+  background: $light-gray-color;
+  border: none;
+}
+
+.dp-calendar-wrapper {
+  border: none !important;
+}
+
+.dp-calendar-nav-container {
+  border: none !important;
+  height: 45px !important;
+}
+
+.dp-calendar-day.dp-current-month {
+  border: none;
+  background: white;
+}
+
+.dp-nav-header {
+  display: block;
+  display: block !important;
+  width: 100%;
+  position: relative !important;
+  text-align: center;
+
+  button {
+    border: none;
+    background: transparent;
+  }
+}
+
+.dp-current-location-btn {
+  display: none;
+}
+
+.dp-calendar-weekday {
+  width: 45px !important;
+  border: none !important;
+}
+
+.dp-nav-btns-container {
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  width: 100%;
+  height: 100%;
+}
+
+.dp-calendar-weekday {
+  padding: 15px 0 !important;
+}
+
+.dp-calendar-nav-container-left,
+.dp-calendar-nav-container-right {
+  height: 100%;
+}
+
+.dp-calendar-nav-container-left {
+  position: absolute;
+  left: 10px;
+}
+
+.dp-calendar-nav-container-right {
+  position: absolute;
+  right: 10px;
+}
+
+.dp-calendar-nav-right,
+.dp-calendar-nav-left {
+  height: 100%;
+  border: none;
+  background: none;
+  top: 50%;
+  padding: 0;
+  width: 20px;
+  transform: translateY(-50%);
 }

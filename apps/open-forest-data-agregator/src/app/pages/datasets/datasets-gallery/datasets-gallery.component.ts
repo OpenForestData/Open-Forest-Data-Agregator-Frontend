@@ -7,6 +7,7 @@ import 'lg-fullscreen.js';
 import 'lg-thumbnail.js';
 
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
+import { DatasetsService } from '../datasets.service';
 
 @Component({
   selector: 'ofd-agregator-datasets-gallery',
@@ -29,7 +30,7 @@ export class DatasetsGalleryComponent implements OnInit {
 
   @ViewChild('galleryItems', { static: false }) galleryItems: any;
 
-  constructor() {}
+  constructor(public DSService: DatasetsService) {}
 
   ngOnInit(): void {}
 

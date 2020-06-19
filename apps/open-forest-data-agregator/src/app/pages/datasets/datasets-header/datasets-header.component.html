@@ -32,7 +32,7 @@
         <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
       </button>
     </label>
-    <button class="search-section__advanced-search" type="button">
+    <button class="search-section__advanced-search" (click)="showAdvanced()" type="button">
       {{ 'datasets.advanced-search' | translate }}
     </button>
   </form>

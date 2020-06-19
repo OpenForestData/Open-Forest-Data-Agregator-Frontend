@@ -278,6 +278,22 @@
     "search_placeholder": "Szukaj aktualności..."
   },
   "search": {
-    "advanced": "Wyszukiwanie zaawansowane"
+    "advanced": "Wyszukiwanie zaawansowane",
+    "search_filters": "Szukaj filtrów",
+    "search": "Szukaj",
+    "filters": "Filtry",
+    "categories": "Kategorie",
+    "filter_1": "Filtr 1",
+    "filter_2": "Filtr 2",
+    "filter_3": "Filtr 3",
+    "active_filters": "Aktywne filtry",
+    "clear_all": "Wyczyść",
+    "show_query": "Pokaż zapytanie",
+    "hide_query": "Ukryj zapytanie",
+    "loading_text": "Trwa ładowanie wyników",
+    "not_found_text": "Nie znaleziono żadnych podpowiedzi",
+    "type_to_search": "Wyszukaj lub dodaj własny tag",
+    "add_tag": "Wciśnij Enter, lub wybierz tą opcję aby dodać własny tag",
+    "filter_title": "Section Title"
   }
 }

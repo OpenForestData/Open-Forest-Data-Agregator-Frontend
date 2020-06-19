@@ -1,5 +1,9 @@
 @import '../../../../../../resources/_colors.scss';
 
+.relative {
+  position: relative;
+}
+
 .datasets {
   display: flex;
   align-items: flex-start;

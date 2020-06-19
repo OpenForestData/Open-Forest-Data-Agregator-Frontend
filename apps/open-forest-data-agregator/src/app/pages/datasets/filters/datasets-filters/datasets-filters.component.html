@@ -60,35 +60,192 @@
 </div>
 
 <div class="advanced" [ngClass]="{ active: showAdvanced }">
-  <div class="row">
-    <div class="col-xs-12 end-xs">
-      <img src="assets/modules/search/times.png" class="times" alt="Close" />
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 end-xs">
+        <img src="assets/modules/search/times.png" class="times" alt="Close" (click)="showAdvanced = false" />
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <ofd-agregator-section-title
-        [iconURL]="'assets/modules/search/search_title.png'"
-        [titleText]="'search.advanced' | translate"
-      ></ofd-agregator-section-title>
+    <div class="row">
+      <div class="col-md-8 col-xs-12">
+        <ofd-agregator-section-title
+          [iconURL]="'assets/modules/search/search_title.png'"
+          [titleText]="'search.advanced' | translate"
+        ></ofd-agregator-section-title>
+      </div>
     </div>
-  </div>
 
-  <ng-select
-    [items]="people"
-    [multiple]="true"
-    bindLabel="name"
-    [addTag]="true"
-    [selectableGroup]="true"
-    [closeOnSelect]="false"
-    bindValue="id"
-    [(ngModel)]="selectedPeople"
-  >
-    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
-      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.gender | uppercase }}
-    </ng-template>
-    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
-    </ng-template>
-  </ng-select>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-4">
+        <div class="search-section top-search">
+          <label>
+            <input
+              class="search-section__input"
+              name="datasetSearch"
+              [(ngModel)]="searchValue"
+              type="text"
+              placeholder="{{ 'search.search' | translate }}"
+            />
+            <button class="search-section__button" type="submit">
+              <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
+            </button>
+          </label>
+
+          <!-- <div class="active_filters">
+            <p>{{ 'search.active_filters' | translate }}:</p>
+            <div class="active">
+              <div *ngFor="let item of getActiveFilters">
+                <span class="filter-name">{{ item.name | translate }}: </span>
+                <span class="filter-value" *ngFor="let v of item.values"
+                  >{{ v }}
+
+                  <svg-icon [src]="'/assets/images/small_times.svg'" [applyCss]="true"></svg-icon>
+                </span>
+              </div>
+            </div>
+          </div>
+-->
+          <button class="btn lunchSearch" (click)="searchAdvenced()">
+            {{ 'search.search' | translate }}
+            <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row main-row">
+      <div class="col-xs-3 scrollable">
+        <h3 class="advanced-title">{{ 'search.filters' | translate }}</h3>
+        <div class="search-section">
+          <label>
+            <input
+              class="search-section__input"
+              name="datasetSearch"
+              [(ngModel)]="searchFilterValue"
+              type="text"
+              placeholder="{{ 'search.search_filters' | translate }}"
+            />
+            <button class="search-section__button">
+              <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
+            </button>
+          </label>
+        </div>
+        <div class="filters-section">
+          <section class="group-row" *ngFor="let group of advancedFilters">
+            <ng-container *ngIf="group.items.length">
+              <header *ngIf="group.headerVisible">{{ group.title | translate }}</header>
+              <aside>
+                <ul>
+                  <li *ngFor="let item of group.items" class="filter-li" (click)="toogleFilter(item)">
+                    <img
+                      src="assets/modules/search/advanced_checks.png"
+                      width="22"
+                      height="18"
+                      class="check"
+                      alt="Check"
+                      [ngClass]="{ 'active-green': item.activeOrder > 0 }"
+                    />
+                    {{ item.name | translate }}
+                  </li>
+                </ul>
+              </aside>
+            </ng-container>
+          </section>
+        </div>
+      </div>
+      <div class="col-xs-6 scrollable">
+        <div class="filters-values">
+          <div *ngFor="let item of advancedSelected">
+            <header class="filter-name">{{ item.name | translate }}</header>
+
+            <div class="filter-details" *ngIf="item.type === 'SIGNLE-SELECT'">
+              <ng-select
+                [clearAllText]="'search.clear_all' | translate"
+                [loadingText]="'search.loading_text' | translate"
+                [notFoundText]="'search.not_found_text' | translate"
+                [typeToSearchText]="'search.type_to_search' | translate"
+                [addTagText]="'search.add_tag' | translate"
+                [multiple]="false"
+                [addTag]="false"
+                bindValue="id"
+                bindLabel="label"
+                [closeOnSelect]="true"
+                [items]="item.items"
+                [(ngModel)]="item.values"
+              >
+              </ng-select>
+            </div>
+
+            <div class="filter-details" *ngIf="item.type === 'SELECT'">
+              <ng-select
+                [clearAllText]="'search.clear_all' | translate"
+                [loadingText]="'search.loading_text' | translate"
+                [notFoundText]="'search.not_found_text' | translate"
+                [typeToSearchText]="'search.type_to_search' | translate"
+                [addTagText]="'search.add_tag' | translate"
+                [multiple]="true"
+                [addTag]="true"
+                [selectableGroup]="true"
+                [closeOnSelect]="false"
+                [items]="item.items"
+                [(ngModel)]="item.values"
+              >
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
+                </ng-template>
+              </ng-select>
+            </div>
+            <div class="filter-details" *ngIf="item.type === 'DATE'">
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <label class="datepicker-label">
+                    <dp-date-picker [(ngModel)]="item.values[0]" [config]="datePickerConfig"></dp-date-picker>
+                  </label>
+                </div>
+                <!-- <div class="col-md-6 col-xs-12 ml-auto">
+                  <label class="datepicker-label">
+                    <div>
+                      {{ 'stats.to' | translate }}
+                    </div>
+                    <dp-date-picker
+                      [(ngModel)]="item.values[1]"
+                      [minDate]="item.values[0]"
+                      [config]="datePickerConfig"
+                    ></dp-date-picker>
+                  </label>
+                </div> -->
+              </div>
+            </div>
+            <div class="filter-details" *ngIf="item.type === 'INPUT'">
+              <ng-select
+                [clearAllText]="'search.clear_all' | translate"
+                [loadingText]="'search.loading_text' | translate"
+                [notFoundText]="''"
+                [typeToSearchText]="''"
+                [addTagText]="'search.add_tag' | translate"
+                [multiple]="true"
+                [addTag]="true"
+                [selectableGroup]="true"
+                [closeOnSelect]="false"
+                [items]="item.items"
+                [(ngModel)]="item.values"
+              >
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="query-string">
+          <span *ngFor="let item of queryArray" class="query-string-wrapp">
+            <span class="query-string-key">{{ item.key }}=</span
+            ><span class="query-string-value" *ngFor="let k of item.values">{{ k }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
