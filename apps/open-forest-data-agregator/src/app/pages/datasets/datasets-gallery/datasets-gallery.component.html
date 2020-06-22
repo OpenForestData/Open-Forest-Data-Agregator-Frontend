@@ -13,29 +13,31 @@
   </div>
 
   <div class="datasets-list__datasets" #galleryItems>
-    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets; let i = index">
-      <a
-        class="datasets-list__datasets__item__picture thumbnail thumbnail-{{ i }}"
-        (click)="showGallery(i, $event.target)"
-        [title]="dataset.title"
-        [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
-        [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
-      >
-        <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
-        <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
-        <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
-      </a>
-      <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
-      <a
-        [routerLink]="['detail']"
-        [queryParams]="{ doi: dataset.identifier64 }"
-        class="datasets-list__datasets__item__link"
-        *ngIf="dataset.preview && dataset.preview !== 'wait'"
-      >
-        {{ 'global.see' | translate }}
+    <ng-container *ngFor="let dataset of datasets; let i = index">
+      <div class="datasets-list__datasets__item" *ngIf="dataset.preview && dataset.preview !== 'wait'">
+        <a
+          class="datasets-list__datasets__item__picture thumbnail thumbnail-{{ i }}"
+          (click)="showGallery(i, $event.target)"
+          [title]="dataset.title"
+          [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
+          [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
+        >
+          <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
+          <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+        </a>
+        <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
+        <a
+          [routerLink]="['detail']"
+          [queryParams]="{ doi: dataset.identifier64 }"
+          class="datasets-list__datasets__item__link"
+          *ngIf="dataset.preview && dataset.preview !== 'wait'"
+        >
+          {{ 'global.see' | translate }}
 
-        <svg-icon [src]="'/assets/images/arrow-green-right.svg'" [applyCss]="true"></svg-icon>
-      </a>
-    </div>
+          <svg-icon [src]="'/assets/images/arrow-green-right.svg'" [applyCss]="true"></svg-icon>
+        </a>
+      </div>
+    </ng-container>
   </div>
 </div>

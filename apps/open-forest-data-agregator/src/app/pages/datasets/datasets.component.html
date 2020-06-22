@@ -53,7 +53,7 @@
           <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
         </div>
 
-        <div class="datasets-list__pagination">
+        <div class="datasets-list__pagination" *ngIf="pageCount">
           <ofd-agregator-pagination
             [items]="pageCount"
             [pageSize]="15"

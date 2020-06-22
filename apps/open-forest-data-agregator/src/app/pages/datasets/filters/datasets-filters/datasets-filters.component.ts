@@ -23,11 +23,11 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
   public moreCountStart = 5;
   public subs: Subscription = new Subscription();
   public checkbox = {
-    media: {
+    mediaStatic: {
       key: 'media',
       value: false
     },
-    coordinates: {
+    geoStatic: {
       key: 'coordinates',
       value: false
     }
@@ -245,8 +245,8 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       })
     );
 
+    const exclude = ['start', 'rows', 'category', 'q', 'mediaStatic', 'geoStatic'];
     this.route.queryParams.subscribe(params => {
-      const exclude = ['start', 'rows', 'category', 'q'];
       const p = {};
       // tslint:disable-next-line: forin
       for (const index in params) {
@@ -260,10 +260,23 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       this.queryParams = p;
     });
 
-    if (this.queryParams['category']) this.categoryChanged(this.queryParams['category']);
-    if (this.queryParams['q']) this.DSService.searchFilters = { field: 'q', data: this.queryParams['q'] };
-    if (this.queryParams['start']) this.DSService.searchFilters = { field: 'start', data: this.queryParams['start'] };
-    if (this.queryParams['rows']) this.DSService.searchFilters = { field: 'rows', data: this.queryParams['rows'] };
+    exclude.forEach(item => {
+      if (this.queryParams[item]) {
+        switch (item) {
+          case 'q':
+          case 'start':
+          case 'rows':
+          case 'category':
+            this.DSService.searchFilters = { field: item, data: this.queryParams[item] };
+            break;
+          case 'mediaStatic':
+          case 'geoStatic':
+            this.checkbox[item].value = true;
+            this.DSService.searchFilters = { field: item, data: true };
+            break;
+        }
+      }
+    });
 
     this.getFilters();
     this.getFilters(false);
@@ -282,6 +295,10 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     Object.keys(this.filters).forEach(key => {
       this.filters[key].value = this.advancedByKey[key].values;
     });
+  }
+
+  checkboxChange(newValue, type) {
+    this.DSService.searchFilters = { field: type, data: newValue };
   }
 
   updateAdvanced() {
@@ -322,7 +339,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
         obj.multiple = false;
         obj.data = () => {
           return Object.keys(filter[key]).map(k2 =>
-            Object.create({ name: filter['category'][k2].friendly_name, value: filter['category'][k2].id })
+            Object.create({ name: filter['category'][k2].friendly_name, value: filter['category'][k2].name })
           );
         };
         this.categories = obj;

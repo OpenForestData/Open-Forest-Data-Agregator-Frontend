@@ -142,3 +142,9 @@
 .datasets-list__count {
   margin-right: 10px;
 }
+
+.datasets-list__datasets__item a {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}

@@ -84,7 +84,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
     return filter['category']
       ? Object.keys(filter['category']).map(key =>
-          Object.create({ name: filter['category'][key].friendly_name, value: filter['category'][key].id })
+          Object.create({ name: filter['category'][key].friendly_name, value: filter['category'][key].name })
         )
       : [];
   }
