@@ -22,6 +22,8 @@ export class DatasetsService {
     start: 1,
     rows: 15,
     category: '',
+    geoStatic: false,
+    mediaStatic: false,
     basic: {},
     advanced: {}
   };
@@ -85,6 +87,8 @@ export class DatasetsService {
       ?start=${this._searchFilters.start}&
       rows=${this._searchFilters.rows}
       ${this._searchFilters.q ? '&q=' + this._searchFilters.q : ''}
+      ${this._searchFilters.geoStatic ? '&geoStatic=true' : ''}
+      ${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}
       ${this._searchFilters.category ? '&category=' + this._searchFilters.category : ''}
       ${Object.keys(this._searchFilters.basic).length ? '&' + objectToQuery(this._searchFilters.basic) : ''}
     `

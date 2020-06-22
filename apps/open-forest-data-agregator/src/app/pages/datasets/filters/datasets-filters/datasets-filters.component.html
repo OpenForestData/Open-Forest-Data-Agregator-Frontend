@@ -1,10 +1,18 @@
 <div class="datasets-filters__type">
-  <!-- <ui-checkbox [name]="'media'" [(model)]="checkbox.media.value">
-    {{ 'datasets.filters.' + checkbox.media.key | translate }}
-  </ui-checkbox> -->
-  <!-- <ui-checkbox [name]="'coordinates'" [(model)]="checkbox.coordinates.value">
-    {{ 'datasets.filters.' + checkbox.coordinates.key | translate }}
-  </ui-checkbox> -->
+  <ui-checkbox
+    (modelChange)="checkboxChange($event, 'mediaStatic')"
+    [name]="'media'"
+    [(model)]="checkbox.mediaStatic.value"
+  >
+    {{ 'datasets.filters.' + checkbox.mediaStatic.key | translate }}
+  </ui-checkbox>
+  <ui-checkbox
+    (modelChange)="checkboxChange($event, 'geoStatic')"
+    [name]="'coordinates'"
+    [(model)]="checkbox.geoStatic.value"
+  >
+    {{ 'datasets.filters.' + checkbox.geoStatic.key | translate }}
+  </ui-checkbox>
 </div>
 <div class="datasets-filters__filters">
   <div class="datasets-filters__filters__mobile">
