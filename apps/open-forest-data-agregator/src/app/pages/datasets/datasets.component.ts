@@ -148,12 +148,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           files: [],
           images: [],
           subject: item.subject ? item.subject.join(', ') : '',
-          coordinates: [
-            {
-              lat: 50.2137612,
-              long: 18.9371533
-            }
-          ],
+          coordinates: coords,
           description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : '',
           dvObjectType: item.dvObjectType,
           dwcBasisOfRecord: item.dwcBasisOfRecord,
