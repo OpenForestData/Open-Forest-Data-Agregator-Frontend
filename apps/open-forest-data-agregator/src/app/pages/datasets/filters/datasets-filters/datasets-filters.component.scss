@@ -372,3 +372,13 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .advanced {
+    position: sticky;
+  }
+}
+
+.times {
+  cursor: pointer;
+}

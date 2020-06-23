@@ -61,7 +61,7 @@ export class DatasetsMapComponent implements OnInit, OnChanges {
   }
 
   getMarkers() {
-    const coords = this.datasets.filter(item => item['coordinates']);
+    const coords = this.datasets.filter(item => item['coordinates'].length);
     this.activeMarkes = coords.length;
 
     return coords.map(dataset => {

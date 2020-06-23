@@ -6,7 +6,8 @@ import {
   Output,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnDestroy
+  OnDestroy,
+  Input
 } from '@angular/core';
 import { categoriesMock } from '@app/pages/datasets/datasets.mock';
 import { DatasetsService } from '../../datasets.service';
@@ -20,6 +21,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./datasets-filters.component.scss']
 })
 export class DatasetsFiltersComponent implements OnInit, OnDestroy {
+  @Input() hideBasic;
+
   public moreCountStart = 5;
   public subs: Subscription = new Subscription();
   public checkbox = {
@@ -155,6 +158,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.DSService.showAdvancedSubject.subscribe(() => {
         this.showAdvanced = true;
+        this.DSService.hideHeader = true;
         this.cd.detectChanges();
       })
     );
@@ -401,6 +405,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     }
 
     this.showAdvanced = false;
+    this.DSService.hideHeader = false;
     this.DSService.searchFilters = { field: 'basic', data: activeArr };
 
     this.updateBasic();

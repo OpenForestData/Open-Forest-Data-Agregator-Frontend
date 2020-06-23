@@ -1,3 +1,5 @@
+@import '../../../../../../../resources/colors';
+
 .datasets-table {
   &__table {
     width: 100% !important;
@@ -32,4 +34,33 @@
 
 tr {
   cursor: pointer;
+}
+
+::ng-deep {
+  .dt-buttons {
+    display: flex;
+
+    .dt-button {
+      display: flex !important;
+      border: none !important;
+      background: none !important;
+      height: 30px !important;
+      min-width: 75px;
+      border: 1px solid $accent-color !important;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .fullScreen {
+    button.fullscreen {
+      background-color: $accent-color !important;
+      color: white;
+
+      span {
+        display: flex;
+      }
+    }
+  }
 }
