@@ -18,8 +18,11 @@ export class ResourceComponent implements OnInit {
     pdf: null,
     json: null,
     csv: null,
-    doc: null
+    doc: null,
+    map: null,
+    iframe: null
   };
+  viewerType = '';
   mockLeftSide = {
     downloadAmount: 5,
     createdDate: '20.07.2019',
@@ -77,29 +80,7 @@ export class ResourceComponent implements OnInit {
     ]
   };
 
-  rdfContent = `
-<?xml version="1.0"?> 
-<RDF> 
-<Description about="http://pl.wikipedia.org/wiki/Filtr_rodzinny"> 
-    <autor>Jan Kowalski</autor> 
-    <utworzono>1 stycznia 1970</utworzono> 
-    <zmodyfikowano>1 stycznia 2000</zmodyfikowano> 
-</Description> 
-</RDF>`;
-
   resources: any = [
-    {
-      format: 'csv',
-      fileLink: '/assets/.mocks/StoliceSredniki.csv'
-    },
-    {
-      format: 'docx',
-      fileLink: 'https://data-epuszcza.biaman.pl/api/access/datafile/223'
-    },
-    {
-      format: 'geojson',
-      fileLink: '/assets/.mocks/small_geojson.geojson'
-    },
     {
       format: 'geotiff',
       fileLink: '/assets/.mocks/cea.tif'
@@ -133,17 +114,6 @@ export class ResourceComponent implements OnInit {
       fileLink: `https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1`
     }
   ];
-
-  // resource = this.resources[14];
-  contentText: any = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu augue ut elit porta auctor eget quis nulla.
-  Duis mollis scelerisque fermentum. In in laoreet orci. Phasellus at auctor turpis, eu molestie purus. Sed efficitur fermentum velit ac faucibus.
-  Aliquam ultrices elementum tincidunt. Etiam quis nibh fermentum, tincidunt erat quis, dignissim felis. Nullam dapibus tincidunt ipsum, non vehicula libero imperdiet ut. Curabitur condimentum magna a neque euismod sollicitudin at et nibh.
-  Donec sollicitudin nibh in nisl lacinia elementum. Cras commodo orci lacus, a congue lorem laoreet non. In congue non risus vel ornare.
-  Sed rhoncus eget dui sit amet pretium. Nunc nisl magna, sagittis ut ultricies ultrices, accumsan ut felis.
-  Sed id elit iaculis, malesuada metus quis, placerat leo. Curabitur porta convallis risus, lobortis mattis odio efficitur sed.`;
-
-  tableViewRaw: any = `{\"NAZWA PLAC\\u00d3WKI\": [\"SP NR 1\", \"SP NR 2\", \"SP NR 6\", \"SP NR 9\", \"SP NR 10\", \"SP NR 11\", \"SP NR 12\", \"SP NR 13\", \"GIM NR 1\", \"GIM NR 2\", \"GIM NR 3\", \"GIM NR 4\"], \"2015 r.\": [6, 0, 3, 5, 15, 2, 6, 6, 11, 18, 21, 13], \"I semestr 2016 r.\": [6, 0, 2, 4, 13, 1, 3, 4, 6, 14, 15, 11], \"II semestr 2016 r.\": [7, 1, 0, 2, 12, 1, 1, 4, 10, 8, 16, 9]}`;
-  tableView: any = [JSON.parse(this.tableViewRaw)];
   metaCitation = {
     'download-url': 'https://whiteaster.com',
     MD5: '4b46beba4a79e26745266e2221a09c52',
@@ -188,23 +158,40 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       this.resource = response;
       console.log('TYPE: ', this.resource.details.fileTypeDisplay);
       console.log('this.resource: ', this.resource);
-      if (this.resource.details.fileTypeDisplay === 'Plain Text') {
+      if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
-      } else if (this.resource.details.fileTypeDisplay === 'JPEG Image') {
+      } else if (['MS Word'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        console.log('MS WORD ELSE IF BLOCK');
+        this.resourceContent.doc = this.resource.download_url;
+      } else if (['JPEG Image'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.image = this.resource.download_url;
-      } else if (this.resource.details.fileTypeDisplay === 'Adobe PDF') {
+      } else if (['Adobe PDF'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.pdf = this.resource.download_url;
-      } else if (this.resource.details.fileTypeDisplay === 'JSON') {
+      } else if (['JSON'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
-      } else if (this.resource.details.fileTypeDisplay === 'application/rdf+xml') {
+      } else if (['application/rdf+xml'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
-      } else if (this.resource.details.fileTypeDisplay === 'Comma Separated Values') {
+      } else if ([].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.csv = this.resource.download_url;
-      } else if (this.resource.details.fileTypeDisplay === 'MS Word') {
-        this.resourceContent.doc = 'https://data-epuszcza.biaman.pl/api/access/datafile/223';
-        // this.resourceContent.doc = this.resource.download_url;
-        // STATIC LINK BECAUSE OUR DATAVERSE IS NOT VISIBLE OUTSIDE OUR NETWORK
+      } else if (['map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.iframe = this.resource;
+        this.viewerType = 'geonodeViewer';
+      } else if (['dashboard_grafana'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.iframe = this.resource;
+        this.viewerType = 'grafanaViewer';
+      } else if (['3ds', 'obj', 'stl'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.iframe = this.resource;
+        this.viewerType = '3dViewer';
+      } else if (['micro'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.iframe = this.resource;
+        this.viewerType = 'microViewer';
+      } else if (['tiff'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.iframe = this.resource;
+        this.viewerType = 'tiffViewer';
+      } else {
+        console.log('GET RESOURCE BY ID ELSE BLOCK');
       }
+      console.log('resource content: ', this.resourceContent);
     });
   }
 
@@ -212,6 +199,12 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
     this.http.get(url, { responseType: 'text' }).subscribe(response => {
       this.resourceContent.plain_text = response;
       console.log('test: ', this.resourceContent.plain_text);
+    });
+  }
+
+  getJSONFromURL(url: string) {
+    this.http.get(url, { responseType: 'text' }).subscribe(response => {
+      this.resourceContent.iframe = JSON.parse(response);
     });
   }
 }

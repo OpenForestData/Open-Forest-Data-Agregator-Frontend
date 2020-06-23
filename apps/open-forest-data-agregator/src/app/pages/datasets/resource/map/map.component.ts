@@ -29,7 +29,7 @@ declare let L;
 export class MapComponent implements OnInit {
   private map;
   tiles;
-  @Input() resource;
+  @Input() resource = '';
   @Input() type;
   markerContainer: any = [];
 
@@ -59,8 +59,9 @@ export class MapComponent implements OnInit {
   }
 
   getMarkers(path: string) {
-    if (this.type === 'geojson') {
+    if (this.type === 'application/geo+json') {
       this.http.get(path).subscribe((results: any) => {
+        console.log('geojson results: ', results);
         for (const i of results.features) {
           geoJSON(i).addTo(this.map);
         }
@@ -68,7 +69,7 @@ export class MapComponent implements OnInit {
     } else if (this.type === 'geotiff') {
       this.fetchGeoTiff(path);
       console.log('Not done yet');
-    } else if (this.type === 'kml') {
+    } else if (this.type === 'application/vnd.google-earth.kml+xml') {
       this.fetchKML(this.resource);
     } else if (this.type === 'wkt') {
       omnivore.wkt(path).addTo(this.map);
@@ -126,8 +127,9 @@ export class MapComponent implements OnInit {
   }
 
   private initMap(): void {
-    this.map = new L.Map('map', { center: new L.LatLng(58.4, 43.0), zoom: 11 });
+    this.map = new L.Map('map');
     this.tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    this.map.setView([0, 0], 0);
     this.map.addLayer(this.tiles);
   }
 }

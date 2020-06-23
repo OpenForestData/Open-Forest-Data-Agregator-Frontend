@@ -164,7 +164,6 @@ export class DatasetComponent implements OnInit {
 
   pageClick(page) {}
 
-  // TODO: Get dataset data from given DOI
   getDatasetDetails(doi) {
     this.datasetService.getDatasetByDOI(doi).subscribe(response => {
       this.dataset = response;

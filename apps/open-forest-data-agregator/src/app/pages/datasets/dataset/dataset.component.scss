@@ -212,6 +212,7 @@
           }
           .title {
             text-decoration: underline;
+            word-break: break-all;
           }
         }
       }
@@ -236,7 +237,7 @@
           padding: 0 10px 0 0;
         }
         &__file-type {
-          padding: 0 10px 0 0;
+          padding: 0 32px 0 0;
         }
         &__filter-by {
           margin: 0;
