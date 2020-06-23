@@ -127,16 +127,33 @@
             </div>
             <div
               class="right-container__files__file-viewer__as-map"
-              *ngIf="['geojson', 'geotiff', 'kml', 'wkt', 'gml', 'shp'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="
+                [
+                  'application/geo+json',
+                  'geotiff',
+                  'application/vnd.google-earth.kml+xml',
+                  'wkt',
+                  'gml',
+                  'shp'
+                ].indexOf(resource.details?.fileTypeDisplay) >= 0
+              "
             >
-              <ofd-agregator-map [resource]="resource.fileLink" [type]="resource.details?.fileTypeDisplay">
+              <ofd-agregator-map [resource]="resourceContent.map" [type]="resource.details?.fileTypeDisplay">
               </ofd-agregator-map>
             </div>
             <div
               class="right-container__files__file-viewer__as-iframe"
-              *ngIf="['3d', 'tiff', 'micro', 'geonode', 'grafana'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="
+                ['3d', 'tiff', 'micro', 'map_geonode', 'dashboard_grafana'].indexOf(
+                  resource.details?.fileTypeDisplay
+                ) >= 0
+              "
             >
-              <ofd-agregator-iframe [iframeUrl]="resource.fileLink" [type]="resource.details?.fileTypeDisplay">
+              <ofd-agregator-iframe
+                [resource]="resourceContent.iframe"
+                [viewerType]="viewerType"
+                [type]="resource.details?.fileTypeDisplay"
+              >
               </ofd-agregator-iframe>
             </div>
           </div>
@@ -156,15 +173,21 @@
                 <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
               </button>
             </div>
-            <div
-              class="meta-citation__look-up"
-              *ngIf="['jpg', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
-            >
+            <div class="meta-citation__look-up">
               <div class="meta-citation__look-up__keys">
                 <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
               </div>
               <div class="meta-citation__look-up__values">
-                <img class="meta-citation__look-up__values__img" [src]="resource.fileLink" />
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="resourceContent.image"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+                />
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="'/assets/images/no_photo.png'"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) < 0"
+                />
               </div>
             </div>
             <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: 0">

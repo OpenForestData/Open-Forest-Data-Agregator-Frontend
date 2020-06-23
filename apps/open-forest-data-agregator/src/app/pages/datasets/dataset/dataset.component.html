@@ -62,9 +62,9 @@
         <div class="right-container__header">
           <div class="right-container__header__title">
             <svg-icon [src]="'/assets/images/server.svg'"></svg-icon>
-            <p>{{ testData.header.title }}</p>
+            <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0].value }}</p>
           </div>
-          <p>{{ testData.header.body }}</p>
+          <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue.value }}</p>
           <div class="right-container__header__api">
             <a href="{{ testData.header.apiUrl }}"
               >{{ 'datasets.dataset.headers.api' | translate
@@ -147,7 +147,7 @@
             </div>
 
             <div class="right-container__files__sorting__bar-left">
-              <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon>
+              <!-- <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon> -->
               <div class="right-container__files__sorting__bar-left__sort-by">
                 <ui-select [items]="sortItemsFilter" [options]="optionsFilter" [(value)]="sortByFilter"> </ui-select>
               </div>

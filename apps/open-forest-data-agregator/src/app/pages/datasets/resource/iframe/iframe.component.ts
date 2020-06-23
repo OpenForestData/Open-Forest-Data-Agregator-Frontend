@@ -7,12 +7,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./iframe.component.scss']
 })
 export class IframeComponent implements OnInit {
-  @Input() iframeUrl;
   @Input() type;
+  @Input() resource;
+  @Input() viewerType;
+  iframeUrl;
   sanitizedLink;
+  readonly EXTERNAL_URL: string = 'https://data-epuszcza.biaman.pl/';
+
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    this.sanitizedLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.iframeUrl);
+    console.log('resource iframe: ', this.resource);
+    this.sanitizedLink = this.joinAndSanitize();
+  }
+
+  joinAndSanitize() {
+    const iframeUrl = `${this.EXTERNAL_URL}tools/${this.viewerType}.html?siteUrl=${this.EXTERNAL_URL}&fileid=${this.resource.dataset_details?.id}&datasetid=${this.resource.details?.identifier}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(iframeUrl);
   }
 }
