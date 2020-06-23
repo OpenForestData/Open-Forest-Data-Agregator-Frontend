@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 
 @Component({
@@ -8,13 +8,28 @@ import { DatasetsService } from '../datasets.service';
 })
 export class DatasetsTableComponent implements OnInit {
   @Input() datasets: any[];
+  @Output() fullscreenEvent: EventEmitter<any> = new EventEmitter();
 
   dtOptions: any = {};
+
+  public fullScreen = false;
 
   constructor(public DSService: DatasetsService) {}
 
   public get paginationsSize() {
     return this.DSService.searchFilters.data.rows;
+  }
+
+  showFullscreen() {
+    this.DSService.hideHeader = true;
+    this.fullScreen = true;
+    this.fullscreenEvent.emit(true);
+  }
+
+  hideFullscreen() {
+    this.DSService.hideHeader = false;
+    this.fullScreen = false;
+    this.fullscreenEvent.emit(false);
   }
 
   ngOnInit(): void {
@@ -24,8 +39,28 @@ export class DatasetsTableComponent implements OnInit {
       dom: 'Bfrtip',
       bPaginate: false,
       bInfo: false,
-      responsive: true,
-      buttons: ['copy', 'print', 'excel', 'pdfHtml5']
+      scrollY: '73vh',
+      scrollCollapse: true,
+      scrollX: true,
+      // responsive: true,
+      buttons: [
+        'copy',
+        'print',
+        'excel',
+        'pdfHtml5',
+        {
+          text: 'Fullscreen',
+          titleAttr: 'Fullscreen',
+          className: 'fullscreen',
+          action: () => {
+            if (!this.fullScreen) {
+              this.showFullscreen();
+            } else {
+              this.hideFullscreen();
+            }
+          }
+        }
+      ]
     };
   }
 }

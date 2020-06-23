@@ -25,6 +25,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     { name: 'Zbiory danych', href: '/datasets' }
   ];
 
+  public fullscreen = false;
   public pageCount = 0;
 
   public filters = {
@@ -89,11 +90,19 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       : [];
   }
 
+  public get pageSize() {
+    return this.DSService.searchFilters.data.rows;
+  }
+
   /**
    * @ignore
    */
   ngOnInit() {
     this.getData();
+  }
+
+  setFullscreen(value) {
+    this.fullscreen = value;
   }
 
   paginationChanged(payload) {
@@ -112,6 +121,16 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       this.datasetsItems = response['list']['results'].map((item, index) => {
         identifiers.push(item.identifier);
         identifiersIndex[item.identifier] = index;
+        let coords = [];
+
+        if (item.dwcDecimalLatitude) {
+          coords = [
+            {
+              lat: item.dwcDecimalLatitude,
+              long: item.dwcDecimalLongitude
+            }
+          ];
+        }
 
         return {
           id: item.id,
@@ -122,8 +141,10 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           createdAt: '',
           author: item.authorName ? item.authorName.join(', ') : '',
           category: item.dvName,
-          source: 'Dataverse',
+          source: item.authorAffiliation ? item.authorAffiliation.join(', ') : 'Dataverse',
+          sourceLink: '#',
           preview: 'wait',
+          detailsData: {},
           files: [],
           images: [],
           subject: item.subject ? item.subject.join(', ') : '',
@@ -133,7 +154,21 @@ export class DatasetsComponent implements OnInit, OnDestroy {
               long: 18.9371533
             }
           ],
-          description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : ''
+          description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : '',
+          dvObjectType: item.dvObjectType,
+          dwcBasisOfRecord: item.dwcBasisOfRecord,
+          dwcCatalogNumber: item.dwcCatalogNumber,
+          dwcClass: item.dwcClass,
+          dwcCollectionCode: item.dwcCollectionCode,
+          dwcCollectionCode_s: item.dwcCollectionCode_s,
+          dwcContinent: item.dwcContinent,
+          dwcCountry: item.dwcCountry,
+          dwcDatasetName: item.dwcDatasetName,
+          dwcDecimalLatitude: item.dwcDecimalLatitude,
+          dwcDecimalLongitude: item.dwcDecimalLongitude,
+          dwcEventDate: item.dwcEventDate,
+          dwcFamily: item.dwcFamily,
+          dwcGenus: item.dwcGenus
         };
       });
 
@@ -154,10 +189,15 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
               item.createdAt = singlDetails.latestVersion.createTime;
               item.files = singlDetails.latestVersion.files;
-              item.images = singlDetails.latestVersion.files
+              const images = singlDetails.latestVersion.files
                 .filter((_: any) => _.thumbnail_url)
                 .map((_: any) => _.thumbnail_url);
-              item.preview = item.images[0] || null;
+              item.preview = images[0] || null;
+              item.images = singlDetails.latestVersion.files
+                .filter((_: any) => _.download_url)
+                .map((_: any) => _.download_url);
+
+              item.detailsData = singlDetails;
             }
           });
           this.changeDetectorRef.detectChanges();

@@ -1,5 +1,5 @@
 <div class="pagination">
-  <div class="pagination__go-to-page">
+  <div class="pagination__go-to-page" [ngClass]="{ hide: pages <= 1 }">
     <label for="go-to-page">
       {{ 'pagination.go-to-page' | translate }}
     </label>
@@ -14,7 +14,7 @@
       class="input"
     />
   </div>
-  <ol class="pagination__pages">
+  <ol class="pagination__pages" [ngClass]="{ hide: pages <= 1 }">
     <li class="prev-page">
       <button (click)="pageClick(page - 1)" [disabled]="page == 1">
         <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
