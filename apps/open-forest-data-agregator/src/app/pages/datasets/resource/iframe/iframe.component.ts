@@ -13,6 +13,9 @@ export class IframeComponent implements OnInit {
   iframeUrl;
   sanitizedLink;
   readonly EXTERNAL_URL: string = 'https://data-epuszcza.biaman.pl/';
+  readonly DATAVERSE_URL: string = 'https://dataverse.whiteaster.com';
+  readonly EXAMPLE_URL: string =
+    '3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0';
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -22,7 +25,8 @@ export class IframeComponent implements OnInit {
   }
 
   joinAndSanitize() {
-    const iframeUrl = `${this.EXTERNAL_URL}tools/${this.viewerType}.html?siteUrl=${this.EXTERNAL_URL}&fileid=${this.resource.dataset_details?.id}&datasetid=${this.resource.details?.identifier}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
+    const iframeUrl = `${this.EXTERNAL_URL}tools/${this.viewerType}.html?siteUrl=${this.DATAVERSE_URL}&fileid=${this.resource.details?.identifier}&datasetid=${this.resource.dataset_details?.id}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
+    console.log('iframe url: ', iframeUrl);
     return this.sanitizer.bypassSecurityTrustResourceUrl(iframeUrl);
   }
 }

@@ -38,6 +38,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.setMarker();
     this.initMap();
+    console.log('resource map init: ', this.resource);
     this.getMarkers(this.resource);
   }
 
@@ -68,7 +69,6 @@ export class MapComponent implements OnInit {
       });
     } else if (this.type === 'geotiff') {
       this.fetchGeoTiff(path);
-      console.log('Not done yet');
     } else if (this.type === 'application/vnd.google-earth.kml+xml') {
       this.fetchKML(this.resource);
     } else if (this.type === 'wkt') {

@@ -1,4 +1,9 @@
 .xml-container {
-  font-family: monospace;
-  white-space: pre;
+  font-family: monospace !important;
+  white-space: pre !important;
+}
+
+pre {
+  height: 800px;
+  overflow: auto;
 }

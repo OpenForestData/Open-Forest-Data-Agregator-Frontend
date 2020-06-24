@@ -1,8 +1,8 @@
-<div class="data-container" *ngIf="expandable" (click)="onToggle()">
+<div class="data-container" (click)="onToggle()">
   <h3 class="header-bar" [ngClass]="{ expanded: expanded }">
     <svg-icon [src]="iconSrc" [applyCss]="true"></svg-icon>
     {{ title }}
-    <ng-container>
+    <ng-container *ngIf="expandable">
       <button>
         <svg-icon
           [src]="'/assets/images/dark_arrow_down.svg'"
