@@ -162,11 +162,11 @@
       justify-content: center;
       align-items: center;
       &__as-docx {
-        max-width: 80%;
+        max-width: 100%;
         width: 100%;
       }
       &__as-pdf {
-        max-width: 80%;
+        max-width: 100%;
         width: 100%;
       }
       &__as-text {
@@ -187,7 +187,11 @@
       }
       &__as-map {
         height: 800px;
-        width: 80%;
+        width: 100%;
+      }
+      &__as-xml {
+        height: 800px;
+        width: 100%;
       }
       &__as-iframe {
         height: 800px;

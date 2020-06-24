@@ -12,10 +12,15 @@
         <div class="metric">
           <div class="metric__content">
             <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
-            <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ mockLeftSide.createdDate }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ (metricData?.fields)[6].value }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
+              <!-- TODO: Add if no author affiliation then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
+              <a href="{{ resource.dataset_details?.alternativeURL }}">{{
+                (resource.dataset_details?.providers)[0].authorAffiliation.value
+                  ? (resource.dataset_details?.providers)[0]?.authorAffiliation.value
+                  : 'Dataverse'
+              }}</a>
             </p>
             <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ mockLeftSide.author }}</p>
             <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
@@ -67,7 +72,7 @@
           </div>
           <p>{{ testData.header.body }}</p>
           <div class="right-container__header__api">
-            <button class="button">
+            <button class="button" (click)="downloadSingleResource(this.resource.download_url)">
               {{ 'home.download' | translate }}
               <svg-icon [src]="'/assets/images/download.svg'" [applyCss]="true"></svg-icon>
             </button>
@@ -91,7 +96,7 @@
             </div>
             <div
               class="right-container__files__file-viewer__as-image"
-              *ngIf="['JPEG Image'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="['JPEG Image', 'PNG Image', 'GIF Image'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
               <img class="right-container__files__file-viewer__as-image__source" [src]="resourceContent.image" />
             </div>
@@ -109,19 +114,19 @@
             </div>
             <div
               class="right-container__files__file-viewer__as-table"
-              *ngIf="['Comma Separated Values', 'tsv'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="['Comma Separated Values', 'Tab-Separated Values'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
               <ofd-agregator-table [resource]="resourceContent.csv"></ofd-agregator-table>
             </div>
             <div
               class="right-container__files__file-viewer__as-docx"
-              *ngIf="['MS Word', 'docx', 'xls', 'xlsx'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="['MS Word', 'MS Excel Spreadsheet'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
               <ofd-agregator-docs [resource]="resourceContent.doc"></ofd-agregator-docs>
             </div>
             <div
               class="right-container__files__file-viewer__as-xml"
-              *ngIf="['xml', 'application/rdf+xml'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="['XML', 'application/rdf+xml'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
               <ofd-agregator-xml [resource]="resourceContent.plain_text"></ofd-agregator-xml>
             </div>
@@ -144,7 +149,7 @@
             <div
               class="right-container__files__file-viewer__as-iframe"
               *ngIf="
-                ['3d', 'tiff', 'micro', 'map_geonode', 'dashboard_grafana'].indexOf(
+                ['3d', 'application/x-tgif', 'TIFF Image', 'micro', 'map_geonode', 'dashboard_grafana'].indexOf(
                   resource.details?.fileTypeDisplay
                 ) >= 0
               "

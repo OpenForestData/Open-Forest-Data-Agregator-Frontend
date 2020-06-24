@@ -18,7 +18,12 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <a href="{{ mockLeftSide.source.link }}">{{ mockLeftSide.source.type }}</a>
+              <!-- TODO: Add if no alternativeURL then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
+              <a href="{{ dataset.alternativeURL }}">{{
+                (dataset?.providers)[0]?.authorAffiliation.value
+                  ? (dataset?.providers)[0]?.authorAffiliation.value
+                  : 'Dataverse'
+              }}</a>
             </p>
             <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ dataset.publisher }}</p>
             <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
@@ -62,9 +67,9 @@
         <div class="right-container__header">
           <div class="right-container__header__title">
             <svg-icon [src]="'/assets/images/server.svg'"></svg-icon>
-            <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0].value }}</p>
+            <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0]?.value }}</p>
           </div>
-          <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue.value }}</p>
+          <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue?.value }}</p>
           <div class="right-container__header__api">
             <a href="{{ testData.header.apiUrl }}"
               >{{ 'datasets.dataset.headers.api' | translate
@@ -74,12 +79,13 @@
         </div>
 
         <div class="right-container__files">
-          <ofd-agregator-data-container
-            class="files-container"
-            [title]="'datasets.dataset.headers.files' | translate"
-            [iconSrc]="'/assets/images/files.svg'"
-          >
-          </ofd-agregator-data-container>
+          <div class="full-width">
+            <svg-icon [src]="'/assets/images/files.svg'" [applyCss]="true"></svg-icon>
+            <p>{{ 'datasets.dataset.headers.files' | translate }}</p>
+          </div>
+          <!-- <ofd-agregator-data-container class="files-container" [title]="'datasets.dataset.headers.files' | translate"
+            [iconSrc]="'/assets/images/files.svg'" [expandable]="false" [expanded]="false">
+          </ofd-agregator-data-container> -->
 
           <div class="right-container__files__sorting">
             <div class="right-container__files__sorting__bar-right">
