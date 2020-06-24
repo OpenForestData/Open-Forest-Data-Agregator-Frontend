@@ -24,6 +24,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { DataContainerComponent } from './data-container/data-container.component';
 import { DebounceKeyupDirective } from '@app/directives/debonuce-keyup.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { BoldPipe } from './pipes/TextBold.pipe';
 
 const components = [
   PageNavComponent,
@@ -37,7 +38,8 @@ const components = [
   NewDataComponent,
   AccordionComponent,
   DataContainerComponent,
-  DebounceKeyupDirective
+  DebounceKeyupDirective,
+  BoldPipe
 ];
 
 @NgModule({

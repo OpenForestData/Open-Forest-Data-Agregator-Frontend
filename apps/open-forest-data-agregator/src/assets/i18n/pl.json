@@ -94,14 +94,14 @@
         }
       },
       "metadata-all": {
-        "downloads": "Ilość pobrań:",
-        "created": "Utworzono:",
-        "source": "Źródło:",
-        "author": "Autor:",
-        "data-openness": "Stopień otwartości danych:",
-        "license": "Licencja:",
-        "domain": "Dziedzina:",
-        "keywords": "Słowa kluczowe:"
+        "downloads": "Ilość pobrań: ",
+        "created": "Utworzono: ",
+        "source": "Źródło: ",
+        "author": "Autor: ",
+        "data-openness": "Stopień otwartości danych: ",
+        "license": "Licencja: ",
+        "domain": "Dziedzina: ",
+        "keywords": "Słowa kluczowe: "
       },
       "metadata": {
         "id": "Dataset Persistent ID",

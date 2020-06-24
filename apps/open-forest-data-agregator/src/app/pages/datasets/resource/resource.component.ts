@@ -160,6 +160,7 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       console.log('TYPE: ', this.resource.details.fileTypeDisplay);
       console.log('this.resource: ', this.resource);
       this.getMetrics(this.resource);
+      this.getMetadataOfFile(this.resource);
       // this.metricData = this.resource.detaset_details?.lastestVersion?.metadataBlocks.citation;
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
@@ -235,4 +236,19 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   keepOrder = (a, b) => {
     return a;
   };
+
+  getMetadataOfFile(resource) {
+    this.metaCitation = {
+      'download-url': resource.download_url,
+      MD5: resource.details.fileMd5,
+      'publication-date': resource.details.publicationDate,
+      size: this.convertFromBytes(resource.details.fileSizeInBytes),
+      type: resource.details.fileTypeDisplay,
+      'deposit-date': resource.details.dateSort
+    };
+  }
+
+  convertFromBytes(size): string {
+    return Math.floor(size / 1024).toString() + ' kB';
+  }
 }
