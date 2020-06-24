@@ -16,11 +16,11 @@ import { DatasetsService } from '../datasets.service';
 })
 export class DatasetsGalleryComponent implements OnInit {
   public sortItems = [
-    { name: 'A-Z', value: 0 },
+    { name: 'A-Z', value: 1 },
     { name: 'Z-A', value: 0 }
   ];
 
-  public sortBy = null;
+  public sortBy = this.sortItems[0];
 
   public options: IUISelectOptions = {
     placeholder: 'Sortuj wg'
@@ -32,7 +32,13 @@ export class DatasetsGalleryComponent implements OnInit {
 
   constructor(public DSService: DatasetsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
+  }
+
+  sortChanged(sortValue) {
+    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc' };
+  }
 
   showGallery(index, el) {
     const item = this.datasets[index];

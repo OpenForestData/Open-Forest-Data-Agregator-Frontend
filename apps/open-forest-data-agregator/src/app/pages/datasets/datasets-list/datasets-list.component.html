@@ -4,7 +4,8 @@
       <span class="datasets-list__count">
         {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
       </span>
-      <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
+      <ui-select [items]="sortItems" [options]="options" (valueChange)="sortChanged($event)" [(value)]="sortBy">
+      </ui-select>
     </div>
     <button class="button datasets-list__export">
       {{ 'global.export' | translate }}
@@ -24,7 +25,10 @@
             [alt]="dataset.title"
           />
         </picture>
-        <article>
+      </a>
+
+      <article>
+        <div class="pointer" [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
           <header>
             <h3 class="datasets-list__datasets__item__title">
               <picture class="datasets-list__datasets__item__picture--mobile">
@@ -48,12 +52,18 @@
           <p class="datasets-list__datasets__item__description">
             {{ dataset.description }}
           </p>
-          <footer class="datasets-list__datasets__item__source">
-            <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+        </div>
+        <footer
+          class="datasets-list__datasets__item__source"
+          [routerLink]="dataset.sourceLink ? [] : ['detail']"
+          [queryParams]="{ doi: dataset.identifier64 }"
+        >
+          <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+          <a href="{{ dataset.sourceLink }}" [ngClass]="{ 'events-none': !dataset.sourceLink }" target="_blank">
             {{ 'global.source' | translate }}: <b>{{ dataset.source }}</b>
-          </footer>
-        </article>
-      </a>
+          </a>
+        </footer>
+      </article>
     </div>
   </div>
 </div>

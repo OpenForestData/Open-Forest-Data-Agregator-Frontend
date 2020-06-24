@@ -142,7 +142,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           author: item.authorName ? item.authorName.join(', ') : '',
           category: item.dvName,
           source: item.authorAffiliation ? item.authorAffiliation.join(', ') : 'Dataverse',
-          sourceLink: '#',
+          sourceLink: item.alternativeURL || null,
           preview: 'wait',
           detailsData: {},
           files: [],

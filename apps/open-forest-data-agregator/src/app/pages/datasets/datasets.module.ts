@@ -21,6 +21,8 @@ import { DatasetsTableComponent } from './datasets-table/datasets-table.componen
 import { DatasetsGalleryComponent } from './datasets-gallery/datasets-gallery.component';
 import { DatasetsMapComponent } from './datasets-map/datasets-map.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
+import { DatasetsCategoryDescriptionComponent } from './datasets-category-description/datasets-category-description.component';
+import { DatasetsActiveFiltersComponent } from './datasets-active-filters/datasets-active-filters.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     DatasetsTimeRangeComponent,
     DatasetsTableComponent,
     DatasetsGalleryComponent,
-    DatasetsMapComponent
+    DatasetsMapComponent,
+    DatasetsCategoryDescriptionComponent,
+    DatasetsActiveFiltersComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,14 @@
+<div class="content" *ngIf="activeFilters">
+  <div class="group">
+    <b>{{ 'search.active_filters' | translate }}:</b>
+  </div>
+  <div class="group-wrapper">
+    <div class="group" *ngFor="let group of activeFilters">
+      <b>{{ group.name | translate }}:</b>
+      <span *ngFor="let value of group.values" class="value">
+        {{ value }}
+        <svg-icon src="assets/modules/search/small_times.svg" class="m-l-10" [applyCss]="true"></svg-icon>
+      </span>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,8 @@
       <span class="dataset-list__count">
         {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
       </span>
-      <ui-select [items]="sortItems" [options]="options" [(value)]="sortBy"> </ui-select>
+      <ui-select [items]="sortItems" [options]="options" (valueChange)="sortChanged($event)" [(value)]="sortBy">
+      </ui-select>
     </div>
     <button class="button datasets-list__export">
       {{ 'global.export' | translate }}

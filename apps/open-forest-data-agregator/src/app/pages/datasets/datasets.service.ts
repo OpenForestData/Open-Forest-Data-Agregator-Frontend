@@ -18,11 +18,13 @@ export class DatasetsService {
   public updateQuerySubject: Subject<any> = new Subject();
 
   private searchDebounceTimeout = null;
+  public activeFiltersArray = [];
 
   private _searchFilters = {
     q: '',
     start: 1,
     rows: 15,
+    sort: 'asc',
     category: '',
     geoStatic: false,
     mediaStatic: false,
@@ -79,6 +81,8 @@ export class DatasetsService {
       clearTimeout(this.searchDebounceTimeout);
     }
 
+    if (this._searchFilters['start'] < 1) this._searchFilters['start'] = 1;
+
     this.searchDebounceTimeout = setTimeout(() => {
       this.triggerSearchSubject.next();
     }, 150);
@@ -102,8 +106,9 @@ export class DatasetsService {
     };
 
     const queryString = `
-      ?start=${this._searchFilters.start}&
-      rows=${this._searchFilters.rows}
+      ?start=${this._searchFilters.start - 1}&
+      rows=${this._searchFilters.rows}&
+      sort=${this._searchFilters.sort}
       ${this._searchFilters.q ? '&q=' + this._searchFilters.q : ''}
       ${this._searchFilters.geoStatic ? '&geoStatic=true' : ''}
       ${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}
