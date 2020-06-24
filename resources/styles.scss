@@ -431,3 +431,7 @@ ui-checkbox {
 .hide-overflow {
   overflow: hidden;
 }
+
+:focus {
+  outline: 0 !important;
+}

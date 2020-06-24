@@ -11,10 +11,16 @@
       >
         <div class="metric">
           <div class="metric__content">
-            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ mockLeftSide.downloadAmount }}</p>
-            <p>{{ 'datasets.dataset.metadata-all.created' | translate }} {{ metricData?.dateOfDeposit?.value }}</p>
             <p>
-              {{ 'datasets.dataset.metadata-all.source' | translate }}
+              <b>{{ 'datasets.dataset.metadata-all.downloads' | translate }}</b>
+              {{ mockLeftSide.downloadAmount }}
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.created' | translate }}</b>
+              {{ metricData?.dateOfDeposit?.value }}
+            </p>
+            <p>
+              <b> {{ 'datasets.dataset.metadata-all.source' | translate }}</b>
               <!-- TODO: Add if no author affiliation then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
               <a
                 href="{{
@@ -30,22 +36,24 @@
               >
             </p>
             <p>
-              {{ 'datasets.dataset.metadata-all.author' | translate }}
+              <b>{{ 'datasets.dataset.metadata-all.author' | translate }}</b>
               {{ (metricData?.author?.value)[0].authorName.value }}
             </p>
-            <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
             <p>
-              {{ 'datasets.dataset.metadata-all.license' | translate }}
+              <b>{{ 'datasets.dataset.metadata-all.data-openness' | translate }}</b> {{ mockLeftSide.dataOpenness }}
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.license' | translate }}</b>
               <a href="{{ mockLeftSide.license.link }}">{{ resource.dataset_details?.latestVersion?.license }}</a>
             </p>
             <p>
-              {{ 'datasets.dataset.metadata-all.domain' | translate }}
+              <b>{{ 'datasets.dataset.metadata-all.domain' | translate }}</b>
               <span *ngFor="let subject of metricData?.subject?.value; let i = index"
                 >{{ subject }}<span *ngIf="i < metricData?.subject?.value.length - 1">, </span>
               </span>
             </p>
             <p>
-              {{ 'datasets.dataset.metadata-all.keywords' | translate }}
+              <b> {{ 'datasets.dataset.metadata-all.keywords' | translate }}</b>
               <span *ngFor="let keyword of metricData?.keyword?.value; let i = index"
                 >{{ keyword.keywordValue.value }}<span *ngIf="i < metricData?.keyword?.value.length - 1">, </span>
               </span>
@@ -187,9 +195,14 @@
           </div>
         </div>
 
-        <!-- <div class="meta-citation-box">
-          <ofd-agregator-data-container class="meta-citation" [iconSrc]="'/assets/images/metadata-content.svg'"
-            [title]="'datasets.dataset.headers.metadata' | translate" [expandable]="true" [expanded]="false">
+        <div class="meta-citation-box">
+          <ofd-agregator-data-container
+            class="meta-citation"
+            [iconSrc]="'/assets/images/metadata-content.svg'"
+            [title]="'datasets.dataset.headers.metadata' | translate"
+            [expandable]="true"
+            [expanded]="false"
+          >
             <div class="meta-citation__header">
               <button class="button">
                 {{ 'global.export' | translate }}
@@ -201,54 +214,27 @@
                 <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
               </div>
               <div class="meta-citation__look-up__values">
-                <img class="meta-citation__look-up__values__img" [src]="resourceContent.image"
-                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0" />
-                <img class="meta-citation__look-up__values__img" [src]="'/assets/images/no_photo.png'"
-                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) < 0" />
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="resourceContent.image"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+                />
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="'/assets/images/no_photo.png'"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) < 0"
+                />
               </div>
             </div>
             <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: keepOrder">
               <div class="meta-citation__row__keys">
                 {{ 'datasets.resource.metadata.' + item.key | translate }}
               </div>
-              <div class="meta-citation__row__values">
+              <div class="meta-citation__row__values" *ngIf="item.key !== 'download-url'">
                 {{ item.value }}
               </div>
-            </div>
-          </ofd-agregator-data-container>
-        </div> -->
-
-        <div
-          class="meta-citation-box"
-          *ngFor="let meta of resource.dataset_details?.latestVersion?.metadataBlocks | keyvalue"
-        >
-          <ofd-agregator-data-container
-            class="meta-citation"
-            [title]="meta.value.displayName"
-            [expandable]="true"
-            [expanded]="false"
-          >
-            <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
-              <div class="meta-citation__row__multiple" *ngIf="field.multiple">
-                <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
-                  <div class="meta-citation__row__keys">
-                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
-                  </div>
-                  <div class="meta-citation__row__values">
-                    {{ value.value.value }}
-                  </div>
-                </div>
-              </div>
-
-              <div class="meta-citation__row__multiple" *ngIf="!field.multiple">
-                <div class="meta-citation__row__container">
-                  <div class="meta-citation__row__keys">
-                    {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
-                  </div>
-                  <div class="meta-citation__row__values">
-                    {{ field.value }}
-                  </div>
-                </div>
+              <div class="meta-citation__row__values" *ngIf="item.key === 'download-url'">
+                <a href="{{ item.value }}">{{ item.value }}</a>
               </div>
             </div>
           </ofd-agregator-data-container>

@@ -12,6 +12,10 @@
   }
 }
 
+b {
+  font-weight: 500 !important;
+}
+
 .container {
   background-color: $light-gray-color;
   display: flex;
@@ -305,41 +309,38 @@
   margin-bottom: 20px;
 }
 
-.meta-citation::ng-deep {
-  .header-bar::ng-deep {
-    padding: 11px 0;
-  }
-}
-
 .meta-citation {
   &__row::ng-deep {
     width: 100%;
     display: flex;
     flex-direction: row;
     font-size: 12px;
+    padding: 16px 0 0 14px;
   }
-  .meta-citation__row__multiple {
-    flex-direction: column;
-    width: 100%;
+  &__header::ng-deep {
+    float: right;
+    padding: 36px 10px 15px 0;
   }
-  .meta-citation__row__container {
+  &__look-up {
     width: 100%;
     display: flex;
     flex-direction: row;
     font-size: 12px;
     padding: 16px 0 0 14px;
+    &__values {
+      &__img {
+        width: 95px;
+        height: 132px;
+      }
+    }
   }
-  .meta-citation__row__keys {
-    width: 30%;
+  .meta-citation__row__keys,
+  .meta-citation__look-up__keys {
+    width: 20%;
   }
-  .meta-citation__row__values {
-    width: 70%;
-  }
-}
-
-.meta-darwin::ng-deep {
-  .header-bar {
-    padding: 11px 0;
+  .meta-citation__row__values,
+  .meta-citation__look-up__values {
+    width: 80%;
   }
 }
 
@@ -372,7 +373,7 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
-  padding: 10px 0 0 14px;
+  padding: 10px 0 0 10px;
   &__text {
     display: flex;
     flex-direction: row;
