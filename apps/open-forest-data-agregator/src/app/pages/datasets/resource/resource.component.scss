@@ -24,6 +24,7 @@
   height: inherit;
   padding-right: 38px;
   max-width: 290px;
+  padding-bottom: 30px;
 }
 
 .dataset-right {
@@ -304,38 +305,41 @@
   margin-bottom: 20px;
 }
 
+.meta-citation::ng-deep {
+  .header-bar::ng-deep {
+    padding: 11px 0;
+  }
+}
+
 .meta-citation {
   &__row::ng-deep {
     width: 100%;
     display: flex;
     flex-direction: row;
     font-size: 12px;
-    padding: 16px 0 0 14px;
   }
-  &__header::ng-deep {
-    float: right;
-    padding: 36px 10px 15px 0;
+  .meta-citation__row__multiple {
+    flex-direction: column;
+    width: 100%;
   }
-  &__look-up {
+  .meta-citation__row__container {
     width: 100%;
     display: flex;
     flex-direction: row;
     font-size: 12px;
     padding: 16px 0 0 14px;
-    &__values {
-      &__img {
-        width: 95px;
-        height: 132px;
-      }
-    }
   }
-  .meta-citation__row__keys,
-  .meta-citation__look-up__keys {
-    width: 20%;
+  .meta-citation__row__keys {
+    width: 30%;
   }
-  .meta-citation__row__values,
-  .meta-citation__look-up__values {
-    width: 80%;
+  .meta-citation__row__values {
+    width: 70%;
+  }
+}
+
+.meta-darwin::ng-deep {
+  .header-bar {
+    padding: 11px 0;
   }
 }
 
@@ -368,7 +372,7 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
-  padding: 10px 0 0 10px;
+  padding: 10px 0 0 14px;
   &__text {
     display: flex;
     flex-direction: row;

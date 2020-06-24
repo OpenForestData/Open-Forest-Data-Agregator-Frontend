@@ -178,7 +178,10 @@
         "dwcSpecificEpithet": "Specific Epithet",
         "dwcTaxonRank": "Taxon Rank",
         "dwcLicense": "License",
-        "dwcBasisOfRecord": "Basis of Record"
+        "dwcBasisOfRecord": "Basis of Record",
+        "timePeriodCoveredEnd": "Time Perdiod End",
+        "timePeriodCoveredStart": "Time Perdiod Start",
+        "dwcVerbatimLocality": "Verbatim Locality"
       }
     },
     "resource": {
