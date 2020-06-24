@@ -1,11 +1,4 @@
 <div class="datasets-table__container">
-  <div class="datasets-table__header">
-    <button class="button datasets-table__export">
-      {{ 'global.export' | translate }}
-      <svg-icon src="/assets/images/export.svg"></svg-icon>
-    </button>
-  </div>
-
   <table datatable [dtOptions]="dtOptions" class="row-border hover datasets-table__table">
     <thead>
       <tr>
@@ -14,15 +7,46 @@
         <th class="datasets-table__th">Data publikacji</th>
         <th class="datasets-table__th">Autor</th>
         <th class="datasets-table__th">Temat</th>
+        <th class="datasets-table__th">dvName</th>
+        <th class="datasets-table__th">dvObjectType</th>
+        <th class="datasets-table__th">dwcBasisOfRecord</th>
+        <th class="datasets-table__th">dwcCatalogNumber</th>
+        <th class="datasets-table__th">dwcClass</th>
+        <th class="datasets-table__th">dwcCollectionCode</th>
+        <th class="datasets-table__th">dwcCollectionCode_s</th>
+        <th class="datasets-table__th">dwcContinent</th>
+        <th class="datasets-table__th">dwcCountry</th>
+        <th class="datasets-table__th">dwcDatasetName</th>
+        <th class="datasets-table__th">dwcDecimalLatitude</th>
+        <th class="datasets-table__th">dwcDecimalLongitude</th>
+        <th class="datasets-table__th">dwcEventDate</th>
+        <th class="datasets-table__th">dwcFamily</th>
+        <th class="datasets-table__th">dwcGenus</th>
       </tr>
     </thead>
+    <!-- [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }" -->
     <tbody>
-      <tr *ngFor="let dataset of datasets" [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
+      <tr *ngFor="let dataset of datasets">
         <td class="datasets-table__td">{{ dataset.datasetPersistentID }}</td>
         <td class="datasets-table__td">{{ dataset.title }}</td>
         <td class="datasets-table__td">{{ dataset.createdAt }}</td>
         <td class="datasets-table__td">{{ dataset.author }}</td>
         <td class="datasets-table__td">{{ dataset.subject }}</td>
+        <td class="datasets-table__td">{{ dataset.dvName }}</td>
+        <td class="datasets-table__td">{{ dataset.dvObjectType }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcBasisOfRecord }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcCatalogNumber }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcClass }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcCollectionCode }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcCollectionCode_s }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcContinent }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcCountry }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcDatasetName }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcDecimalLatitude }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcDecimalLongitude }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcEventDate }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcFamily }}</td>
+        <td class="datasets-table__td">{{ dataset.dwcGenus }}</td>
       </tr>
     </tbody>
   </table>

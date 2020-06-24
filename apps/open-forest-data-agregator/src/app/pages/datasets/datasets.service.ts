@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '@app/services/app-config.service';
 import { Subject } from 'rxjs';
 import { query } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatasetsService {
+  public hideHeaderValue = false;
+
   public dataChangedSubject: Subject<any> = new Subject();
   public triggerSearchSubject: Subject<any> = new Subject();
   public showAdvancedSubject: Subject<any> = new Subject();
@@ -39,6 +41,22 @@ export class DatasetsService {
     return this._searchData;
   }
 
+  public get hideHeader() {
+    return this.hideHeaderValue;
+  }
+
+  public set hideHeader(newValue) {
+    this.hideHeaderValue = newValue;
+    if (isPlatformBrowser(this.platformId)) {
+      if (newValue) {
+        document.body.classList.add('hide-overflow');
+      } else {
+        document.body.classList.remove('hide-overflow');
+      }
+    }
+  }
+
+  // tslint:disable-next-line: adjacent-overload-signatures
   public set searchData(newValue) {
     if (!newValue.list.available_filter_fields)
       newValue.list.available_filter_fields = this._searchData.list.available_filter_fields;
@@ -108,6 +126,7 @@ export class DatasetsService {
     public http: HttpClient,
     private location: Location,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: string,
     private activatedRoute: ActivatedRoute
   ) {}
 

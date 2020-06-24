@@ -6,6 +6,10 @@ header {
   z-index: 5;
   position: sticky;
   top: 0;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .main-nav {

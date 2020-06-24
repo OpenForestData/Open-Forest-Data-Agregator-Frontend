@@ -428,6 +428,6 @@ ui-checkbox {
   transform: translateY(-50%);
 }
 
-:focus {
-  outline: 0 !important;
+.hide-overflow {
+  overflow: hidden;
 }

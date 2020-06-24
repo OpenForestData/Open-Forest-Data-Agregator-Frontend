@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'ng2-date-picker/common/services/utils/utils.service';
+import { DatasetsService } from '@app/pages/datasets/datasets.service';
 
 /**
  * Header Component
@@ -14,7 +16,7 @@ export class HeaderComponent implements OnInit {
   /**
    * @ignore
    */
-  constructor() {}
+  constructor(public DSService: DatasetsService) {}
 
   /**
    * @ignore

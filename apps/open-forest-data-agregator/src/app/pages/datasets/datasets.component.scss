@@ -118,3 +118,36 @@
   height: 100%;
   margin-bottom: 60px;
 }
+
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 20;
+}
+
+.display-none {
+  display: none;
+}
+
+::ng-deep {
+  .fullScreen {
+    .datasets-table__container {
+      padding: 30px;
+      height: 83vh;
+      overflow: hidden;
+      padding-bottom: 0 !important;
+      width: calc(100% - 60px);
+    }
+
+    .datasets-list__pagination {
+      padding: 0 30px;
+    }
+  }
+}
