@@ -42,6 +42,14 @@
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
         ></ofd-agregator-datasets-data-presentation>
 
+        <ofd-agregator-datasets-active-filters
+          [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
+        ></ofd-agregator-datasets-active-filters>
+
+        <ofd-agregator-datasets-category-description
+          [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
+        ></ofd-agregator-datasets-category-description>
+
         <div class="datasets__list" *ngIf="datasets.mode === 'list'">
           <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
         </div>

@@ -71,6 +71,14 @@
       &__source {
         display: flex;
         font-size: 12px;
+        cursor: pointer;
+
+        a {
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          color: $text-color;
+        }
 
         b {
           padding-left: 5px;
@@ -144,8 +152,13 @@
 }
 
 .datasets-list__datasets__item > a {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
   color: $text-color;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.events-none {
+  pointer-events: none;
 }

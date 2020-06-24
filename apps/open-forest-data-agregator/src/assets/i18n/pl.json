@@ -329,6 +329,9 @@
     "not_found_text": "Nie znaleziono żadnych podpowiedzi",
     "type_to_search": "Wyszukaj lub dodaj własny tag",
     "add_tag": "Wciśnij Enter, lub wybierz tą opcję aby dodać własny tag",
-    "filter_title": "Section Title"
+    "filter_title": "Section Title",
+    "category": "Kategoria",
+    "mediaStatic": "Zdjęcie / multimedia",
+    "geoStatic": "Współrzędne"
   }
 }

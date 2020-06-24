@@ -74,17 +74,33 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     return this.advancedFiltersConfig;
   }
 
-  public get getActiveFilters() {
+  public updateActiveFilters() {
     let activeArr = [
       {
         name: 'search.search',
         type: 'SELECT',
         values: [this.searchValue].filter(item => item.length)
+      },
+      {
+        name: 'search.category',
+        type: 'SELECT',
+        values: this.DSService.searchFilters.data['category'] ? [this.DSService.searchFilters.data['category']] : []
+      },
+      {
+        name: 'search.mediaStatic',
+        type: 'SELECT',
+        values: this.checkbox.mediaStatic.value ? ['True'] : []
+      },
+      {
+        name: 'search.geoStatic',
+        type: 'SELECT',
+        values: this.checkbox.geoStatic.value ? ['True'] : []
       }
     ];
     this.advancedFiltersConfig.forEach(group => {
       // @ts-ignore
       group.data.forEach(item => {
+        if (item.name === 'search.categories') return;
         activeArr.push({
           name: item.name,
           type: item.type,
@@ -96,8 +112,9 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     });
 
     activeArr = activeArr.filter(item => item.values.length);
+    console.log(activeArr);
 
-    return activeArr;
+    this.DSService.activeFiltersArray = activeArr;
   }
 
   public get queryArray() {
@@ -246,6 +263,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
           this.searchAdvenced();
         }
         this.cd.detectChanges();
+        this.updateActiveFilters();
       })
     );
 
@@ -270,6 +288,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
           case 'q':
           case 'start':
           case 'rows':
+          case 'sort':
           case 'category':
             this.DSService.searchFilters = { field: item, data: this.queryParams[item] };
             break;

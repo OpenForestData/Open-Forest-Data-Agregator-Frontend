@@ -196,18 +196,6 @@
                     <dp-date-picker [(ngModel)]="item.values[0]" [config]="datePickerConfig"></dp-date-picker>
                   </label>
                 </div>
-                <!-- <div class="col-md-6 col-xs-12 ml-auto">
-                  <label class="datepicker-label">
-                    <div>
-                      {{ 'stats.to' | translate }}
-                    </div>
-                    <dp-date-picker
-                      [(ngModel)]="item.values[1]"
-                      [minDate]="item.values[0]"
-                      [config]="datePickerConfig"
-                    ></dp-date-picker>
-                  </label>
-                </div> -->
               </div>
             </div>
             <div class="filter-details" *ngIf="item.type === 'INPUT'">

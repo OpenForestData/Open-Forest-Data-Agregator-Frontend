@@ -1,0 +1,38 @@
+<div class="content" *ngIf="category">
+  <div class="row">
+    <div class="col-xs-12 end-xs">
+      <div class="news-social">
+        <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
+        <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
+        <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+        <a href="#"> <img src="assets/modules/home/social_mail.png" alt="Twitter"/></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row description">
+    <div class="col-xs-12">
+      <h3 class="title">
+        <svg-icon src="assets/modules/search/folder.svg" [applyCss]="true"></svg-icon>
+        {{ data.friendly_name }}
+      </h3>
+      <!-- <small>{{ data.publicationDate }}</small> -->
+      <p>
+        {{ data.description }}
+      </p>
+    </div>
+  </div>
+
+  <!-- <div class="row middle-md">
+    <div class="col-xs-6 source">
+      <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+      <b>{{ 'global.source' | translate }}:</b> Dataverse
+    </div>
+    <div class="col-xs-6 api">
+      <a href="#"
+        >{{ 'datasets.dataset.headers.api' | translate
+        }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon
+      ></a>
+    </div>
+  </div> -->
+</div>
