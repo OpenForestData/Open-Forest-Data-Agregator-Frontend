@@ -13,7 +13,7 @@ export class IframeComponent implements OnInit {
   iframeUrl;
   sanitizedLink;
   readonly EXTERNAL_URL: string = 'https://data-epuszcza.biaman.pl/';
-  readonly DATAVERSE_URL: string = 'https://dataverse.whiteaster.com';
+  readonly DATAVERSE_URL: string = 'https://data-epuszcza.biaman.pl';
   readonly EXAMPLE_URL: string =
     '3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0';
 

@@ -149,6 +149,7 @@ export class DatasetComponent implements OnInit {
   urlToDataset: any = '';
   checkboxList = [];
   allFilesCheckboxState = false;
+  metricData: any = {};
 
   constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
 
@@ -167,6 +168,7 @@ export class DatasetComponent implements OnInit {
   getDatasetDetails(doi) {
     this.datasetService.getDatasetByDOI(doi).subscribe(response => {
       this.dataset = response;
+      this.getMetrics(this.dataset);
       this.dataset.latestVersion.files = this.dataset.latestVersion.files.map(file => {
         file.isChecked = false;
         return file;
@@ -200,5 +202,13 @@ export class DatasetComponent implements OnInit {
         this.downloadSingleResource(file.download_url);
       }
     });
+  }
+
+  getMetrics(resource) {
+    resource.latestVersion?.metadataBlocks?.citation.fields.forEach(field => {
+      // console.log(field);
+      this.metricData[field.typeName] = field;
+    });
+    console.log('metric data: ', this.metricData);
   }
 }

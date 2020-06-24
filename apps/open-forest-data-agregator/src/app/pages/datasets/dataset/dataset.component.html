@@ -19,13 +19,16 @@
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
               <!-- TODO: Add if no alternativeURL then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
-              <a href="{{ dataset.alternativeURL }}">{{
-                (dataset?.providers)[0]?.authorAffiliation.value
-                  ? (dataset?.providers)[0]?.authorAffiliation.value
+              <a href="{{ dataset?.alternativeURL ? dataset?.alternativeURL : 'https://data-epuszcza.biaman.pl/' }}">{{
+                dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
+                  ? (dataset?.providers)[0]?.authorAffiliation?.value
                   : 'Dataverse'
               }}</a>
             </p>
-            <p>{{ 'datasets.dataset.metadata-all.author' | translate }} {{ dataset.publisher }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.author' | translate }}
+              {{ (metricData?.author?.value)[0].authorName.value }}
+            </p>
             <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
@@ -33,14 +36,14 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.domain' | translate }}
-              <span *ngFor="let subject of mockLeftSide.subjects; let i = index"
-                >{{ subject }}<span *ngIf="i < mockLeftSide.subjects.length - 1">, </span>
+              <span *ngFor="let subject of metricData?.subject?.value; let i = index"
+                >{{ subject }}<span *ngIf="i < metricData?.subject?.value.length - 1">, </span>
               </span>
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.keywords' | translate }}
-              <span *ngFor="let keyword of mockLeftSide.keywords; let i = index"
-                >{{ keyword }}<span *ngIf="i < mockLeftSide.keywords.length - 1">, </span>
+              <span *ngFor="let keyword of metricData?.keyword?.value; let i = index"
+                >{{ keyword.keywordValue.value }}<span *ngIf="i < metricData?.keyword?.value.length - 1">, </span>
               </span>
             </p>
           </div>

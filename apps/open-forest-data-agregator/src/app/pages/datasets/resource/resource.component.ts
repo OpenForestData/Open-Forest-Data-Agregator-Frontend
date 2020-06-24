@@ -23,7 +23,7 @@ export class ResourceComponent implements OnInit {
     iframe: null
   };
   viewerType = '';
-  metricData: any;
+  metricData: any = {};
   mockLeftSide = {
     downloadAmount: 5,
     createdDate: '20.07.2019',
@@ -159,7 +159,8 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       this.resource = response;
       console.log('TYPE: ', this.resource.details.fileTypeDisplay);
       console.log('this.resource: ', this.resource);
-      this.metricData = this.resource.detaset_details?.lastestVersion?.metadataBlocks.citation;
+      this.getMetrics(this.resource);
+      // this.metricData = this.resource.detaset_details?.lastestVersion?.metadataBlocks.citation;
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
       } else if (['MS Word', 'MS Excel Spreadsheet'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
@@ -182,7 +183,9 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       } else if (['dashboard_grafana'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'grafanaViewer';
-      } else if (['3ds', 'application/x-tgif', 'stl'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (
+        ['3ds', 'application/x-tgif', 'application/vnd.ms-pki.stl'].indexOf(this.resource.details?.fileTypeDisplay) >= 0
+      ) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = '3dViewer';
       } else if (['micro'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
@@ -220,4 +223,16 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   downloadSingleResource(file: any) {
     return window.open(file, '_blank');
   }
+
+  getMetrics(resource) {
+    resource.dataset_details?.latestVersion?.metadataBlocks?.citation.fields.forEach(field => {
+      // console.log(field);
+      this.metricData[field.typeName] = field;
+    });
+    console.log('metric data: ', this.metricData);
+  }
+
+  keepOrder = (a, b) => {
+    return a;
+  };
 }
