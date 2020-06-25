@@ -12,12 +12,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DatasetComponent implements OnInit {
   public sortItemsFilter = [
     { name: 'A-Z', value: 0 },
-    { name: 'Z-A', value: 0 }
+    { name: 'Z-A', value: 1 }
   ];
 
   public sortItemsType = [
-    { name: 'Image', value: 0 },
-    { name: 'Video', value: 0 }
+    { name: 'All', value: 0 },
+    { name: 'Image', value: 1 },
+    { name: 'Video', value: 2 }
   ];
 
   public sortItemsAccess = [
@@ -99,29 +100,6 @@ export class DatasetComponent implements OnInit {
     ]
   };
 
-  metaDarwin: object = {
-    type: 'Psycial Object',
-    license: 'CC BY',
-    'rights-holder': 'Mammal Research Institute Polish Academy of Science',
-    'institution-code': 'MRIPAS',
-    'collection-code': 'ZOO',
-    'dataset-name': 'Kolekcja zoologiczna IBS PAN',
-    'basis-of-record': 'Organism',
-    'catalog-number': 'Catalog Number: 59681',
-    sex: 'female',
-    'life-stage': 'adult',
-    event: '1997-07-16',
-    year: 'Year: 1990',
-    month: 'Month: 7',
-    day: 'Day: 16',
-    continent: 'Europe',
-    country: 'Poland',
-    locality: 'Białowieża BPN I3-I4-250',
-    latitude: '52.222222',
-    longtiude: '23.880547',
-    'latina-title': 'Mustela nivalis'
-  };
-
   metaCitation: object = {
     id: 1,
     'publication-date': '2020-05-21',
@@ -150,6 +128,8 @@ export class DatasetComponent implements OnInit {
   checkboxList = [];
   allFilesCheckboxState = false;
   metricData: any = {};
+  sort: any;
+  files: any = [];
 
   constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
 
@@ -169,7 +149,7 @@ export class DatasetComponent implements OnInit {
     this.datasetService.getDatasetByDOI(doi).subscribe(response => {
       this.dataset = response;
       this.getMetrics(this.dataset);
-      this.dataset.latestVersion.files = this.dataset.latestVersion.files.map(file => {
+      this.files = this.dataset.latestVersion.files.map(file => {
         file.isChecked = false;
         return file;
       });
@@ -206,9 +186,41 @@ export class DatasetComponent implements OnInit {
 
   getMetrics(resource) {
     resource.latestVersion?.metadataBlocks?.citation.fields.forEach(field => {
-      // console.log(field);
       this.metricData[field.typeName] = field;
     });
-    console.log('metric data: ', this.metricData);
+  }
+
+  makeSource() {
+    if (this.dataset?.alternativeURL) {
+      return this.dataset?.alternativeURL;
+    } else {
+      return `https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
+    }
+  }
+
+  sortByName() {
+    this.dataset?.latestVersion?.files.reverse();
+    return this.dataset?.latestVersion?.files;
+  }
+
+  onSortChange(sort) {
+    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    this.sort = sort;
+    if (sort.value === 0) {
+      this.files = copyOfInitialFiles;
+    } else if (sort.value === 1) {
+      this.files = copyOfInitialFiles.reverse();
+    }
+  }
+
+  onSortTypeChange(sort) {
+    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    if (sort.value === 0) {
+      this.files = copyOfInitialFiles;
+    } else if (sort.value === 1) {
+      this.files = copyOfInitialFiles.filter(file => file.dataFile.contentType === 'image/jpeg');
+    } else if (sort.value === 2) {
+      this.files = copyOfInitialFiles.filter(file => file.dataFile.contentType === 'video/mp4');
+    }
   }
 }

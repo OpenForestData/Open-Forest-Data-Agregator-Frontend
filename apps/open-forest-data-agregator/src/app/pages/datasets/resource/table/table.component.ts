@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class TableComponent implements OnInit {
   @Input() resource;
+  @Input() type;
   csvContainer = '';
   convertedData: any = {};
   constructor(private http: HttpClient) {}
@@ -25,15 +26,22 @@ export class TableComponent implements OnInit {
   getCSV(path: string) {
     this.http.get(path, { responseType: 'text' }).subscribe(results => {
       this.csvContainer = results;
+      console.log('convetrted csv:', this.csvContainer);
       this.parseToDisplay(this.csvContainer);
     });
   }
 
   parseToDisplay(content: string) {
+    let customDelimiter = ';';
+    if (this.type === 'Comma Separated Values') {
+      customDelimiter = ';';
+    } else if (this.type === 'Tab-Separated Values') {
+      customDelimiter = '\\t';
+    }
     Papa.parse(content, {
       header: true,
       skipEmptyLines: true,
-      delimiter: ';',
+      delimiter: customDelimiter,
       complete: result => {
         this.convertedData = result;
       }
