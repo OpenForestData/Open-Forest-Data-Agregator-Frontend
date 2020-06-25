@@ -26,19 +26,16 @@ export class ResourceComponent implements OnInit {
   metricData: any = {};
   mockLeftSide = {
     downloadAmount: 5,
-    createdDate: '20.07.2019',
     source: {
       type: 'Dataverse',
       link: 'https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/UGMKHW'
     },
     author: 'Olga Kurek',
-    dataOpenness: 'Lorem ipsum',
+    dataOpenness: '',
     license: {
       name: 'GNU General Public License',
       link: 'https://pl.wikipedia.org/wiki/GNU_General_Public_License'
     },
-    subjects: ['Medicine', 'Health and Life', 'Sciences'],
-    keywords: ['mammal', 'wolf', 'mustela common random lorem'],
     version: {
       number: '0.1',
       date: new Date(),
@@ -121,7 +118,7 @@ export class ResourceComponent implements OnInit {
     'publication-date': '2020-05-20',
     size: '147.9 kB',
     type: 'JPG',
-    'deposit-date': '2020-05-20'
+    'deposit-date': null
   };
   mobile = false;
 
@@ -244,11 +241,19 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       'publication-date': resource.details.publicationDate,
       size: this.convertFromBytes(resource.details.fileSizeInBytes),
       type: resource.details.fileTypeDisplay,
-      'deposit-date': resource.details.dateSort
+      'deposit-date': new Date(resource.details.dateSort)
     };
   }
 
   convertFromBytes(size): string {
     return Math.floor(size / 1024).toString() + ' kB';
+  }
+
+  makeSource() {
+    if (this.resource.detaset_details?.alternativeURL) {
+      return this.resource.dataset_details?.alternativeURL;
+    } else {
+      return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
+    }
   }
 }

@@ -19,7 +19,7 @@
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
               <!-- TODO: Add if no alternativeURL then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
-              <a href="{{ dataset?.alternativeURL ? dataset?.alternativeURL : 'https://data-epuszcza.biaman.pl/' }}">{{
+              <a [href]="makeSource()">{{
                 dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
                   ? (dataset?.providers)[0]?.authorAffiliation?.value
                   : 'Dataverse'
@@ -58,7 +58,7 @@
           </ofd-agregator-header-bar>
 
           <div class="versions__content">
-            <a href="{{ mockLeftSide.version.link }}"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
+            <a [href]="makeSource()"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
             <p>{{ ' - ' + (dataset.latestVersion?.releaseTime | date: 'dd.MM.yyyy') + ' | ' + dataset.publisher }}</p>
           </div>
         </div>
@@ -73,12 +73,10 @@
             <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0]?.value }}</p>
           </div>
           <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue?.value }}</p>
-          <div class="right-container__header__api">
-            <a href="{{ testData.header.apiUrl }}"
-              >{{ 'datasets.dataset.headers.api' | translate
-              }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon
-            ></a>
-          </div>
+          <!-- <div class="right-container__header__api">
+            <a href="{{ testData.header.apiUrl }}">{{ 'datasets.dataset.headers.api' | translate
+              }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon></a>
+          </div> -->
         </div>
 
         <div class="right-container__files">
@@ -102,7 +100,13 @@
               </p>
               <div class="right-container__files__sorting__bar-right__file-type">
                 {{ 'datasets.dataset.headers.typeFile' | translate }}
-                <ui-select class="type-sort" [items]="sortItemsType" [options]="optionsType" [(value)]="sortByType">
+                <ui-select
+                  class="type-sort"
+                  [items]="sortItemsType"
+                  [options]="optionsType"
+                  [(value)]="sortByType"
+                  (valueChange)="onSortTypeChange($event)"
+                >
                 </ui-select>
               </div>
 
@@ -138,6 +142,7 @@
                     [items]="sortItemsFilter"
                     [options]="optionsFilter"
                     [(value)]="sortByType"
+                    (valueChange)="onSortTypeChange($event)"
                   >
                   </ui-select>
                 </div>
@@ -158,7 +163,13 @@
             <div class="right-container__files__sorting__bar-left">
               <!-- <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon> -->
               <div class="right-container__files__sorting__bar-left__sort-by">
-                <ui-select [items]="sortItemsFilter" [options]="optionsFilter" [(value)]="sortByFilter"> </ui-select>
+                <ui-select
+                  [items]="sortItemsFilter"
+                  [options]="optionsFilter"
+                  [(value)]="sortByFilter"
+                  (valueChange)="onSortChange($event)"
+                >
+                </ui-select>
               </div>
             </div>
           </div>
@@ -181,15 +192,12 @@
           </div>
 
           <div class="right-container__files__download-single">
-            <div
-              class="right-container__files__download-single__row"
-              *ngFor="let file of dataset.latestVersion?.files; let i = index"
-            >
+            <div class="right-container__files__download-single__row" *ngFor="let file of files; let i = index">
               <ui-checkbox [name]="i" class="single-checkbox" [(model)]="file.isChecked">
                 <div class="background-gray">
                   {{ formatConverter(file.label) | uppercase }}
                 </div>
-                <p class="title">{{ file.label }}</p>
+                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}">{{ file.label }}</p>
               </ui-checkbox>
               <div class="buttons-download">
                 <button class="buttons-download__style">
