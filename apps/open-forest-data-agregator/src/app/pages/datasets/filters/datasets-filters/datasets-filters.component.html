@@ -1,62 +1,52 @@
 <div class="datasets-filters__type" *ngIf="hideBasic">
   <ui-checkbox
-    (modelChange)="checkboxChange($event, 'mediaStatic')"
+    (modelChange)="DSService.searchFilters = { field: 'mediaStatic', data: $event }"
     [name]="'media'"
-    [(model)]="checkbox.mediaStatic.value"
+    [(model)]="filtersState.mediaStatic"
   >
-    {{ 'datasets.filters.' + checkbox.mediaStatic.key | translate }}
+    {{ 'datasets.filters.media' | translate }}
   </ui-checkbox>
   <ui-checkbox
-    (modelChange)="checkboxChange($event, 'geoStatic')"
+    (modelChange)="DSService.searchFilters = { field: 'geoStatic', data: $event }"
     [name]="'coordinates'"
-    [(model)]="checkbox.geoStatic.value"
+    [(model)]="filtersState.geoStatic"
   >
-    {{ 'datasets.filters.' + checkbox.geoStatic.key | translate }}
+    {{ 'datasets.filters.coordinates' | translate }}
   </ui-checkbox>
 </div>
-<div class="datasets-filters__filters" *ngIf="hideBasic">
-  <div class="datasets-filters__filters__mobile">
-    <ofd-agregator-datasets-filter
-      header="{{ 'datasets.filters.' + categories.key | translate }}"
-      [data]="categories.data()"
-      [key]="categories.key"
-      [value]="selectedCategory"
-      [isExpanded]="categories.isExpanded"
-      [multiple]="categories.multiple"
-      (valueChange)="categoryChanged($event)"
-    ></ofd-agregator-datasets-filter>
-  </div>
 
+<div class="datasets-filters__filters" *ngIf="hideBasic">
   <ng-container *ngFor="let key of getFilters()">
     <ofd-agregator-datasets-filter
-      header="{{ filters[key].name }}"
-      [type]="filters[key].type"
-      [data]="filters[key].data()"
-      [key]="filters[key].key"
-      [(value)]="filters[key].value"
-      [isExpanded]="filters[key].isExpanded"
-      [multiple]="filters[key].multiple"
-      (valueChange)="filtersChanged($event)"
+      header="{{ filtersByKey[key].name }}"
+      [type]="filtersByKey[key].type"
+      [data]="filtersByKey[key].items"
+      [key]="filtersByKey[key].key"
+      [(value)]="filtersByKey[key].values"
+      [isExpanded]="filtersByKey[key].isExpanded"
+      [multiple]="filtersByKey[key].multiple"
+      (valueChange)="filtersChanged()"
     ></ofd-agregator-datasets-filter>
   </ng-container>
 
   <ng-container *ngIf="moreFilters">
     <ng-container *ngFor="let key of getFilters(false)">
       <ofd-agregator-datasets-filter
-        header="{{ filters[key].name }}"
-        [data]="filters[key].data()"
-        [key]="filters[key].key"
-        [(value)]="filters[key].value"
-        [isExpanded]="filters[key].isExpanded"
-        [multiple]="filters[key].multiple"
-        (valueChange)="filtersChanged($event)"
+        header="{{ filtersByKey[key].name }}"
+        [type]="filtersByKey[key].type"
+        [data]="filtersByKey[key].items"
+        [key]="filtersByKey[key].key"
+        [(value)]="filtersByKey[key].values"
+        [isExpanded]="filtersByKey[key].isExpanded"
+        [multiple]="filtersByKey[key].multiple"
+        (valueChange)="filtersChanged()"
       ></ofd-agregator-datasets-filter>
     </ng-container>
   </ng-container>
 
   <button
     class="button datasets-filters__more-filters"
-    *ngIf="keys(this.filters).length > moreCountStart"
+    *ngIf="basicFiltersKeys.length > moreCountStart"
     (click)="moreFilters = !moreFilters"
   >
     <ng-container *ngIf="!moreFilters">
@@ -68,200 +58,4 @@
       <svg-icon src="assets/images/minus.svg" class="m-l-10 m-t--10" [applyCss]="true"></svg-icon>
     </ng-container>
   </button>
-</div>
-
-<div class="advanced" [ngClass]="{ active: showAdvanced }">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 end-xs">
-        <img src="assets/modules/search/times.png" class="times" alt="Close" (click)="closeAdvenced()" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8 col-xs-12">
-        <ofd-agregator-section-title
-          [iconURL]="'assets/modules/search/search_title.png'"
-          [titleText]="'search.advanced' | translate"
-        ></ofd-agregator-section-title>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-4">
-        <div class="search-section top-search">
-          <label>
-            <input
-              class="search-section__input"
-              name="datasetSearch"
-              [(ngModel)]="searchValue"
-              type="text"
-              placeholder="{{ 'search.search' | translate }}"
-            />
-            <button class="search-section__button" type="submit">
-              <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
-            </button>
-          </label>
-
-          <button class="btn lunchSearch" (click)="searchAdvenced()">
-            {{ 'search.search' | translate }}
-            <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="row main-row">
-      <div class="col-md-3 col-xs-12 scrollable">
-        <h3 class="advanced-title">{{ 'search.filters' | translate }}</h3>
-        <div class="search-section">
-          <label>
-            <input
-              class="search-section__input"
-              name="datasetSearch"
-              [(ngModel)]="searchFilterValue"
-              type="text"
-              placeholder="{{ 'search.search_filters' | translate }}"
-            />
-            <button class="search-section__button">
-              <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
-            </button>
-          </label>
-        </div>
-        <div class="filters-section">
-          <section class="group-row" *ngFor="let group of advancedFilters">
-            <ng-container *ngIf="group.items.length">
-              <header *ngIf="group.headerVisible">{{ group.title | translate }}</header>
-              <aside>
-                <ul>
-                  <li *ngFor="let item of group.items" class="filter-li" (click)="toogleFilter(item)">
-                    <img
-                      src="assets/modules/search/advanced_checks.png"
-                      width="22"
-                      height="18"
-                      class="check"
-                      alt="Check"
-                      [ngClass]="{ 'active-green': item.activeOrder > 0 }"
-                    />
-                    {{ item.name | translate }}
-                  </li>
-                </ul>
-              </aside>
-            </ng-container>
-          </section>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12 scrollable">
-        <div class="filters-values">
-          <div *ngFor="let item of advancedSelected">
-            <header class="filter-name">{{ item.name | translate }}</header>
-
-            <div class="filter-details" *ngIf="item.type === 'SIGNLE-SELECT'">
-              <ng-select
-                [clearAllText]="'search.clear_all' | translate"
-                [loadingText]="'search.loading_text' | translate"
-                [notFoundText]="'search.not_found_text' | translate"
-                [typeToSearchText]="'search.type_to_search' | translate"
-                [addTagText]="'search.add_tag' | translate"
-                [multiple]="false"
-                [addTag]="false"
-                bindValue="id"
-                bindLabel="label"
-                [closeOnSelect]="true"
-                [items]="item.items"
-                [(ngModel)]="item.values"
-              >
-              </ng-select>
-            </div>
-            <div class="filter-details" *ngIf="item.type === 'SELECT'">
-              <ofd-agregator-datasets-input-tag
-                [data]="item.items"
-                [(value)]="item.values"
-                [multiple]="true"
-              ></ofd-agregator-datasets-input-tag>
-              <!-- <ng-select
-                [clearAllText]="'search.clear_all' | translate"
-                [loadingText]="'search.loading_text' | translate"
-                [notFoundText]="'search.not_found_text' | translate"
-                [typeToSearchText]="'search.type_to_search' | translate"
-                [addTagText]="'search.add_tag' | translate"
-                [multiple]="true"
-                [addTag]="true"
-                [selectableGroup]="true"
-                [closeOnSelect]="false"
-                [items]="item.items"
-                [(ngModel)]="item.values"
-              >
-                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                  <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
-                </ng-template>
-              </ng-select> -->
-            </div>
-            <div class="filter-details" *ngIf="item.type === 'DATE'">
-              <div class="row">
-                <div class="col-md-12 col-xs-12">
-                  <label class="datepicker-label">
-                    <dp-date-picker [(ngModel)]="item.values[0]" [config]="datePickerConfig"></dp-date-picker>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="filter-details" *ngIf="item.type === 'INPUT'">
-              <ofd-agregator-datasets-input-tag
-                [data]="item.items"
-                [(value)]="item.values"
-                [multiple]="true"
-              ></ofd-agregator-datasets-input-tag>
-              <!-- <ng-select
-                [clearAllText]="'search.clear_all' | translate"
-                [loadingText]="'search.loading_text' | translate"
-                [notFoundText]="''"
-                [typeToSearchText]="''"
-                [addTagText]="'search.add_tag' | translate"
-                [multiple]="true"
-                [addTag]="true"
-                [selectableGroup]="true"
-                [closeOnSelect]="false"
-                [items]="item.items"
-                [(ngModel)]="item.values"
-              >
-                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                  <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
-                </ng-template>
-              </ng-select> -->
-            </div>
-
-            <div class="filter-details" *ngIf="item.type === 'MAP'">
-              <ofd-agregator-datasets-range
-                header="''"
-                [data]="''"
-                [key]="''"
-                [(value)]="item.values"
-                [showHeaderValue]="false"
-                [isExpanded]="true"
-                [multiple]="true"
-              ></ofd-agregator-datasets-range>
-            </div>
-
-            <div class="filter-details" *ngIf="item.type === 'DATERANGE'">
-              <ofd-agregator-datasets-time-range
-                header="''"
-                [key]="''"
-                [(value)]="item.values"
-                [showHeaderValue]="false"
-                [isExpanded]="false"
-              ></ofd-agregator-datasets-time-range>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-3 desktop-only">
-        <div class="query-string">
-          <span *ngFor="let item of queryArray" class="query-string-wrapp">
-            <span class="query-string-key">{{ item.key }}=</span
-            ><span class="query-string-value" *ngFor="let k of item.values">{{ k }}</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

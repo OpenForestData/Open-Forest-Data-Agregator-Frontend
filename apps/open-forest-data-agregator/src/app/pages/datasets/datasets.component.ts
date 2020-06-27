@@ -198,6 +198,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
         });
       }
 
+      this.DSService.newFiltersStructureSubject.next();
       this.changeDetectorRef.detectChanges();
     });
   }

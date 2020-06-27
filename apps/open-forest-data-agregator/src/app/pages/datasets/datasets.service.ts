@@ -17,6 +17,7 @@ export class DatasetsService {
   public showAdvancedSubject: Subject<any> = new Subject();
   public updateQuerySubject: Subject<any> = new Subject();
   public removeFilterSubject: Subject<any> = new Subject();
+  public newFiltersStructureSubject: Subject<any> = new Subject();
 
   private searchDebounceTimeout = null;
   public activeFiltersArray = [];
@@ -69,7 +70,7 @@ export class DatasetsService {
     this.dataChangedSubject.next();
   }
 
-  public set searchFilters(value: { field: string; data: any }) {
+  public set searchFilters(value: { field: string; data: any; search?: boolean }) {
     const excludeReset = ['sort', 'start'];
 
     if (!excludeReset.includes(value.field) || this._searchFilters['start'] < 1) {
@@ -88,31 +89,46 @@ export class DatasetsService {
       clearTimeout(this.searchDebounceTimeout);
     }
 
-    this.searchDebounceTimeout = setTimeout(() => {
-      this.triggerSearchSubject.next();
-    }, 150);
+    if (value.search) {
+      this.searchDebounceTimeout = setTimeout(() => {
+        this.triggerSearchSubject.next();
+      }, 150);
+    }
   }
 
   public get searchFilters() {
     // tslint:disable-next-line: only-arrow-functions
-    const objectToQuery = function(obj) {
-      const str = [];
+    const objectToQuery = function(object) {
+      const objectQueryString = [];
 
-      // tslint:disable-next-line: forin
-      for (const p in obj) {
-        if (obj[p].value.length) {
-          obj[p].value
-            .filter(val => val)
-            .forEach(val => {
-              if (val.format) {
-                val = val.format('YYYY-MM-DD');
+      Object.keys(object).forEach(index => {
+        const groupData = object[index]['data'];
+        groupData
+          .filter(filter => {
+            const value = Array.isArray(filter['values']) ? filter['values'] : [filter['values']];
+            return value.filter(item => item).length && filter.key !== 'category';
+          })
+          .forEach(filter => {
+            const key = filter['key'];
+            let values = Array.isArray(filter['values']) ? filter['values'] : [filter['values']];
+            if (['DATE', 'DATERANGE'].includes(filter['type'])) {
+              if (Boolean(values[0]) || Boolean(values[1])) {
+                values[0] = Boolean(values[0]) ? values[0] : 'null';
+                values[1] = Boolean(values[1]) ? values[1] : 'null';
+              } else {
+                values = [];
               }
-              str.push(encodeURIComponent(obj[p]['key']) + '=' + encodeURIComponent(val));
-            });
-        }
-      }
+            }
 
-      return str.join('&');
+            values
+              .filter(value => value !== undefined && values !== null)
+              .forEach(value => {
+                objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+              });
+          });
+      });
+
+      return objectQueryString.length ? `&${objectQueryString.join('&')}` : ``;
     };
 
     const queryString = `
@@ -123,7 +139,7 @@ export class DatasetsService {
       ${this._searchFilters.geoStatic ? '&geoStatic=true' : ''}
       ${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}
       ${this._searchFilters.category ? '&category=' + this._searchFilters.category : ''}
-      ${Object.keys(this._searchFilters.basic).length ? '&' + objectToQuery(this._searchFilters.basic) : ''}
+      ${objectToQuery(this._searchFilters.basic)}
     `
       .trim()
       .replace(/\s/g, '');

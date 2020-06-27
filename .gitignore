@@ -40,4 +40,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+back_up
+back_up/*
+
 package-lock.json
