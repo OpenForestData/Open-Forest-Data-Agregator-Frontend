@@ -8,13 +8,7 @@ import { DrawEvents, FeatureGroup, latLng, tileLayer, Map, featureGroup } from '
   styleUrls: ['./datasets-range.component.scss']
 })
 export class DatasetsRangeComponent implements OnInit {
-  @Input() header: string;
-
-  @Input() key: string;
-
   @Input() data: any[];
-
-  @Input() isExpanded: boolean;
 
   @Input() value: any = null;
 
@@ -23,8 +17,6 @@ export class DatasetsRangeComponent implements OnInit {
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   public map: Map;
-
-  public firstShow = false;
 
   public drawnItems: FeatureGroup = featureGroup();
 
@@ -64,13 +56,7 @@ export class DatasetsRangeComponent implements OnInit {
     this.drawnItems.addLayer(layer);
 
     const bounds = this.drawnItems.getBounds();
-  }
 
-  showHeader() {
-    this.isExpanded = !this.isExpanded;
-
-    if (this.isExpanded && !this.firstShow) {
-      this.firstShow = true;
-    }
+    this.valueChange.emit([bounds[Object.keys(bounds)[0]], bounds[Object.keys(bounds)[1]]]);
   }
 }

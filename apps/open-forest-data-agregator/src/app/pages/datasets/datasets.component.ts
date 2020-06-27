@@ -99,6 +99,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.getData();
+
+    this.DSService.resetFilters();
   }
 
   setFullscreen(value) {
@@ -147,6 +149,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           detailsData: {},
           files: [],
           images: [],
+          labels: [],
           subject: item.subject ? item.subject.join(', ') : '',
           coordinates: coords,
           description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : '',
@@ -184,14 +187,10 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
               item.createdAt = singlDetails.latestVersion.createTime;
               item.files = singlDetails.latestVersion.files;
-              const images = singlDetails.latestVersion.files
-                .filter((_: any) => _.thumbnail_url)
-                .map((_: any) => _.thumbnail_url);
-              item.preview = images[0] || null;
-              item.images = singlDetails.latestVersion.files
-                .filter((_: any) => _.download_url)
-                .map((_: any) => _.download_url);
-
+              const images = singlDetails.latestVersion.files.filter((_: any) => _.thumbnail_url);
+              item.preview = images.map((_: any) => _.thumbnail_url)[0] || null;
+              item.images = images.map((_: any) => _.download_url);
+              item.labels = images.map((_: any) => _.label);
               item.detailsData = singlDetails;
             }
           });

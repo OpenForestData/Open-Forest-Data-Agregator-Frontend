@@ -13,11 +13,11 @@
   }
 
   &__range {
-    width: 224px;
-    height: 224px;
+    width: calc(100% - 20px);
+    height: 300px;
     border: 8px solid #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    margin: 21px 15px;
+    margin: 21px 0;
   }
 
   &__arrow {

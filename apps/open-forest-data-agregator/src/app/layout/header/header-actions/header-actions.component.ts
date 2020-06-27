@@ -29,7 +29,7 @@ export class HeaderActionsComponent implements OnInit, OnDestroy {
       this.DSService.searchFilters = { field: 'q', data: this.searchPhrase };
       this.DSService.updateQuerySubject.next(this.searchPhrase);
       if (this.router.url.split('?')[0] !== '/datasets') {
-        this.router.navigate(['/datasets?start=0&rows=15&q=' + this.searchPhrase]);
+        this.router.navigate(['/datasets', { queryParams: { start: 0, rows: 15, q: this.searchPhrase } }]);
       }
     }
   }

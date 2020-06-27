@@ -13,5 +13,9 @@ export class DatasetsActiveFiltersComponent implements OnInit {
     return this.DSService.activeFiltersArray;
   }
 
+  removeFilter(name, index) {
+    this.DSService.removeFilterSubject.next({ name, index });
+  }
+
   ngOnInit() {}
 }

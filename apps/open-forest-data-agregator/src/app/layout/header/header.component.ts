@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UtilsService } from 'ng2-date-picker/common/services/utils/utils.service';
+import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * Header Component
@@ -12,11 +12,22 @@ import { DatasetsService } from '@app/pages/datasets/datasets.service';
 })
 export class HeaderComponent implements OnInit {
   public showMobileMenu = false;
+  public collapseHeader = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.toogleBar();
+  }
+
+  toogleBar() {
+    const scrollTop = this.document.documentElement.scrollTop;
+    this.collapseHeader = scrollTop > 60;
+  }
 
   /**
    * @ignore
    */
-  constructor(public DSService: DatasetsService) {}
+  constructor(@Inject(DOCUMENT) private document: Document, public DSService: DatasetsService) {}
 
   /**
    * @ignore

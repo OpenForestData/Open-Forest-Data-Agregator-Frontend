@@ -46,7 +46,7 @@ export class DatasetsGalleryComponent implements OnInit {
       Object.create({
         src: img,
         thumb: img,
-        subHtml: `Dataset - ${index}, Img: ${imgIndex}`
+        subHtml: `${item.labels[imgIndex]}`
       })
     );
 

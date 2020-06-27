@@ -1,20 +1,24 @@
 <div class="filter">
-  <h3 class="filter__title" [ngClass]="{ 'filter__title--expanded': isExpanded }">
-    {{ header }}
-
-    <button class="filter__arrow" (click)="isExpanded = !isExpanded">
-      <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
-    </button>
-  </h3>
-
-  <div class="filter__time-range" [hidden]="!isExpanded">
+  <div class="filter__time-range">
     <div class="filter__time-from">
-      <label for="time-from">{{ 'global.from' | translate }}</label>
-      <input type="number" id="time-from" name="time-from" [(ngModel)]="value['from']" />
+      <label class="datepicker-label">
+        {{ 'global.from' | translate }}
+        <dp-date-picker
+          (onSelect)="changeDate($event, 0)"
+          [(ngModel)]="value[0]"
+          [config]="datePickerConfig"
+        ></dp-date-picker>
+      </label>
     </div>
-    <div class="filter__time-to">
-      <label for="time-to">{{ 'global.to' | translate }}</label>
-      <input type="number" id="time-to" name="time-to" [(ngModel)]="value['to']" />
+    <div class="filter__time-to" *ngIf="!single">
+      <label class="datepicker-label">
+        {{ 'global.from' | translate }}
+        <dp-date-picker
+          (onSelect)="changeDate($event, 1)"
+          [(ngModel)]="value[1]"
+          [config]="datePickerConfig"
+        ></dp-date-picker>
+      </label>
     </div>
   </div>
 </div>

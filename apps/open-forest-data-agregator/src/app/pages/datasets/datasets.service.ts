@@ -16,6 +16,7 @@ export class DatasetsService {
   public triggerSearchSubject: Subject<any> = new Subject();
   public showAdvancedSubject: Subject<any> = new Subject();
   public updateQuerySubject: Subject<any> = new Subject();
+  public removeFilterSubject: Subject<any> = new Subject();
 
   private searchDebounceTimeout = null;
   public activeFiltersArray = [];
@@ -69,6 +70,12 @@ export class DatasetsService {
   }
 
   public set searchFilters(value: { field: string; data: any }) {
+    const excludeReset = ['sort', 'start'];
+
+    if (!excludeReset.includes(value.field) || this._searchFilters['start'] < 1) {
+      this._searchFilters['start'] = 1;
+    }
+
     if (value.field === 'basic') {
       Object.keys(value.data).forEach(key => {
         this._searchFilters[value.field][key] = value.data[key];
@@ -80,8 +87,6 @@ export class DatasetsService {
     if (this.searchDebounceTimeout) {
       clearTimeout(this.searchDebounceTimeout);
     }
-
-    if (this._searchFilters['start'] < 1) this._searchFilters['start'] = 1;
 
     this.searchDebounceTimeout = setTimeout(() => {
       this.triggerSearchSubject.next();
@@ -96,9 +101,14 @@ export class DatasetsService {
       // tslint:disable-next-line: forin
       for (const p in obj) {
         if (obj[p].value.length) {
-          obj[p].value.forEach(val => {
-            str.push(encodeURIComponent(obj[p]['key']) + '=' + encodeURIComponent(val));
-          });
+          obj[p].value
+            .filter(val => val)
+            .forEach(val => {
+              if (val.format) {
+                val = val.format('YYYY-MM-DD');
+              }
+              str.push(encodeURIComponent(obj[p]['key']) + '=' + encodeURIComponent(val));
+            });
         }
       }
 
@@ -137,6 +147,20 @@ export class DatasetsService {
 
   search() {
     return this.http.get(`${AppConfigService.config.api}search${this.searchFilters.field}`);
+  }
+
+  resetFilters() {
+    this._searchFilters = {
+      q: '',
+      start: 1,
+      rows: 15,
+      sort: 'asc',
+      category: '',
+      geoStatic: false,
+      mediaStatic: false,
+      basic: {},
+      advanced: {}
+    };
   }
 
   details(identifiers) {

@@ -5,9 +5,14 @@
   <div class="group-wrapper">
     <div class="group" *ngFor="let group of activeFilters">
       <b>{{ group.name | translate }}:</b>
-      <span *ngFor="let value of group.values" class="value">
+      <span *ngFor="let value of group.values; let i = index" class="value">
         {{ value }}
-        <svg-icon src="assets/modules/search/small_times.svg" class="m-l-10" [applyCss]="true"></svg-icon>
+        <svg-icon
+          src="assets/modules/search/small_times.svg"
+          (click)="removeFilter(group.name, i)"
+          class="m-l-10"
+          [applyCss]="true"
+        ></svg-icon>
       </span>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="datasets-table__container">
+<div class="datasets-table__container" [ngClass]="{ 'display-none': datasets.length == 0 }">
   <table datatable [dtOptions]="dtOptions" class="row-border hover datasets-table__table">
     <thead>
       <tr>

@@ -26,9 +26,11 @@
       (valueChange)="categoryChanged($event)"
     ></ofd-agregator-datasets-filter>
   </div>
+
   <ng-container *ngFor="let key of getFilters()">
     <ofd-agregator-datasets-filter
       header="{{ filters[key].name }}"
+      [type]="filters[key].type"
       [data]="filters[key].data()"
       [key]="filters[key].key"
       [(value)]="filters[key].value"
@@ -37,6 +39,7 @@
       (valueChange)="filtersChanged($event)"
     ></ofd-agregator-datasets-filter>
   </ng-container>
+
   <ng-container *ngIf="moreFilters">
     <ng-container *ngFor="let key of getFilters(false)">
       <ofd-agregator-datasets-filter
@@ -71,7 +74,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 end-xs">
-        <img src="assets/modules/search/times.png" class="times" alt="Close" (click)="showAdvanced = false" />
+        <img src="assets/modules/search/times.png" class="times" alt="Close" (click)="closeAdvenced()" />
       </div>
     </div>
     <div class="row">
@@ -169,9 +172,13 @@
               >
               </ng-select>
             </div>
-
             <div class="filter-details" *ngIf="item.type === 'SELECT'">
-              <ng-select
+              <ofd-agregator-datasets-input-tag
+                [data]="item.items"
+                [(value)]="item.values"
+                [multiple]="true"
+              ></ofd-agregator-datasets-input-tag>
+              <!-- <ng-select
                 [clearAllText]="'search.clear_all' | translate"
                 [loadingText]="'search.loading_text' | translate"
                 [notFoundText]="'search.not_found_text' | translate"
@@ -187,7 +194,7 @@
                 <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                   <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
                 </ng-template>
-              </ng-select>
+              </ng-select> -->
             </div>
             <div class="filter-details" *ngIf="item.type === 'DATE'">
               <div class="row">
@@ -199,7 +206,12 @@
               </div>
             </div>
             <div class="filter-details" *ngIf="item.type === 'INPUT'">
-              <ng-select
+              <ofd-agregator-datasets-input-tag
+                [data]="item.items"
+                [(value)]="item.values"
+                [multiple]="true"
+              ></ofd-agregator-datasets-input-tag>
+              <!-- <ng-select
                 [clearAllText]="'search.clear_all' | translate"
                 [loadingText]="'search.loading_text' | translate"
                 [notFoundText]="''"
@@ -215,7 +227,29 @@
                 <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                   <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
                 </ng-template>
-              </ng-select>
+              </ng-select> -->
+            </div>
+
+            <div class="filter-details" *ngIf="item.type === 'MAP'">
+              <ofd-agregator-datasets-range
+                header="''"
+                [data]="''"
+                [key]="''"
+                [(value)]="item.values"
+                [showHeaderValue]="false"
+                [isExpanded]="true"
+                [multiple]="true"
+              ></ofd-agregator-datasets-range>
+            </div>
+
+            <div class="filter-details" *ngIf="item.type === 'DATERANGE'">
+              <ofd-agregator-datasets-time-range
+                header="''"
+                [key]="''"
+                [(value)]="item.values"
+                [showHeaderValue]="false"
+                [isExpanded]="false"
+              ></ofd-agregator-datasets-time-range>
             </div>
           </div>
         </div>
