@@ -1,0 +1,203 @@
+@import '../../../../../../../../../resources/_colors.scss';
+
+.filter {
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #fff;
+    line-height: 28px;
+    padding: 7px 15px;
+    border-radius: 5px;
+    position: relative;
+    margin: 10px 0 0 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+
+    svg-icon {
+      display: flex;
+      width: 11px;
+      height: 6px;
+      transition: 0.3s transform ease;
+      transform: rotate(0);
+    }
+  }
+
+  &__data {
+    padding: 21px 15px;
+
+    ui-checkbox {
+      display: block;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  &__select-all {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 0;
+  }
+
+  &__show-more {
+    color: $accent-color;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    padding: 0;
+    margin-top: 7px;
+    margin-bottom: 22px;
+
+    svg {
+      margin-right: 18px;
+      display: block;
+    }
+
+    &.less {
+      align-items: center;
+
+      svg-icon {
+        height: 2px;
+      }
+    }
+  }
+}
+
+.filter__title--expanded {
+  svg-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.times {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.datasets-filter {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0 15px;
+
+  &__item {
+    color: $text-color;
+    font-size: 14px;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+
+    &.selected {
+      color: $accent-color;
+    }
+  }
+}
+
+::ng-deep {
+  @media (max-width: 1200px) {
+    .filter__select-all {
+      padding-right: 10px;
+    }
+
+    .filter {
+      label.ui-checkbox {
+        color: #fff !important;
+
+        span {
+          border-color: #fff !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .filter {
+    &__data {
+      padding: 20px 0;
+
+      label.ui-checkbox {
+        color: #fff !important;
+
+        span {
+          border-color: #fff !important;
+        }
+      }
+    }
+
+    &__show-more {
+      color: #fff;
+
+      svg {
+        line {
+          stroke: #fff;
+        }
+
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
+    &__select-all {
+      color: #fff;
+    }
+
+    .selected {
+      color: $accent-color;
+      background: white;
+      font-weight: 500;
+
+      .times {
+        position: absolute;
+        color: $accent-color;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        font-size: 36px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .datasets-filter {
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      color: #fff;
+    }
+  }
+}
+
+.filter-details {
+  padding: 15px 0;
+}
+
+.display-none {
+  display: none;
+}

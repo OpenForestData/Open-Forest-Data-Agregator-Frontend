@@ -1,3 +1,0 @@
-Unstaged changes after reset:
-D	apps/open-forest-data-agregator/src/app/pages/datasets/filters/datasets-filters/datasets-filter/datasets-filter.component.ts
-M	apps/open-forest-data-agregator/src/app/pages/datasets/filters/datasets-filters/datasets-filter/datasets-filter.component.txt

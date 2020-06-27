@@ -23,6 +23,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { DatasetsCategoryDescriptionComponent } from './datasets-category-description/datasets-category-description.component';
 import { DatasetsActiveFiltersComponent } from './datasets-active-filters/datasets-active-filters.component';
 import { DatasetsInputTagComponent } from './filters/datasets-input-tag/datasets-input-tag.component';
+import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DatasetsInputTagComponent } from './filters/datasets-input-tag/datasets
     DatasetsHeaderComponent,
     DatasetsCategoryComponent,
     DatasetsFiltersComponent,
+    DatasetsFilterComponent,
     DatasetsDataPresentationComponent,
     DatasetsListComponent,
     DatasetsRangeComponent,
