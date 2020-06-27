@@ -39,6 +39,12 @@ export class DatasetsTimeRangeComponent implements OnInit {
   ngOnInit(): void {}
 
   changeDate(payload, index) {
-    this.valueChange.emit(this.value);
+    if (this.single) {
+      this.valueChange.emit(this.value);
+    }
+
+    if (!this.single && this.value[0] && this.value[1]) {
+      this.valueChange.emit(this.value);
+    }
   }
 }

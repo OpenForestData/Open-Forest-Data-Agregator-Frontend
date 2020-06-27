@@ -92,44 +92,15 @@ export class DatasetsService {
     if (value.search) {
       this.searchDebounceTimeout = setTimeout(() => {
         this.triggerSearchSubject.next();
+        const url =
+          this.router.createUrlTree([], { relativeTo: this.activatedRoute }).toString() + this.searchFilters.field;
+        this.location.go(url);
       }, 150);
     }
   }
 
   public get searchFilters() {
     // tslint:disable-next-line: only-arrow-functions
-    const objectToQuery = function(object) {
-      const objectQueryString = [];
-
-      Object.keys(object).forEach(index => {
-        const groupData = object[index]['data'];
-        groupData
-          .filter(filter => {
-            const value = Array.isArray(filter['values']) ? filter['values'] : [filter['values']];
-            return value.filter(item => item).length && filter.key !== 'category';
-          })
-          .forEach(filter => {
-            const key = filter['key'];
-            let values = Array.isArray(filter['values']) ? filter['values'] : [filter['values']];
-            if (['DATE', 'DATERANGE'].includes(filter['type'])) {
-              if (Boolean(values[0]) || Boolean(values[1])) {
-                values[0] = Boolean(values[0]) ? values[0] : 'null';
-                values[1] = Boolean(values[1]) ? values[1] : 'null';
-              } else {
-                values = [];
-              }
-            }
-
-            values
-              .filter(value => value !== undefined && values !== null)
-              .forEach(value => {
-                objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-              });
-          });
-      });
-
-      return objectQueryString.length ? `&${objectQueryString.join('&')}` : ``;
-    };
 
     const queryString = `
       ?start=${this._searchFilters.start - 1}&
@@ -139,13 +110,10 @@ export class DatasetsService {
       ${this._searchFilters.geoStatic ? '&geoStatic=true' : ''}
       ${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}
       ${this._searchFilters.category ? '&category=' + this._searchFilters.category : ''}
-      ${objectToQuery(this._searchFilters.basic)}
+      ${this.objectToQuery(this._searchFilters.basic)}
     `
       .trim()
       .replace(/\s/g, '');
-
-    const url = this.router.createUrlTree([], { relativeTo: this.activatedRoute }).toString() + queryString;
-    this.location.go(url);
 
     return {
       field: queryString,
@@ -177,6 +145,55 @@ export class DatasetsService {
       basic: {},
       advanced: {}
     };
+  }
+
+  public objectToQuery(object, encode = true) {
+    const objectQueryString = [];
+
+    Object.keys(object).forEach(index => {
+      const groupData = object[index]['data'];
+      groupData
+        .filter(filter => {
+          const value = Array.isArray(filter['values']) ? filter['values'] : [filter['values']];
+          return value.filter(item => item).length && filter.key !== 'category';
+        })
+        .forEach(filter => {
+          const key = filter['key'];
+          let values = [...(Array.isArray(filter['values']) ? filter['values'] : [filter['values']])];
+          if (filter['type'] === 'DATE') {
+            values[0] = values[0].format ? values[0].format('YYYY-MM-DD') : values[0];
+          }
+
+          if (filter['type'] === 'DATERANGE') {
+            if (Boolean(values[0]) || Boolean(values[1])) {
+              values[0] = values[0] ? (values[0].format ? values[0].format('YYYY-MM-DD') : values[0]) : 'null';
+              values[1] = values[1] ? (values[1].format ? values[1].format('YYYY-MM-DD') : values[1]) : 'null';
+            } else {
+              values = [];
+            }
+          }
+
+          if (filter['type'] === 'MAP' && values.length) {
+            values = [`${values[0]['lat']}_${values[0]['lng']}`, `${values[1]['lat']}_${values[1]['lng']}`];
+          }
+
+          values
+            .filter(value => value !== undefined && values !== null)
+            .forEach(value => {
+              if (encode) {
+                objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+              } else {
+                objectQueryString.push(key + '=' + value);
+              }
+            });
+        });
+    });
+
+    if (encode) {
+      return objectQueryString.length ? `&${objectQueryString.join('&')}` : ``;
+    } else {
+      return objectQueryString.length ? `${objectQueryString.join(' AND ')}` : ``;
+    }
   }
 
   details(identifiers) {

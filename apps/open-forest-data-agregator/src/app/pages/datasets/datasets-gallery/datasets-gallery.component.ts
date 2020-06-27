@@ -37,7 +37,7 @@ export class DatasetsGalleryComponent implements OnInit {
   }
 
   sortChanged(sortValue) {
-    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc' };
+    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc', search: true };
   }
 
   showGallery(index, el) {

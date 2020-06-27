@@ -12,7 +12,7 @@
     </div>
     <div class="filter__time-to" *ngIf="!single">
       <label class="datepicker-label">
-        {{ 'global.from' | translate }}
+        {{ 'global.to' | translate }}
         <dp-date-picker
           (onSelect)="changeDate($event, 1)"
           [(ngModel)]="value[1]"

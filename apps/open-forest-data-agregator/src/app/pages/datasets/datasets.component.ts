@@ -73,7 +73,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
 
   setCategory(value) {
-    this.DSService.searchFilters = { field: 'category', data: value };
+    this.DSService.searchFilters = { field: 'category', data: value, search: true };
   }
 
   public get selectedCategory() {
@@ -108,8 +108,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
 
   paginationChanged(payload) {
-    this.DSService.searchFilters = { field: 'start', data: payload.page };
-    this.DSService.searchFilters = { field: 'rows', data: payload.limit };
+    this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
+    this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
   }
 
   getData() {

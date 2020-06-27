@@ -280,6 +280,8 @@
 
   .query-string {
     padding: 25px;
+    padding-right: 0;
+    word-break: break-all;
 
     .query-string-wrapp {
       margin-bottom: 5px;
@@ -319,12 +321,23 @@
   }
 
   .advanced {
+    .filter-details.adv {
+      .filter__time-range {
+        padding: 0 !important;
+      }
+
+      .datepicker-label {
+        margin-right: 30px !important;
+      }
+    }
+
     .filter-value svg-icon {
       margin-left: 5px;
     }
 
     dp-date-picker {
       width: 100%;
+      margin-left: 5px;
     }
 
     .dp-open + div {

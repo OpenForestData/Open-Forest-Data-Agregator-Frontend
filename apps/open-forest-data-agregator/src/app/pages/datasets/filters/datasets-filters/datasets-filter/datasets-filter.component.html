@@ -97,6 +97,7 @@
     <div class="filter-details" *ngIf="type === 'MAP'">
       <ofd-agregator-datasets-range
         [value]="value"
+        [isExpanded]="isExpanded"
         (valueChange)="emitChange($event)"
         [multiple]="true"
       ></ofd-agregator-datasets-range>

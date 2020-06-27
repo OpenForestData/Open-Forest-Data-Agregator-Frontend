@@ -24,7 +24,7 @@ export class DatasetsListComponent implements OnInit {
   public doi = 'doi:10.5072/FK2/MDWWUY';
 
   sortChanged(sortValue) {
-    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc' };
+    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc', search: true };
   }
 
   convertDOI(doi) {
