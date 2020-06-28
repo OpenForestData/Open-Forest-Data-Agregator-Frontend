@@ -66,7 +66,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
 
   public get advancedSelected() {
     return []
-      .concat(...this.filtersConfig.map(item => item.items))
+      .concat(...this.filtersConfig.map(item => item.data))
       .filter(item => item.activeOrder)
       .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
   }
