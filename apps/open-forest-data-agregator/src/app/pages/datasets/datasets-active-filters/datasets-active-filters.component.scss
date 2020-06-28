@@ -5,8 +5,6 @@
 }
 
 .group {
-  margin-bottom: 15px;
-
   b {
     font-weight: 500;
     font-size: 12px;
@@ -23,13 +21,21 @@
     margin-left: 3px;
     margin-right: 3px;
     font-size: 12px;
+    padding-bottom: 0;
     background-color: $light-gray-color;
+    line-height: 30px;
   }
 }
 
 .group-wrapper {
+  margin-top: 15px;
+
   .group {
     display: inline-block;
     margin-right: 20px;
   }
+}
+
+.cursor {
+  cursor: pointer;
 }

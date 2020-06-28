@@ -50,14 +50,15 @@ export class DatasetsMapComponent implements OnInit, OnChanges {
 
   renderMarkers() {
     const markers = this.getMarkers();
+    this.datasetsMarkers.clearLayers();
 
     markers.map(marker => {
       this.datasetsMarkers.addLayer(marker);
     });
 
-    if (this.map) {
-      this.map.fitBounds(this.datasetsMarkers.getBounds());
-    }
+    // if (this.map) {
+    // this.map.fitBounds(this.datasetsMarkers.getBounds());
+    // }
   }
 
   getMarkers() {

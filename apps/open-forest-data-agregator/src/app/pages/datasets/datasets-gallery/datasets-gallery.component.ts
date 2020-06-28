@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 import 'lightgallery.js';
 import 'lg-zoom.js';
@@ -8,19 +8,22 @@ import 'lg-thumbnail.js';
 
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { DatasetsService } from '../datasets.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ofd-agregator-datasets-gallery',
   templateUrl: './datasets-gallery.component.html',
   styleUrls: ['./datasets-gallery.component.scss']
 })
-export class DatasetsGalleryComponent implements OnInit {
+export class DatasetsGalleryComponent implements OnInit, OnDestroy {
   public sortItems = [
     { name: 'A-Z', value: 1 },
     { name: 'Z-A', value: 0 }
   ];
 
   public sortBy = this.sortItems[0];
+
+  public sub: Subscription;
 
   public options: IUISelectOptions = {
     placeholder: 'Sortuj wg'
@@ -30,14 +33,18 @@ export class DatasetsGalleryComponent implements OnInit {
 
   @ViewChild('galleryItems', { static: false }) galleryItems: any;
 
-  constructor(public DSService: DatasetsService) {}
+  constructor(public DSService: DatasetsService) {
+    this.sub = this.DSService.sortSubject.subscribe(_ => {
+      this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
+    });
+  }
 
   ngOnInit(): void {
     this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
   }
 
   sortChanged(sortValue) {
-    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc' };
+    this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc', search: true };
   }
 
   showGallery(index, el) {
@@ -46,7 +53,7 @@ export class DatasetsGalleryComponent implements OnInit {
       Object.create({
         src: img,
         thumb: img,
-        subHtml: `Dataset - ${index}, Img: ${imgIndex}`
+        subHtml: `${item.labels[imgIndex]}`
       })
     );
 
@@ -55,5 +62,9 @@ export class DatasetsGalleryComponent implements OnInit {
       dynamic: true,
       dynamicEl
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

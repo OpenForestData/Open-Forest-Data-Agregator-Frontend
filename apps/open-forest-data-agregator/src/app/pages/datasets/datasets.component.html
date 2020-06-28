@@ -43,6 +43,7 @@
         ></ofd-agregator-datasets-data-presentation>
 
         <ofd-agregator-datasets-active-filters
+          [activeFilters]="advancedSelected"
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
         ></ofd-agregator-datasets-active-filters>
 
@@ -65,6 +66,10 @@
         <div class="datasets__map" *ngIf="datasets.mode === 'map'">
           <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
         </div>
+
+        <h3 class="no_results" *ngIf="pageCount <= 0">
+          {{ 'search.no_results' | translate }}
+        </h3>
 
         <div class="datasets-list__pagination" *ngIf="pageCount">
           <ofd-agregator-pagination

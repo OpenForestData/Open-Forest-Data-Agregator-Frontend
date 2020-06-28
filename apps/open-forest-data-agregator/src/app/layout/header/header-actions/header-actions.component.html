@@ -3,6 +3,7 @@
     type="text"
     [(ngModel)]="searchPhrase"
     class="header-search"
+    (keydown.enter)="searchClick()"
     [placeholder]="'global.search' | translate"
     [ngClass]="{ active: searchActive }"
   />

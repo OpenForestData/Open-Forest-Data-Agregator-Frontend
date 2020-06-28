@@ -1,15 +1,5 @@
 <div class="filter">
-  <h3 class="filter__title" [ngClass]="{ 'filter__title--expanded': isExpanded }">
-    {{ header }}
-
-    <button class="filter__arrow" (click)="showHeader()">
-      <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
-    </button>
-  </h3>
-
   <div
-    [hidden]="!isExpanded"
-    *ngIf="firstShow"
     class="filter__range"
     leaflet
     leafletDraw

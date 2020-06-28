@@ -13,6 +13,7 @@ import { categoriesMock } from '@app/pages/datasets/datasets.mock';
 import { DatasetsService } from '../../datasets.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ofd-agregator-datasets-filters',
@@ -23,152 +24,72 @@ import { ActivatedRoute } from '@angular/router';
 export class DatasetsFiltersComponent implements OnInit, OnDestroy {
   @Input() hideBasic;
 
-  public moreCountStart = 5;
-  public subs: Subscription = new Subscription();
-  public checkbox = {
-    mediaStatic: {
-      key: 'media',
-      value: false
-    },
-    geoStatic: {
-      key: 'coordinates',
-      value: false
-    }
+  public typeConversion = {
+    TEXT: 'INPUT',
+    NONE: 'INPUT',
+    MAP: 'MAP',
+    DATERANGE: 'DATERANGE',
+    TEXTBOX: 'SELECT',
+    DATE: 'DATE'
   };
-  public filters = {};
-  public categories: any = {
-    data: () => {}
-  };
-
   public queryParams = {};
-  public keys = Object.keys;
-  public moreFilters = false;
-  public isMobile = false;
-  public showAdvanced = false;
-  public searchFilterValue = '';
-  public searchValue = '';
+  public filtersByKey = {};
+
+  public moreCountStart = 6;
   public orderCounter = 1;
-  public queryVisible = false;
 
-  private advancedByKey = {};
-  private advancedFiltersConfig = [];
+  public showAdvanced = false;
+  public structureFirstTimeCreated = true;
+  public moreFilters = false;
 
-  public datePickerConfig = {
-    locale: 'pl-PL',
-    disableKeypress: true,
-    unSelectOnClick: false,
-    firstDayOfWeek: 'mo'
-  };
+  public searchValue = '';
+  public searchFilterValue = '';
 
-  public get selectedCategory() {
-    return this.DSService.searchFilters.data.category;
+  public subs: Subscription = new Subscription();
+
+  public basicFiltersKeys = [];
+  public filtersConfig = [];
+
+  public get filtersState() {
+    return this.DSService.searchFilters.data;
   }
 
   public get advancedFilters() {
-    this.advancedFiltersConfig.forEach(group => {
+    return this.filtersConfig.map(group => {
       group.items = this.searchFilterValue
         ? group.data.filter((item: any) => item.name.toLowerCase().includes(this.searchFilterValue.toLowerCase()))
         : group.data;
-    });
 
-    return this.advancedFiltersConfig;
-  }
-
-  public updateActiveFilters() {
-    let activeArr = [
-      {
-        name: 'search.search',
-        type: 'SELECT',
-        values: [this.searchValue].filter(item => item.length)
-      },
-      {
-        name: 'search.category',
-        type: 'SELECT',
-        values: this.DSService.searchFilters.data['category'] ? [this.DSService.searchFilters.data['category']] : []
-      },
-      {
-        name: 'search.mediaStatic',
-        type: 'SELECT',
-        values: this.checkbox.mediaStatic.value ? ['True'] : []
-      },
-      {
-        name: 'search.geoStatic',
-        type: 'SELECT',
-        values: this.checkbox.geoStatic.value ? ['True'] : []
-      }
-    ];
-    this.advancedFiltersConfig.forEach(group => {
-      // @ts-ignore
-      group.data.forEach(item => {
-        if (item.name === 'search.categories') return;
-        activeArr.push({
-          name: item.name,
-          type: item.type,
-          values: Array.isArray(item.values)
-            ? item.values.filter((_: any) => (_ === undefined ? false : _.length))
-            : [item.values].filter((_: any) => (_ === undefined ? false : _.length))
-        });
-      });
-    });
-
-    activeArr = activeArr.filter(item => item.values.length);
-    console.log(activeArr);
-
-    this.DSService.activeFiltersArray = activeArr;
-  }
-
-  public get queryArray() {
-    let queryArr = [
-      {
-        key: 'Q',
-        type: 'SELECT',
-        values: [this.searchValue].filter(item => item.length)
-      }
-    ];
-    this.advancedFiltersConfig.forEach(group => {
-      // @ts-ignore
-      group.data.forEach(item => {
-        queryArr.push({
-          key: item.key,
-          type: item.type,
-          values: Array.isArray(item.values)
-            ? item.values.filter((_: any) => (_ === undefined ? false : _.length))
-            : [item.values].filter((_: any) => (_ === undefined ? false : _.length))
-        });
-      });
-    });
-
-    queryArr = queryArr.filter(item => item.values.length);
-
-    return queryArr.map(item => {
-      if (item.values.length > 1) {
-        if (item.type === 'DATE') {
-          // item.values = ['FROM', item.values[0], 'TO', item.values[1]];
-          item.values = [item.values[0]];
-        } else {
-          item.values = item.values.join('OR').split(',');
-          item.values[0] = '(' + item.values[0];
-          item.values[item.values.length - 1] += ')';
-        }
-      }
-      item.values = item.values.map(_ => _.trim());
-      return item;
+      return group;
     });
   }
 
   public get advancedSelected() {
     return []
-      .concat(...this.advancedFiltersConfig.map(item => item.items))
+      .concat(...this.filtersConfig.map(item => item.items))
       .filter(item => item.activeOrder)
       .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
   }
 
-  // tslint:disable-next-line
-  @Output() onDisplayModeChange: EventEmitter<any> = new EventEmitter<any>();
+  public get queryArray() {
+    const filters = this.DSService.searchFilters.data;
+    const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
 
-  @HostListener('window:resize', [])
-  onWindowResize() {
-    this.checkMobile();
+    let queryString = `${this.searchValue ? 'q=' + this.searchValue + ' AND ' : ''}${
+      filters.geoStatic ? 'geoStatic=true  AND ' : ''
+    }${filters.mediaStatic ? 'mediaStatic=true  AND ' : ''}${
+      cat ? 'category=' + cat + ' AND ' : ''
+    }${this.DSService.objectToQuery(this.filtersConfig, false)}`.trim();
+
+    if (queryString.substr(-4) === ' AND') {
+      queryString = queryString.slice(0, -4);
+    }
+
+    if (queryString.substr(-3) === ' OR') {
+      queryString = queryString.slice(0, -3);
+    }
+
+    return queryString;
   }
 
   constructor(public DSService: DatasetsService, public cd: ChangeDetectorRef, private route: ActivatedRoute) {
@@ -181,104 +102,30 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     );
 
     this.subs.add(
+      this.DSService.removeFilterSubject.subscribe(payload => {
+        this.removeFilterByName(payload.name, payload.index);
+      })
+    );
+
+    this.subs.add(
       this.DSService.updateQuerySubject.subscribe(query => {
         this.searchValue = query;
         this.cd.detectChanges();
       })
     );
 
-    this.subs.add(
-      this.DSService.dataChangedSubject.subscribe(() => {
-        if (!this.advancedFiltersConfig.length) {
-          this.searchValue = this.DSService.searchFilters.data['q'];
-          const data = this.DSService.searchData['list'];
-          const groupOrder = {};
-          const typeConversion = {
-            TEXT: 'INPUT',
-            NONE: 'INPUT',
-            TEXTBOX: 'SELECT',
-            DATE: 'DATE'
-          };
-          const advKey = 'listing_filter_fields';
+    this.subs.add(this.DSService.newFiltersStructureSubject.subscribe(_ => this.createStructure()));
 
-          this.advancedFiltersConfig = [
-            {
-              title: '',
-              headerVisible: false,
-              items: [],
-              data: [
-                {
-                  key: 'category',
-                  name: 'search.categories',
-                  values: this.queryParams['category'] || [],
-                  items: Object.keys(data[advKey]['category']).map(i =>
-                    Object.create({
-                      id: data[advKey]['category'][i]['name'],
-                      label: data[advKey]['category'][i]['friendly_name']
-                    })
-                  ),
-                  type: 'SIGNLE-SELECT',
-                  activeOrder: this.queryParams['category'] ? this.orderCounter : null
-                }
-              ]
-            }
-          ];
-
-          this.advancedByKey['category'] = this.advancedFiltersConfig[0].data[0];
-
-          if (this.queryParams['category']) this.orderCounter += 1;
-
-          Object.keys(data['filter_groups']).forEach((key, i) => {
-            this.advancedFiltersConfig.push({
-              title: data['filter_groups'][key]['friendly_name'],
-              headerVisible: true,
-              items: [],
-              data: []
-            });
-            groupOrder[data['filter_groups'][key]['id']] = i + 1;
-          });
-
-          Object.keys(data[advKey]).forEach(index => {
-            if (index !== 'category') {
-              const filter = data[advKey][index];
-              const groupIndex = groupOrder[filter['filter_group_id']];
-              const config = this.advancedFiltersConfig[groupIndex];
-              const filterObj = {
-                key: filter['field_name'],
-                name: filter['friendly_name'],
-                values: this.queryParams[filter['field_name']] || [],
-                items: filter['attributes'].map(_ => _.name),
-                type: typeConversion[filter.type] || 'INPUT',
-                activeOrder: this.queryParams[filter['field_name']] ? this.orderCounter : null
-              };
-
-              this.advancedByKey[filter['field_name']] = filterObj;
-
-              config.data.push(filterObj);
-
-              if (this.queryParams[filter['field_name']]) this.orderCounter += 1;
-            }
-          });
-
-          this.searchAdvenced();
-        }
-        this.cd.detectChanges();
-        this.updateActiveFilters();
-      })
-    );
-
-    const exclude = ['start', 'rows', 'category', 'q', 'mediaStatic', 'geoStatic'];
+    const exclude = ['start', 'rows', 'category', 'q', 'mediaStatic', 'geoStatic', 'sort'];
     this.route.queryParams.subscribe(params => {
       const p = {};
-      // tslint:disable-next-line: forin
-      for (const index in params) {
-        // tslint:disable-next-line: prefer-conditional-expression
-        if (exclude.includes(index)) {
-          p[index] = params[index];
-        } else {
-          p[index] = !Array.isArray(params[index]) ? [params[index]] : params[index];
-        }
-      }
+      Object.keys(params).forEach(index => {
+        p[index] = exclude.includes(index)
+          ? params[index]
+          : Array.isArray(params[index])
+          ? [params[index]]
+          : params[index];
+      });
       this.queryParams = p;
     });
 
@@ -294,86 +141,173 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
             break;
           case 'mediaStatic':
           case 'geoStatic':
-            this.checkbox[item].value = true;
             this.DSService.searchFilters = { field: item, data: true };
             break;
         }
       }
     });
-
-    this.getFilters();
-    this.getFilters(false);
   }
 
-  ngOnInit(): void {
-    this.checkMobile();
-    setTimeout(() => {
-      this.filtersChanged(null);
-    }, 0);
-  }
+  ngOnInit() {}
 
-  updateBasic() {
-    const currentState = this.DSService.searchFilters.data;
-    this.DSService.updateQuerySubject.next(this.searchValue);
-    Object.keys(this.filters).forEach(key => {
-      this.filters[key].value = this.advancedByKey[key].values;
+  createStructure() {
+    this.searchValue = this.DSService.searchFilters.data['q'];
+    const data = this.DSService.searchData['list'];
+    const groupOrder = {};
+    const advKey = 'listing_filter_fields';
+    if (this.filtersByKey['category']) {
+      this.filtersByKey['category'].values = this.filtersState.category;
+    }
+    const categoryValue =
+      (this.structureFirstTimeCreated ? this.queryParams['category'] : this.filtersState.category || '') || '';
+    const filtersConfig = [
+      {
+        title: '',
+        headerVisible: false,
+        items: [],
+        data: [
+          {
+            key: 'category',
+            isExpanded: this.structureFirstTimeCreated
+              ? this.queryParams['category']
+              : this.filtersByKey['category'].values
+              ? true
+              : false,
+            name: 'search.categories',
+            values: categoryValue,
+            multiple: false,
+            items: Object.keys(data[advKey]['category']).map(i =>
+              Object.create({
+                id: data[advKey]['category'][i]['name'],
+                label: data[advKey]['category'][i]['friendly_name']
+              })
+            ),
+            type: 'SIGNLE-SELECT',
+            activeOrder: categoryValue ? this.orderCounter : null
+          }
+        ]
+      }
+    ];
+
+    this.filtersByKey['category'] = filtersConfig[0].data[0];
+    if (categoryValue) this.orderCounter += 1;
+
+    Object.keys(data['filter_groups']).forEach((key, i) => {
+      filtersConfig.push({
+        title: data['filter_groups'][key]['friendly_name'],
+        headerVisible: true,
+        items: [],
+        data: []
+      });
+      groupOrder[data['filter_groups'][key]['id']] = i + 1;
     });
-  }
 
-  checkboxChange(newValue, type) {
-    this.DSService.searchFilters = { field: type, data: newValue };
-  }
+    Object.keys(data[advKey]).forEach(index => {
+      if (index !== 'category') {
+        const filter = data[advKey][index];
+        const groupIndex = groupOrder[filter['filter_group_id']];
+        const config = filtersConfig[groupIndex];
+        const key = filter['field_name'];
+        const anyValues =
+          (this.structureFirstTimeCreated ? this.queryParams[key] : this.filtersByKey[key].values || []) || [];
+        const type = this.typeConversion[filter.type] || 'INPUT';
 
-  updateAdvanced() {
-    const currentState = this.DSService.searchFilters.data;
-    this.DSService.updateQuerySubject.next(this.searchValue);
-    Object.keys(this.filters).forEach(key => {
-      if (this.advancedByKey[key]) {
-        this.advancedByKey[key].values = this.filters[key].value;
-        if (this.filters[key].value.length) {
-          this.advancedByKey[key].activeOrder = this.orderCounter;
-          this.orderCounter += 1;
+        let finalValue = Array.isArray(anyValues) ? anyValues.filter(value => value) : [anyValues];
+
+        if (type === 'MAP' && anyValues.length && this.structureFirstTimeCreated) {
+          const tmp = [...anyValues[0][0].split('_'), ...anyValues[0][1].split('_')];
+
+          finalValue = [
+            { lat: tmp[0], lng: tmp[1] },
+            { lat: tmp[2], lng: tmp[3] }
+          ];
         }
+
+        if (['TEXT', 'TEXTBOX', 'SELECT'].includes(type) && anyValues[0] && Array.isArray(anyValues[0])) {
+          finalValue = anyValues[0];
+        }
+
+        if (type === 'DATE' && anyValues.length) {
+          // @ts-ignore
+          finalValue = finalValue.map(item => moment(item));
+        }
+
+        if (type === 'DATERANGE' && anyValues.length) {
+          // @ts-ignore
+          finalValue = Array.isArray(anyValues[0]) ? anyValues[0].map(item => moment(item)) : finalValue;
+        }
+
+        const filterObj = {
+          key,
+          isExpanded: this.structureFirstTimeCreated
+            ? finalValue.length
+            : this.filtersByKey[key]
+            ? this.filtersByKey[key].isExpanded
+            : false,
+          name: filter['friendly_name'],
+          values: finalValue,
+          multiple: true,
+          items: filter['attributes'].map(_ => _.name),
+          type,
+          activeOrder: finalValue.length ? this.orderCounter : null
+        };
+
+        this.filtersByKey[key] = filterObj;
+        config.data.push(filterObj);
+        if (this.queryParams[key]) this.orderCounter += 1;
       }
     });
-  }
 
-  search() {
-    this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+    if (this.structureFirstTimeCreated) {
+      const exclude = ['start', 'rows', 'category', 'q', 'mediaStatic', 'geoStatic', 'sort'];
+      exclude.forEach(item => {
+        if (this.queryParams[item]) {
+          switch (item) {
+            case 'q':
+            case 'start':
+            case 'rows':
+            case 'sort':
+            case 'category':
+              this.DSService.searchFilters = { field: item, data: this.queryParams[item] };
+              break;
+            case 'mediaStatic':
+            case 'geoStatic':
+              this.DSService.searchFilters = { field: item, data: true };
+              break;
+          }
+        }
+      });
+
+      this.DSService.searchFilters = {
+        field: 'basic',
+        data: filtersConfig,
+        search: Boolean(Object.keys(this.queryParams).length)
+      };
+      this.DSService.sortSubject.next();
+    }
+
+    this.filtersConfig = filtersConfig;
+    this.basicFiltersKeys = Object.keys(this.DSService.searchData.list.available_filter_fields);
+    this.structureFirstTimeCreated = false;
+
+    this.searchValue = this.filtersState.q;
+    this.DSService.updateQuerySubject.next(this.filtersState.q);
+
+    this.cd.detectChanges();
   }
 
   getFilters(beginning = true) {
-    const filter = this.DSService.searchData.list.available_filter_fields;
-    Object.keys(filter).forEach(key => {
-      const obj = {
-        isExpanded: this.filters[key] ? this.filters[key].isExpanded : this.queryParams[key] ? true : false,
-        key,
-        value: this.filters[key] ? this.filters[key].value : this.queryParams[key] ? this.queryParams[key] : [],
-        name: filter[key].friendly_name,
-        multiple: true,
-        data: () => {
-          return filter[key].attributes
-            ? filter[key].attributes.map(item => Object.create({ name: item.name, value: item.name }))
-            : [];
-        }
-      };
-
-      if (key === 'category') {
-        obj.multiple = false;
-        obj.data = () => {
-          return Object.keys(filter[key]).map(k2 =>
-            Object.create({ name: filter['category'][k2].friendly_name, value: filter['category'][k2].name })
-          );
-        };
-        this.categories = obj;
-      } else {
-        this.filters[key] = obj;
-      }
-    });
-
     return beginning
-      ? Object.keys(this.filters).slice(0, this.moreCountStart)
-      : Object.keys(this.filters).slice(this.moreCountStart);
+      ? this.basicFiltersKeys.filter(name => name !== 'category').slice(0, this.moreCountStart)
+      : this.basicFiltersKeys.filter(name => name !== 'category').slice(this.moreCountStart);
+  }
+
+  filtersChanged() {
+    this.DSService.searchFilters = {
+      field: 'basic',
+      data: this.filtersConfig,
+      search: true
+    };
   }
 
   toogleFilter(item) {
@@ -386,60 +320,57 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  categoryChanged(value) {
-    this.DSService.searchFilters = { field: 'category', data: value };
-  }
-
-  filtersChanged(payload) {
-    this.updateAdvanced();
-    this.DSService.searchFilters = { field: 'basic', data: this.filters };
+  closeAdvenced() {
+    this.showAdvanced = false;
+    this.DSService.hideHeader = false;
   }
 
   searchAdvenced() {
-    const activeArr = {};
-    let catValue = null;
+    this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+    const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
 
-    this.advancedFiltersConfig.forEach(group => {
-      group.data
-        .filter(item => item.activeOrder)
-        .forEach(item => {
-          let values = Array.isArray(item.values) ? item.values : [item.values];
-          if (item.type === 'DATE') {
-            values = values.map(_ => _.format('YYYY-MM-DD'));
-          }
-          if (item.key === 'category') {
-            catValue = values[0];
-          } else {
-            activeArr[item.key] = { key: item.key, value: values };
-          }
-        });
-    });
-
-    if (this.searchValue) {
-      this.DSService.searchFilters = { field: 'q', data: this.searchValue };
-    }
-
-    if (catValue) {
-      this.DSService.searchFilters = { field: 'category', data: catValue };
-    }
+    this.DSService.searchFilters = { field: 'category', data: cat };
 
     this.showAdvanced = false;
     this.DSService.hideHeader = false;
-    this.DSService.searchFilters = { field: 'basic', data: activeArr };
+    this.DSService.searchFilters = { field: 'basic', data: this.filtersConfig, search: true };
+  }
 
-    this.updateBasic();
+  public removeFilterByName(name, index) {
+    switch (name) {
+      case 'search':
+        this.searchValue = '';
+        break;
+      case 'category':
+        this.filtersByKey['category'].values = '';
+        break;
+      case 'mediaStatic':
+        this.DSService.searchFilters = { field: 'mediaStatic', data: false, search: true };
+        break;
+      case 'geoStatic':
+        this.DSService.searchFilters = { field: 'geoStatic', data: false, search: true };
+        break;
+      default:
+        if (this.filtersByKey[name]) {
+          switch (this.filtersByKey[name].type) {
+            case 'DATERANGE':
+            case 'MAP':
+              this.filtersByKey[name].values = [];
+              break;
+            case 'SINGLE-SELECT':
+              this.filtersByKey[name].values = '';
+              break;
+            default:
+              this.filtersByKey[name].values.splice(index, 1);
+              break;
+          }
+        }
+        break;
+    }
+    this.searchAdvenced();
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
-  }
-
-  checkMobile() {
-    if (this.isMobile !== window.innerWidth <= 1200) {
-      this.isMobile = window.innerWidth <= 1200;
-      this.moreFilters = this.isMobile;
-
-      this.onDisplayModeChange.emit(this.isMobile ? 'mobile' : 'desktop');
-    }
   }
 }
