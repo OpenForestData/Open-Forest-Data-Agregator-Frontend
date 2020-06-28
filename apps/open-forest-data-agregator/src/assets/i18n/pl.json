@@ -332,6 +332,7 @@
     "filter_title": "Section Title",
     "category": "Kategoria",
     "mediaStatic": "Zdjęcie / multimedia",
-    "geoStatic": "Współrzędne"
+    "geoStatic": "Współrzędne",
+    "no_results": "Nie znaleziono wyników spełniających podane kryteria"
   }
 }

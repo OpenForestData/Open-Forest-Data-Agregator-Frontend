@@ -11,7 +11,6 @@ import { DatasetsComponent } from './datasets.component';
 import { DatasetsHeaderComponent } from '@app/pages/datasets/datasets-header/datasets-header.component';
 import { DatasetsCategoryComponent } from '@app/pages/datasets/filters/datasets-category/datasets-category.component';
 import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
-import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
 import { DatasetsDataPresentationComponent } from './datasets-data-presentation/datasets-data-presentation.component';
 import { DatasetModule } from './dataset/dataset.module';
 import { DatasetsListComponent } from './datasets-list/datasets-list.component';
@@ -23,6 +22,8 @@ import { DatasetsMapComponent } from './datasets-map/datasets-map.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { DatasetsCategoryDescriptionComponent } from './datasets-category-description/datasets-category-description.component';
 import { DatasetsActiveFiltersComponent } from './datasets-active-filters/datasets-active-filters.component';
+import { DatasetsInputTagComponent } from './filters/datasets-input-tag/datasets-input-tag.component';
+import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DatasetsActiveFiltersComponent } from './datasets-active-filters/datase
     DatasetsGalleryComponent,
     DatasetsMapComponent,
     DatasetsCategoryDescriptionComponent,
-    DatasetsActiveFiltersComponent
+    DatasetsActiveFiltersComponent,
+    DatasetsInputTagComponent
   ],
   imports: [
     CommonModule,

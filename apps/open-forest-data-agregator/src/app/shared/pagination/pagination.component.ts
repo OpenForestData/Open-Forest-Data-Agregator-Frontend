@@ -77,7 +77,6 @@ export class PaginationComponent implements OnInit, OnChanges {
    */
   rerender(): void {
     this.pagesArray = [];
-    console.log(this.items, this.pageSize);
     this.pages = Math.ceil(this.items / this.pageSize);
     this.start = this.page > this.offset ? this.page - this.offset : 1;
     this.end = this.page + this.offset > this.pages ? this.pages : this.page + this.offset;

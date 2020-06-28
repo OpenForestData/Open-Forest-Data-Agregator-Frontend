@@ -312,7 +312,7 @@ ui-checkbox {
   padding: 7px 14px;
   border: 1px solid $text-color;
   border-radius: 20px;
-  width: 90px;
+  width: 80px;
   margin-left: 10px;
   font-size: 12px;
 }
@@ -434,4 +434,8 @@ ui-checkbox {
 
 :focus {
   outline: 0 !important;
+}
+
+.pointer {
+  cursor: pointer;
 }

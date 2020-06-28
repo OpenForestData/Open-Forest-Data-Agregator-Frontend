@@ -1,26 +1,50 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  OnChanges,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 
 @Component({
   selector: 'ofd-agregator-datasets-time-range',
   templateUrl: './datasets-time-range.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./datasets-time-range.component.scss']
 })
 export class DatasetsTimeRangeComponent implements OnInit {
-  @Input() header: string;
-
-  @Input() key: string;
-
   @Input() data: any[];
-
-  @Input() isExpanded: boolean;
 
   @Input() value: any = null;
 
   @Input() multiple = true;
 
+  @Input() single = false;
+
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {}
+  public datePickerConfig = {
+    locale: 'pl-PL',
+    disableKeypress: true,
+    unSelectOnClick: false,
+    firstDayOfWeek: 'mo'
+  };
+
+  constructor(public cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
+
+  changeDate(payload, index) {
+    if (this.single) {
+      this.valueChange.emit(this.value);
+    }
+
+    if (!this.single && this.value[0] && this.value[1]) {
+      this.valueChange.emit(this.value);
+    }
+  }
 }

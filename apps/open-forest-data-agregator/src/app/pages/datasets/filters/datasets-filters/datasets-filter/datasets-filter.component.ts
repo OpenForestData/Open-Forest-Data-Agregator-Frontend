@@ -1,16 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ofd-agregator-datasets-filter',
   templateUrl: './datasets-filter.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./datasets-filter.component.scss']
 })
 export class DatasetsFilterComponent implements OnInit {
   @Input() header: string;
 
+  @Input() type = 'SELECT';
+
   @Input() key: string;
 
-  @Input() data: any[];
+  @Input() data: any[] = [];
 
   @Input() isExpanded: boolean;
 
@@ -42,7 +45,11 @@ export class DatasetsFilterComponent implements OnInit {
   toggleAllFilters() {
     if (!this.multiple) return;
     this.showAll = !this.showAll;
-    this.value = this.showAll ? this.data.map(val => val.value) : [];
+    this.value = this.showAll ? this.data : [];
     this.valueChange.emit(this.value);
+  }
+
+  emitChange(payload) {
+    this.valueChange.emit(payload);
   }
 }

@@ -24,7 +24,7 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    this.DSService.searchFilters = { field: 'q', data: this.searchValue };
+    this.DSService.searchFilters = { field: 'q', data: this.searchValue, search: true };
     this.DSService.updateQuerySubject.next(this.searchValue);
   }
 

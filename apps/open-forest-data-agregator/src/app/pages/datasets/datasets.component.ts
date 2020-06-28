@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { datasetsMock, categoriesMock } from '@app/pages/datasets/datasets.mock'
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 import { DatasetsService } from './datasets.service';
+import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
 
 /**
  * Datasets Component
@@ -20,6 +21,8 @@ import { DatasetsService } from './datasets.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatasetsComponent implements OnInit, OnDestroy {
+  @ViewChild(DatasetsFiltersComponent) filterComponent: DatasetsFiltersComponent;
+
   public breadcrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zbiory danych', href: '/datasets' }
@@ -73,7 +76,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
 
   setCategory(value) {
-    this.DSService.searchFilters = { field: 'category', data: value };
+    this.DSService.searchFilters = { field: 'category', data: value, search: true };
   }
 
   public get selectedCategory() {
@@ -94,10 +97,52 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     return this.DSService.searchFilters.data.rows;
   }
 
+  public get advancedSelected() {
+    if (this.filterComponent) {
+      const advanced = []
+        .concat(...this.filterComponent.filtersConfig.map(item => item.data))
+        .filter(item => item.activeOrder && item.key !== 'category')
+        .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
+
+      const activeArr = [
+        {
+          name: 'search.search',
+          type: 'SELECT',
+          key: 'search',
+          values: [this.filterComponent.searchValue].filter(item => item.length)
+        },
+        {
+          name: 'search.category',
+          type: 'SELECT',
+          key: 'category',
+          values: this.DSService.searchFilters.data['category'] ? [this.DSService.searchFilters.data['category']] : []
+        },
+        {
+          name: 'search.mediaStatic',
+          type: 'SELECT',
+          key: 'mediaStatic',
+          values: this.filterComponent.filtersState.mediaStatic ? ['True'] : []
+        },
+        {
+          name: 'search.geoStatic',
+          type: 'SELECT',
+          key: 'geoStatic',
+          values: this.filterComponent.filtersState.geoStatic ? ['True'] : []
+        },
+        ...advanced
+      ];
+
+      return activeArr.filter(item => item.values.length);
+    }
+
+    return [];
+  }
+
   /**
    * @ignore
    */
   ngOnInit() {
+    this.DSService.resetFilters();
     this.getData();
   }
 
@@ -106,8 +151,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
 
   paginationChanged(payload) {
-    this.DSService.searchFilters = { field: 'start', data: payload.page };
-    this.DSService.searchFilters = { field: 'rows', data: payload.limit };
+    this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
+    this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
   }
 
   getData() {
@@ -147,6 +192,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           detailsData: {},
           files: [],
           images: [],
+          labels: [],
           subject: item.subject ? item.subject.join(', ') : '',
           coordinates: coords,
           description: item.dsDescriptionValue ? item.dsDescriptionValue.join(', ') : '',
@@ -184,14 +230,10 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
               item.createdAt = singlDetails.latestVersion.createTime;
               item.files = singlDetails.latestVersion.files;
-              const images = singlDetails.latestVersion.files
-                .filter((_: any) => _.thumbnail_url)
-                .map((_: any) => _.thumbnail_url);
-              item.preview = images[0] || null;
-              item.images = singlDetails.latestVersion.files
-                .filter((_: any) => _.download_url)
-                .map((_: any) => _.download_url);
-
+              const images = singlDetails.latestVersion.files.filter((_: any) => _.thumbnail_url);
+              item.preview = images.map((_: any) => _.thumbnail_url)[0] || null;
+              item.images = images.map((_: any) => _.download_url);
+              item.labels = images.map((_: any) => _.label);
               item.detailsData = singlDetails;
             }
           });
@@ -199,6 +241,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
         });
       }
 
+      this.DSService.newFiltersStructureSubject.next();
       this.changeDetectorRef.detectChanges();
     });
   }
