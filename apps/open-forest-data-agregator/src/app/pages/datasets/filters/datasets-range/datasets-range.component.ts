@@ -20,6 +20,8 @@ export class DatasetsRangeComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
+  public layers = [];
+
   public map: Map;
 
   public sub: Subscription;
@@ -31,6 +33,8 @@ export class DatasetsRangeComponent implements OnInit, OnChanges, OnDestroy {
     draw: {
       marker: false,
       rectangle: true,
+      circle: false,
+      polygon: false,
       polyline: false,
       circlemarker: false
     },
@@ -50,9 +54,21 @@ export class DatasetsRangeComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   constructor(public DSService: DatasetsService) {
-    this.sub = this.DSService.triggerSearchSubject.subscribe(_ => {
-      this.drawnItems = featureGroup();
-      if (this.value.length) this.drawnItems.addLayer(rectangle(this.value));
+    this.sub = this.DSService.newFiltersStructureSubject.subscribe(_ => {
+      setTimeout(() => {
+        this.drawnItems = featureGroup();
+        if (this.value.length) {
+          const layer = rectangle(this.value);
+          this.layers.push(layer);
+
+          this.drawnItems.addLayer(layer);
+        } else {
+          this.layers.forEach(layer => {
+            // console.log(layer);
+            this.map.removeLayer(layer);
+          });
+        }
+      }, 50);
     });
   }
 
@@ -66,6 +82,8 @@ export class DatasetsRangeComponent implements OnInit, OnChanges, OnDestroy {
     this.map = map;
     if (this.value.length) {
       this.drawnItems.addLayer(rectangle(this.value));
+      const layer = rectangle(this.value);
+      this.layers.push(layer);
     }
   }
 
@@ -74,6 +92,8 @@ export class DatasetsRangeComponent implements OnInit, OnChanges, OnDestroy {
     this.drawnItems.addLayer(layer);
 
     const bounds = this.drawnItems.getBounds();
+
+    this.layers.push(layer);
 
     this.valueChange.emit([bounds[Object.keys(bounds)[0]], bounds[Object.keys(bounds)[1]]]);
   }

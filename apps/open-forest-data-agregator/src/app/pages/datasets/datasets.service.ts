@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { query } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, isPlatformBrowser } from '@angular/common';
+import { tmpdir } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,8 @@ export class DatasetsService {
   public updateQuerySubject: Subject<any> = new Subject();
   public removeFilterSubject: Subject<any> = new Subject();
   public newFiltersStructureSubject: Subject<any> = new Subject();
-
+  public sortSubject: Subject<any> = new Subject();
   private searchDebounceTimeout = null;
-  public activeFiltersArray = [];
-
   private _searchFilters = {
     q: '',
     start: 1,
@@ -177,15 +176,30 @@ export class DatasetsService {
             values = [`${values[0]['lat']}_${values[0]['lng']}`, `${values[1]['lat']}_${values[1]['lng']}`];
           }
 
+          const temp = [];
           values
             .filter(value => value !== undefined && values !== null)
             .forEach(value => {
-              if (encode) {
-                objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+              if (Array.isArray(value)) {
+                value.forEach(_ => {
+                  if (encode) {
+                    objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(_));
+                  } else {
+                    temp.push(_);
+                  }
+                });
               } else {
-                objectQueryString.push(key + '=' + value);
+                if (encode) {
+                  objectQueryString.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+                } else {
+                  temp.push(value);
+                }
               }
             });
+
+          if (temp.length) {
+            objectQueryString.push(`${key}=(${temp.join(' OR ')})`);
+          }
         });
     });
 

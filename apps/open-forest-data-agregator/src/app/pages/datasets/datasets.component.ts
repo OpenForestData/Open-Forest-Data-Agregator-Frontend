@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { datasetsMock, categoriesMock } from '@app/pages/datasets/datasets.mock'
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 import { DatasetsService } from './datasets.service';
+import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
 
 /**
  * Datasets Component
@@ -20,6 +21,8 @@ import { DatasetsService } from './datasets.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatasetsComponent implements OnInit, OnDestroy {
+  @ViewChild(DatasetsFiltersComponent) filterComponent: DatasetsFiltersComponent;
+
   public breadcrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zbiory danych', href: '/datasets' }
@@ -94,13 +97,53 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     return this.DSService.searchFilters.data.rows;
   }
 
+  public get advancedSelected() {
+    if (this.filterComponent) {
+      const advanced = []
+        .concat(...this.filterComponent.filtersConfig.map(item => item.data))
+        .filter(item => item.activeOrder && item.key !== 'category')
+        .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
+
+      const activeArr = [
+        {
+          name: 'search.search',
+          type: 'SELECT',
+          key: 'search',
+          values: [this.filterComponent.searchValue].filter(item => item.length)
+        },
+        {
+          name: 'search.category',
+          type: 'SELECT',
+          key: 'category',
+          values: this.DSService.searchFilters.data['category'] ? [this.DSService.searchFilters.data['category']] : []
+        },
+        {
+          name: 'search.mediaStatic',
+          type: 'SELECT',
+          key: 'mediaStatic',
+          values: this.filterComponent.filtersState.mediaStatic ? ['True'] : []
+        },
+        {
+          name: 'search.geoStatic',
+          type: 'SELECT',
+          key: 'geoStatic',
+          values: this.filterComponent.filtersState.geoStatic ? ['True'] : []
+        },
+        ...advanced
+      ];
+
+      return activeArr.filter(item => item.values.length);
+    }
+
+    return [];
+  }
+
   /**
    * @ignore
    */
   ngOnInit() {
-    this.getData();
-
     this.DSService.resetFilters();
+    this.getData();
   }
 
   setFullscreen(value) {

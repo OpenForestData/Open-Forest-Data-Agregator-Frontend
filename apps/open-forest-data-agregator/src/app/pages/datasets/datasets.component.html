@@ -43,6 +43,7 @@
         ></ofd-agregator-datasets-data-presentation>
 
         <ofd-agregator-datasets-active-filters
+          [activeFilters]="advancedSelected"
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
         ></ofd-agregator-datasets-active-filters>
 

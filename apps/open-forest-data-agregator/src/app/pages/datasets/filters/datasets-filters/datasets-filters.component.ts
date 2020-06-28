@@ -36,7 +36,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
   public filtersByKey = {};
 
   public moreCountStart = 6;
-  public orderCounter = 0;
+  public orderCounter = 1;
 
   public showAdvanced = false;
   public structureFirstTimeCreated = true;
@@ -62,8 +62,6 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
 
       return group;
     });
-
-    // return this.filtersConfig;
   }
 
   public get advancedSelected() {
@@ -77,12 +75,19 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     const filters = this.DSService.searchFilters.data;
     const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
 
-    const queryString = `
-    ${this.searchValue ? 'q=' + this.searchValue : ''}
-    ${filters.geoStatic ? ' AND geoStatic=true' : ''}
-    ${filters.mediaStatic ? ' AND mediaStatic=true' : ''}
-    ${cat ? ' AND category=' + cat : ''}
-    ${this.DSService.objectToQuery(this.filtersConfig, false)}`;
+    let queryString = `${this.searchValue ? 'q=' + this.searchValue + ' AND ' : ''}${
+      filters.geoStatic ? 'geoStatic=true  AND ' : ''
+    }${filters.mediaStatic ? 'mediaStatic=true  AND ' : ''}${
+      cat ? 'category=' + cat + ' AND ' : ''
+    }${this.DSService.objectToQuery(this.filtersConfig, false)}`.trim();
+
+    if (queryString.substr(-4) === ' AND') {
+      queryString = queryString.slice(0, -4);
+    }
+
+    if (queryString.substr(-3) === ' OR') {
+      queryString = queryString.slice(0, -3);
+    }
 
     return queryString;
   }
@@ -98,7 +103,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
 
     this.subs.add(
       this.DSService.removeFilterSubject.subscribe(payload => {
-        // this.removeFilterByName(payload.name, payload.index);
+        this.removeFilterByName(payload.name, payload.index);
       })
     );
 
@@ -150,6 +155,11 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     const data = this.DSService.searchData['list'];
     const groupOrder = {};
     const advKey = 'listing_filter_fields';
+    if (this.filtersByKey['category']) {
+      this.filtersByKey['category'].values = this.filtersState.category;
+    }
+    const categoryValue =
+      (this.structureFirstTimeCreated ? this.queryParams['category'] : this.filtersState.category || '') || '';
     const filtersConfig = [
       {
         title: '',
@@ -164,9 +174,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
               ? true
               : false,
             name: 'search.categories',
-            values: this.structureFirstTimeCreated
-              ? this.queryParams['category']
-              : this.filtersByKey['category'].values || [],
+            values: categoryValue,
             multiple: false,
             items: Object.keys(data[advKey]['category']).map(i =>
               Object.create({
@@ -175,14 +183,14 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
               })
             ),
             type: 'SIGNLE-SELECT',
-            activeOrder: this.queryParams['category'] ? this.orderCounter : null
+            activeOrder: categoryValue ? this.orderCounter : null
           }
         ]
       }
     ];
 
     this.filtersByKey['category'] = filtersConfig[0].data[0];
-    if (this.queryParams['category']) this.orderCounter += 1;
+    if (categoryValue) this.orderCounter += 1;
 
     Object.keys(data['filter_groups']).forEach((key, i) => {
       filtersConfig.push({
@@ -203,6 +211,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
         const anyValues =
           (this.structureFirstTimeCreated ? this.queryParams[key] : this.filtersByKey[key].values || []) || [];
         const type = this.typeConversion[filter.type] || 'INPUT';
+
         let finalValue = Array.isArray(anyValues) ? anyValues.filter(value => value) : [anyValues];
 
         if (type === 'MAP' && anyValues.length && this.structureFirstTimeCreated) {
@@ -214,8 +223,11 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
           ];
         }
 
+        if (['TEXT', 'TEXTBOX', 'SELECT'].includes(type) && anyValues[0] && Array.isArray(anyValues[0])) {
+          finalValue = anyValues[0];
+        }
+
         if (type === 'DATE' && anyValues.length) {
-          // if (this.structureFirstTimeCreated) debugger;
           // @ts-ignore
           finalValue = finalValue.map(item => moment(item));
         }
@@ -271,6 +283,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
         data: filtersConfig,
         search: Boolean(Object.keys(this.queryParams).length)
       };
+      this.DSService.sortSubject.next();
     }
 
     this.filtersConfig = filtersConfig;
@@ -278,7 +291,8 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.structureFirstTimeCreated = false;
 
     this.searchValue = this.filtersState.q;
-    this.updateActiveFilters();
+    this.DSService.updateQuerySubject.next(this.filtersState.q);
+
     this.cd.detectChanges();
   }
 
@@ -311,48 +325,6 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.DSService.hideHeader = false;
   }
 
-  public updateActiveFilters() {
-    let activeArr = [
-      {
-        name: 'search.search',
-        type: 'SELECT',
-        values: [this.searchValue].filter(item => item.length)
-      },
-      {
-        name: 'search.category',
-        type: 'SELECT',
-        values: this.DSService.searchFilters.data['category'] ? [this.DSService.searchFilters.data['category']] : []
-      },
-      {
-        name: 'search.mediaStatic',
-        type: 'SELECT',
-        values: this.filtersState.mediaStatic.value ? ['True'] : []
-      },
-      {
-        name: 'search.geoStatic',
-        type: 'SELECT',
-        values: this.filtersState.geoStatic.value ? ['True'] : []
-      }
-    ];
-    this.filtersConfig.forEach(group => {
-      // @ts-ignore
-      group.data.forEach(item => {
-        if (item.key === 'category') return;
-        activeArr.push({
-          name: item.name,
-          type: item.type,
-          values: Array.isArray(item.values)
-            ? item.values.filter((_: any) => (_ === undefined ? false : _.length))
-            : [item.values].filter((_: any) => (_ === undefined ? false : _.length))
-        });
-      });
-    });
-
-    activeArr = activeArr.filter(item => item.values.length);
-
-    this.DSService.activeFiltersArray = activeArr;
-  }
-
   searchAdvenced() {
     this.DSService.searchFilters = { field: 'q', data: this.searchValue };
     const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
@@ -362,6 +334,40 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.showAdvanced = false;
     this.DSService.hideHeader = false;
     this.DSService.searchFilters = { field: 'basic', data: this.filtersConfig, search: true };
+  }
+
+  public removeFilterByName(name, index) {
+    switch (name) {
+      case 'search':
+        this.searchValue = '';
+        break;
+      case 'category':
+        this.filtersByKey['category'].values = '';
+        break;
+      case 'mediaStatic':
+        this.DSService.searchFilters = { field: 'mediaStatic', data: false, search: true };
+        break;
+      case 'geoStatic':
+        this.DSService.searchFilters = { field: 'geoStatic', data: false, search: true };
+        break;
+      default:
+        if (this.filtersByKey[name]) {
+          switch (this.filtersByKey[name].type) {
+            case 'DATERANGE':
+            case 'MAP':
+              this.filtersByKey[name].values = [];
+              break;
+            case 'SINGLE-SELECT':
+              this.filtersByKey[name].values = '';
+              break;
+            default:
+              this.filtersByKey[name].values.splice(index, 1);
+              break;
+          }
+        }
+        break;
+    }
+    this.searchAdvenced();
   }
 
   ngOnDestroy() {
