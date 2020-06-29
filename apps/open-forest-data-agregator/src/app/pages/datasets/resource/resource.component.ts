@@ -193,7 +193,7 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'tiffViewer';
       } else if (
-        ['application/geo+json', 'application/vnd.google-earth.kml+xml', 'wkt'].indexOf(
+        ['application/geo+json', 'application/vnd.google-earth.kml+xml', 'wkt', 'Shape'].indexOf(
           this.resource.details?.fileTypeDisplay
         ) >= 0
       ) {
@@ -254,6 +254,14 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       return this.resource.dataset_details?.alternativeURL;
     } else {
       return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
+    }
+  }
+
+  formatConverter(filename: string) {
+    let format = filename;
+    if (format) {
+      format = format.substring(format.indexOf('.') + 1);
+      return format;
     }
   }
 }

@@ -71,6 +71,7 @@
     "datatables.net-responsive-dt": "^2.2.5",
     "express": "^4.15.2",
     "express-serve-static-core": "^0.1.1",
+    "file-saver": "^2.0.2",
     "georaster": "^1.0.5",
     "georaster-layer-for-leaflet": "^0.4.2",
     "geotiff": "^1.0.0-beta.11",

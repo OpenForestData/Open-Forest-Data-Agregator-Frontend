@@ -3,6 +3,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { DatasetService } from '@app/services/dataset.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'ofd-agregator-dataset',
@@ -130,6 +131,7 @@ export class DatasetComponent implements OnInit {
   metricData: any = {};
   sort: any;
   files: any = [];
+  metadataObject: any = {};
 
   constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
 
@@ -222,5 +224,48 @@ export class DatasetComponent implements OnInit {
     } else if (sort.value === 2) {
       this.files = copyOfInitialFiles.filter(file => file.dataFile.contentType === 'video/mp4');
     }
+  }
+
+  convertMetadataToFile(data: any) {
+    let firstRow = '';
+    let secondRow = '';
+    Object.keys(data).forEach(first => {
+      firstRow += first + ';';
+    });
+    Object.values(data).forEach(second => {
+      secondRow += second + ';';
+    });
+    const csvArray = [firstRow, '\r\n', secondRow];
+
+    const a = document.createElement('a');
+    const blob = new Blob(csvArray, { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = `${this.dataset.latestVersion?.metadataBlocks?.citation?.fields[0]?.value}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
+
+  getMetadata(metadata) {
+    Object.values(metadata).forEach((meta: any) => {
+      meta?.fields.forEach(field => {
+        if (field.multiple === true) {
+          if (field.typeName === 'subject') {
+            this.metadataObject[field.typeName] = field.value[0];
+          } else if (field.typeName !== 'subject') {
+            field.value.forEach(value => {
+              Object.values(value).forEach((val: any) => {
+                this.metadataObject[val.typeName] = val.value;
+              });
+            });
+          }
+        } else if (field.multiple === false) {
+          this.metadataObject[field.typeName] = field.value;
+        }
+      });
+    });
+    return this.metadataObject;
   }
 }

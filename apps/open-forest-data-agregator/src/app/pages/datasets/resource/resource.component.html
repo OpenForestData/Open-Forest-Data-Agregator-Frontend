@@ -82,7 +82,7 @@
         <div class="right-container__header">
           <div class="right-container__header__title">
             <div class="background-gray">
-              {{ metaCitation.type | lowercase }}
+              {{ formatConverter(resource.details?.name) | lowercase }}
             </div>
             <p>{{ metricData?.title?.value }}</p>
           </div>
@@ -156,7 +156,7 @@
                   'application/vnd.google-earth.kml+xml',
                   'wkt',
                   'gml',
-                  'shp'
+                  'Shape'
                 ].indexOf(resource.details?.fileTypeDisplay) >= 0
               "
             >
