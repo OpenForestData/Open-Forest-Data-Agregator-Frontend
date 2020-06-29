@@ -234,7 +234,7 @@
             {{ 'datasets.dataset.headers.metadata' | translate }}
           </div>
           <div class="metadata-header__export">
-            <button class="button">
+            <button class="button" (click)="convertMetadataToFile(getMetadata(dataset?.latestVersion?.metadataBlocks))">
               {{ 'global.export' | translate }}
               <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
             </button>

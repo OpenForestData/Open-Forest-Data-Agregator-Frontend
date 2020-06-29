@@ -17,10 +17,11 @@ import '@asymmetrik/ngx-leaflet';
 import 'leaflet-kml';
 import 'georaster-layer-for-leaflet';
 import * as omnivore from '@mapbox/leaflet-omnivore';
-// import shapefile from 'shapefile';
+import 'shapefile';
 declare let GeoRasterLayer;
 declare let parseGeoraster;
 declare let L;
+declare let shapefile;
 @Component({
   selector: 'ofd-agregator-map',
   templateUrl: './map.component.html',
@@ -73,26 +74,27 @@ export class MapComponent implements OnInit {
       this.fetchKML(this.resource);
     } else if (this.type === 'wkt') {
       omnivore.wkt(path).addTo(this.map);
-    } else if (this.type === 'shp') {
+    } else if (this.type === 'Shape') {
       console.log('IM IN SHP ELSE IF');
-      // this.getShp(path);
+      this.getShp(path);
     }
   }
 
-  // getShp(path) {
-  //   console.log('shp path: ', path);
-  //   const shpLayer = L.geoJSON().addTo(this.map);
-  //   shapefile
-  //     .open(path)
-  //     .then(source =>
-  //       source.read().then(function log(result) {
-  //         if (result.done) return;
-  //         shpLayer.addData(result.value);
-  //         return source.read().then(log);
-  //       })
-  //     )
-  //     .catch(error => console.error(error.stack));
-  // }
+  getShp(path) {
+    console.log('shp path: ', path);
+    const shpLayer = L.geoJSON().addTo(this.map);
+    shapefile
+      .open(path)
+      .then(source =>
+        source.read().then(function log(result) {
+          console.log('results shp: ', result);
+          if (result.done) return;
+          shpLayer.addData(result.value);
+          return source.read().then(log);
+        })
+      )
+      .catch(error => console.error(error.stack));
+  }
 
   fetchGeoTiff(path) {
     console.log('parseGeoraster: ', L);

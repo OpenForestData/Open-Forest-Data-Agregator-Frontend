@@ -576,10 +576,10 @@ b {
     flex-direction: column;
     padding: 5px 28px 5px 28px;
     &__keys {
-      width: 80% !important;
+      width: 20% !important;
     }
     &__values {
-      width: 20% !important;
+      width: 80% !important;
     }
   }
   .meta-citation__look-up__values {
@@ -636,5 +636,64 @@ b {
     .social-bar {
       padding: 40px 28px;
     }
+  }
+
+  .meta-citation-box {
+    margin-bottom: 20px;
+  }
+
+  .meta-citation {
+    &__row::ng-deep {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      padding: 16px 0 0 14px;
+    }
+    &__header::ng-deep {
+      float: right;
+      padding: 36px 10px 15px 0;
+    }
+    &__look-up {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      padding: 16px 0 0 14px;
+      &__values {
+        &__img {
+          width: 95px;
+          height: 132px;
+        }
+      }
+    }
+    .meta-citation__row__keys,
+    .meta-citation__look-up__keys {
+      width: 20%;
+    }
+    .meta-citation__row__values,
+    .meta-citation__look-up__values {
+      width: 80%;
+    }
+  }
+
+  .meta-darwin {
+    &__row::ng-deep {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      padding: 16px 0 0 14px;
+    }
+    .meta-citation__row__keys {
+      width: 20%;
+    }
+    .meta-citation__row__values {
+      width: 80%;
+    }
+  }
+
+  .meta-citation__look-up__values {
+    width: 20% !important;
   }
 }
