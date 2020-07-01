@@ -107,7 +107,7 @@ export class DatasetComponent implements OnInit {
         return file;
       });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
-      this.allFiles = response?.latestVersion?.files.map(x => x);
+      this.allFiles = [...response?.latestVersion?.files];
     });
   }
 
@@ -120,7 +120,7 @@ export class DatasetComponent implements OnInit {
    */
   formatConverter(filename: string) {
     let format = filename;
-    format = format.substring(format.indexOf('.') + 1);
+    format = format.substr(format.lastIndexOf('.') + 1);
     return format;
   }
 
@@ -193,7 +193,7 @@ export class DatasetComponent implements OnInit {
    * // returns list of files in order by name Z-A
    */
   onSortChange(sort) {
-    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
     this.sort = sort;
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
@@ -210,7 +210,7 @@ export class DatasetComponent implements OnInit {
    * // returns List of all files
    */
   onSortTypeChange(sort) {
-    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
     } else if (sort.value === 1) {

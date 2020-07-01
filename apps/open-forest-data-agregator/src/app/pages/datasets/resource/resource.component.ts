@@ -234,7 +234,7 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   formatConverter(filename: string) {
     let format = filename;
     if (format) {
-      format = format.substring(format.indexOf('.') + 1);
+      format = format.substr(format.lastIndexOf('.') + 1);
       return format;
     }
   }

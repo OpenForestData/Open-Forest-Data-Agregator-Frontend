@@ -18,7 +18,6 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <!-- TODO: Add if no alternativeURL then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
               <a [href]="makeSource()">{{
                 dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
                   ? (dataset?.providers)[0]?.authorAffiliation?.value
@@ -80,9 +79,6 @@
             <svg-icon [src]="'/assets/images/files.svg'" [applyCss]="true"></svg-icon>
             <p>{{ 'datasets.dataset.headers.files' | translate }}</p>
           </div>
-          <!-- <ofd-agregator-data-container class="files-container" [title]="'datasets.dataset.headers.files' | translate"
-            [iconSrc]="'/assets/images/files.svg'" [expandable]="false" [expanded]="false">
-          </ofd-agregator-data-container> -->
 
           <div class="right-container__files__sorting">
             <div class="right-container__files__sorting__bar-right">
@@ -219,7 +215,7 @@
             [pageSize]="pageSize"
             [(page)]="page"
             [showOffsets]="true"
-            *ngIf="allFiles?.length > 15"
+            *ngIf="allFiles?.length > pageSize"
             (changes)="paginationChange($event)"
           >
           </ofd-agregator-pagination>
