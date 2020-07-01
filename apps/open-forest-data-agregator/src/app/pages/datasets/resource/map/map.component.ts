@@ -36,13 +36,18 @@ export class MapComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Function that initialize at the start of website loading. Creates santinized link.
+   */
   ngOnInit() {
     this.setMarker();
     this.initMap();
-    console.log('resource map init: ', this.resource);
     this.getMarkers(this.resource);
   }
 
+  /**
+   * Creates markers that leaflet lacks
+   */
   setMarker() {
     const iconRetinaUrl = '/assets/images/marker-icon-2x.png';
     const iconUrl = '/assets/images/marker-icon.png';
@@ -60,10 +65,15 @@ export class MapComponent implements OnInit {
     Marker.prototype.options.icon = iconDefault;
   }
 
+  /**
+   * Main function for recognizing type and show it on map
+   * @param path Path to single resource file
+   * @example getMarkers('geotiff')
+   * Runs fetchGeoTiff('geotiff')
+   */
   getMarkers(path: string) {
     if (this.type === 'application/geo+json') {
       this.http.get(path).subscribe((results: any) => {
-        console.log('geojson results: ', results);
         for (const i of results.features) {
           geoJSON(i).addTo(this.map);
         }
@@ -80,14 +90,16 @@ export class MapComponent implements OnInit {
     }
   }
 
+  /**
+   * Display SHP file on map
+   * @param path Path with current resource
+   */
   getShp(path) {
-    console.log('shp path: ', path);
     const shpLayer = L.geoJSON().addTo(this.map);
     shapefile
       .open(path)
       .then(source =>
         source.read().then(function log(result) {
-          console.log('results shp: ', result);
           if (result.done) return;
           shpLayer.addData(result.value);
           return source.read().then(log);
@@ -96,18 +108,20 @@ export class MapComponent implements OnInit {
       .catch(error => console.error(error.stack));
   }
 
+  /**
+   * Display GEOTiff file on map
+   * @param path Path to resource file
+   */
   fetchGeoTiff(path) {
-    console.log('parseGeoraster: ', L);
     fetch(path)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => {
         parseGeoraster(arrayBuffer).then(georaster => {
-          console.log('georaster: ', georaster);
           const layer = new GeoRasterLayer({
             georaster,
             opacity: 0.7,
             pixelValuesToColorFn: values => (values[0] === 42 ? '#ffffff' : '#000000'),
-            resolution: 64 // optional parameter for adjusting display resolution
+            resolution: 64
           });
           layer.addTo(this.map);
           this.map.fitBounds(layer.getBounds());
@@ -115,6 +129,10 @@ export class MapComponent implements OnInit {
       });
   }
 
+  /**
+   * Get KML file and display it on map
+   * @param path File path to resource
+   */
   fetchKML(path) {
     fetch(path)
       .then(response => response.text())
@@ -128,6 +146,9 @@ export class MapComponent implements OnInit {
       });
   }
 
+  /**
+   * Initialize map and set view on global map
+   */
   private initMap(): void {
     this.map = new L.Map('map');
     this.tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');

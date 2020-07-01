@@ -21,7 +21,6 @@
             </p>
             <p>
               <b> {{ 'datasets.dataset.metadata-all.source' | translate }}</b>
-              <!-- TODO: Add if no author affiliation then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
               <a [href]="makeSource()">{{
                 (resource.dataset_details?.providers)[0].authorAffiliation?.value
                   ? (resource.dataset_details?.providers)[0]?.authorAffiliation?.value
@@ -183,6 +182,37 @@
                 [type]="resource.details?.fileTypeDisplay"
               >
               </ofd-agregator-iframe>
+            </div>
+            <div
+              class="right-container__files__file-viewer__not-supported"
+              *ngIf="
+                [
+                  'Plain Text',
+                  'JPEG Image',
+                  'PNG Image',
+                  'GIF Image',
+                  'Adobe PDF',
+                  'JSON',
+                  'Comma Separated Values',
+                  'Tab-Separated Values',
+                  'MS Word',
+                  'MS Excel Spreadsheet',
+                  'application/geo+json',
+                  'geotiff',
+                  'application/vnd.google-earth.kml+xml',
+                  'wkt',
+                  '3d',
+                  'application/x-tgif',
+                  'TIFF Image',
+                  'micro',
+                  'map_geonode',
+                  'dashboard_grafana',
+                  'application/vnd.ms-pki.stl',
+                  'Shape'
+                ].indexOf(resource.details?.fileTypeDisplay) === -1
+              "
+            >
+              <ofd-agregator-not-supported></ofd-agregator-not-supported>
             </div>
           </div>
         </div>

@@ -75,7 +75,7 @@
         "access": "Dostęp: ",
         "sortBy": "Sortuj wg",
         "download": "Pobierz",
-        "records": "Rekordy",
+        "records": "Rekordów",
         "goto": "Idź do strony"
       },
       "filters": {
@@ -181,10 +181,13 @@
         "dwcBasisOfRecord": "Basis of Record",
         "timePeriodCoveredEnd": "Time Perdiod End",
         "timePeriodCoveredStart": "Time Perdiod Start",
-        "dwcVerbatimLocality": "Verbatim Locality"
+        "dwcVerbatimLocality": "Verbatim Locality",
+        "dwcPreparations": "Preparations",
+        "dwcVernacularName": "Vernacular Name"
       }
     },
     "resource": {
+      "not-supported-type": "Chosen type is not supported.",
       "headers": {
         "look-up": "Podgląd"
       },

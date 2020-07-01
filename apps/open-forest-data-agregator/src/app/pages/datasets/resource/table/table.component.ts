@@ -15,22 +15,37 @@ export class TableComponent implements OnInit {
   convertedData: any = {};
   constructor(private http: HttpClient) {}
 
+  /**
+   * Function that initialize on website loading and get CSV file.
+   */
   ngOnInit() {
     this.getCSV(this.resource);
   }
 
+  /**
+   * Function that keep sorting in keyvalue pipe
+   * @param a Sorting value a
+   * @param b Sorting value b
+   */
   keepOrder = (a, b) => {
     return a;
   };
 
+  /**
+   * Get resource in type of text and parse it
+   * @param path Path to resource
+   */
   getCSV(path: string) {
     this.http.get(path, { responseType: 'text' }).subscribe(results => {
       this.csvContainer = results;
-      console.log('convetrted csv:', this.csvContainer);
       this.parseToDisplay(this.csvContainer);
     });
   }
 
+  /**
+   * Find delimiter from content and parse for display
+   * @param content Content of file
+   */
   parseToDisplay(content: string) {
     let customDelimiter = ';';
     if (this.type === 'Comma Separated Values') {

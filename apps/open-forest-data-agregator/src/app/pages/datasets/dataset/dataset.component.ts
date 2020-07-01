@@ -36,33 +36,19 @@ export class DatasetComponent implements OnInit {
   };
 
   public optionsAccess: IUISelectOptions = {
-    placeholder: 'Sortuj wg'
+    placeholder: 'Filtruj wg'
   };
 
   public optionsFilter: IUISelectOptions = {
-    placeholder: 'Filtruj wg'
+    placeholder: 'Sortuj wg'
   };
 
   mockLeftSide: any = {
     downloadAmount: 5,
-    createdDate: '20.07.2019',
-    source: {
-      type: 'Dataverse',
-      link: 'https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/UGMKHW'
-    },
-    author: 'Olga Kurek',
     dataOpenness: 'Lorem ipsum',
     license: {
       name: 'GNU General Public License',
       link: 'https://pl.wikipedia.org/wiki/GNU_General_Public_License'
-    },
-    subjects: ['Medicine', 'Health and Life', 'Sciences'],
-    keywords: ['mammal', 'wolf', 'mustela common random lorem'],
-    version: {
-      number: '0.1',
-      date: new Date(),
-      acceptedBy: 'Olga Kurek',
-      link: 'https://whiteaster.com/'
     }
   };
 
@@ -71,52 +57,8 @@ export class DatasetComponent implements OnInit {
     { name: 'Zasoby danych', href: '/datasets' }
   ];
 
-  testData = {
-    header: {
-      title: 'Jam Łasica(Pawian Pospolity)',
-      body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Mauris vitae magna sodales, dapibus metus quis, scelerisque nulla. Maecenas nec orci at dui l`,
-      api: 'http://whiteaster.com',
-      apiUrl: 'http://whiteaster.com'
-    },
-    body: {
-      name: 'abc'
-    },
-    files: [
-      {
-        title: 'DataViewer - MRIPAS_coll_159681_Mustela  Nivalis_ Xray__IR_rec00000157.bmp 2020-03-30 10-01-40.mp4',
-        format: 'mp4',
-        link: 'https://whiteaster.com'
-      },
-      {
-        title: 'MRIPAS_coll_159681_MustelaNivalis_1990_scan.jpg',
-        format: 'jpg',
-        link: 'https://whiteaster.com'
-      },
-      {
-        title: 'MRIPAS_coll_23624_MustelaNivalis_xray.zip',
-        format: 'zip',
-        link: 'https://whiteaster.com'
-      }
-    ]
-  };
-
-  metaCitation: object = {
-    id: 1,
-    'publication-date': '2020-05-21',
-    title: 'Jam Łasica(Pawian Pospolity)',
-    author: 'Olga Kurek',
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Mauris vitae magna sodales, dapibus metus quis, scelerisque nulla. Maecenas nec orci at dui l`,
-    subject: 'Medicine, Science, Test',
-    keyword: 'Medicine, Science, Test',
-    depositor: 'Kurek, Olga',
-    'deposit-date': '2020-05-21'
-  };
-
   showOffsets = false;
 
-  pages = 3;
   pageSize = 15;
   page = 1;
   offset = 2;
@@ -132,9 +74,14 @@ export class DatasetComponent implements OnInit {
   sort: any;
   files: any = [];
   metadataObject: any = {};
+  allFiles: any = [];
 
   constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
 
+  /**
+   * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
+   * Convert doi and get dataset details based on DOI
+   */
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
@@ -145,8 +92,12 @@ export class DatasetComponent implements OnInit {
     });
   }
 
-  pageClick(page) {}
-
+  /**
+   * Get Dataset details from backend and translate it to more readable format.
+   * @param doi DOI a unique identity from Dataverse
+   * @example getDatasetDetails(doi)
+   * @returns Observable with details of given doi dataset
+   */
   getDatasetDetails(doi) {
     this.datasetService.getDatasetByDOI(doi).subscribe(response => {
       this.dataset = response;
@@ -156,28 +107,48 @@ export class DatasetComponent implements OnInit {
         return file;
       });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
-      console.log('dataset: ', this.dataset);
+      this.allFiles = [...response?.latestVersion?.files];
     });
   }
 
+  /**
+   * Function for getting extension from filename
+   * @param { string } filename Name of file
+   * @example
+   * formatConverter('test.abc')
+   * // returns abc
+   */
   formatConverter(filename: string) {
     let format = filename;
-    format = format.substring(format.indexOf('.') + 1);
+    format = format.substr(format.lastIndexOf('.') + 1);
     return format;
   }
 
+  /**
+   * Opens a new window with given link that downloads file
+   * @param file File
+   * @example
+   * // returns
+   * downloadSingleResource(file.download_url)
+   */
   downloadSingleResource(file: any) {
     return window.open(file, '_blank');
   }
 
+  /**
+   * Give a property isChecked to a file list
+   */
   toggleAllCheckboxes() {
     this.allFilesCheckboxState = !this.allFilesCheckboxState;
-    this.dataset.latestVersion.files = this.dataset.latestVersion.files.map(file => {
+    this.files = this.files.map(file => {
       file.isChecked = this.allFilesCheckboxState;
       return file;
     });
   }
 
+  /**
+   * Check if checkbox are checked and downloads files if are
+   */
   downloadCheckedFiles() {
     this.dataset.latestVersion.files.forEach(file => {
       if (file.isChecked) {
@@ -186,12 +157,26 @@ export class DatasetComponent implements OnInit {
     });
   }
 
+  /**
+   * Translate resource list into more readable object
+   * @param resource Resource list
+   * @example
+   * getMetrics(this.dataset)
+   * // returns Object with key : value
+   */
   getMetrics(resource) {
     resource.latestVersion?.metadataBlocks?.citation.fields.forEach(field => {
       this.metricData[field.typeName] = field;
     });
   }
 
+  /**
+   * Take a alternative link if exists and return it if not then make a link to dataset based on dataset details
+   * @returns { string } URL to dataset or other resource where the file exists
+   * @example
+   * makeSource()
+   * // returns https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/HAS4WC
+   */
   makeSource() {
     if (this.dataset?.alternativeURL) {
       return this.dataset?.alternativeURL;
@@ -200,13 +185,15 @@ export class DatasetComponent implements OnInit {
     }
   }
 
-  sortByName() {
-    this.dataset?.latestVersion?.files.reverse();
-    return this.dataset?.latestVersion?.files;
-  }
-
+  /**
+   * Sorting files based on sorting value
+   * @param sort Sorting value
+   * @example
+   * onSortChange(1)
+   * // returns list of files in order by name Z-A
+   */
   onSortChange(sort) {
-    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
     this.sort = sort;
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
@@ -215,8 +202,15 @@ export class DatasetComponent implements OnInit {
     }
   }
 
+  /**
+   * Sorting types function based on sorting value
+   * @param sort Sorting value
+   * @example
+   * onSortTypeChange(0)
+   * // returns List of all files
+   */
   onSortTypeChange(sort) {
-    const copyOfInitialFiles = this.dataset.latestVersion?.files.map(x => x);
+    const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
     } else if (sort.value === 1) {
@@ -226,6 +220,12 @@ export class DatasetComponent implements OnInit {
     }
   }
 
+  /**
+   * Concat data from converted metadata object into csv file and downloads it new window
+   * @param data Metadata object
+   * @example
+   * convertMetadataToFile(getMetadata(dataset?.latestVersion?.metadataBlocks))
+   */
   convertMetadataToFile(data: any) {
     let firstRow = '';
     let secondRow = '';
@@ -248,6 +248,12 @@ export class DatasetComponent implements OnInit {
     a.remove();
   }
 
+  /**
+   * Convert metadata from backend and convert it to more readable object
+   * @param metadata
+   * @example getMetadata(dataset?.latestVersion?.metadataBlocks)
+   * @returns Object with metadata with fields in form of key : value
+   */
   getMetadata(metadata) {
     Object.values(metadata).forEach((meta: any) => {
       meta?.fields.forEach(field => {
@@ -267,5 +273,13 @@ export class DatasetComponent implements OnInit {
       });
     });
     return this.metadataObject;
+  }
+
+  /**
+   * Pagination function for list of files on change trigger
+   * @param payload Payload
+   */
+  paginationChange(payload) {
+    this.files = this.allFiles.slice(payload.page * payload.limit - payload.limit, payload.page * payload.limit);
   }
 }

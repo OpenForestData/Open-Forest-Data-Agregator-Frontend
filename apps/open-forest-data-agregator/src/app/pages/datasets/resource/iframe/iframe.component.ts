@@ -14,19 +14,24 @@ export class IframeComponent implements OnInit {
   sanitizedLink;
   readonly EXTERNAL_URL: string = 'https://data-epuszcza.biaman.pl/';
   readonly DATAVERSE_URL: string = 'https://data-epuszcza.biaman.pl';
-  readonly EXAMPLE_URL: string =
-    '3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0';
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  /**
+   * Function that initialize at the start of website loading. Creates santinized link.
+   */
   ngOnInit() {
-    console.log('resource iframe: ', this.resource);
     this.sanitizedLink = this.joinAndSanitize();
   }
 
+  /**
+   * Creates iframe URL from EXTERNAL URL and dataset details.
+   * @example
+   * joinAndSanitize()
+   * // returns https://data-epuszcza.biaman.pl/tools/3dViewer.html?siteUrl=https://data-epuszcza.biaman.pl&fileid=73&datasetid=70&datasetversion=1
+   */
   joinAndSanitize() {
     const iframeUrl = `${this.EXTERNAL_URL}tools/${this.viewerType}.html?siteUrl=${this.DATAVERSE_URL}&fileid=${this.resource.details?.identifier}&datasetid=${this.resource.dataset_details?.id}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
-    console.log('iframe url: ', iframeUrl);
     return this.sanitizer.bypassSecurityTrustResourceUrl(iframeUrl);
   }
 }

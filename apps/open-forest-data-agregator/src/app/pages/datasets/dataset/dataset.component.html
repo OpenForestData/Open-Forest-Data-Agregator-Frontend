@@ -18,7 +18,6 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <!-- TODO: Add if no alternativeURL then authorAff === Dataverse alternativeURL === DatasetURLDOI -->
               <a [href]="makeSource()">{{
                 dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
                   ? (dataset?.providers)[0]?.authorAffiliation?.value
@@ -73,10 +72,6 @@
             <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0]?.value }}</p>
           </div>
           <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue?.value }}</p>
-          <!-- <div class="right-container__header__api">
-            <a href="{{ testData.header.apiUrl }}">{{ 'datasets.dataset.headers.api' | translate
-              }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon></a>
-          </div> -->
         </div>
 
         <div class="right-container__files">
@@ -84,9 +79,6 @@
             <svg-icon [src]="'/assets/images/files.svg'" [applyCss]="true"></svg-icon>
             <p>{{ 'datasets.dataset.headers.files' | translate }}</p>
           </div>
-          <!-- <ofd-agregator-data-container class="files-container" [title]="'datasets.dataset.headers.files' | translate"
-            [iconSrc]="'/assets/images/files.svg'" [expandable]="false" [expanded]="false">
-          </ofd-agregator-data-container> -->
 
           <div class="right-container__files__sorting">
             <div class="right-container__files__sorting__bar-right">
@@ -139,8 +131,8 @@
                   {{ 'datasets.dataset.headers.typeFile' | translate }}
                   <ui-select
                     class="type-sort"
-                    [items]="sortItemsFilter"
-                    [options]="optionsFilter"
+                    [items]="sortItemsType"
+                    [options]="optionsType"
                     [(value)]="sortByType"
                     (valueChange)="onSortTypeChange($event)"
                   >
@@ -181,7 +173,7 @@
               (modelChange)="toggleAllCheckboxes()"
               [(model)]="allFilesCheckboxState"
             >
-              {{ dataset.latestVersion?.files.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
+              {{ files?.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
             </ui-checkbox>
             <div class="right-container__files__download-all__buttons">
               <button class="right-container__files__download-all__buttons__download" (click)="downloadCheckedFiles()">
@@ -219,11 +211,12 @@
           </div>
 
           <ofd-agregator-pagination
-            [items]="50"
-            [pageSize]="15"
+            [items]="allFiles?.length"
+            [pageSize]="pageSize"
             [(page)]="page"
             [showOffsets]="true"
-            *ngIf="dataset.latestVersion?.files.length > 15"
+            *ngIf="allFiles?.length > pageSize"
+            (changes)="paginationChange($event)"
           >
           </ofd-agregator-pagination>
         </div>

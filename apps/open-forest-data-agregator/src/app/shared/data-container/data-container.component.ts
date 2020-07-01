@@ -20,6 +20,9 @@ export class DataContainerComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Toggle expanded view
+   */
   onToggle() {
     this.expanded = !this.expanded;
     this.toggle.emit();

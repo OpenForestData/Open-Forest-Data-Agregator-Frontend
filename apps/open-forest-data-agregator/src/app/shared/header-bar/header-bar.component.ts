@@ -18,6 +18,9 @@ export class HeaderBarComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Toggle expanded view
+   */
   onToggle() {
     this.expanded = !this.expanded;
     this.toggle.emit(this.expanded);
