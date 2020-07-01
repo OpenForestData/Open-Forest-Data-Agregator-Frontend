@@ -1,20 +1,48 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+/**
+ * Resource IFrame component
+ */
 @Component({
   selector: 'ofd-agregator-iframe',
   templateUrl: './iframe.component.html',
   styleUrls: ['./iframe.component.scss']
 })
 export class IframeComponent implements OnInit {
+  /**
+   * Type of file
+   */
   @Input() type;
+  /**
+   * Resource file
+   */
   @Input() resource;
+  /**
+   * Type of viewer
+   */
   @Input() viewerType;
+  /**
+   * Holder for IFrame URL
+   */
   iframeUrl;
+  /**
+   * Sanitized link
+   */
   sanitizedLink;
+  /**
+   * External site site URL
+   */
   readonly EXTERNAL_URL: string = 'https://data-epuszcza.biaman.pl/';
+  /**
+   * Dataverse site URL
+   */
   readonly DATAVERSE_URL: string = 'https://data-epuszcza.biaman.pl';
 
+  /**
+   * IFrame constructor
+   * @param {DomSanitizer} sanitizer Sanitizer
+   */
   constructor(private sanitizer: DomSanitizer) {}
 
   /**

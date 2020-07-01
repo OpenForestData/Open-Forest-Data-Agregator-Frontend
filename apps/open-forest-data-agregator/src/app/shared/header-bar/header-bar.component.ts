@@ -6,16 +6,31 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./header-bar.component.scss']
 })
 export class HeaderBarComponent implements OnInit {
+  /**
+   * Icon source
+   */
   @Input() iconSrc: string;
-
+  /**
+   * Expandable toggle
+   */
   @Input() expandable: boolean;
-
+  /**
+   * Expanded value
+   */
   @Input() expanded: boolean;
-
+  /**
+   * Toggle event emitter
+   */
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 
+  /**
+   * Data-container constructor
+   */
   constructor() {}
 
+  /**
+   * Initialize at the start
+   */
   ngOnInit(): void {}
 
   /**
