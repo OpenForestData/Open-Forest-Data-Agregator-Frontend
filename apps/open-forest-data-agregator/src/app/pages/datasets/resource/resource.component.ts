@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
-import hljs from 'highlight.js';
 import { DatasetService } from '@app/services/dataset.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -49,75 +48,12 @@ export class ResourceComponent implements OnInit {
     { name: 'Zasoby danych', href: '/datasets' }
   ];
 
-  testData = {
-    header: {
-      title: 'Jam Łasica(Pawian Pospolity)',
-      body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Mauris vitae magna sodales, dapibus metus quis, scelerisque nulla. Maecenas nec orci at dui l`,
-      api: 'http://whiteaster.com'
-    },
-    body: {
-      name: 'abc'
-    },
-    files: [
-      {
-        title: 'DataViewer - MRIPAS_coll_159681_Mustela  Nivalis_ Xray__IR_rec00000157.bmp 2020-03-30 10-01-40.mp4',
-        format: 'mp4',
-        link: 'https://whiteaster.com'
-      },
-      {
-        title: 'MRIPAS_coll_159681_MustelaNivalis_1990_scan.jpg',
-        format: 'jpg',
-        link: 'https://whiteaster.com'
-      },
-      {
-        title: 'MRIPAS_coll_23624_MustelaNivalis_xray.zip',
-        format: 'zip',
-        link: 'https://whiteaster.com'
-      }
-    ]
-  };
-
-  resources: any = [
-    {
-      format: 'geotiff',
-      fileLink: '/assets/.mocks/cea.tif'
-    },
-    {
-      format: 'kml',
-      fileLink: '/assets/.mocks/kml_example.kml'
-    },
-    {
-      format: 'geotiff',
-      fileLink: '/assets/.mocks/example_4269.tif'
-    },
-    {
-      format: 'wkt',
-      fileLink: '/assets/.mocks/geometry.wkt'
-    },
-    {
-      format: 'gml',
-      fileLink: '/assets/.mocks/gml2.gml'
-    },
-    {
-      format: 'shp',
-      fileLink: '/assets/.mocks/gis_osm_water_a_07_1.shp'
-    },
-    {
-      format: '3d',
-      fileLink: `https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0`
-    },
-    {
-      format: 'tiff',
-      fileLink: `https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1`
-    }
-  ];
   metaCitation = {
-    'download-url': 'https://whiteaster.com',
-    MD5: '4b46beba4a79e26745266e2221a09c52',
-    'publication-date': '2020-05-20',
-    size: '147.9 kB',
-    type: 'JPG',
+    'download-url': '',
+    MD5: '',
+    'publication-date': '',
+    size: '',
+    type: '',
     'deposit-date': null
   };
   mobile = false;
@@ -130,20 +66,11 @@ Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https:
 Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
   `;
 
-  externalToolExplanation = `
-  EXTERNAL_URL to adres strony ggdzie są external toole, to chyba będzie statyczne albo przekazane przez Olka
-  potem masz typ external toola (3dViewer, microViewer itp...)
-  to będziesz musiał wstawiać w zależności od typu pliku
-  stale: SITE_URL, FILE_ID, DATASET_ID i DATASET_VERSION
-  będziesz musiał wyciągnąć sobie od Olka
-  SITE_URL to adres datavers'a
-  FILE_ID to ID pliku
-  DATASET_ID to id datasetu (nie DOI!!!!!)
-  DATASET_VERSION to wersja datasetu (1.0, 1.1 itp. nie ID wersji a wersja)
-  `;
-
   constructor(private http: HttpClient, private datasetService: DatasetService, private route: ActivatedRoute) {}
-
+  /**
+   * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
+   * Convert doi and get dataset details based on DOI
+   */
   ngOnInit() {
     if (window.screen.width < 1200) {
       this.mobile = true;
@@ -151,14 +78,15 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
     this.getResourceByID(this.route.snapshot.paramMap.get('id'));
   }
 
+  /**
+   * Get resource file from backend, format metric, and feed resource view components based on type
+   * @param id ID of resource file
+   */
   getResourceByID(id: any) {
     this.datasetService.getResourceByID(id).subscribe(response => {
       this.resource = response;
-      console.log('TYPE: ', this.resource.details.fileTypeDisplay);
-      console.log('this.resource: ', this.resource);
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
-      // this.metricData = this.resource.detaset_details?.lastestVersion?.metadataBlocks.citation;
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
       } else if (['MS Word', 'MS Excel Spreadsheet'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
@@ -201,39 +129,63 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       } else {
         console.log('GET RESOURCE BY ID ELSE BLOCK');
       }
-      console.log('resource content: ', this.resourceContent);
     });
   }
 
+  /**
+   * Get file content from given URL
+   * @param url URL to file
+   */
   getTextFromURL(url: string) {
     this.http.get(url, { responseType: 'text' }).subscribe(response => {
       this.resourceContent.plain_text = response;
-      console.log('test: ', this.resourceContent.plain_text);
     });
   }
 
+  /**
+   * Get file content from given URL
+   * @param url URL to file
+   */
   getJSONFromURL(url: string) {
     this.http.get(url, { responseType: 'text' }).subscribe(response => {
       this.resourceContent.iframe = JSON.parse(response);
     });
   }
 
+  /**
+   * Opens a new window with given link that downloads file
+   * @param file File
+   * @example
+   * // returns
+   * downloadSingleResource(file.download_url)
+   */
   downloadSingleResource(file: any) {
     return window.open(file, '_blank');
   }
 
+  /**
+   * Convert resource object to single object in simplified form for display
+   * @param resource Resource object
+   */
   getMetrics(resource) {
     resource.dataset_details?.latestVersion?.metadataBlocks?.citation.fields.forEach(field => {
-      // console.log(field);
       this.metricData[field.typeName] = field;
     });
-    console.log('metric data: ', this.metricData);
   }
 
+  /**
+   * Function that keep sorting in keyvalue angular pipe
+   * @param a Sorting value a
+   * @param b Sorting value b
+   */
   keepOrder = (a, b) => {
     return a;
   };
 
+  /**
+   * Creates new object with file metadata
+   * @param resource Resource file details
+   */
   getMetadataOfFile(resource) {
     this.metaCitation = {
       'download-url': resource.download_url,
@@ -245,10 +197,25 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
     };
   }
 
+  /**
+   * Transform bytes into kilobytes
+   * @param size Size of file in bytes
+   * @returns { string } Size file in kilobytes
+   * @example
+   * convertFromBytes(1000)
+   * // returns '1 kB'
+   */
   convertFromBytes(size): string {
     return Math.floor(size / 1024).toString() + ' kB';
   }
 
+  /**
+   * Take a alternative link if exists and return it if not then make a link to dataset based on dataset details
+   * @returns { string } URL to dataset or other resource where the file exists
+   * @example
+   * makeSource()
+   * // returns https://data-epuszcza.biaman.pl/file.xhtml?fileId=73&version=1.0
+   */
   makeSource() {
     if (this.resource.detaset_details?.alternativeURL) {
       return this.resource.dataset_details?.alternativeURL;
@@ -257,6 +224,13 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
     }
   }
 
+  /**
+   * Function for getting extension from filename
+   * @param { string } filename Name of file
+   * @example
+   * formatConverter('test.abc')
+   * // returns abc
+   */
   formatConverter(filename: string) {
     let format = filename;
     if (format) {

@@ -14,6 +14,7 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { XmlComponent } from './xml/xml.component';
 import { MapComponent } from './map/map.component';
 import { IframeComponent } from './iframe/iframe.component';
+import { NotSupportedComponent } from './not-supported/not-supported.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { IframeComponent } from './iframe/iframe.component';
     DocsComponent,
     XmlComponent,
     MapComponent,
-    IframeComponent
+    IframeComponent,
+    NotSupportedComponent
   ],
   imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule, NgxDocViewerModule]
 })

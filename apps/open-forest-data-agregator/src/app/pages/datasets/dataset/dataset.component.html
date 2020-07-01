@@ -73,10 +73,6 @@
             <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0]?.value }}</p>
           </div>
           <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue?.value }}</p>
-          <!-- <div class="right-container__header__api">
-            <a href="{{ testData.header.apiUrl }}">{{ 'datasets.dataset.headers.api' | translate
-              }}<svg-icon [src]="'/assets/images/api_green.svg'" [applyCss]="true"> </svg-icon></a>
-          </div> -->
         </div>
 
         <div class="right-container__files">
@@ -139,8 +135,8 @@
                   {{ 'datasets.dataset.headers.typeFile' | translate }}
                   <ui-select
                     class="type-sort"
-                    [items]="sortItemsFilter"
-                    [options]="optionsFilter"
+                    [items]="sortItemsType"
+                    [options]="optionsType"
                     [(value)]="sortByType"
                     (valueChange)="onSortTypeChange($event)"
                   >
@@ -181,7 +177,7 @@
               (modelChange)="toggleAllCheckboxes()"
               [(model)]="allFilesCheckboxState"
             >
-              {{ dataset.latestVersion?.files.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
+              {{ files?.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
             </ui-checkbox>
             <div class="right-container__files__download-all__buttons">
               <button class="right-container__files__download-all__buttons__download" (click)="downloadCheckedFiles()">
@@ -219,11 +215,12 @@
           </div>
 
           <ofd-agregator-pagination
-            [items]="50"
-            [pageSize]="15"
+            [items]="allFiles?.length"
+            [pageSize]="pageSize"
             [(page)]="page"
             [showOffsets]="true"
-            *ngIf="dataset.latestVersion?.files.length > 15"
+            *ngIf="allFiles?.length > 15"
+            (changes)="paginationChange($event)"
           >
           </ofd-agregator-pagination>
         </div>
