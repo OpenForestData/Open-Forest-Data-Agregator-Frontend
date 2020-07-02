@@ -23,4 +23,17 @@
       </div>
     </div>
   </div>
+  <div class="main-footer__cookies" *ngIf="!getAcceptCookie()">
+    <img class="main-footer__cookies__image" src="assets/images/cookie.png" />
+    <div class="main-footer__cookies__text">
+      <p>
+        Używamy plików cookie, aby poprawić komfort korzystania z naszej witryny. Korzystając z naszej witryny,zgadzasz
+        się na gromadzenie danych zgodnie z opisem w naszej <a href="privacy-policy">Polityce prywatności</a>.
+      </p>
+    </div>
+    <button class="button-accept" (click)="acceptAndSetCookies()">
+      <svg-icon src="/assets/images/tick.svg" [applyCss]="true"></svg-icon>
+      Akceptuj
+    </button>
+  </div>
 </footer>
