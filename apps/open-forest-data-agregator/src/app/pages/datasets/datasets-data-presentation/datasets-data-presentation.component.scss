@@ -132,7 +132,7 @@
           border: 1px solid $text-color;
           color: $text-color;
           border-radius: 50px;
-          padding: 8px 12px;
+          padding: 8px 16px;
           font-size: 14px;
           background-color: transparent;
           margin-left: 10px;
@@ -144,4 +144,20 @@
 
 span.flex {
   display: flex;
+}
+
+ng-select {
+  width: 150px;
+}
+
+::ng-deep {
+  .datasets-presentation__views--mobile {
+    .ng-clear-wrapper {
+      display: none;
+    }
+  }
+
+  .ng-dropdown-panel.ng-select-top {
+    bottom: initial !important;
+  }
 }

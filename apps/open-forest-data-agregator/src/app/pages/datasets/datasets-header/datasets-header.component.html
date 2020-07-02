@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container jus-center">
   <div class="button-wrapper">
     <button class="button">
       {{ 'home.add_data' | translate }}
@@ -32,8 +32,14 @@
         <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
       </button>
     </label>
-    <button class="search-section__advanced-search" (click)="showAdvanced()" type="button">
+    <button class="search-section__advanced-search desktop-only" (click)="showAdvanced()" type="button">
       {{ 'datasets.advanced-search' | translate }}
     </button>
   </form>
+</div>
+
+<div class="container mobile-flex-only mobile-advanced">
+  <button class="search-section__advanced-search" (click)="showAdvanced()" type="button">
+    {{ 'datasets.advanced-search' | translate }}
+  </button>
 </div>

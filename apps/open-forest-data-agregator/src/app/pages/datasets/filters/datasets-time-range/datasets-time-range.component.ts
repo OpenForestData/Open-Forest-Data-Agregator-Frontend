@@ -30,11 +30,18 @@ export class DatasetsTimeRangeComponent implements OnInit {
   public datePickerConfig = {
     locale: 'pl-PL',
     disableKeypress: true,
-    unSelectOnClick: false,
-    firstDayOfWeek: 'mo'
+    unSelectOnClick: true,
+    closeOnSelect: true,
+    enableMonthSelector: true,
+    showMultipleYearsNavigation: true,
+    firstDayOfWeek: 'mo',
+    hideOnOutsideClick: false,
+    dayBtnCssClassCallback: () => {},
+    monthBtnCssClassCallback: () => {},
+    onSelect: () => {}
   };
 
-  constructor(public cd: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {}
 

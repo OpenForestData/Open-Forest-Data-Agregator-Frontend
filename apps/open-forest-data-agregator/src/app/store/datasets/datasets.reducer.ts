@@ -8,6 +8,14 @@ const initialState: DatasetsState = {
   mode: 'list'
 };
 
+/**
+ * Store reducer for datasets states
+ *
+ * @export
+ * @param {DatasetsState} [state=initialState]
+ * @param {DatasetsActions.DatasetsActions} action
+ * @returns {DatasetsState}
+ */
 export function datasetsReducer(
   state: DatasetsState = initialState,
   action: DatasetsActions.DatasetsActions

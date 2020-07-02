@@ -163,6 +163,12 @@
   }
 }
 
+@media (max-width: 992px) {
+  .datasets-map__container {
+    max-width: calc(100% - 80px);
+  }
+}
+
 @media (max-width: 400px) {
   .datasets-map {
     &__details {

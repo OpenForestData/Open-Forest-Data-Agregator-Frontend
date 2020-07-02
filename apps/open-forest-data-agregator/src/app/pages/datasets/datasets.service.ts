@@ -213,4 +213,12 @@ export class DatasetsService {
   details(identifiers) {
     return this.http.post(`${AppConfigService.config.api}datasets`, { identifiers });
   }
+
+  getDatasetByDOI(doi: any) {
+    return this.http.get<any>(`${this.url}dataset?identifier=${doi}`);
+  }
+
+  getResourceByID(id: number) {
+    return this.http.get<any>(`${this.url}resource/${id}`);
+  }
 }

@@ -68,3 +68,9 @@ tr {
 .display-none {
   display: none;
 }
+
+@media (max-width: 992px) {
+  .datasets-table__container {
+    width: calc(100% - 60px);
+  }
+}

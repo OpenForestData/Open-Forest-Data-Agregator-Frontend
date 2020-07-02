@@ -19,6 +19,11 @@ export class LanguageService {
     return this.cookieService.get('language') || (AppConfigService.config ? AppConfigService.config.language : 'pl');
   }
 
+  /**
+   * Sets new language
+   *
+   * @memberof LanguageService
+   */
   public set language(value) {
     if (AppConfigService.config) {
       AppConfigService.config.language = value;

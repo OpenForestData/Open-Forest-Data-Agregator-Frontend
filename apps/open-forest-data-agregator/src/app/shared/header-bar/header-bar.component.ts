@@ -1,43 +1,53 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 /**
- * Header-bar component
+ * Collapsable header
+ *
+ * @export
+ * @class HeaderBarComponent
+ * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-header-bar',
   templateUrl: './header-bar.component.html',
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent implements OnInit {
+export class HeaderBarComponent {
   /**
-   * Icon source
+   * Icon URL
+   *
+   * @type {string}
+   * @memberof HeaderBarComponent
    */
   @Input() iconSrc: string;
+
   /**
-   * Expandable toggle
+   * If collapsable
+   *
+   * @type {boolean}
+   * @memberof HeaderBarComponent
    */
   @Input() expandable: boolean;
+
   /**
-   * Expanded value
+   * Collapsed/Expanded state
+   *
+   * @type {boolean}
+   * @memberof HeaderBarComponent
    */
   @Input() expanded: boolean;
+
   /**
-   * Toggle event emitter
+   * State emitter for collapse changed
+   *
+   * @type {EventEmitter<any>}
+   * @memberof HeaderBarComponent
    */
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 
   /**
-   * Data-container constructor
-   */
-  constructor() {}
-
-  /**
-   * Initialize at the start
-   */
-  ngOnInit(): void {}
-
-  /**
-   * Toggle expanded view
+   * Toogle fn
+   *
+   * @memberof HeaderBarComponent
    */
   onToggle() {
     this.expanded = !this.expanded;

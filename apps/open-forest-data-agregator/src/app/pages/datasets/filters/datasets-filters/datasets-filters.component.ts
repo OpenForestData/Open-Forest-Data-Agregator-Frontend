@@ -50,6 +50,8 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
   public basicFiltersKeys = [];
   public filtersConfig = [];
 
+  public showAdvencedListMobile = false;
+
   public get filtersState() {
     return this.DSService.searchFilters.data;
   }
@@ -322,6 +324,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
 
   closeAdvenced() {
     this.showAdvanced = false;
+    this.showAdvencedListMobile = false;
     this.DSService.hideHeader = false;
   }
 
