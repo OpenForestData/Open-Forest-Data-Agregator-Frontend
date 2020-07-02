@@ -208,10 +208,18 @@ ofd-agregator-footer-navigation-items {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .main-footer {
     &__cookies {
-      max-width: 95vw;
+      max-width: 90vw;
+      width: 100%;
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .button-accept {
+    align-self: flex-end;
+    margin-right: 20px;
   }
 }
