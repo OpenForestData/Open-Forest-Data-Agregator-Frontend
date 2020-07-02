@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+/**
+ * Data-container component
+ */
 @Component({
   selector: 'ofd-agregator-data-container',
   templateUrl: './data-container.component.html',

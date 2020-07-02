@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+/**
+ * Header-bar component
+ */
 @Component({
   selector: 'ofd-agregator-header-bar',
   templateUrl: './header-bar.component.html',

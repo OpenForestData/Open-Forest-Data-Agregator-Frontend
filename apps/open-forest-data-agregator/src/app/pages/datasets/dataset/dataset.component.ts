@@ -84,7 +84,7 @@ export class DatasetComponent implements OnInit {
     { name: 'Zasoby danych', href: '/datasets' }
   ];
   /**
-   * Pagination page
+   * Pagination size
    */
   pageSize = 15;
   /**

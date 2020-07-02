@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Social component
+ */
 @Component({
   selector: 'ofd-agregator-social',
   templateUrl: './social.component.html',
