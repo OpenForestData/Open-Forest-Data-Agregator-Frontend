@@ -4,13 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { DatasetService } from '@app/services/dataset.service';
 import { ActivatedRoute } from '@angular/router';
 
+/**
+ * Resource component
+ */
 @Component({
   selector: 'ofd-agregator-resource',
   templateUrl: './resource.component.html',
   styleUrls: ['./resource.component.scss']
 })
 export class ResourceComponent implements OnInit {
+  /**
+   * Single resource
+   */
   resource: any = [];
+  /**
+   * Content of resource
+   */
   resourceContent = {
     plain_text: '',
     image: null,
@@ -21,7 +30,13 @@ export class ResourceComponent implements OnInit {
     map: null,
     iframe: null
   };
+  /**
+   * Viewer type
+   */
   viewerType = '';
+  /**
+   * Metric data object
+   */
   metricData: any = {};
   mockLeftSide = {
     downloadAmount: 5,
@@ -42,12 +57,16 @@ export class ResourceComponent implements OnInit {
       link: 'https://whiteaster.com/'
     }
   };
-
+  /**
+   * List of breadcrumbs
+   */
   breadCrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zasoby danych', href: '/datasets' }
   ];
-
+  /**
+   * Meta citation object
+   */
   metaCitation = {
     'download-url': '',
     MD5: '',
@@ -56,8 +75,13 @@ export class ResourceComponent implements OnInit {
     type: '',
     'deposit-date': null
   };
+  /**
+   * Mobile view
+   */
   mobile = false;
-
+  /**
+   * Mocks
+   */
   externalTools = `
 3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
 Micro: https://data-epuszcza.biaman.pl/tools/microViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
@@ -66,6 +90,12 @@ Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https:
 Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
   `;
 
+  /**
+   * Resource constructor
+   * @param {Http} http Http
+   * @param {DatasetService} datasetService Dataset Service
+   * @param {Route} route Route
+   */
   constructor(private http: HttpClient, private datasetService: DatasetService, private route: ActivatedRoute) {}
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.

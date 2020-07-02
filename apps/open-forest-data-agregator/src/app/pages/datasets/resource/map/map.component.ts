@@ -28,12 +28,31 @@ declare let shapefile;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+  /**
+   * Map
+   */
   private map;
+  /**
+   * Tiles
+   */
   tiles;
+  /**
+   * Resource
+   */
   @Input() resource = '';
+  /**
+   * Type of resource
+   */
   @Input() type;
+  /**
+   * Container for markers
+   */
   markerContainer: any = [];
 
+  /**
+   * Resource map constructor
+   * @param {HttpClient} http Http Client
+   */
   constructor(private http: HttpClient) {}
 
   /**

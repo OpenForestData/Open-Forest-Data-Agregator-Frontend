@@ -1,18 +1,37 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Papa from 'papaparse';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
+/**
+ * Resource table component
+ */
 @Component({
   selector: 'ofd-agregator-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  /**
+   * Resource
+   */
   @Input() resource;
+  /**
+   * Type of resource
+   */
   @Input() type;
+  /**
+   * CSV container
+   */
   csvContainer = '';
+  /**
+   * Converted data object
+   */
   convertedData: any = {};
+
+  /**
+   * Resource table constructor
+   * @param {HttpClient} http Http Client
+   */
   constructor(private http: HttpClient) {}
 
   /**

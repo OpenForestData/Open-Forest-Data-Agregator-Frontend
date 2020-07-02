@@ -2,47 +2,72 @@ import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { DatasetService } from '@app/services/dataset.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { saveAs } from 'file-saver';
+import { ActivatedRoute } from '@angular/router';
 
+/**
+ * Dataset component
+ */
 @Component({
   selector: 'ofd-agregator-dataset',
   templateUrl: './dataset.component.html',
   styleUrls: ['./dataset.component.scss']
 })
 export class DatasetComponent implements OnInit {
+  /**
+   * Sort by name values
+   */
   public sortItemsFilter = [
     { name: 'A-Z', value: 0 },
     { name: 'Z-A', value: 1 }
   ];
-
+  /**
+   * Sort by type values
+   */
   public sortItemsType = [
     { name: 'All', value: 0 },
     { name: 'Image', value: 1 },
     { name: 'Video', value: 2 }
   ];
-
+  /**
+   * Sort by access values
+   */
   public sortItemsAccess = [
     { name: 'Public', value: 0 },
     { name: 'Domain', value: 0 }
   ];
-
+  /**
+   * Sort by filter value
+   */
   public sortByType = null;
+  /**
+   * Sort by access filter value
+   */
   public sortByAccess = null;
+  /**
+   * Sort by filter value
+   */
   public sortByFilter = null;
-
+  /**
+   * Options type name
+   */
   public optionsType: IUISelectOptions = {
     placeholder: 'Filtruj wg'
   };
-
+  /**
+   * Options access name
+   */
   public optionsAccess: IUISelectOptions = {
     placeholder: 'Filtruj wg'
   };
-
+  /**
+   * Options filter name
+   */
   public optionsFilter: IUISelectOptions = {
     placeholder: 'Sortuj wg'
   };
-
+  /**
+   * Mocks
+   */
   mockLeftSide: any = {
     downloadAmount: 5,
     dataOpenness: 'Lorem ipsum',
@@ -51,32 +76,64 @@ export class DatasetComponent implements OnInit {
       link: 'https://pl.wikipedia.org/wiki/GNU_General_Public_License'
     }
   };
-
+  /**
+   * List of breadcrumbs
+   */
   breadCrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zasoby danych', href: '/datasets' }
   ];
-
-  showOffsets = false;
-
+  /**
+   * Pagination size
+   */
   pageSize = 15;
+  /**
+   * Pagination page
+   */
   page = 1;
-  offset = 2;
-  pagesArray = [1, 2, 3];
-
+  /**
+   * Mobile view
+   */
   mobile = false;
-
+  /**
+   * Current dataset
+   */
   dataset: any = {};
+  /**
+   * URL to Dataset
+   */
   urlToDataset: any = '';
+  /**
+   * List of checkbox
+   */
   checkboxList = [];
+  /**
+   * All files checkbox state
+   */
   allFilesCheckboxState = false;
+  /**
+   * Metric data object
+   */
   metricData: any = {};
-  sort: any;
+  /**
+   * List of files
+   */
   files: any = [];
+  /**
+   * Metadata object
+   */
   metadataObject: any = {};
+  /**
+   * List of all files
+   */
   allFiles: any = [];
 
-  constructor(private datasetService: DatasetService, private router: Router, private route: ActivatedRoute) {}
+  /**
+   * Dataset constructor
+   * @param {datasetService} datasetService Dataset Service
+   * @param {route} route Route
+   */
+  constructor(private datasetService: DatasetService, private route: ActivatedRoute) {}
 
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
@@ -194,7 +251,6 @@ export class DatasetComponent implements OnInit {
    */
   onSortChange(sort) {
     const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
-    this.sort = sort;
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
     } else if (sort.value === 1) {
