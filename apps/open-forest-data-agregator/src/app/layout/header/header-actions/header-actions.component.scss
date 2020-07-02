@@ -19,7 +19,8 @@
 
 .login-btn {
   padding: 0 20px;
-  display: flex;
+  // display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   color: $text-color;
@@ -73,7 +74,7 @@
 .search-wrapper {
   width: 250px;
   position: relative;
-  transform: translateX(35px);
+  transform: translateX(20px);
 }
 
 .mobile-flex {

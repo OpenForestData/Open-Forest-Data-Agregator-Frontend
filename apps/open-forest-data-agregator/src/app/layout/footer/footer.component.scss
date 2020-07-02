@@ -52,6 +52,7 @@
     bottom: 43px;
     transform: translateX(-50%);
     background: white;
+    z-index: 999;
     &__text {
       p {
         margin: 0 81px 0 0;
@@ -172,6 +173,7 @@ ofd-agregator-footer-navigation-items {
       bottom: 43px;
       transform: translateX(-50%);
       background: white;
+      z-index: 999;
       &__text {
         p {
           margin: 0 20px;
