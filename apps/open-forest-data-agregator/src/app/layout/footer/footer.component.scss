@@ -85,6 +85,21 @@
   }
 }
 
+.button-accept:hover {
+  background: white;
+  border: solid 1px #009444;
+  color: green;
+
+  svg {
+    path {
+      fill: #009444;
+    }
+    line {
+      stroke: #009444;
+    }
+  }
+}
+
 ofd-agregator-footer-navigation-items {
   display: block;
   margin-bottom: 60px;
