@@ -166,58 +166,60 @@
         <div class="filters-values">
           <div *ngFor="let item of advancedSelected">
             <header class="filter-name">{{ item.name | translate }}</header>
-            <div class="filter-details" *ngIf="item.type === 'SIGNLE-SELECT'">
-              <ng-select
-                [clearAllText]="'search.clear_all' | translate"
-                [loadingText]="'search.loading_text' | translate"
-                [notFoundText]="'search.not_found_text' | translate"
-                [typeToSearchText]="'search.type_to_search' | translate"
-                [addTagText]="'search.add_tag' | translate"
-                [multiple]="false"
-                [addTag]="false"
-                bindValue="id"
-                bindLabel="label"
-                [closeOnSelect]="true"
-                [items]="item.items"
-                [(ngModel)]="item.values"
-              >
-              </ng-select>
-            </div>
+            <ng-container [ngSwitch]="item.type">
+              <div class="filter-details" *ngSwitchCase="'SIGNLE-SELECT'">
+                <ng-select
+                  [clearAllText]="'search.clear_all' | translate"
+                  [loadingText]="'search.loading_text' | translate"
+                  [notFoundText]="'search.not_found_text' | translate"
+                  [typeToSearchText]="'search.type_to_search' | translate"
+                  [addTagText]="'search.add_tag' | translate"
+                  [multiple]="false"
+                  [addTag]="false"
+                  bindValue="id"
+                  bindLabel="label"
+                  [closeOnSelect]="true"
+                  [items]="item.items"
+                  [(ngModel)]="item.values"
+                >
+                </ng-select>
+              </div>
 
-            <div class="filter-details" *ngIf="item.type === 'INPUT'">
-              <ofd-agregator-datasets-input-tag
-                [data]="item.items"
-                [(value)]="item.values"
-                [multiple]="true"
-              ></ofd-agregator-datasets-input-tag>
-            </div>
+              <div class="filter-details" *ngSwitchCase="'INPUT'">
+                <ofd-agregator-datasets-input-tag
+                  [data]="item.items"
+                  [(value)]="item.values"
+                  [multiple]="true"
+                ></ofd-agregator-datasets-input-tag>
+              </div>
 
-            <div class="filter-details" *ngIf="item.type === 'MAP'">
-              <ofd-agregator-datasets-range
-                [(value)]="item.values"
-                [isExpanded]="true"
-                [multiple]="true"
-              ></ofd-agregator-datasets-range>
-            </div>
+              <div class="filter-details" *ngSwitchCase="'MAP'">
+                <ofd-agregator-datasets-range
+                  [(value)]="item.values"
+                  [isExpanded]="true"
+                  [multiple]="true"
+                ></ofd-agregator-datasets-range>
+              </div>
 
-            <div class="filter-details adv" *ngIf="item.type === 'DATERANGE'">
-              <ofd-agregator-datasets-time-range [value]="item.values"></ofd-agregator-datasets-time-range>
-            </div>
+              <div class="filter-details adv" *ngSwitchCase="'DATERANGE'">
+                <ofd-agregator-datasets-time-range [value]="item.values"></ofd-agregator-datasets-time-range>
+              </div>
 
-            <div class="filter-details adv" *ngIf="item.type === 'DATE'">
-              <ofd-agregator-datasets-time-range
-                [single]="true"
-                [value]="item.values"
-              ></ofd-agregator-datasets-time-range>
-            </div>
+              <div class="filter-details adv" *ngSwitchCase="'DATE'">
+                <ofd-agregator-datasets-time-range
+                  [single]="true"
+                  [value]="item.values"
+                ></ofd-agregator-datasets-time-range>
+              </div>
 
-            <div class="filter-details" *ngIf="item.type === 'SELECT'">
-              <ofd-agregator-datasets-input-tag
-                [data]="item.items"
-                [(value)]="item.values"
-                [multiple]="true"
-              ></ofd-agregator-datasets-input-tag>
-            </div>
+              <div class="filter-details" *ngSwitchCase="'SELECT'">
+                <ofd-agregator-datasets-input-tag
+                  [data]="item.items"
+                  [(value)]="item.values"
+                  [multiple]="true"
+                ></ofd-agregator-datasets-input-tag>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>

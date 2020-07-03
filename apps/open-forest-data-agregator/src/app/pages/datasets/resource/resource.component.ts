@@ -38,6 +38,11 @@ export class ResourceComponent implements OnInit {
    * Metric data object
    */
   metricData: any = {};
+  /**
+   * @ignore
+   *
+   * @memberof ResourceComponent
+   */
   mockLeftSide = {
     downloadAmount: 5,
     source: {

@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { DatasetComponent } from './dataset.component';
 import { DatasetRoutingModule } from './dataset-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
-
+/**
+ * Dataset details module
+ *
+ * @export
+ * @class DatasetModule
+ */
 @NgModule({
   declarations: [DatasetComponent],
   imports: [CommonModule, DatasetRoutingModule, SharedModule]

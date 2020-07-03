@@ -62,6 +62,11 @@ export class PaginationComponent implements OnChanges {
    */
   public end: number;
 
+  /**
+   * @ignore
+   *
+   * @memberof PaginationComponent
+   */
   public inputValue = 1;
 
   /**

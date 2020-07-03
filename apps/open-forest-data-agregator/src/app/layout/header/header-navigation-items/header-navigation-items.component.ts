@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Interface for navigation items
+ *
+ * @interface NavigationItem
+ */
 interface NavigationItem {
   name: string;
   path: string;
@@ -18,7 +23,7 @@ interface NavigationItem {
   templateUrl: './header-navigation-items.component.html',
   styleUrls: ['./header-navigation-items.component.scss']
 })
-export class HeaderNavigationItemsComponent {
+export class HeaderNavigationItemsComponent implements OnInit {
   /**
    * Navgiation components
    *
@@ -71,4 +76,6 @@ export class HeaderNavigationItemsComponent {
       key: 'blog'
     }
   ];
+
+  ngOnInit() {}
 }

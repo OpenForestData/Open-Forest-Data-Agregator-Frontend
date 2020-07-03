@@ -12,6 +12,9 @@ export interface AppState {
   datasets: fromDatasets.DatasetsState;
 }
 
+/**
+ * Reducers
+ */
 export const reducers: ActionReducerMap<AppState> = {
   datasets: fromDatasets.datasetsReducer
 };

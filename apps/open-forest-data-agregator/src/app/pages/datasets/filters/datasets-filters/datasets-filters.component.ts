@@ -1,29 +1,63 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  OnInit,
-  Output,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  OnDestroy,
-  Input
-} from '@angular/core';
-import { categoriesMock } from '@app/pages/datasets/datasets.mock';
-import { DatasetsService } from '../../datasets.service';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { DatasetsService } from '../../datasets.service';
 
+/**
+ * Interface for data type of single filter
+ *
+ * @interface IFilterData
+ */
+interface IFilterData {
+  key: string;
+  isExpanded: boolean;
+  name: string;
+  values: any;
+  multiple: boolean;
+  items: {};
+  type: string;
+  activeOrder: null | number;
+}
+/**
+ * Group filters interface
+ *
+ * @interface IFiltersStructure
+ */
+interface IFiltersStructure {
+  title: string;
+  headerVisible: boolean;
+  items: [];
+  data: IFilterData[];
+}
+
+/**
+ * Main view of datasets filters
+ *
+ * @export
+ * @class DatasetsFiltersComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'ofd-agregator-datasets-filters',
   templateUrl: './datasets-filters.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./datasets-filters.component.scss']
 })
-export class DatasetsFiltersComponent implements OnInit, OnDestroy {
+export class DatasetsFiltersComponent implements OnDestroy {
+  /**
+   * Collapse filters column
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   @Input() hideBasic;
 
+  /**
+   * Key/Value convert object
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public typeConversion = {
     TEXT: 'INPUT',
     NONE: 'INPUT',
@@ -32,30 +66,116 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     TEXTBOX: 'SELECT',
     DATE: 'DATE'
   };
+
+  /**
+   * Holds query params from URL
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public queryParams = {};
+
+  /**
+   * Filters in objecy hold by their key
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public filtersByKey = {};
 
+  /**
+   * Number of filters shown before "show more" is showed
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public moreCountStart = 6;
+
+  /**
+   * Uniq number that incread with every selected filter
+   * Its base of sorting in advanced ciew
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public orderCounter = 1;
 
+  /**
+   * Is advanced view active
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public showAdvanced = false;
+
+  /**
+   * If data are fetch first time
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public structureFirstTimeCreated = true;
+
+  /**
+   * Expand/show all filters
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public moreFilters = false;
 
+  /**
+   * Value of search input
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public searchValue = '';
+
+  /**
+   * Search filters input value in advanced view
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public searchFilterValue = '';
 
+  /**
+   * @ignore
+   *
+   * @type {Subscription}
+   * @memberof DatasetsFiltersComponent
+   */
   public subs: Subscription = new Subscription();
 
+  /**
+   * Holds keys for basic filters
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public basicFiltersKeys = [];
+
+  /**
+   * Contains structure for filters
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public filtersConfig = [];
 
+  /**
+   * Show filter list at mobile view
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   public showAdvencedListMobile = false;
 
+  /**
+   * Get filters state from service
+   *
+   * @readonly
+   * @memberof DatasetsFiltersComponent
+   */
   public get filtersState() {
     return this.DSService.searchFilters.data;
   }
 
+  /**
+   * Get advanced filters list filtered by serachFilterValue
+   *
+   * @readonly
+   * @memberof DatasetsFiltersComponent
+   */
   public get advancedFilters() {
     return this.filtersConfig.map(group => {
       group.items = this.searchFilterValue
@@ -66,6 +186,12 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Get active selected filters, order by activeOrder key
+   *
+   * @readonly
+   * @memberof DatasetsFiltersComponent
+   */
   public get advancedSelected() {
     return []
       .concat(...this.filtersConfig.map(item => item.data))
@@ -73,6 +199,12 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       .sort((a, b) => (a.activeOrder > b.activeOrder ? -1 : a.activeOrder < b.activeOrder ? 1 : 0));
   }
 
+  /**
+   * Create's readable for human query
+   *
+   * @readonly
+   * @memberof DatasetsFiltersComponent
+   */
   public get queryArray() {
     const filters = this.DSService.searchFilters.data;
     const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
@@ -94,6 +226,13 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     return queryString;
   }
 
+  /**
+   * Creates an instance of DatasetsFiltersComponent.
+   * @param {DatasetsService} DSService
+   * @param {ChangeDetectorRef} cd
+   * @param {ActivatedRoute} route
+   * @memberof DatasetsFiltersComponent
+   */
   constructor(public DSService: DatasetsService, public cd: ChangeDetectorRef, private route: ActivatedRoute) {
     this.subs.add(
       this.DSService.showAdvancedSubject.subscribe(() => {
@@ -150,8 +289,11 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {}
-
+  /**
+   * Create structure for filters
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   createStructure() {
     this.searchValue = this.DSService.searchFilters.data['q'];
     const data = this.DSService.searchData['list'];
@@ -162,7 +304,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     }
     const categoryValue =
       (this.structureFirstTimeCreated ? this.queryParams['category'] : this.filtersState.category || '') || '';
-    const filtersConfig = [
+    const filtersConfig: IFiltersStructure[] = [
       {
         title: '',
         headerVisible: false,
@@ -208,7 +350,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
       if (index !== 'category') {
         const filter = data[advKey][index];
         const groupIndex = groupOrder[filter['filter_group_id']];
-        const config = filtersConfig[groupIndex];
+        const config: IFiltersStructure = filtersConfig[groupIndex];
         const key = filter['field_name'];
         const anyValues =
           (this.structureFirstTimeCreated ? this.queryParams[key] : this.filtersByKey[key].values || []) || [];
@@ -239,7 +381,7 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
           finalValue = Array.isArray(anyValues[0]) ? anyValues[0].map(item => moment(item)) : finalValue;
         }
 
-        const filterObj = {
+        const filterObj: IFilterData = {
           key,
           isExpanded: this.structureFirstTimeCreated
             ? finalValue.length
@@ -298,12 +440,24 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
+  /**
+   * Gets filters the basic part or collapsed one
+   *
+   * @param {boolean} [beginning=true]
+   * @returns
+   * @memberof DatasetsFiltersComponent
+   */
   getFilters(beginning = true) {
     return beginning
       ? this.basicFiltersKeys.filter(name => name !== 'category').slice(0, this.moreCountStart)
       : this.basicFiltersKeys.filter(name => name !== 'category').slice(this.moreCountStart);
   }
 
+  /**
+   * Emit filter value if any filter changed
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   filtersChanged() {
     this.DSService.searchFilters = {
       field: 'basic',
@@ -312,6 +466,12 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     };
   }
 
+  /**
+   * Adds or remove advanced filter
+   *
+   * @param {*} item
+   * @memberof DatasetsFiltersComponent
+   */
   toogleFilter(item) {
     if (item.activeOrder) {
       item.activeOrder = null;
@@ -322,12 +482,21 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Close advanced view
+   */
   closeAdvenced() {
     this.showAdvanced = false;
     this.showAdvencedListMobile = false;
     this.DSService.hideHeader = false;
   }
 
+  /**
+   * Callback for advanced search button click
+   * Sets values from advanced settings and runs searching
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   searchAdvenced() {
     this.DSService.searchFilters = { field: 'q', data: this.searchValue };
     const cat = this.filtersByKey['category'].values.length ? this.filtersByKey['category'].values : '';
@@ -339,6 +508,13 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.DSService.searchFilters = { field: 'basic', data: this.filtersConfig, search: true };
   }
 
+  /**
+   * Removing filter value at position ( index ) by name of filter
+   *
+   * @param {*} name
+   * @param {*} index
+   * @memberof DatasetsFiltersComponent
+   */
   public removeFilterByName(name, index) {
     switch (name) {
       case 'search':
@@ -373,6 +549,11 @@ export class DatasetsFiltersComponent implements OnInit, OnDestroy {
     this.searchAdvenced();
   }
 
+  /**
+   * @ignore
+   *
+   * @memberof DatasetsFiltersComponent
+   */
   ngOnDestroy() {
     this.subs.unsubscribe();
   }

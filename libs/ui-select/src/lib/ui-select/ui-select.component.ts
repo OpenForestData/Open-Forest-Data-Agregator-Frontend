@@ -11,6 +11,12 @@ import {
   ViewChild
 } from '@angular/core';
 
+/**
+ * UI Select options interface
+ *
+ * @export
+ * @interface IUISelectOptions
+ */
 export interface IUISelectOptions {
   bold?: boolean;
   class?: string;

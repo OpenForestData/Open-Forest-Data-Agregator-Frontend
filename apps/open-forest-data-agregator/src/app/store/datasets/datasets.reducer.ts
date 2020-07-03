@@ -1,5 +1,11 @@
 import * as DatasetsActions from './datasets.actions';
 
+/**
+ * Datasets state interface
+ *
+ * @export
+ * @interface DatasetsState
+ */
 export interface DatasetsState {
   mode: string;
 }

@@ -11,7 +11,12 @@ const routes: Routes = [
     children: [{ path: ':id', component: ResourceComponent }]
   }
 ];
-
+/**
+ * Dataset details routing
+ *
+ * @export
+ * @class DatasetRoutingModule
+ */
 @NgModule({
   exports: [RouterModule],
   imports: [RouterModule.forChild(routes)]
