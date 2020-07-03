@@ -15,7 +15,12 @@ const routes: Routes = [
   { path: 'partners', component: PartnersComponent },
   { path: ':id/:slug', component: PageTemplateComponent }
 ];
-
+/**
+ * Routing for generic pages
+ *
+ * @export
+ * @class GenericRoutingModule
+ */
 @NgModule({
   exports: [RouterModule],
   imports: [RouterModule.forChild(routes)]

@@ -1,15 +1,38 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
-
+/**
+ * About project page view
+ *
+ * @export
+ * @class AboutProjectComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'ofd-agregator-about-project',
   templateUrl: './about-project.component.html',
   styleUrls: ['./about-project.component.scss']
 })
 export class AboutProjectComponent implements OnInit, OnDestroy {
+  /**
+   * Page icon near title
+   *
+   * @memberof AboutProjectComponent
+   */
   public iconURL = 'assets/modules/generic/about_project.png';
+  /**
+   * Page title for title component
+   *
+   * @memberof AboutProjectComponent
+   */
   public pageTitle = 'misc.about_project';
+
+  /**
+   * Page content
+   *
+   * @memberof AboutProjectComponent
+   */
   public pageContent = `
   <p>
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero ratione quasi iure harum deserunt earum
@@ -52,12 +75,41 @@ export class AboutProjectComponent implements OnInit, OnDestroy {
 
   `;
 
+  /**
+   * Language change subscription
+   *
+   * @type {Subscription}
+   * @memberof HomeNewsComponent
+   */
   public languageSubscription: Subscription = new Subscription();
+  /**
+   *
+   * @param {LanguageService} languageService
+   * @memberof HomeNewsComponent
+   */
   constructor(public languageService: LanguageService) {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HomeNewsComponent
+   */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
   }
+
+  /**
+   * Fetch data from API
+   *
+   * @memberof HomeNewsComponent
+   */
   getData() {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HomeNewsComponent
+   */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();
   }

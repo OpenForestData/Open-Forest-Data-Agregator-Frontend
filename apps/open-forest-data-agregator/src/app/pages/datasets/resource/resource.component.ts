@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
-import { DatasetService } from '@app/services/dataset.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatasetsService } from '../datasets.service';
 
 /**
  * Resource component
@@ -93,10 +93,10 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   /**
    * Resource constructor
    * @param {Http} http Http
-   * @param {DatasetService} datasetService Dataset Service
+   * @param {DatasetSservice} datasetService Dataset Service
    * @param {Route} route Route
    */
-  constructor(private http: HttpClient, private datasetService: DatasetService, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private datasetService: DatasetsService, private route: ActivatedRoute) {}
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
    * Convert doi and get dataset details based on DOI
@@ -157,7 +157,6 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       ) {
         this.resourceContent.map = this.resource.download_url;
       } else {
-        console.log('GET RESOURCE BY ID ELSE BLOCK');
       }
     });
   }

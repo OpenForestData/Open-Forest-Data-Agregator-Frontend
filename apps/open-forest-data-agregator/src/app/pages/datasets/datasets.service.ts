@@ -215,10 +215,10 @@ export class DatasetsService {
   }
 
   getDatasetByDOI(doi: any) {
-    return this.http.get<any>(`${this.url}dataset?identifier=${doi}`);
+    return this.http.get<any>(`${AppConfigService.config.api}dataset?identifier=${doi}`);
   }
 
   getResourceByID(id: number) {
-    return this.http.get<any>(`${this.url}resource/${id}`);
+    return this.http.get<any>(`${AppConfigService.config.api}resource/${id}`);
   }
 }

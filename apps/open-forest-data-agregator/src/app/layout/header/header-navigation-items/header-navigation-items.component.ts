@@ -1,20 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TranslateService } from '@ngx-translate/core';
-
 interface NavigationItem {
   name: string;
   path: string;
   key: string;
   children?: NavigationItem[];
 }
-
+/**
+ * Header navigation component
+ *
+ * @export
+ * @class HeaderNavigationItemsComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'ofd-agregator-header-navigation-items',
   templateUrl: './header-navigation-items.component.html',
   styleUrls: ['./header-navigation-items.component.scss']
 })
-export class HeaderNavigationItemsComponent implements OnInit {
+export class HeaderNavigationItemsComponent {
+  /**
+   * Navgiation components
+   *
+   * @type {NavigationItem[]}
+   * @memberof HeaderNavigationItemsComponent
+   */
   public items: NavigationItem[] = [
     {
       name: '',
@@ -61,8 +71,4 @@ export class HeaderNavigationItemsComponent implements OnInit {
       key: 'blog'
     }
   ];
-
-  constructor(public translateService: TranslateService) {}
-
-  ngOnInit(): void {}
 }

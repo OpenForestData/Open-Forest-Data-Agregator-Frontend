@@ -4,7 +4,12 @@ import { LanguageService } from '@app/services/language.service';
 import { Subscription } from 'rxjs';
 
 /**
- * Home Component
+ * Home component
+ *
+ * @export
+ * @class HomeComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-home',
@@ -19,16 +24,52 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  /**
+   * Language subscription
+   *
+   * @type {Subscription}
+   * @memberof HomeComponent
+   */
   public languageSubscription: Subscription = new Subscription();
+
+  /**
+   *
+   * @param {LanguageService} languageService
+   * @param {UIModalService} modal
+   * @memberof HomeComponent
+   */
   constructor(public languageService: LanguageService, public modal: UIModalService) {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HomeComponent
+   */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
   }
+
+  /**
+   * Fetch data from API
+   *
+   * @memberof HomeComponent
+   */
   getData() {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HomeComponent
+   */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();
   }
 
+  /**
+   * Close modal
+   *
+   * @memberof HomeComponent
+   */
   onModalClose() {
     this.modal.close('contact-modal');
   }

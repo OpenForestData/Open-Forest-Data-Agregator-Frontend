@@ -25,7 +25,12 @@ const components = [
   HomeContactFormComponent,
   HomeNewsMobileComponent
 ];
-
+/**
+ * Home module
+ *
+ * @export
+ * @class HomeModule
+ */
 @NgModule({
   declarations: components,
   imports: [CommonModule, HomeRoutingModule, SharedModule]

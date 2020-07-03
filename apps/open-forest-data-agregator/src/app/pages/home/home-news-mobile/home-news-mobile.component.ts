@@ -1,7 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { LanguageService } from '@app/services/language.service';
-
+import { HomeNewsComponent } from '../home-news/home-news.component';
+/**
+ * Mobile view of news at home page
+ *
+ * @export
+ * @class HomeNewsMobileComponent
+ * @extends {HomeNewsComponent}
+ */
 @Component({
   selector: 'ofd-agregator-home-news-mobile',
   templateUrl: './home-news-mobile.component.html',
@@ -11,27 +16,29 @@ import { LanguageService } from '@app/services/language.service';
     './home-news-mobile.component.scss'
   ]
 })
-export class HomeNewsMobileComponent implements OnInit, OnDestroy {
+export class HomeNewsMobileComponent extends HomeNewsComponent {
+  /**
+   * Current slide
+   *
+   * @memberof HomeNewsMobileComponent
+   */
   public mobileActiveNews = 0;
-  public languageSubscription: Subscription = new Subscription();
 
-  constructor(public languageService: LanguageService) {}
-
-  ngOnInit() {
-    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
-  }
-
-  getData() {}
-
-  ngOnDestroy() {
-    this.languageSubscription.unsubscribe();
-  }
-
+  /**
+   * Next slide
+   *
+   * @memberof HomeNewsMobileComponent
+   */
   swipeLeftNews() {
     this.mobileActiveNews += 1;
     this.mobileActiveNews = this.mobileActiveNews > 2 ? 0 : this.mobileActiveNews;
   }
 
+  /**
+   * Previous slide
+   *
+   * @memberof HomeNewsMobileComponent
+   */
   swipeRightNews() {
     this.mobileActiveNews -= 1;
     this.mobileActiveNews = this.mobileActiveNews < 0 ? 0 : this.mobileActiveNews;

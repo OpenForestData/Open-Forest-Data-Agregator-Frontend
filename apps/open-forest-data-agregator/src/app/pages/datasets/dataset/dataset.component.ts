@@ -126,7 +126,7 @@ export class DatasetComponent implements OnInit {
 
   /**
    * Dataset constructor
-   * @param {datasetService} datasetService Dataset Service
+   * @param {datasetSservice} datasetService Dataset Service
    * @param {route} route Route
    */
   constructor(private datasetService: DatasetsService, private route: ActivatedRoute) {}
