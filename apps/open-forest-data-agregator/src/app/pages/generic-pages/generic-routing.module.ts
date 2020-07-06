@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'faq', component: FaqComponent },
   { path: 'instructions', component: InstructionsComponent },
   { path: 'partners', component: PartnersComponent },
-  { path: ':id/:slug', component: PageTemplateComponent }
+  { path: ':slug', component: PageTemplateComponent }
 ];
 /**
  * Routing for generic pages

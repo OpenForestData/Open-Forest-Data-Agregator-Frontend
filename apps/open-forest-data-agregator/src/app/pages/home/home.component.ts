@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
 import { LanguageService } from '@app/services/language.service';
 import { Subscription } from 'rxjs';
+import { UtilsService } from '@app/services/utils.service';
 
 /**
  * Home component
@@ -38,7 +39,11 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @param {UIModalService} modal
    * @memberof HomeComponent
    */
-  constructor(public languageService: LanguageService, public modal: UIModalService) {}
+  constructor(
+    public languageService: LanguageService,
+    public modal: UIModalService,
+    public utilService: UtilsService
+  ) {}
 
   /**
    * @ignore
@@ -46,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @memberof HomeComponent
    */
   ngOnInit() {
+    this.getData();
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
   }
 
@@ -54,7 +60,12 @@ export class HomeComponent implements OnInit, OnDestroy {
    *
    * @memberof HomeComponent
    */
-  getData() {}
+  getData() {
+    this.utilService.getHomePage().subscribe(response => {
+      this.utilService.homePageData = response;
+      this.utilService.setSEO(response);
+    });
+  }
 
   /**
    * @ignore

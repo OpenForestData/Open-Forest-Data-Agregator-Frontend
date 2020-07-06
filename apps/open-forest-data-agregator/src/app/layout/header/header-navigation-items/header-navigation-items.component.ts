@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService, NavigationItem } from '@app/services/utils.service';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@app/services/language.service';
 
-/**
- * Interface for navigation items
- *
- * @interface NavigationItem
- */
-interface NavigationItem {
-  name: string;
-  path: string;
-  key: string;
-  children?: NavigationItem[];
-}
 /**
  * Header navigation component
  *
@@ -30,52 +22,34 @@ export class HeaderNavigationItemsComponent implements OnInit {
    * @type {NavigationItem[]}
    * @memberof HeaderNavigationItemsComponent
    */
-  public items: NavigationItem[] = [
-    {
-      name: '',
-      path: '/',
-      key: 'start'
-    },
-    {
-      name: '',
-      path: '/datasets',
-      key: 'datasets'
-    },
-    {
-      name: '',
-      path: '/statistics',
-      key: 'stats'
-    },
-    {
-      name: '',
-      path: '/mobile-application',
-      key: 'mobile-application'
-    },
-    {
-      name: '',
-      path: '/more/about-project',
-      key: 'more',
-      children: [
-        { name: '', path: '/more/about-project', key: 'about-project' },
-        { name: '', path: '/more/partners', key: 'about-partners' },
-        {
-          name: '',
-          path: '/more/about-resources',
-          key: 'about-datasets'
-        },
-        {
-          name: '',
-          path: '/more/instructions',
-          key: 'instructions'
-        }
-      ]
-    },
-    {
-      name: '',
-      path: '/blog',
-      key: 'blog'
-    }
-  ];
+  public get items(): NavigationItem[] {
+    return this.utilService.menuStructure || [];
+  }
 
-  ngOnInit() {}
+  /**
+   * @ignore
+   *
+   * @type {Subscription}
+   * @memberof HeaderNavigationItemsComponent
+   */
+  public sub: Subscription;
+
+  /**
+   * Creates an instance of HeaderNavigationItemsComponent.
+   * @memberof HeaderNavigationItemsComponent
+   */
+  constructor(public utilService: UtilsService, public languageService: LanguageService) {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HeaderNavigationItemsComponent
+   */
+  ngOnInit() {
+    this.sub = this.languageService.changeLanguage.subscribe(_ => {
+      this.utilService.buildStructure();
+    });
+
+    this.utilService.getStructure();
+  }
 }

@@ -1,11 +1,19 @@
 <section class="search-section">
   <div class="search-wrapper">
-    <input type="text" class="search" [placeholder]="'home.search_placeholder' | translate" />
-    <button class="search-button">
+    <input
+      type="text"
+      class="search"
+      (keyup.enter)="search()"
+      [(ngModel)]="searchValue"
+      [placeholder]="'home.search_placeholder' | translate"
+    />
+    <button class="search-button" (click)="search()">
       <img src="assets/modules/home/search_icon.png" alt="{{ 'home.all_news' | translate }}" />
     </button>
   </div>
-  <p class="advanced-search">{{ 'home.advanced_search' | translate }}</p>
+  <a [routerLink]="['datasets']" [queryParams]="{ adv: true }">
+    <p class="advanced-search">{{ 'home.advanced_search' | translate }}</p>
+  </a>
 </section>
 
 <section class="animal-of-the-day">

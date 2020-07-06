@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
 /**
  * Contact modal content
  *
@@ -13,9 +14,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeContactFormComponent {
   /**
+   * Holds form data
+   *
+   * @memberof HomeContactFormComponent
+   */
+  public form = {
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    text: '',
+    checkbox: ''
+  };
+  /**
+   * Creates an instance of HomeContactFormComponent.
+   * @param {UIModalService} modal
+   * @memberof HomeContactFormComponent
+   */
+  constructor(public modal: UIModalService) {}
+  /**
    * Close modal window
    *
    * @memberof HomeContactFormComponent
    */
-  closeModal() {}
+  closeModal() {
+    this.modal.close('contact-modal');
+  }
+
+  /**
+   * Submitting form
+   *
+   * @memberof HomeContactFormComponent
+   */
+  submitForm() {
+    console.log(this.form);
+  }
 }

@@ -287,6 +287,12 @@ export class DatasetsFiltersComponent implements OnDestroy {
         }
       }
     });
+
+    if (this.queryParams['adv']) {
+      setTimeout(() => {
+        this.DSService.showAdvancedSubject.next();
+      }, 1000);
+    }
   }
 
   /**

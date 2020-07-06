@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
-import { Subscription } from 'rxjs';
-import { LanguageService } from '@app/services/language.service';
+import { UtilsService } from '@app/services/utils.service';
 /**
  * FAQ view at home page
  *
@@ -15,43 +14,6 @@ import { LanguageService } from '@app/services/language.service';
   templateUrl: './home-faq-contact.component.html',
   styleUrls: ['./home-faq-contact.component.scss', '../home.media.scss']
 })
-export class HomeFaqContactComponent implements OnInit, OnDestroy {
-  /**
-   * Language change subscription
-   *
-   * @type {Subscription}
-   * @memberof HomeNewsComponent
-   */
-  public languageSubscription: Subscription = new Subscription();
-  /**
-   *
-   * @param {LanguageService} languageService
-   * @memberof HomeNewsComponent
-   */
-  constructor(public languageService: LanguageService) {}
-
-  /**
-   * @ignore
-   *
-   * @memberof HomeNewsComponent
-   */
-  ngOnInit() {
-    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
-  }
-
-  /**
-   * Fetch data from API
-   *
-   * @memberof HomeNewsComponent
-   */
-  getData() {}
-
-  /**
-   * @ignore
-   *
-   * @memberof HomeNewsComponent
-   */
-  ngOnDestroy() {
-    this.languageSubscription.unsubscribe();
-  }
+export class HomeFaqContactComponent {
+  constructor(public utilService: UtilsService, public modal: UIModalService) {}
 }

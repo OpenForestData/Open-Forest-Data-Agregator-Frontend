@@ -4,6 +4,13 @@
   min-height: 360px;
   display: flex;
   align-items: center;
+
+  h1 {
+    font-weight: 900;
+    font-size: 3.75rem;
+    max-width: 500px;
+    text-transform: uppercase;
+  }
 }
 
 .bg-gray {
@@ -38,6 +45,13 @@
       height: 75px;
       display: flex;
       align-items: center;
+
+      a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
 
       &.show-all {
         margin-left: auto;

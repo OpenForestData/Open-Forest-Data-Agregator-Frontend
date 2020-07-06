@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from '@app/services/utils.service';
 /**
  * Banner component
  *
@@ -17,4 +18,11 @@ export class HomeBannerComponent {
    * @memberof HomeBannerComponent
    */
   public showMobileCategories = false;
+
+  /**
+   * Creates an instance of HomeBannerComponent.
+   * @param {UtilsService} utilService
+   * @memberof HomeBannerComponent
+   */
+  constructor(public utilService: UtilsService) {}
 }
