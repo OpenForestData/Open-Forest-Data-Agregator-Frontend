@@ -50,7 +50,10 @@ export class DatasetsTableComponent implements OnInit {
         {
           extend: 'pdfHtml5',
           orientation: 'landscape',
-          pageSize: 'LEGAL'
+          pageSize: {
+            width: 150 * this.datasets.length,
+            height: 25 * this.datasets.length
+          }
         },
         {
           text: 'Fullscreen',
