@@ -47,7 +47,11 @@ export class DatasetsTableComponent implements OnInit {
         'copy',
         'print',
         'excel',
-        'pdfHtml5',
+        {
+          extend: 'pdfHtml5',
+          orientation: 'landscape',
+          pageSize: 'LEGAL'
+        },
         {
           text: 'Fullscreen',
           titleAttr: 'Fullscreen',
