@@ -17,7 +17,12 @@ const components = [
   InstructionsComponent,
   PartnersComponent
 ];
-
+/**
+ * Generic pages module
+ *
+ * @export
+ * @class GenericModule
+ */
 @NgModule({
   declarations: components,
   imports: [CommonModule, GenericRoutingModule, SharedModule]

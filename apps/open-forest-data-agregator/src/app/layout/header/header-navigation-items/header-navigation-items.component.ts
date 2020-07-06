@@ -1,68 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService, NavigationItem } from '@app/services/utils.service';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@app/services/language.service';
 
-import { TranslateService } from '@ngx-translate/core';
-
-interface NavigationItem {
-  name: string;
-  path: string;
-  key: string;
-  children?: NavigationItem[];
-}
-
+/**
+ * Header navigation component
+ *
+ * @export
+ * @class HeaderNavigationItemsComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'ofd-agregator-header-navigation-items',
   templateUrl: './header-navigation-items.component.html',
   styleUrls: ['./header-navigation-items.component.scss']
 })
 export class HeaderNavigationItemsComponent implements OnInit {
-  public items: NavigationItem[] = [
-    {
-      name: '',
-      path: '/',
-      key: 'start'
-    },
-    {
-      name: '',
-      path: '/datasets',
-      key: 'datasets'
-    },
-    {
-      name: '',
-      path: '/statistics',
-      key: 'stats'
-    },
-    {
-      name: '',
-      path: '/mobile-application',
-      key: 'mobile-application'
-    },
-    {
-      name: '',
-      path: '/more/about-project',
-      key: 'more',
-      children: [
-        { name: '', path: '/more/about-project', key: 'about-project' },
-        { name: '', path: '/more/partners', key: 'about-partners' },
-        {
-          name: '',
-          path: '/more/about-resources',
-          key: 'about-datasets'
-        },
-        {
-          name: '',
-          path: '/more/instructions',
-          key: 'instructions'
-        }
-      ]
-    },
-    {
-      name: '',
-      path: '/blog',
-      key: 'blog'
-    }
-  ];
+  /**
+   * Navgiation components
+   *
+   * @type {NavigationItem[]}
+   * @memberof HeaderNavigationItemsComponent
+   */
+  public get items(): NavigationItem[] {
+    return this.utilService.menuStructure || [];
+  }
 
-  constructor(public translateService: TranslateService) {}
+  /**
+   * @ignore
+   *
+   * @type {Subscription}
+   * @memberof HeaderNavigationItemsComponent
+   */
+  public sub: Subscription;
 
-  ngOnInit(): void {}
+  /**
+   * Creates an instance of HeaderNavigationItemsComponent.
+   * @memberof HeaderNavigationItemsComponent
+   */
+  constructor(public utilService: UtilsService, public languageService: LanguageService) {}
+
+  /**
+   * @ignore
+   *
+   * @memberof HeaderNavigationItemsComponent
+   */
+  ngOnInit() {
+    this.sub = this.languageService.changeLanguage.subscribe(_ => {
+      this.utilService.buildStructure();
+    });
+
+    this.utilService.getStructure();
+  }
 }

@@ -386,16 +386,135 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .advanced {
-    position: sticky;
-  }
-}
-
 .times {
   cursor: pointer;
 }
 
 .datasets-filters__type {
   margin-bottom: 20px;
+}
+
+.showAdvencedListMobile {
+  padding: 8px 24px 8px 8px;
+  min-width: 150px;
+  color: white;
+  background-color: $accent-color;
+  height: 50px;
+  font-size: 16px;
+  margin-left: auto;
+  font-weight: 500;
+  width: 100%;
+  letter-spacing: 1px;
+  border-radius: 0;
+  text-transform: uppercase;
+
+  svg {
+    height: 16px;
+    margin-right: 10px;
+  }
+
+  svg * {
+    fill: white;
+  }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+  .lunchSearch {
+    font-size: 14px;
+  }
+
+  .filters-values {
+    margin-bottom: 300px;
+    padding: 0 !important;
+  }
+
+  .advanced,
+  .advanced .container {
+    padding: 0;
+    margin: 0;
+    width: 100% !important;
+  }
+
+  .container > .row:not(.main-row) {
+    padding: 20px;
+
+    &.p-t-0 {
+      padding-top: 0;
+    }
+  }
+
+  .scrollable {
+    height: 100% !important;
+  }
+
+  .main-row,
+  .list-of-filters {
+    height: 100%;
+  }
+
+  .group-row header {
+    background-color: $accent-color !important;
+    color: white;
+  }
+
+  .list-of-filters {
+    top: 0;
+    position: fixed;
+    z-index: 1005;
+    will-change: transform;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(-100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: whitesmoke;
+    width: 90%;
+    flex-basis: 90%;
+    max-width: 90%;
+
+    .top-bar {
+      position: sticky;
+      padding: 15px 20px;
+      width: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      z-index: 1010;
+    }
+
+    &.active {
+      transform: translateX(0%);
+    }
+  }
+
+  .filters-content,
+  .mobile-p-20 {
+    padding: 20px;
+  }
+
+  .search-bar {
+    margin-bottom: 10px;
+  }
+
+  img.times {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .search-section {
+    flex-flow: column;
+    width: 100%;
+
+    input {
+      width: 100%;
+    }
+
+    label {
+      margin-bottom: 20px;
+    }
+  }
 }

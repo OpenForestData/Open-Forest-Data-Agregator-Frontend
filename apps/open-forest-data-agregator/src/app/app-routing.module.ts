@@ -14,13 +14,17 @@ const routes: Routes = [
       { path: 'statistics', loadChildren: '../app/pages/statistics/statistics.module#StatisticsModule' },
       { path: 'blog', loadChildren: '../app/pages/blog/blog.module#BlogModule' },
       { path: 'news', loadChildren: '../app/pages/news/news.module#NewsModule' },
-      { path: 'auth', loadChildren: '../app/auth/auth.module#AuthModule' },
       { path: 'datasets', loadChildren: '../app/pages/datasets/datasets.module#DatasetsModule' },
       { path: '**', component: NotFoundComponent }
     ]
   }
 ];
-
+/**
+ * Routing module for app. Contains routings path for basic modules
+ *
+ * @export
+ * @class AppRoutingModule
+ */
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {

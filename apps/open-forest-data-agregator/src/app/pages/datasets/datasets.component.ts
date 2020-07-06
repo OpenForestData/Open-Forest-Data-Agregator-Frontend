@@ -21,16 +21,44 @@ import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-fi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatasetsComponent implements OnInit, OnDestroy {
+  /**
+   * Reference to view component
+   *
+   * @type {DatasetsFiltersComponent}
+   * @memberof DatasetsComponent
+   */
   @ViewChild(DatasetsFiltersComponent) filterComponent: DatasetsFiltersComponent;
 
+  /**
+   * Breadcrumbs Array
+   *
+   * @type {IBreadcrumbs[]}
+   * @memberof DatasetsComponent
+   */
   public breadcrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
     { name: 'Zbiory danych', href: '/datasets' }
   ];
 
+  /**
+   * Fullscreen for table
+   *
+   * @memberof DatasetsComponent
+   */
   public fullscreen = false;
+
+  /**
+   * Number of pages
+   *
+   * @memberof DatasetsComponent
+   */
   public pageCount = 0;
 
+  /**
+   * Headers for filters
+   *
+   * @memberof DatasetsComponent
+   */
   public filters = {
     category: {
       key: 'category',
@@ -53,6 +81,12 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    * Mock datasets items
    */
   public datasetsItems = [];
+
+  /**
+   * Current page
+   *
+   * @memberof DatasetsComponent
+   */
   public page = 1;
 
   /**
@@ -60,6 +94,12 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    */
   public datasets: any;
 
+  /**
+   * @ignore
+   *
+   * @type {Subscription}
+   * @memberof DatasetsComponent
+   */
   public subs: Subscription = new Subscription();
 
   /**
@@ -75,14 +115,32 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     this.subs.add(this.DSService.triggerSearchSubject.subscribe(() => this.getData()));
   }
 
+  /**
+   * Set category value
+   *
+   * @param {*} value
+   * @memberof DatasetsComponent
+   */
   setCategory(value) {
     this.DSService.searchFilters = { field: 'category', data: value, search: true };
   }
 
+  /**
+   * Get category from service
+   *
+   * @readonly
+   * @memberof DatasetsComponent
+   */
   public get selectedCategory() {
     return this.DSService.searchFilters.data.category;
   }
 
+  /**
+   * Get all available categories
+   *
+   * @readonly
+   * @memberof DatasetsComponent
+   */
   public get categories() {
     const filter = this.DSService.searchData.list.available_filter_fields;
 
@@ -93,10 +151,22 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       : [];
   }
 
+  /**
+   * Get page size
+   *
+   * @readonly
+   * @memberof DatasetsComponent
+   */
   public get pageSize() {
     return this.DSService.searchFilters.data.rows;
   }
 
+  /**
+   * Gets selected filters for advenced view
+   *
+   * @readonly
+   * @memberof DatasetsComponent
+   */
   public get advancedSelected() {
     if (this.filterComponent) {
       const advanced = []
@@ -146,15 +216,32 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
+  /**
+   * Set full screen view
+   *
+   * @param {*} value
+   * @memberof DatasetsComponent
+   */
   setFullscreen(value) {
     this.fullscreen = value;
   }
 
+  /**
+   * Callback for paginantion page/size change
+   *
+   * @param {*} payload
+   * @memberof DatasetsComponent
+   */
   paginationChanged(payload) {
     this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
     this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
   }
 
+  /**
+   * Fetch data from API & create basic strucucture
+   *
+   * @memberof DatasetsComponent
+   */
   getData() {
     this.DSService.search().subscribe((response: any) => {
       this.DSService.searchData = response;
@@ -246,14 +333,25 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Toggle filters state
+   *
+   * @param {*} payload
+   * @param {*} name
+   * @memberof DatasetsComponent
+   */
   toggleFilter(payload, name) {
     this.filters[name].isExpanded = payload;
     this.changeDetectorRef.detectChanges();
   }
 
+  /**
+   * @ignore
+   *
+   * @memberof DatasetsComponent
+   */
   ngOnDestroy() {
     this.subs.unsubscribe();
-
     this.store.dispatch(new DatasetsChangeViewMode('list'));
   }
 }

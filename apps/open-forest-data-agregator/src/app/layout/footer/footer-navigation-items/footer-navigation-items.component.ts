@@ -5,30 +5,31 @@ import { TranslateService } from '@ngx-translate/core';
 interface NavigationItem {
   name: string;
   path: string;
-  key: string;
 }
-
+/**
+ * Footer navigation
+ *
+ * @export
+ * @class FooterNavigationItemsComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'ofd-agregator-footer-navigation-items',
   templateUrl: './footer-navigation-items.component.html',
   styleUrls: ['./footer-navigation-items.component.scss']
 })
-export class FooterNavigationItemsComponent implements OnInit {
+export class FooterNavigationItemsComponent {
+  /**
+   * Navigation items
+   *
+   * @type {NavigationItem[]}
+   * @memberof FooterNavigationItemsComponent
+   */
   public items: NavigationItem[] = [
-    { name: '', path: '/more/about-resources', key: 'datasets' },
-    { name: '', path: 'about-page', key: 'about-page' },
-    { name: '', path: 'privacy-policy', key: 'policy' },
-    { name: '', path: 'api-docs', key: 'api' },
-    { name: '', path: '/more/faq', key: 'faq' }
+    { name: 'footer.items.datasets', path: '/more/about-resources' },
+    { name: 'footer.items.about-page', path: 'about-page' },
+    { name: 'footer.items.policy', path: 'privacy-policy' },
+    { name: 'footer.items.api', path: 'api-docs' },
+    { name: 'footer.items.faq', path: '/more/faq' }
   ];
-
-  constructor(public translateService: TranslateService) {
-    this.translateService.get('footer.items').subscribe(translations => {
-      this.items.forEach(item => {
-        if (translations[item['key']]) item.name = translations[item['key']];
-      });
-    });
-  }
-
-  ngOnInit(): void {}
 }

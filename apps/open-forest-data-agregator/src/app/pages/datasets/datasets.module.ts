@@ -24,7 +24,12 @@ import { DatasetsCategoryDescriptionComponent } from './datasets-category-descri
 import { DatasetsActiveFiltersComponent } from './datasets-active-filters/datasets-active-filters.component';
 import { DatasetsInputTagComponent } from './filters/datasets-input-tag/datasets-input-tag.component';
 import { DatasetsFilterComponent } from './filters/datasets-filters/datasets-filter/datasets-filter.component';
-
+/**
+ * Datasets module
+ *
+ * @export
+ * @class DatasetsModule
+ */
 @NgModule({
   declarations: [
     DatasetsComponent,

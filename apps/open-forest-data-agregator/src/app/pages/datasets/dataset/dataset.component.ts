@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
-import { DatasetService } from '@app/services/dataset.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatasetsService } from '../datasets.service';
 
 /**
  * Dataset component
@@ -126,10 +126,10 @@ export class DatasetComponent implements OnInit {
 
   /**
    * Dataset constructor
-   * @param {datasetService} datasetService Dataset Service
+   * @param {datasetSservice} datasetService Dataset Service
    * @param {route} route Route
    */
-  constructor(private datasetService: DatasetService, private route: ActivatedRoute) {}
+  constructor(private datasetService: DatasetsService, private route: ActivatedRoute) {}
 
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.

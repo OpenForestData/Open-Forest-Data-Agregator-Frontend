@@ -7,7 +7,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env/environment';
 
 import { reducers } from '.';
-
+/**
+ * Store module
+ *
+ * @export
+ * @class StateModule
+ */
 @NgModule({
   imports: [
     CommonModule,

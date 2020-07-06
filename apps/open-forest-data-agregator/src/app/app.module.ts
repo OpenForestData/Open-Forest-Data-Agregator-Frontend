@@ -64,7 +64,12 @@ const components = [
   NotFoundComponent,
   BackToTopComponent
 ];
-
+/**
+ * Application main module. Loads initial modules for app to work
+ *
+ * @export
+ * @class AppModule
+ */
 @NgModule({
   declarations: [...components],
   imports: [

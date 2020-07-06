@@ -5,8 +5,8 @@
       <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
     </button>
   </h3>
-  <div [ngClass]="{ 'display-none': !isExpanded }">
-    <div class="checkbox" *ngIf="type === 'SELECT'">
+  <div [ngClass]="{ 'display-none': !isExpanded }" [ngSwitch]="type">
+    <div class="checkbox" *ngSwitchCase="'SELECT'">
       <div class="filter__data">
         <ng-container *ngIf="multiple">
           <button (click)="toggleAllFilters()" class="filter__select-all" *ngIf="data.length > 1">
@@ -85,7 +85,7 @@
       </button>
     </div>
 
-    <div class="filter-details" *ngIf="type === 'INPUT'">
+    <div class="filter-details" *ngSwitchCase="'INPUT'">
       <ofd-agregator-datasets-input-tag
         [data]="data"
         [value]="value"
@@ -94,7 +94,7 @@
       ></ofd-agregator-datasets-input-tag>
     </div>
 
-    <div class="filter-details" *ngIf="type === 'MAP'">
+    <div class="filter-details" *ngSwitchCase="'MAP'">
       <ofd-agregator-datasets-range
         [value]="value"
         [isExpanded]="isExpanded"
@@ -103,14 +103,14 @@
       ></ofd-agregator-datasets-range>
     </div>
 
-    <div class="filter-details" *ngIf="type === 'DATERANGE'">
+    <div class="filter-details" *ngSwitchCase="'DATERANGE'">
       <ofd-agregator-datasets-time-range
         [value]="value"
         (valueChange)="emitChange($event)"
       ></ofd-agregator-datasets-time-range>
     </div>
 
-    <div class="filter-details" *ngIf="type === 'DATE'">
+    <div class="filter-details" *ngSwitchCase="'DATE'">
       <ofd-agregator-datasets-time-range
         [single]="true"
         [value]="value"

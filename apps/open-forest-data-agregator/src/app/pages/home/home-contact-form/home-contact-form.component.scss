@@ -135,3 +135,12 @@ textarea:not(:placeholder-shown) + label {
 .check_box:checked + label {
   background-position: -20px 0;
 }
+
+.times {
+  cursor: pointer;
+}
+
+.normal {
+  position: relative;
+  line-height: 20px;
+}

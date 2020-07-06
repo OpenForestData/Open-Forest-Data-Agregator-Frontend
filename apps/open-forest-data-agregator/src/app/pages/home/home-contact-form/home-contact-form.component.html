@@ -6,36 +6,67 @@
     [titleText]="'home.contact_header' | translate"
   ></ofd-agregator-section-title>
 
-  <div class="filds">
-    <input type="text" id="firstName" [placeholder]="'home.contact_form.name' | translate" />
-    <label for="firstName">{{ 'home.contact_form.name' | translate }}</label>
-  </div>
+  <form #f="ngForm" (ngSubmit)="submitForm()">
+    <div class="filds">
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        required
+        [(ngModel)]="form.firstName"
+        [placeholder]="'home.contact_form.name' | translate"
+      />
+      <label for="firstName">{{ 'home.contact_form.name' | translate }}</label>
+    </div>
 
-  <div class="filds">
-    <input type="text" id="lastName" [placeholder]="'home.contact_form.surname' | translate" />
-    <label for="lastName">{{ 'home.contact_form.surname' | translate }}</label>
-  </div>
+    <div class="filds">
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        required
+        [(ngModel)]="form.lastName"
+        [placeholder]="'home.contact_form.surname' | translate"
+      />
+      <label for="lastName">{{ 'home.contact_form.surname' | translate }}</label>
+    </div>
 
-  <div class="filds">
-    <input type="text" id="emailAddress" [placeholder]="'home.contact_form.email' | translate" />
-    <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
-  </div>
+    <div class="filds">
+      <input
+        type="text"
+        id="emailAddress"
+        name="emailAddress"
+        required
+        [(ngModel)]="form.emailAddress"
+        [placeholder]="'home.contact_form.email' | translate"
+      />
+      <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
+    </div>
 
-  <div class="filds">
-    <textarea id="text" [placeholder]="'home.contact_form.text' | translate"></textarea>
-    <label for="text">{{ 'home.contact_form.text' | translate }}</label>
-  </div>
+    <div class="filds">
+      <textarea
+        id="text"
+        name="text"
+        required
+        [(ngModel)]="form.text"
+        [placeholder]="'home.contact_form.text' | translate"
+      ></textarea>
+      <label for="text">{{ 'home.contact_form.text' | translate }}</label>
+    </div>
 
-  <div class="field checkbox-field">
-    <input type="checkbox" class="check_box" id="checkbox1" name="checkbox" />
-    <label for="checkbox1"></label>
-    <span for="checkbox1" class="checkbox-label">{{ 'home.contact_form.checkbox' | translate }}</span>
-  </div>
+    <div class="field checkbox-field">
+      <input type="checkbox" required class="check_box" id="checkbox1" [(ngModel)]="form.checkbox" name="checkbox" />
+      <label class="mark" for="checkbox1"></label>
+      <label class="normal" for="checkbox1">
+        <span class="checkbox-label">{{ 'home.contact_form.checkbox' | translate }}</span>
+      </label>
+    </div>
 
-  <div class="field button-wrapp">
-    <button type="submit" class="btn">
-      {{ 'home.contact_form.send' | translate }}
-      <img src="assets/modules/home/envelop_white.png" />
-    </button>
-  </div>
+    <div class="field button-wrapp">
+      <button type="submit" class="btn">
+        {{ 'home.contact_form.send' | translate }}
+        <img src="assets/modules/home/envelop_white.png" />
+      </button>
+    </div>
+  </form>
 </div>
