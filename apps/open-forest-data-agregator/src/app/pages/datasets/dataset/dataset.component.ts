@@ -156,7 +156,6 @@ export class DatasetComponent implements OnInit {
       this.dataset = response;
       this.getMetrics(this.dataset);
       this.getFilterTypes();
-      console.log('dataset: ', this.dataset);
       this.files = this.dataset.latestVersion.files.map(file => {
         file.isChecked = false;
         return file;
