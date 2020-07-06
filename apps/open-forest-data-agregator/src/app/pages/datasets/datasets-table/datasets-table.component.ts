@@ -51,6 +51,7 @@ export class DatasetsTableComponent implements OnInit {
           extend: 'pdfHtml5',
           orientation: 'landscape',
           pageSize: {
+            // This need to be changed based on keys for width and amount datasets for height
             width: 150 * this.datasets.length,
             height: 25 * this.datasets.length
           }
