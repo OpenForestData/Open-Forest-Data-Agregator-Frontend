@@ -1,19 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AppConfigService } from './app-config.service';
 
+/**
+ * Dataset service
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class DatasetService {
-  public url = 'https://agregator.whiteaster.com/api/v1/';
-
+  /**
+   * Dataset constructor
+   * @param {HttpClient} http Http Client
+   */
   constructor(private http: HttpClient) {}
 
+  /**
+   * Get dataset object by doi
+   * @param doi doi identifier
+   */
   getDatasetByDOI(doi: any) {
-    return this.http.get<any>(`${this.url}dataset?identifier=${doi}`);
+    return this.http.get<any>(`${AppConfigService.config.api}dataset?identifier=${doi}`);
   }
 
+  /**
+   * Get resource object by id
+   * @param {number} id identification number
+   */
   getResourceByID(id: number) {
-    return this.http.get<any>(`${this.url}resource/${id}`);
+    return this.http.get<any>(`${AppConfigService.config.api}resource/${id}`);
   }
 }

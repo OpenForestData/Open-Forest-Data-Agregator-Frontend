@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
+import { BlogService } from '@app/services/blog.service';
 
 @Component({
   selector: 'ofd-agregator-blog-post',
@@ -15,7 +16,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   public languageSubscription: Subscription = new Subscription();
   public newsID = 0;
 
-  constructor(public languageService: LanguageService, public route: ActivatedRoute) {
+  constructor(public languageService: LanguageService, public route: ActivatedRoute, public blogService: BlogService) {
     this.routerSubscription = this.route.params.subscribe(params => {
       this.newsID = params['id'];
     });
@@ -24,6 +25,12 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     for (let i = 0; i < 25; i++) this.randomWords.push(this.random());
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+    this.route.params.subscribe(params => {
+      console.log('params: ', params);
+      this.blogService.getBlogSlug(params['slug']).subscribe(response => {
+        console.log('slug reponse: ', response);
+      });
+    });
   }
 
   random() {
