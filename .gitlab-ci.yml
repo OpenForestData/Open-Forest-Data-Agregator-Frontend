@@ -4,9 +4,19 @@ before_script:
   - npm install
 
 stages:
+  - sonar analysis
   - test
   - lint
   - build
+
+sonarqube:
+  image: sonarsource/sonar-scanner-cli
+  stage: sonar analysis
+  before_script: []
+  script:
+    - sonar-scanner -Dsonar.projectKey=open-forest-data-agregator-frontend -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.whiteaster.com -Dsonar.login=650b2d645302b11d12bb0d1e72971ecf310a763c
+  only:
+    - master
 
 lint:
   stage: lint
