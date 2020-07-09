@@ -1,0 +1,31 @@
+@import '../../../../../../../resources/colors';
+
+.input-area {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 15px;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  label:first-of-type {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .phone-xs {
+    width: 100%;
+    margin-top: 25px;
+    justify-content: flex-start;
+    flex-basis: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+}

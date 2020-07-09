@@ -1,0 +1,18 @@
+<ng-select
+  [clearAllText]="'search.clear_all' | translate"
+  [loadingText]="'search.loading_text' | translate"
+  [notFoundText]="data.length ? ('search.loading_text' | translate) : ''"
+  [typeToSearchText]="data.length ? ('search.not_found_text' | translate) : ''"
+  [addTagText]="'search.add_tag' | translate"
+  [multiple]="multiple"
+  [addTag]="true"
+  [selectableGroup]="true"
+  [closeOnSelect]="false"
+  [items]="data"
+  (change)="emitValue($event)"
+  [(ngModel)]="value"
+>
+  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+    <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item }}
+  </ng-template>
+</ng-select>

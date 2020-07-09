@@ -1,0 +1,129 @@
+@import '../../../../../resources/_colors.scss';
+
+.ui-checkbox {
+  color: $text-color;
+  display: flex;
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  user-select: none;
+  font-size: 14px;
+  min-height: 20px;
+
+  span.label {
+    margin-top: 1px;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  height: 18px;
+  width: 18px;
+  background-color: transparent;
+  border: 1px solid $text-color;
+  border-radius: 2px;
+  box-sizing: border-box;
+  transition: 0.3s all;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background-image: url('/assets/images/check.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0;
+  left: 4px;
+  top: 5px;
+  display: block;
+  transition: 0.3s opacity;
+}
+
+.ui-checkbox input:checked ~ .checkmark {
+  border: 1px solid $accent-color;
+}
+
+.ui-checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+
+.checkbox-field {
+  padding-left: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  label {
+    margin-left: 0px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-label {
+    font-size: 14px;
+    margin-left: 15px;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+
+  .check_box {
+    display: none;
+  }
+
+  .check_box + label {
+    cursor: pointer;
+    background: url('./../../../../../resources/assets/modules/auth/checkbox.png') no-repeat;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+    background-position: 0 0;
+    padding-top: 1px;
+  }
+
+  .check_box:checked + label {
+    background-position: -20px 0;
+  }
+}
+
+::ng-deep {
+  @media (max-width: 1200px) {
+    .mobile-white-1200 {
+      .checkbox-field {
+        color: white;
+
+        .check_box + label {
+          background-image: url('./../../../../../resources/assets/modules/auth/checkbox_white.png') !important;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .mobile-white {
+      .checkbox-field {
+        color: white;
+
+        .check_box + label {
+          background-image: url('./../../../../../resources/assets/modules/auth/checkbox_white.png') !important;
+        }
+      }
+    }
+  }
+}

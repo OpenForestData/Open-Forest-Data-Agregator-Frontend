@@ -1,0 +1,104 @@
+@import '../../../../../../../resources/_colors.scss';
+
+.navigation-items {
+  &__list {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      position: relative;
+
+      &.has-children {
+        > a {
+          position: relative;
+          padding-right: 52px !important;
+
+          &:after {
+            position: absolute;
+            content: '';
+            background-image: url('/assets/images/dark_arrow_down.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: block;
+            height: 6px;
+            width: 10px;
+            right: 0;
+            top: 50%;
+            transform: translate(-26px, -50%);
+          }
+        }
+      }
+
+      &:not(:last-of-type) {
+        a {
+          padding-right: 32px;
+        }
+      }
+
+      a {
+        color: $text-color;
+      }
+
+      > a {
+        padding-top: 6px;
+        display: block;
+        padding-bottom: 6px;
+
+        &.active {
+          color: $accent-color;
+        }
+      }
+
+      &:hover {
+        > a {
+          color: $accent-color;
+        }
+
+        .navigation-items__dropdown-list {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__dropdown-list {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style-type: none;
+    margin: 0;
+    padding: 13px 0 0 0;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    &-item {
+      a {
+        white-space: nowrap;
+        padding: 6px 36px;
+        display: block;
+
+        &:hover,
+        &.active {
+          background-color: $accent-color;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .navigation-items__list-item {
+    a {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+  }
+}

@@ -1,0 +1,135 @@
+$blur: 4px;
+
+:host {
+  display: none;
+
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: auto;
+    opacity: 1;
+    transition: 0.3s opacity;
+
+    .modal-body {
+      background: #fff;
+      position: relative;
+
+      &.slide-up {
+        animation: 0.3s 0s 1 slideUp;
+      }
+
+      &.slide-down {
+        animation: 0.3s 0s 1 slideDown;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border: none;
+        transform: translate(100%, -100%);
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
+      }
+    }
+  }
+
+  .modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.85;
+    z-index: 900;
+    animation: 0.3s 0s 1 showIn;
+  }
+}
+::ng-deep {
+  body.modal-open {
+    overflow: hidden;
+  }
+
+  body.modal-open deegitals-frontend-root {
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -o-filter: blur($blur);
+    -ms-filter: blur($blur);
+    filter: blur($blur);
+    transition: 0.3s all;
+  }
+
+  body.modal-closed {
+    .modal {
+      opacity: 0 !important;
+    }
+    deegitals-frontend-root {
+      -webkit-filter: blur(0);
+      -moz-filter: blur(0);
+      -o-filter: blur(0);
+      -ms-filter: blur(0);
+      filter: blur(0);
+    }
+    .modal-background {
+      transition: 0.3s opacity;
+      opacity: 0 !important;
+    }
+  }
+}
+
+@keyframes showIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-25%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 702px) {
+  .modal-body {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  ::ng-deep {
+    .row.around-md {
+      margin: auto;
+    }
+  }
+}

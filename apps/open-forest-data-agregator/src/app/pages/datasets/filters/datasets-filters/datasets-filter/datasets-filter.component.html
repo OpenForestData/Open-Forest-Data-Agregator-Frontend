@@ -1,0 +1,121 @@
+<div class="filter">
+  <h3 class="filter__title" [ngClass]="{ 'filter__title--expanded': isExpanded }" (click)="isExpanded = !isExpanded">
+    {{ header | translate }}
+    <button class="filter__arrow">
+      <svg-icon [src]="'/assets/images/dark_arrow_down.svg'" [applyCss]="true"></svg-icon>
+    </button>
+  </h3>
+  <div [ngClass]="{ 'display-none': !isExpanded }" [ngSwitch]="type">
+    <div class="checkbox" *ngSwitchCase="'SELECT'">
+      <div class="filter__data">
+        <ng-container *ngIf="multiple">
+          <button (click)="toggleAllFilters()" class="filter__select-all" *ngIf="data.length > 1">
+            {{ showAll ? 'Wyczyść' : 'Zaznacz' }}
+          </button>
+          <ng-container *ngFor="let item of data; let i = index">
+            <ui-checkbox
+              [name]="key + '-' + i"
+              [model]="value.indexOf(item) !== -1"
+              (modelChange)="changeFilter($event, item)"
+              *ngIf="(!showMore && i < maxFilters) || showMore"
+            >
+              {{ item }}
+            </ui-checkbox>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!multiple">
+          <ol class="datasets-filter">
+            <ng-container *ngFor="let item of data; let i = index">
+              <li
+                class="datasets-filter__item"
+                *ngIf="(!showMore && i < maxFilters) || showMore"
+                [ngClass]="{ selected: item === value }"
+                (click)="changeFilter(item !== value, item)"
+              >
+                {{ item }}
+
+                <span class="times" *ngIf="item === value" (click)="changeFilter(true, null)">&times;</span>
+              </li>
+            </ng-container>
+          </ol>
+        </ng-container>
+      </div>
+      <button
+        (click)="showMore = !showMore"
+        *ngIf="data && data.length > maxFilters"
+        class="filter__show-more"
+        [ngClass]="{ more: !showMore, less: showMore }"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="2" viewBox="0 0 16 2" *ngIf="showMore">
+          <path fill="#009444" d="m15,0s0.169,0.188 -14,0a1,1 0 0 0 0,2l14,0a1,1 0 0 0 0,-2z" id="Path_1070" />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13.241"
+          height="13.241"
+          viewBox="0 0 13.241 13.241"
+          *ngIf="!showMore"
+        >
+          <g id="Group_839" data-name="Group 839" transform="translate(-7.475 -8.854)">
+            <line
+              id="Line_43"
+              data-name="Line 43"
+              y2="11.241"
+              transform="translate(14.096 9.854)"
+              fill="none"
+              stroke="#009444"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <line
+              id="Line_44"
+              data-name="Line 44"
+              x2="11.241"
+              transform="translate(8.475 15.475)"
+              fill="none"
+              stroke="#009444"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </g>
+        </svg>
+        {{ (showMore ? 'global.show-less' : 'global.show-more') | translate }}
+      </button>
+    </div>
+
+    <div class="filter-details" *ngSwitchCase="'INPUT'">
+      <ofd-agregator-datasets-input-tag
+        [data]="data"
+        [value]="value"
+        (valueChange)="emitChange($event)"
+        [multiple]="true"
+      ></ofd-agregator-datasets-input-tag>
+    </div>
+
+    <div class="filter-details" *ngSwitchCase="'MAP'">
+      <ofd-agregator-datasets-range
+        [value]="value"
+        [isExpanded]="isExpanded"
+        (valueChange)="emitChange($event)"
+        [multiple]="true"
+      ></ofd-agregator-datasets-range>
+    </div>
+
+    <div class="filter-details" *ngSwitchCase="'DATERANGE'">
+      <ofd-agregator-datasets-time-range
+        [value]="value"
+        (valueChange)="emitChange($event)"
+      ></ofd-agregator-datasets-time-range>
+    </div>
+
+    <div class="filter-details" *ngSwitchCase="'DATE'">
+      <ofd-agregator-datasets-time-range
+        [single]="true"
+        [value]="value"
+        (valueChange)="emitChange($event)"
+      ></ofd-agregator-datasets-time-range>
+    </div>
+  </div>
+</div>

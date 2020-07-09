@@ -1,0 +1,272 @@
+<section class="main-container">
+  <ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
+  <section class="container">
+    <div class="dataset-left">
+      <ofd-agregator-data-container
+        class="header-bar-dataset"
+        [iconSrc]="'/assets/images/pencil.svg'"
+        [title]="'datasets.dataset.headers.metrics' | translate"
+        [expandable]="true"
+        [expanded]="!mobile"
+      >
+        <div class="metric">
+          <div class="metric__content">
+            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ 3 }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.created' | translate }}
+              {{ dataset.latestVersion?.createTime | date: 'dd.MM.yyyy' }}
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.source' | translate }}
+              <a [href]="makeSource()">{{
+                dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
+                  ? (dataset?.providers)[0]?.authorAffiliation?.value
+                  : 'Dataverse'
+              }}</a>
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.author' | translate }}
+              {{ (metricData?.author?.value)[0].authorName.value }}
+            </p>
+            <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.license' | translate }}
+              <a href="{{ mockLeftSide.license.link }}">{{ dataset.latestVersion?.license }}</a>
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.domain' | translate }}
+              <span *ngFor="let subject of metricData?.subject?.value; let i = index"
+                >{{ subject }}<span *ngIf="i < metricData?.subject?.value.length - 1">, </span>
+              </span>
+            </p>
+            <p>
+              {{ 'datasets.dataset.metadata-all.keywords' | translate }}
+              <span *ngFor="let keyword of metricData?.keyword?.value; let i = index"
+                >{{ keyword.keywordValue.value }}<span *ngIf="i < metricData?.keyword?.value.length - 1">, </span>
+              </span>
+            </p>
+          </div>
+
+          <div class="metric__social">
+            <ofd-agregator-social class="social-container"></ofd-agregator-social>
+          </div>
+        </div>
+        <div class="versions">
+          <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
+            {{ 'datasets.dataset.headers.versions' | translate }}
+          </ofd-agregator-header-bar>
+
+          <div class="versions__content">
+            <a [href]="makeSource()"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
+            <p>{{ ' - ' + (dataset.latestVersion?.releaseTime | date: 'dd.MM.yyyy') + ' | ' + dataset.publisher }}</p>
+          </div>
+        </div>
+      </ofd-agregator-data-container>
+    </div>
+
+    <div class="dataset-right">
+      <div class="right-container">
+        <div class="right-container__header">
+          <div class="right-container__header__title">
+            <svg-icon [src]="'/assets/images/server.svg'"></svg-icon>
+            <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[0]?.value }}</p>
+          </div>
+          <p>{{ (dataset.latestVersion?.metadataBlocks?.citation?.fields)[3].value[0].dsDescriptionValue?.value }}</p>
+        </div>
+
+        <div class="right-container__files">
+          <div class="full-width">
+            <svg-icon [src]="'/assets/images/files.svg'" [applyCss]="true"></svg-icon>
+            <p>{{ 'datasets.dataset.headers.files' | translate }}</p>
+          </div>
+
+          <div class="right-container__files__sorting">
+            <div class="right-container__files__sorting__bar-right">
+              <svg-icon
+                class="right-container__files__sorting__bar-right__filters"
+                [src]="'/assets/images/dataset/filters.svg'"
+              >
+              </svg-icon>
+              <p class="right-container__files__sorting__bar-right__filter-by">
+                {{ 'datasets.dataset.headers.filterBy' | translate }}
+              </p>
+              <div class="right-container__files__sorting__bar-right__file-type">
+                {{ 'datasets.dataset.headers.typeFile' | translate }}
+                <ui-select
+                  class="type-sort"
+                  [items]="sortItemsType"
+                  [options]="optionsType"
+                  [(value)]="sortByType"
+                  (valueChange)="onSortTypeChange($event)"
+                >
+                </ui-select>
+              </div>
+
+              <!-- <div class="right-container__files__sorting__bar-right__access">
+                {{ 'datasets.dataset.headers.access' | translate }}
+                <ui-select
+                  class="access-sort"
+                  [items]="sortItemsAccess"
+                  [options]="optionsAccess"
+                  [(value)]="sortByAccess"
+                >
+                </ui-select>
+              </div> -->
+            </div>
+
+            <div class="right-container__files__sorting__bar-mobile">
+              <div class="right-container__files__sorting__bar-mobile__filter-by">
+                <svg-icon
+                  class="right-container__files__sorting__bar-right__filters"
+                  [src]="'/assets/images/dataset/filters.svg'"
+                >
+                </svg-icon>
+                <p class="right-container__files__sorting__bar-right__filter-by">
+                  {{ 'datasets.dataset.headers.filterBy' | translate }}
+                </p>
+              </div>
+
+              <div class="right-container__files__sorting__bar-mobile__container">
+                <div class="right-container__files__sorting__bar-right__file-type">
+                  {{ 'datasets.dataset.headers.typeFile' | translate }}
+                  <ui-select
+                    class="type-sort"
+                    [items]="sortItemsType"
+                    [options]="optionsType"
+                    [(value)]="sortByType"
+                    (valueChange)="onSortTypeChange($event)"
+                  >
+                  </ui-select>
+                </div>
+
+                <!-- <div class="right-container__files__sorting__bar-right__access">
+                  {{ 'datasets.dataset.headers.access' | translate }}
+                  <ui-select
+                    class="access-sort"
+                    [items]="sortItemsAccess"
+                    [options]="optionsAccess"
+                    [(value)]="sortByAccess"
+                  >
+                  </ui-select>
+                </div> -->
+              </div>
+            </div>
+
+            <div class="right-container__files__sorting__bar-left">
+              <!-- <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon> -->
+              <div class="right-container__files__sorting__bar-left__sort-by">
+                <ui-select
+                  [items]="sortItemsFilter"
+                  [options]="optionsFilter"
+                  [(value)]="sortByFilter"
+                  (valueChange)="onSortChange($event)"
+                >
+                </ui-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-container__files__download-all">
+            <ui-checkbox
+              [name]="'downloadAllFiles'"
+              class="right-container__files__download-all__checkbox"
+              (modelChange)="toggleAllCheckboxes()"
+              [(model)]="allFilesCheckboxState"
+            >
+              {{ files?.length }} {{ 'datasets.dataset.headers.records' | translate | lowercase }}
+            </ui-checkbox>
+            <div class="right-container__files__download-all__buttons">
+              <button class="right-container__files__download-all__buttons__download" (click)="downloadCheckedFiles()">
+                {{ 'datasets.dataset.headers.download' | translate }}
+                <svg-icon [src]="'/assets/images/dataset/download.svg'"></svg-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="right-container__files__download-single">
+            <div class="right-container__files__download-single__row" *ngFor="let file of files; let i = index">
+              <ui-checkbox [name]="i" class="single-checkbox" [(model)]="file.isChecked">
+                <div class="background-gray">
+                  {{ formatConverter(file.label) | uppercase }}
+                </div>
+                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}">{{ file.label }}</p>
+              </ui-checkbox>
+              <div class="buttons-download">
+                <button class="buttons-download__style">
+                  <svg-icon
+                    [src]="'/assets/images/dataset/download.svg'"
+                    [applyCss]="true"
+                    (click)="downloadSingleResource(file.download_url)"
+                  ></svg-icon>
+                </button>
+                <button class="buttons-download__style">
+                  <svg-icon
+                    [src]="'/assets/images/dataset/look.svg'"
+                    [applyCss]="true"
+                    routerLink="/datasets/resource/{{ file.dataFile.id }}"
+                  ></svg-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <ofd-agregator-pagination
+            [items]="allFiles?.length"
+            [pageSize]="pageSize"
+            [(page)]="page"
+            [showOffsets]="true"
+            *ngIf="allFiles?.length > pageSize"
+            (changes)="paginationChange($event)"
+          >
+          </ofd-agregator-pagination>
+        </div>
+
+        <h3 class="metadata-header">
+          <div class="metadata-header__text">
+            <svg-icon class="header-text" [applyCss]="true" [src]="'/assets/images/metadata-content.svg'"></svg-icon>
+            {{ 'datasets.dataset.headers.metadata' | translate }}
+          </div>
+          <div class="metadata-header__export">
+            <button class="button" (click)="convertMetadataToFile(getMetadata(dataset?.latestVersion?.metadataBlocks))">
+              {{ 'global.export' | translate }}
+              <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
+            </button>
+          </div>
+        </h3>
+
+        <div class="meta-citation-box" *ngFor="let meta of dataset.latestVersion?.metadataBlocks | keyvalue">
+          <ofd-agregator-data-container
+            class="meta-citation"
+            [title]="meta.value.displayName"
+            [expandable]="true"
+            [expanded]="false"
+          >
+            <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple">
+                <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ value.value.value }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-citation__row__multiple" *ngIf="!field.multiple">
+                <div class="meta-citation__row__container">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ field.value }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ofd-agregator-data-container>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

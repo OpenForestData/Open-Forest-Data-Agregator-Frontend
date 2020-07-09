@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 
 /**
- * Page not found component
+ * 404 page
+ *
+ * @export
+ * @class NotFoundComponent
  */
 @Component({
   selector: 'ofd-not-found',
   templateUrl: './not-found.component.html'
 })
-export class NotFoundComponent {
-  /**
-   * @ignore
-   */
-  constructor() {}
-}
+export class NotFoundComponent {}

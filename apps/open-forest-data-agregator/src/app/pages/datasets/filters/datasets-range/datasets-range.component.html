@@ -1,0 +1,13 @@
+<div class="filter">
+  <div
+    class="filter__range"
+    leaflet
+    leafletDraw
+    [leafletOptions]="options"
+    (leafletMapReady)="onMapReady($event)"
+    [leafletDrawOptions]="drawOptions"
+    (leafletDrawCreated)="onDrawCreated($event)"
+  >
+    <div [leafletLayer]="drawnItems"></div>
+  </div>
+</div>

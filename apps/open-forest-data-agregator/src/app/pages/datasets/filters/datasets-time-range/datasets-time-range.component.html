@@ -1,0 +1,24 @@
+<div class="filter">
+  <div class="filter__time-range">
+    <div class="filter__time-from">
+      <label class="datepicker-label">
+        {{ 'global.from' | translate }}
+        <dp-date-picker
+          (onSelect)="changeDate($event, 0)"
+          [(ngModel)]="value[0]"
+          [config]="datePickerConfig"
+        ></dp-date-picker>
+      </label>
+    </div>
+    <div class="filter__time-to" *ngIf="!single">
+      <label class="datepicker-label">
+        {{ 'global.to' | translate }}
+        <dp-date-picker
+          (onSelect)="changeDate($event, 1)"
+          [(ngModel)]="value[1]"
+          [config]="datePickerConfig"
+        ></dp-date-picker>
+      </label>
+    </div>
+  </div>
+</div>

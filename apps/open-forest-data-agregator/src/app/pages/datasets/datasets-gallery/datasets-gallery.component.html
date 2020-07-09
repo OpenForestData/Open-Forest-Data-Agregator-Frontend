@@ -1,0 +1,44 @@
+<div class="datasets-list__container">
+  <div class="datasets-list__header">
+    <div>
+      <span class="dataset-list__count">
+        {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
+      </span>
+      <ui-select [items]="sortItems" [options]="options" (valueChange)="sortChanged($event)" [(value)]="sortBy">
+      </ui-select>
+    </div>
+    <button class="button datasets-list__export">
+      {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
+    </button>
+  </div>
+
+  <div class="datasets-list__datasets" #galleryItems>
+    <ng-container *ngFor="let dataset of datasets; let i = index">
+      <div class="datasets-list__datasets__item" *ngIf="dataset.preview && dataset.preview !== 'wait'">
+        <a
+          class="datasets-list__datasets__item__picture thumbnail thumbnail-{{ i }}"
+          (click)="showGallery(i, $event.target)"
+          [title]="dataset.title"
+          [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
+          [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
+        >
+          <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
+          <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+        </a>
+        <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
+        <a
+          [routerLink]="['detail']"
+          [queryParams]="{ doi: dataset.identifier64 }"
+          class="datasets-list__datasets__item__link"
+          *ngIf="dataset.preview && dataset.preview !== 'wait'"
+        >
+          {{ 'global.see' | translate }}
+
+          <svg-icon [src]="'/assets/images/arrow-green-right.svg'" [applyCss]="true"></svg-icon>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</div>

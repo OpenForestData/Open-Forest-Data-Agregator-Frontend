@@ -1,0 +1,37 @@
+<div class="row mobile-app" *ngIf="utilService.homePageData">
+  <div class="col-lg-7 col-xs-12">
+    <ofd-agregator-section-title
+      [iconURL]="'assets/modules/home/phone_icon.png'"
+      [titleText]="utilService.homePageData.mobile_app_title"
+    ></ofd-agregator-section-title>
+
+    <p class="content" [innerHTML]="utilService.homePageData.mobile_app_content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem dolor veniam repellat iste at nam, quae quasi eum
+      eaque qui ipsa officiis vel voluptate nostrum, delectus dolores cupiditate! Earum eos, delectus deleniti nulla
+      culpa iure laudantium eveniet aspernatur quis blanditiis nisi reiciendis consequatur reprehenderit provident,
+      voluptatum officia laboriosam repellat architecto. Non et accusamus in pariatur quae cum eos delectus porro nulla
+      facilis sunt, inventore illo consequatur minus mollitia tempore totam ut consectetur eaque magni aperiam? Eius
+      fugiat ipsa doloribus enim doloremque? Consequuntur obcaecati itaque facilis aut explicabo ducimus, maxime
+      nesciunt rem eum aliquam aspernatur porro aliquid distinctio fugit, nobis consectetur adipisci quisquam? A,
+      deleniti temporibus cupiditate quaerat et sint incidunt laboriosam nostrum vitae eaque minima, molestias
+      recusandae numquam. Sapiente, cumque!
+    </p>
+
+    <a [href]="utilService.homePageData.mobile_app_cta_link">
+      <button class="btn download desktop-only svg-btn">
+        {{ utilService.homePageData.mobile_app_cta_text }}
+        <svg-icon src="assets/modules/home/download_icon.svg" [applyCss]="true"></svg-icon>
+      </button>
+    </a>
+  </div>
+  <div class="col-lg-5 col-xs-12 align-center">
+    <img [src]="utilService.homePageData.mobile_app_image" class="phone-image" alt="Phone" />
+
+    <a [href]="utilService.homePageData.mobile_app_cta_link">
+      <button class="btn download mobile-only svg-btn">
+        {{ utilService.homePageData.mobile_app_cta_text }}
+        <svg-icon src="assets/modules/home/download_icon.svg" [applyCss]="true"></svg-icon>
+      </button>
+    </a>
+  </div>
+</div>

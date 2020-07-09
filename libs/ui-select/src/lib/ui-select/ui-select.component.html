@@ -1,0 +1,20 @@
+<div class="ui-select" #selectRef (clickOutside)="close()">
+  <button type="button" class="ui-select__selected-item {{ options.class }}" (click)="openSelect()">
+    {{ value && value != '' ? (value[displayName] ? value[displayName] : value) : options.placeholder }}
+    <svg-icon src="/assets/images/select-arrow.svg" [applyCss]="true"></svg-icon>
+  </button>
+
+  <div class="ui-select__items" [ngClass]="{ 'ui-select__items--is-open': isOpen }">
+    <ol class="ui-select__items__list">
+      <li
+        class="ui-select__items__list__item"
+        *ngFor="let item of items; let i = index"
+        [ngClass]="{ 'is-selected': isSelected(item) }"
+      >
+        <button type="button" (click)="selectValue(item, i)">
+          {{ item[displayName] ? item[displayName] : item }}
+        </button>
+      </li>
+    </ol>
+  </div>
+</div>

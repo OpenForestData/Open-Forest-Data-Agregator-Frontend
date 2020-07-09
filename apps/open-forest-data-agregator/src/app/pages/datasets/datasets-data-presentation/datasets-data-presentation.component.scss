@@ -1,0 +1,163 @@
+@import '../../../../../../../resources/_colors.scss';
+
+.datasets-presentation {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  &__header {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 6px 0 0;
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #e6e6e6;
+      transform: translateY(1px);
+    }
+  }
+
+  &__views {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &--mobile {
+      display: none;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #e6e6e6;
+      transform: translateY(1px);
+    }
+  }
+
+  &__view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 140px;
+    margin: 0;
+    border: none;
+    padding: 15px 0;
+    line-height: 21px;
+    color: $text-color;
+    cursor: pointer;
+
+    svg-icon {
+      display: block;
+      margin-right: 20px;
+
+      svg {
+        path {
+          fill: $text-color;
+        }
+
+        line,
+        rect {
+          stroke: $text-color;
+        }
+      }
+    }
+
+    &.active {
+      color: $accent-color;
+
+      svg-icon {
+        svg {
+          path {
+            fill: $accent-color;
+          }
+
+          line,
+          rect {
+            stroke: $accent-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.selector {
+  background-color: $accent-color;
+  height: 2px;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  z-index: 2;
+  transition: 0.3s all ease;
+  transform: translate(0, 0);
+  width: 140px;
+  border-radius: 3px;
+}
+
+@media (max-width: 1200px) {
+  .datasets-presentation {
+    background-color: $light-gray-color;
+    padding: 15px 18px;
+
+    &__header {
+      padding-left: 0;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    &__views {
+      display: none;
+
+      &--mobile {
+        display: block;
+
+        select {
+          border: 1px solid $text-color;
+          color: $text-color;
+          border-radius: 50px;
+          padding: 8px 16px;
+          font-size: 14px;
+          background-color: transparent;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+span.flex {
+  display: flex;
+}
+
+ng-select {
+  width: 150px;
+}
+
+::ng-deep {
+  .datasets-presentation__views--mobile {
+    .ng-clear-wrapper {
+      display: none;
+    }
+  }
+
+  .ng-dropdown-panel.ng-select-top {
+    bottom: initial !important;
+  }
+}

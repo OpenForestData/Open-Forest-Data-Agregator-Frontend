@@ -1,0 +1,8 @@
+$max-width: 1450px;
+
+.container {
+  max-width: $max-width;
+  padding: 0 10px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}

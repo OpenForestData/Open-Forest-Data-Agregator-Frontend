@@ -1,0 +1,18 @@
+<ol class="navigation-items__list">
+  <li
+    class="navigation-items__list-item"
+    *ngFor="let item of items"
+    [ngClass]="{ 'has-children': item.children && item.children.length > 0 }"
+  >
+    <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+      {{ item.name | translate }}
+      <img src="assets/modules/home/arrow_right.png" class="mobile-only" width="16" height="11" alt="{{ item.name }}" />
+    </a>
+
+    <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
+      <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">
+        <a [routerLink]="[childrenItem.path]">{{ childrenItem.name | translate }}</a>
+      </li>
+    </ul>
+  </li>
+</ol>

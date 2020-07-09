@@ -1,0 +1,55 @@
+@import '../../../../../../resources/colors';
+
+.accordion {
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin-bottom: 30px;
+    border: 1px solid $light-gray-color;
+    padding: 30px;
+
+    > h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0;
+      cursor: pointer;
+
+      span {
+        font-size: 18px;
+        font-weight: 500;
+        width: 90%;
+      }
+
+      img {
+        cursor: pointer;
+        width: 19px;
+        height: 11px;
+        transition: transform 0.25s ease-in-out;
+        will-change: transform;
+      }
+    }
+
+    > div {
+      overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s linear, opacity 0.25s linear;
+      opacity: 0;
+      will-change: max-height;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    &.active {
+      > div {
+        max-height: 500px;
+        opacity: 1;
+      }
+
+      h3 > img {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

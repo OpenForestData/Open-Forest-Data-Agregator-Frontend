@@ -1,0 +1,34 @@
+<section class="faq-contact" *ngIf="utilService.homePageData">
+  <div class="container">
+    <div class="row mlr-0">
+      <div class="col-lg-7 col-xs-12">
+        <ofd-agregator-section-title
+          [iconURL]="'assets/modules/home/question_mark.png'"
+          [titleText]="'home.faq' | translate"
+        ></ofd-agregator-section-title>
+        <ul class="faq-list">
+          <li *ngFor="let item of utilService.homePageData.faqs">
+            <a href="#">
+              <span>{{ item.title }}</span>
+              <img src="assets/modules/home/arrow_right.png" class="desktop-only" width="16" height="11" alt="Go to" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 ml-auto col-xs-12">
+        <ofd-agregator-section-title
+          [iconURL]="'assets/modules/home/envelope_icon.png'"
+          [titleText]="'home.contact' | translate"
+        ></ofd-agregator-section-title>
+
+        <p class="contact_info">{{ utilService.homePageData.contact_content }}</p>
+
+        <button class="btn contact_button svg-btn" (click)="modal.open('contact-modal')">
+          {{ 'home.contact_button' | translate }}
+          <svg-icon src="assets/modules/home/envelop_green.svg" [applyCss]="true"></svg-icon>
+        </button>
+      </div>
+    </div>
+    <img src="assets/modules/home/trees.png" width="80" class="trees" />
+  </div>
+</section>

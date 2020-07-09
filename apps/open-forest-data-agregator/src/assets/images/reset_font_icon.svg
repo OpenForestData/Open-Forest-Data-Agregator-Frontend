@@ -1,10 +1,6 @@
-<svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-  <g data-name="Group 495" id="Group_495" transform="translate(-70 0)">
-    <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" data-name="Path 952"
-          fill="#2a2b2c" id="Path_952"
-          transform="translate(68 -2)"/>
-    <text fill="#2a2b2c" font-family="SegoeUI, Segoe UI" font-size="12" id="A" transform="translate(76 14)">
-      <tspan x="0" y="0">A</tspan>
-    </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="Group_839" data-name="Group 839" transform="translate(-70 0)">
+    <path id="Path_952" data-name="Path 952" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" transform="translate(68 -2)" fill="#2a2b2c"/>
+    <text id="A" transform="translate(76 14)" fill="#2a2b2c" font-size="12" font-family="Nunito-Black, Nunito" font-weight="800"><tspan x="0" y="0">A</tspan></text>
   </g>
 </svg>

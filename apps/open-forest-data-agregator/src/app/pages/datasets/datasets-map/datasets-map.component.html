@@ -1,0 +1,69 @@
+<div class="datasets-map__container" [ngClass]="{ 'display-none': datasets.length == 0 }">
+  <div class="datasets-map__header">
+    <div class="datasets-map__showed-datasets">Zaprezentowano {{ activeMarkes }} z {{ datasets.length }} rekordów</div>
+    <button class="button datasets-map__export">
+      {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
+    </button>
+  </div>
+
+  <div class="datasets-map__map__container">
+    <div class="datasets-map__details" [ngClass]="{ 'datasets-map__details--showed': datasetDetails.show }">
+      <ng-container *ngIf="datasetDetails.dataset">
+        <button class="datasets-map__dataset-item__close" (click)="closeDetails()">
+          <svg-icon src="/assets/images/close.svg" [applyCss]="true"></svg-icon>
+        </button>
+        <a
+          class="datasets-map__dataset-item__details"
+          [routerLink]="['detail']"
+          [queryParams]="{ doi: datasetDetails.dataset.identifier64 }"
+        >
+          {{ 'datasets.see-details' | translate }}
+          <svg-icon src="/assets/images/arrow-green-right.svg" [applyCss]="true"></svg-icon>
+        </a>
+        <h4 class="datasets-map__dataset-item__title">
+          {{ datasetDetails.dataset.title }} - {{ datasetDetails.dataset.id }}
+        </h4>
+        <p class="datasets-map__dataset-item__time">
+          <time [dateTime]="datasetDetails.dataset.createdAt">{{
+            datasetDetails.dataset.createdAt | date: 'dd.MM.yyyy'
+          }}</time>
+          | <span>{{ datasetDetails.dataset.author }}</span> - <a href="#">{{ datasetDetails.dataset.category }}</a>
+        </p>
+        <p class="datasets-map__dataset-item__description">
+          {{ datasetDetails.dataset.description }}
+        </p>
+        <p class="datasets-map__dataset-item__source">
+          <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+          {{ 'global.source' | translate }}: <b>{{ datasetDetails.dataset.source }}</b>
+        </p>
+        <div class="datasets-map__dataset-item__metadata">
+          <!-- MOCK!-->
+          <p>
+            <b> Dataset Persistent ID: </b>
+            <span> {{ datasetDetails.dataset.datasetPersistentID }} </span>
+          </p>
+          <p>
+            <b> Publication Date: </b>
+            <span> {{ datasetDetails.dataset.createdAt }} </span>
+          </p>
+          <p>
+            <b> Title: </b>
+            <span> {{ datasetDetails.dataset.title }} </span>
+          </p>
+          <p>
+            <b> Author: </b>
+            <span> {{ datasetDetails.dataset.author }} </span>
+          </p>
+          <p>
+            <b> Description: </b>
+            <span> {{ datasetDetails.dataset.description }} </span>
+          </p>
+        </div>
+      </ng-container>
+    </div>
+    <div class="datasets-map__map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
+      <div [leafletLayer]="datasetsMarkers"></div>
+    </div>
+  </div>
+</div>

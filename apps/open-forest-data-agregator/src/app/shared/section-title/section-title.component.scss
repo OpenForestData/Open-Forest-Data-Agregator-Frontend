@@ -1,0 +1,38 @@
+@import '../../../../../../resources/colors';
+
+h2 {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: flex;
+  letter-spacing: 1px;
+  align-items: center;
+  margin-top: 0;
+
+  .titleText {
+    flex-shrink: 0;
+  }
+
+  img {
+    margin-right: 15px;
+  }
+
+  .green_bar {
+    width: 100%;
+    margin-left: 25px;
+    margin-top: 8px;
+    &.left {
+      margin-left: 0;
+      margin-right: 25px;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      margin: 0;
+      background: $accent-color;
+      border-radius: 5px;
+      border-top: 2px solid $accent-color;
+      border-bottom: 2px solid $accent-color;
+    }
+  }
+}

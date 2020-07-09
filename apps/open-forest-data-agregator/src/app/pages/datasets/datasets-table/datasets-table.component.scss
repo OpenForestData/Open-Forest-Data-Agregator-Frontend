@@ -1,0 +1,76 @@
+@import '../../../../../../../resources/colors';
+
+.datasets-table {
+  &__table {
+    width: 100% !important;
+  }
+
+  &__container {
+    display: block;
+    background-color: #fff;
+    padding: 32px 0 15px 40px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .datasets-table {
+    &__container {
+      max-width: 100%;
+      overflow-x: scroll;
+    }
+  }
+}
+
+.datasets-table__header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+
+  svg-icon {
+    height: 20px;
+  }
+}
+
+tr {
+  cursor: pointer;
+}
+
+::ng-deep {
+  .dt-buttons {
+    display: flex;
+
+    .dt-button {
+      display: flex !important;
+      border: none !important;
+      background: none !important;
+      height: 30px !important;
+      min-width: 75px;
+      border: 1px solid $accent-color !important;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .fullScreen {
+    button.fullscreen {
+      background-color: $accent-color !important;
+      color: white;
+
+      span {
+        display: flex;
+      }
+    }
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .datasets-table__container {
+    width: calc(100% - 60px);
+  }
+}

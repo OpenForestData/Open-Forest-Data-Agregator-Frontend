@@ -13,6 +13,12 @@
     },
     "open-forest-data-agregator-e2e": {
       "tags": []
+    },
+    "ui-checkbox": {
+      "tags": []
+    },
+    "ui-select": {
+      "tags": []
     }
   }
 }

@@ -1,0 +1,12 @@
+<ol class="datasets-category">
+  <li
+    class="datasets-category__item"
+    *ngFor="let category of categories"
+    [ngClass]="{ selected: category.value === selectedCategory }"
+    (click)="selectValue(category.value)"
+  >
+    {{ category.name }}
+
+    <span class="times" *ngIf="category.value === selectedCategory" (click)="selectValue(null)">&times;</span>
+  </li>
+</ol>

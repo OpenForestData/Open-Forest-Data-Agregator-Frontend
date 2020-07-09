@@ -1,0 +1,164 @@
+@import '../../../../../../../resources/_colors.scss';
+
+.datasets-list {
+  &__container {
+    background-color: #fff;
+    padding: 32px 0 15px 40px;
+  }
+
+  &__header {
+    padding-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+
+    select {
+      margin-left: 30px;
+    }
+  }
+
+  &__export {
+    svg {
+      display: block;
+    }
+  }
+
+  &__datasets {
+    &__item {
+      padding: 22px;
+      display: flex;
+      align-items: flex-start;
+      border: 1px solid $light-gray-color;
+      margin-bottom: 20px;
+      font-size: 12px;
+      line-height: 18px;
+
+      &__picture,
+      &__picture--mobile {
+        padding-right: 20px;
+
+        img {
+          width: 56px;
+          height: 56px;
+          object-fit: contain;
+          object-position: center center;
+          // border: 4px solid #fff;
+          box-sizing: border-box;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        }
+      }
+
+      &__picture--mobile {
+        display: none;
+      }
+
+      &__title {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $accent-color;
+        margin: 0 0 5px 0;
+      }
+
+      &__description {
+        font-size: 14px;
+        line-height: 21px;
+        margin: 20px 0;
+      }
+
+      &__source {
+        display: flex;
+        font-size: 12px;
+        cursor: pointer;
+
+        a {
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          color: $text-color;
+        }
+
+        b {
+          padding-left: 5px;
+          font-weight: 600;
+        }
+
+        svg-icon {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .datasets-list {
+    &__container {
+      background-color: #fff;
+      padding: 32px 0 0 0;
+    }
+
+    &__header {
+      flex-direction: column-reverse;
+      flex-wrap: wrap;
+      padding: 0 18px;
+      margin-bottom: 10px;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+
+    &__export {
+      margin-bottom: 15px;
+    }
+
+    &__datasets {
+      padding: 0 18px;
+
+      &__item {
+        &__picture {
+          display: none;
+
+          &--mobile {
+            display: block;
+          }
+        }
+
+        &__title {
+          display: flex;
+          align-items: center;
+        }
+
+        &__description {
+          margin: 10px 0;
+        }
+      }
+    }
+
+    &__pagination {
+      padding: 0 18px;
+    }
+  }
+}
+
+.datasets-list__count {
+  margin-right: 10px;
+}
+
+.datasets-list__datasets__item > a {
+  color: $text-color;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.events-none {
+  pointer-events: none;
+}

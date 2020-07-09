@@ -1,0 +1,15 @@
+::ng-deep {
+  .modify-new-data-component {
+    .latest-added {
+      background-color: transparent !important;
+    }
+
+    .container {
+      width: 100% !important;
+    }
+
+    .drop-down {
+      background: white !important;
+    }
+  }
+}
