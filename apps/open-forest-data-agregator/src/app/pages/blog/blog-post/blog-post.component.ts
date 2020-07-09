@@ -15,7 +15,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   public routerSubscription: Subscription = new Subscription();
   public languageSubscription: Subscription = new Subscription();
   public newsID = 0;
-  public article: any = [];
+  public article: any = {};
 
   constructor(public languageService: LanguageService, public route: ActivatedRoute, public blogService: BlogService) {
     this.routerSubscription = this.route.params.subscribe(params => {
