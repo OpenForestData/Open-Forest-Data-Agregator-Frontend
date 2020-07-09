@@ -25,7 +25,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   /**
    * Filters object
    */
-  filters = { page: 1, pageSize: 4, tag: '' };
+  filters = { page: 1, limit: 10, tag: '' };
 
   /**
    * Language subscription
@@ -94,5 +94,11 @@ export class BlogComponent implements OnInit, OnDestroy {
     if (this.bottomReached) {
       console.log('Load more elements');
     }
+  }
+
+  keywordFilter(keywordUrl: any) {
+    this.blogService.getArticlesByKeyword(keywordUrl).subscribe(response => {
+      this.blogData = response;
+    });
   }
 }

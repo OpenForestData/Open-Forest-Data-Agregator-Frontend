@@ -29,7 +29,7 @@ export class BlogService {
    * // returns blog slug data object
    */
   getBlogSlug(slug: any) {
-    return this.http.get<any>(`${AppConfigService.config.cms}blog/article/${slug}`);
+    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=/cms-api/v1/blog/article/${slug}`);
   }
 
   /**
@@ -50,5 +50,9 @@ export class BlogService {
         }
       })
       .join('&');
+  }
+
+  getArticlesByKeyword(url: any) {
+    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=${url}`);
   }
 }

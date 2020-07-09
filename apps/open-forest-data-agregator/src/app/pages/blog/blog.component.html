@@ -11,7 +11,9 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let item of blogData.keywords">{{ item.title }}</span>
+      <span class="tag" *ngFor="let keyword of blogData.keywords" (click)="keywordFilter(keyword.url)">{{
+        keyword.title
+      }}</span>
     </div>
   </div>
   <div class="row news-body">
@@ -43,7 +45,11 @@
 
       <p class="tags-p">
         <span class="news-tags" *ngIf="newestArticle">
-          <a href="#" *ngFor="let keyword of newestArticle?.keywords">{{ keyword.title }}</a>
+          <!-- <a href="#" *ngFor="let keyword of newestArticle?.keywords"
+            (click)="keywordFilter(keyword.url)">{{ keyword.title }}</a> -->
+          <span class="keywords" *ngFor="let keyword of newestArticle.keywords" (click)="keywordFilter(keyword.url)">{{
+            keyword.title
+          }}</span>
         </span>
       </p>
 

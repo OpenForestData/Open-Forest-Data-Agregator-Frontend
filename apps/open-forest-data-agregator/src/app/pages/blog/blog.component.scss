@@ -124,6 +124,11 @@
   padding-left: 15px;
 }
 
+.keywords {
+  color: green;
+  cursor: pointer;
+}
+
 @media (max-width: 1200px) {
   .news-body {
     .news-image-holder {

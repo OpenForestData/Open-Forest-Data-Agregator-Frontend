@@ -15,6 +15,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   public routerSubscription: Subscription = new Subscription();
   public languageSubscription: Subscription = new Subscription();
   public newsID = 0;
+  public article: any = [];
 
   constructor(public languageService: LanguageService, public route: ActivatedRoute, public blogService: BlogService) {
     this.routerSubscription = this.route.params.subscribe(params => {
@@ -23,23 +24,14 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    for (let i = 0; i < 25; i++) this.randomWords.push(this.random());
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
     this.route.params.subscribe(params => {
       console.log('params: ', params);
       this.blogService.getBlogSlug(params['slug']).subscribe(response => {
-        console.log('slug reponse: ', response);
+        this.article = response.article[0];
+        console.log('blog article: ', this.article);
       });
     });
-  }
-
-  random() {
-    const words = [
-      ...'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, provident.'.split(' '),
-      ...'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, provident.'.split('e')
-    ];
-
-    return words[Math.floor(Math.random() * words.length - 1)];
   }
 
   getData() {}
