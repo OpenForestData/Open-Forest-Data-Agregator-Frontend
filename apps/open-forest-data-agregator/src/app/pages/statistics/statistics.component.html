@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row middle-lg">
+    <div class="col-lg-6 col-md-6 col-xs-12">
+      <ofd-agregator-section-title
+        [iconURL]="'assets/modules/stats/chart.png'"
+        [titleText]="'stats.datasets_stats_title' | translate"
+      ></ofd-agregator-section-title>
+    </div>
+    <div class="col-lg-offset-2 col-md-offset-0 col-lg-4 col-md-6 col-xs-12 center-xs">
+      <button class="btn export-btn svg-btn">
+        {{ 'stats.export' | translate }}
+        <svg-icon src="assets/modules/stats/export.svg" [applyCss]="true"></svg-icon>
+        <!-- <img src="assets/modules/stats/export.png" alt="{{ 'stats.export' | translate }}" /> -->
+      </button>
+    </div>
+  </div>
+
+  <div class="row m-t-30">
+    <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-right mobile-m-b-30">
+      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-left">
+      <ofd-agregator-bar-chart [bgColor]="'0'"></ofd-agregator-bar-chart>
+    </div>
+  </div>
+
+  <div class="row m-t-60 m-b-60">
+    <div class="col-lg-6 col-md-6 col-xs-12">
+      <ofd-agregator-section-title
+        [iconURL]="'assets/modules/stats/chart.png'"
+        [titleText]="'stats.file_stats_title' | translate"
+      ></ofd-agregator-section-title>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
+      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-left">
+      <ofd-agregator-bar-chart [bgColor]="'1'"></ofd-agregator-bar-chart>
+    </div>
+  </div>
+
+  <div class="row m-t-60">
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
+      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-left">
+      <ofd-agregator-bar-chart [bgColor]="'2'"></ofd-agregator-bar-chart>
+    </div>
+  </div>
+</div>
+
+<!--
+
+    "stats": {
+    "datasets_stats_title": "Statystyki zbiorów danych",
+    "file_stats_title": "Statystyki plików",
+    "from": "Od",
+    "to": "Do",
+    "range": "Zakres",
+    "day": "Dzień",
+    "month": "Miesiąc",
+    "year": "Rok",
+    "export": "Eksportuj",
+    "chart_1_1": "Liczba dodanych datasetów w podziale na kategorie",
+    "chart_1_2": "Liczba dodanych datasetów w czasie",
+    "chart_2_1": "Liczba dodanych plików w podziale na kategorie",
+    "chart_2_2": "Liczba dodanych plików w czasie",
+    "chart_3_1": "Liczba pobranych plików w podziale na kategorie",
+    "chart_3_2": "Liczba pobranych plików w czasie"
+  }
+
+ -->

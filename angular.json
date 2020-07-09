@@ -40,11 +40,37 @@
               }
             ],
             "styles": [
+              "./node_modules/highlight.js/styles/github.css",
+              "./node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "./node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
+              "./node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
+              "./node_modules/lightgallery.js/src/css/lightgallery.css",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet-draw/dist/leaflet.draw.css",
               "node_modules/normalize.css/normalize.css",
+              "resources/vendors/flexboxgrid.min.css",
               "resources/styles.scss",
               "apps/open-forest-data-agregator/src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/datatables.net/js/jquery.dataTables.js",
+              "./node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+              "./node_modules/jszip/dist/jszip.js",
+              "./node_modules/pdfmake/build/pdfmake.js",
+              "./node_modules/pdfmake/build/vfs_fonts.js",
+              "./node_modules/moment/moment.js",
+              "./node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+              "./node_modules/datatables.net-buttons/js/buttons.colVis.js",
+              "./node_modules/datatables.net-buttons/js/buttons.flash.js",
+              "./node_modules/datatables.net-buttons/js/buttons.html5.js",
+              "./node_modules/datatables.net-buttons/js/buttons.print.js",
+              "resources/vendors/hammer.min.js",
+              "./node_modules/georaster/dist/georaster.browser.bundle.min.js",
+              "./node_modules/proj4/dist/proj4.js",
+              "./node_modules/@mapbox/leaflet-omnivore/leaflet-omnivore.min.js",
+              "./node_modules/shpjs/dist/shp.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -165,6 +191,52 @@
           "options": {
             "tsConfig": "apps/open-forest-data-agregator-e2e/tsconfig.e2e.json",
             "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "ui-checkbox": {
+      "root": "libs/ui-checkbox",
+      "sourceRoot": "libs/ui-checkbox/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/ui-checkbox/tsconfig.lib.json", "libs/ui-checkbox/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui-checkbox/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-checkbox/jest.config.js",
+            "tsConfig": "libs/ui-checkbox/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-select": {
+      "root": "libs/ui-select",
+      "sourceRoot": "libs/ui-select/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/ui-select/tsconfig.lib.json", "libs/ui-select/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui-select/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-select/jest.config.js",
+            "tsConfig": "libs/ui-select/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }

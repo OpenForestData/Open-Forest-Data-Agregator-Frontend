@@ -1,44 +1,134 @@
 @import '../../../../../../resources/_colors.scss';
 
 .pagination {
-  list-style-type: none;
-  margin: 30px 0;
-  padding: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
-  button {
-    background-color: transparent;
-    border: none;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    color: $primary-color;
-    padding: 3px 6px;
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+  &__go-to-page {
+    input {
+      margin-left: 10px;
     }
   }
 
-  .prev-page {
-    svg {
-      transform: rotate(180deg);
+  &__queries {
+    ui-select {
+      margin-left: 10px;
     }
   }
 
-  .prev-page,
-  .next-page {
-    margin: 0;
-    padding: 2px;
-  }
+  &__pages {
+    list-style-type: none;
+    margin: 30px 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .active {
+    li {
+      &:not(:last-of-type) {
+        margin-right: 5px;
+      }
+    }
+
     button {
-      background-color: #f2f2f2;
-      color: $accent-color;
+      background-color: transparent;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: $primary-color;
+      width: 21px;
+      height: 21px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      justify-content: center;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .prev-page {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .first-page {
+      &:after {
+        content: '...';
+        margin: 0 5px;
+        display: inline-block;
+      }
+    }
+
+    .last-page {
+      &:before {
+        content: '...';
+        margin: 0 5px 0 0;
+        display: inline-block;
+      }
+    }
+
+    .prev-page,
+    .next-page {
+      margin: 0;
+      padding: 2px;
+
+      svg {
+        path {
+          fill: $accent-color;
+        }
+      }
+    }
+
+    .active {
+      button {
+        background-color: $accent-color;
+        color: #fff;
+        border-radius: 50%;
+      }
     }
   }
+}
+
+@media (max-width: 1200px) {
+  .pagination {
+    flex-wrap: wrap;
+    font-size: 14px;
+    justify-content: space-between;
+
+    &__pages {
+      order: 1;
+      width: 100%;
+    }
+
+    &__go-to-page {
+      order: 2;
+      text-align: center;
+    }
+
+    &__queries {
+      order: 3;
+      text-align: center;
+
+      ui-select {
+        margin-left: 0;
+      }
+    }
+
+    .input {
+      width: 57px;
+      margin-left: 0;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.hide {
+  visibility: hidden;
+  pointer-events: none;
 }

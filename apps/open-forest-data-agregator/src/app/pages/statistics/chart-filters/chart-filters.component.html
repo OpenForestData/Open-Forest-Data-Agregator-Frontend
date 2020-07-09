@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-8 col-md-9 col-xs-8 input-area">
+    <img src="assets/modules/stats/calendar.png" width="20" height="22" alt="Filters" />
+
+    <label class="datepicker-label">
+      {{ 'stats.from' | translate }}
+      <dp-date-picker
+        (onSelect)="emitNewFilters()"
+        [(ngModel)]="startDate"
+        [config]="startDatePickerConfig"
+      ></dp-date-picker>
+    </label>
+
+    <label class="datepicker-label">
+      {{ 'stats.to' | translate }}
+      <dp-date-picker
+        (onSelect)="emitNewFilters()"
+        [(ngModel)]="endDate"
+        [minDate]="startDate"
+        [config]="endDatePickerConfig"
+      ></dp-date-picker>
+    </label>
+  </div>
+  <div class="col-lg-4 col-md-3 col-xs-4 end-xs phone-xs" *ngIf="showRange">
+    <ui-select (valueChange)="emitNewFilters()" [items]="selectItems" [options]="options" [(value)]="selectValue">
+    </ui-select>
+  </div>
+</div>

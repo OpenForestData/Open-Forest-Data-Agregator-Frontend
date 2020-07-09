@@ -1,0 +1,83 @@
+<div class="bg-gray">
+  <div class="container relative">
+    <div class="row banner-container">
+      <div class="col-lg-12 col-md-10">
+        <h1>
+          {{ utilService.homePageData?.title_slider }}
+          <img src="assets/images/bottom_bar_big.png" alt="Open Forest Data" />
+        </h1>
+        <!-- <img src="assets/modules/home/forest_title.png" alt="Open Forest Data" /> -->
+
+        <p class="slogan-text">
+          {{ utilService.homePageData?.title_slider_small }}
+        </p>
+      </div>
+    </div>
+    <img src="assets/modules/home/trees.png" class="tree-image" alt="Open Forest Data" />
+  </div>
+</div>
+
+<div class="bg-green" *ngIf="utilService.homePageData">
+  <div class="container green-container">
+    <div class="row animals-container">
+      <div class="col-lg-12 col-md-12 middle-md animal-box-wrapper">
+        <div class="animal-box desktop-flex-only" *ngFor="let item of utilService.homePageData.categories">
+          <a>
+            <img [src]="item.image" alt="Animal name" />
+            <p class="animal-name">{{ item.title }}</p>
+          </a>
+        </div>
+
+        <div class="animal-box desktop-flex-only show-all">
+          <a [routerLink]="['datasets']">
+            <p class="animal-name">{{ 'home.all' | translate }}</p>
+            <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+          </a>
+        </div>
+
+        <div class="animal-box mobile-flex-only mobile-categories" (click)="showMobileCategories = true">
+          <p class="animal-name">{{ 'home.categories' | translate }}</p>
+          <img
+            src="assets/modules/home/chevron_down_white.png"
+            class="categories-arrow"
+            alt="{{ 'home.categories' | translate }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-categories-menu mobile-only" [ngClass]="{ active: showMobileCategories }">
+  <div class="times">
+    <span (click)="showMobileCategories = false">&times;</span>
+  </div>
+  <h3>
+    <img src="assets/modules/home/folder_icon.png" alt="" />
+    {{ 'home.categories' | translate }}
+  </h3>
+  <div class="mobile-categories-wrapper">
+    <div
+      class="animal-box"
+      *ngFor="
+        let i of [
+          'birds_icon',
+          'insects_icon',
+          'mammals_icon',
+          'mushrooms_icon',
+          'map_icon',
+          'phototrap_icon',
+          'plants_icon'
+        ]
+      "
+    >
+      <img src="assets/modules/home/categories/{{ i }}.png" alt="Animal name" />
+      <p class="animal-name">{{ i }}</p>
+    </div>
+
+    <div class="animal-box show-all">
+      <p class="animal-name">{{ 'home.all' | translate }}</p>
+      <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+    </div>
+  </div>
+</div>

@@ -1,21 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 /**
  * Footer Component
+ *
+ * @export
+ * @class FooterComponent
  */
 @Component({
   selector: 'ofd-footer',
   templateUrl: 'footer.component.html',
   styleUrls: ['footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   /**
-   * @ignore
+   * Footer constructor
+   * @param {CookieService} cookieService Cookie Service
    */
-  constructor() {}
+  constructor(public cookieService: CookieService) {}
 
   /**
-   * @ignore
+   * Set cookie for cookie acceptance
    */
-  ngOnInit() {}
+  acceptAndSetCookies() {
+    this.cookieService.set('cookie-accept', 'true');
+  }
+
+  /**
+   * Get cookie for cookie acceptance
+   */
+  getAcceptCookie() {
+    return this.cookieService.get('cookie-accept');
+  }
 }

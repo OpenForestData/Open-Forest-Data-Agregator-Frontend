@@ -1,0 +1,9 @@
+<div class="modal" *ngIf="modalService.isModalOpen(id)">
+  <div class="modal-body slide-{{ direction }}">
+    <button class="modal-close" (click)="modalService.close(id)" *ngIf="showClose">
+      <img src="/assets/images/icons/close.png" alt="Close modal" />
+    </button>
+    <ng-content></ng-content>
+  </div>
+</div>
+<div class="modal-background"></div>

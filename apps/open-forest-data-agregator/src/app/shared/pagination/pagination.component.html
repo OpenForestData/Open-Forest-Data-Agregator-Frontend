@@ -1,27 +1,48 @@
-<ol class="pagination">
-  <li class="prev-page">
-    <button (click)="pageClick(page - 1)" [disabled]="page == 1">
-      <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
-    </button>
-  </li>
-  <li *ngIf="page - offset > 1 && showOffsets">
-    <button (click)="pageClick(1)">
-      1
-    </button>
-  </li>
-  <li *ngFor="let _page of pagesArray" [ngClass]="{ active: _page == page }">
-    <button (click)="pageClick(_page)">
-      {{ _page }}
-    </button>
-  </li>
-  <li *ngIf="pages - offset > page && showOffsets">
-    <button (click)="pageClick(pages)">
-      {{ pages }}
-    </button>
-  </li>
-  <li class="next-page">
-    <button (click)="pageClick(page + 1)" [disabled]="page == pages">
-      <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
-    </button>
-  </li>
-</ol>
+<div class="pagination">
+  <div class="pagination__go-to-page" [ngClass]="{ hide: pages <= 1 }">
+    <label for="go-to-page">
+      {{ 'pagination.go-to-page' | translate }}
+    </label>
+    <input
+      type="number"
+      min="0"
+      (debounceInput)="debouncePage($event.target.value)"
+      [(ngModel)]="inputValue"
+      [debounceTime]="200"
+      max="{{ pages }}"
+      id="go-to-page"
+      class="input"
+    />
+  </div>
+  <ol class="pagination__pages" [ngClass]="{ hide: pages <= 1 }">
+    <li class="prev-page">
+      <button (click)="pageClick(page - 1)" [disabled]="page == 1">
+        <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
+      </button>
+    </li>
+    <li *ngIf="page - offset > 1 && showOffsets" class="first-page">
+      <button (click)="pageClick(1)">
+        1
+      </button>
+    </li>
+    <li *ngFor="let _page of pagesArray" [ngClass]="{ active: _page == page }">
+      <button (click)="pageClick(_page)">
+        {{ _page }}
+      </button>
+    </li>
+    <li *ngIf="pages - offset > page && showOffsets" class="last-page">
+      <button (click)="pageClick(pages)">
+        {{ pages }}
+      </button>
+    </li>
+    <li class="next-page">
+      <button (click)="pageClick(page + 1)" [disabled]="page == pages">
+        <svg-icon [applyCss]="true" src="/assets/images/pag_arr.svg"></svg-icon>
+      </button>
+    </li>
+  </ol>
+  <div class="pagination__queries">
+    {{ 'pagination.show' | translate }}
+    <ui-select (valueChange)="emitChanges($event)" [items]="[15, 30]" [(value)]="pageSize"> </ui-select>
+  </div>
+</div>

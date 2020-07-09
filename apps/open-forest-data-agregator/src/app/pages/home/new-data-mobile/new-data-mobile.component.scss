@@ -1,0 +1,91 @@
+@import '../../../../../../../resources/colors';
+
+.dots-navigation {
+  .dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.16) inset;
+    margin-right: 10px;
+
+    &.active {
+      background-color: $accent-color;
+    }
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.slider {
+  width: calc(100vw - 100px);
+  overflow-x: hidden;
+}
+
+.data-row {
+  margin: 0;
+}
+
+.data-info {
+  margin-top: 15px;
+}
+
+.slider-window {
+  width: calc((100vw - 100px) * 3 + 3 * 50px);
+  display: flex;
+  will-change: transform;
+  transition: transform 0.6s ease;
+
+  &.active-0 {
+    transform: translateX(0);
+  }
+
+  &.active-1 {
+    transform: translateX(-33.333%);
+  }
+
+  &.active-2 {
+    transform: translateX(-66.666%);
+  }
+
+  .data-info {
+    width: calc((100vw - 100px));
+    margin-right: 50px;
+    padding: 0;
+  }
+}
+
+.see_more_wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.button-wrapper {
+  margin-top: 30px;
+}
+
+.add-text {
+  margin-top: 0;
+}
+
+.no-border {
+  padding-left: 0;
+}
+
+@media (max-width: 500px) {
+  .slider {
+    width: calc(100vw - 60px);
+  }
+
+  .slider-window {
+    width: calc((100vw - 60px) * 3 + 3 * 30px);
+
+    .data-info {
+      width: calc(100vw - 60px);
+      margin-right: 30px;
+    }
+  }
+}

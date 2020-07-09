@@ -1,0 +1,76 @@
+<div class="datasets-presentation">
+  <h4 class="datasets-presentation__header">
+    {{ 'datasets.presentation-header' | translate }}
+  </h4>
+  <div class="datasets-presentation__views">
+    <button
+      class="datasets-presentation__view"
+      id="view-list"
+      [ngClass]="{ active: presentation === 'list' }"
+      (click)="selectPresentation('list')"
+    >
+      <span class="flex">
+        <svg-icon src="/assets/images/list-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.list' | translate }}
+      </span>
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-table"
+      [ngClass]="{ active: presentation === 'table' }"
+      (click)="selectPresentation('table')"
+    >
+      <span class="flex">
+        <svg-icon src="/assets/images/table-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.table' | translate }}
+      </span>
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-gallery"
+      [ngClass]="{ active: presentation === 'gallery' }"
+      (click)="selectPresentation('gallery')"
+    >
+      <span class="flex">
+        <svg-icon src="/assets/images/gallery-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.gallery' | translate }}
+      </span>
+    </button>
+    <button
+      class="datasets-presentation__view"
+      id="view-map"
+      [ngClass]="{ active: presentation === 'map' }"
+      (click)="selectPresentation('map')"
+    >
+      <span class="flex">
+        <svg-icon src="/assets/images/map-view.svg" [applyCss]="true"></svg-icon>
+        {{ 'datasets.presentation.map' | translate }}
+      </span>
+    </button>
+    <div class="selector" #selector></div>
+  </div>
+  <div class="datasets-presentation__views--mobile">
+    <ng-select
+      [clearAllText]="'search.clear_all' | translate"
+      [loadingText]="'search.loading_text' | translate"
+      [notFoundText]="'search.not_found_text' | translate"
+      [typeToSearchText]="'search.type_to_search' | translate"
+      [addTagText]="'search.add_tag' | translate"
+      [multiple]="false"
+      [searchable]="false"
+      [addTag]="false"
+      bindValue="id"
+      bindLabel="label"
+      (change)="selectPresentation($event.id)"
+      [closeOnSelect]="true"
+      [items]="[
+        { id: 'list', label: 'datasets.presentation.list' | translate },
+        { id: 'table', label: 'datasets.presentation.table' | translate },
+        { id: 'gallery', label: 'datasets.presentation.gallery' | translate },
+        { id: 'map', label: 'datasets.presentation.map' | translate }
+      ]"
+      [(ngModel)]="presentation"
+    >
+    </ng-select>
+  </div>
+</div>

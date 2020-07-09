@@ -1,0 +1,30 @@
+<div class="search-wrapper desktop-only">
+  <input
+    type="text"
+    [(ngModel)]="searchPhrase"
+    class="header-search"
+    (keydown.enter)="searchClick()"
+    [placeholder]="'global.search' | translate"
+    [ngClass]="{ active: searchActive }"
+  />
+
+  <button class="search-btn" (click)="searchClick()">
+    <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
+  </button>
+</div>
+
+<div class="mobile-flex relative zi2">
+  <a class="login-btn" href="https://agregator.whiteaster.com/pl/admin/login/?next=/pl/admin/">
+    {{ 'nav.login' | translate }}
+    <svg-icon src="/assets/images/lock.svg" [applyCss]="true"></svg-icon>
+  </a>
+
+  <button
+    class="language-btn"
+    (click)="setNewLanguage(item.key)"
+    [ngClass]="{ active: item.key == languageService.language }"
+    *ngFor="let item of languageService.languages"
+  >
+    {{ item.value }}
+  </button>
+</div>

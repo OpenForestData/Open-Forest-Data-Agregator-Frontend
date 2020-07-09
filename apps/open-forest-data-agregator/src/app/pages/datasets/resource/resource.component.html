@@ -1,0 +1,270 @@
+<section class="main-container">
+  <ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
+  <section class="container">
+    <div class="dataset-left">
+      <ofd-agregator-data-container
+        class="header-bar-dataset"
+        [iconSrc]="'/assets/images/pencil.svg'"
+        [title]="'datasets.dataset.headers.metrics' | translate"
+        [expandable]="true"
+        [expanded]="!mobile"
+      >
+        <div class="metric">
+          <div class="metric__content">
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.downloads' | translate }}</b>
+              {{ mockLeftSide.downloadAmount }}
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.created' | translate }}</b>
+              {{ metricData?.dateOfDeposit?.value }}
+            </p>
+            <p>
+              <b> {{ 'datasets.dataset.metadata-all.source' | translate }}</b>
+              <a [href]="makeSource()">{{
+                (resource.dataset_details?.providers)[0].authorAffiliation?.value
+                  ? (resource.dataset_details?.providers)[0]?.authorAffiliation?.value
+                  : 'Dataverse'
+              }}</a>
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.author' | translate }}</b>
+              {{ (metricData?.author?.value)[0].authorName.value }}
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.data-openness' | translate }}</b> {{ mockLeftSide.dataOpenness }}
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.license' | translate }}</b>
+              <a href="{{ mockLeftSide.license.link }}">{{ resource.dataset_details?.latestVersion?.license }}</a>
+            </p>
+            <p>
+              <b>{{ 'datasets.dataset.metadata-all.domain' | translate }}</b>
+              <span *ngFor="let subject of metricData?.subject?.value; let i = index"
+                >{{ subject }}<span *ngIf="i < metricData?.subject?.value.length - 1">, </span>
+              </span>
+            </p>
+            <p>
+              <b> {{ 'datasets.dataset.metadata-all.keywords' | translate }}</b>
+              <span *ngFor="let keyword of metricData?.keyword?.value; let i = index"
+                >{{ keyword.keywordValue.value }}<span *ngIf="i < metricData?.keyword?.value.length - 1">, </span>
+              </span>
+            </p>
+          </div>
+
+          <div class="metric__social">
+            <ofd-agregator-social class="social-container"></ofd-agregator-social>
+          </div>
+        </div>
+        <div class="versions">
+          <ofd-agregator-header-bar class="header-bar-dataset" [iconSrc]="'/assets/images/version.svg'">
+            {{ 'datasets.dataset.headers.versions' | translate }}
+          </ofd-agregator-header-bar>
+
+          <div class="versions__content">
+            <a [href]="makeSource()"> {{ 'ver ' + resource.dataset_details?.latestVersion?.versionNumber + '.0' }}</a>
+            <p>
+              {{
+                ' - ' +
+                  (resource.dataset_details?.latestVersion?.releaseTime | date: 'dd.MM.yyyy') +
+                  ' | ' +
+                  resource.dataset_details?.publisher
+              }}
+            </p>
+          </div>
+        </div>
+      </ofd-agregator-data-container>
+    </div>
+
+    <div class="dataset-right">
+      <div class="right-container">
+        <div class="right-container__header">
+          <div class="right-container__header__title">
+            <div class="background-gray">
+              {{ formatConverter(resource.details?.name) | lowercase }}
+            </div>
+            <p>{{ metricData?.title?.value }}</p>
+          </div>
+          <p>{{ (metricData?.dsDescription?.value)[0].dsDescriptionValue.value }}</p>
+          <div class="right-container__header__api">
+            <button class="button" (click)="downloadSingleResource(this.resource.download_url)">
+              {{ 'home.download' | translate }}
+              <svg-icon [src]="'/assets/images/download.svg'" [applyCss]="true"></svg-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="right-container__files">
+          <ofd-agregator-data-container
+            class="right-container__files__look-up"
+            [title]="'datasets.resource.headers.look-up' | translate"
+            [iconSrc]="'/assets/images/eye.svg'"
+          >
+          </ofd-agregator-data-container>
+
+          <div class="right-container__files__file-viewer" *ngIf="resource">
+            <div
+              class="right-container__files__file-viewer__as-text"
+              *ngIf="['Plain Text'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-text [resource]="resourceContent.plain_text"></ofd-agregator-text>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-image"
+              *ngIf="['JPEG Image', 'PNG Image', 'GIF Image'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <img class="right-container__files__file-viewer__as-image__source" [src]="resourceContent.image" />
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-pdf"
+              *ngIf="['Adobe PDF'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-pdf [resource]="resourceContent.pdf"></ofd-agregator-pdf>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-json"
+              *ngIf="['JSON'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-json [resource]="resourceContent.plain_text"></ofd-agregator-json>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-table"
+              *ngIf="['Comma Separated Values', 'Tab-Separated Values'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-table [resource]="resourceContent.csv" [type]="resource.details?.fileTypeDisplay">
+              </ofd-agregator-table>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-docx"
+              *ngIf="['MS Word', 'MS Excel Spreadsheet'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-docs [resource]="resourceContent.doc"></ofd-agregator-docs>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-xml"
+              *ngIf="['XML', 'application/rdf+xml'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-xml [resource]="resourceContent.plain_text"></ofd-agregator-xml>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-map"
+              *ngIf="
+                [
+                  'application/geo+json',
+                  'geotiff',
+                  'application/vnd.google-earth.kml+xml',
+                  'wkt',
+                  'gml',
+                  'Shape'
+                ].indexOf(resource.details?.fileTypeDisplay) >= 0
+              "
+            >
+              <ofd-agregator-map [resource]="resourceContent.map" [type]="resource.details?.fileTypeDisplay">
+              </ofd-agregator-map>
+            </div>
+            <div
+              class="right-container__files__file-viewer__as-iframe"
+              *ngIf="
+                [
+                  '3d',
+                  'application/x-tgif',
+                  'TIFF Image',
+                  'micro',
+                  'map_geonode',
+                  'dashboard_grafana',
+                  'application/vnd.ms-pki.stl'
+                ].indexOf(resource.details?.fileTypeDisplay) >= 0
+              "
+            >
+              <ofd-agregator-iframe
+                [resource]="resourceContent.iframe"
+                [viewerType]="viewerType"
+                [type]="resource.details?.fileTypeDisplay"
+              >
+              </ofd-agregator-iframe>
+            </div>
+            <div
+              class="right-container__files__file-viewer__not-supported"
+              *ngIf="
+                [
+                  'Plain Text',
+                  'JPEG Image',
+                  'PNG Image',
+                  'GIF Image',
+                  'Adobe PDF',
+                  'JSON',
+                  'Comma Separated Values',
+                  'Tab-Separated Values',
+                  'MS Word',
+                  'MS Excel Spreadsheet',
+                  'application/geo+json',
+                  'geotiff',
+                  'application/vnd.google-earth.kml+xml',
+                  'wkt',
+                  '3d',
+                  'application/x-tgif',
+                  'TIFF Image',
+                  'micro',
+                  'map_geonode',
+                  'dashboard_grafana',
+                  'application/vnd.ms-pki.stl',
+                  'Shape'
+                ].indexOf(resource.details?.fileTypeDisplay) === -1
+              "
+            >
+              <ofd-agregator-not-supported></ofd-agregator-not-supported>
+            </div>
+          </div>
+        </div>
+
+        <div class="meta-citation-box">
+          <ofd-agregator-data-container
+            class="meta-citation"
+            [iconSrc]="'/assets/images/metadata-content.svg'"
+            [title]="'datasets.dataset.headers.metadata' | translate"
+            [expandable]="true"
+            [expanded]="false"
+          >
+            <div class="meta-citation__header">
+              <button class="button">
+                {{ 'global.export' | translate }}
+                <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
+              </button>
+            </div>
+            <div class="meta-citation__look-up">
+              <div class="meta-citation__look-up__keys">
+                <p>{{ 'datasets.resource.metadata.look-up' | translate }}</p>
+              </div>
+              <div class="meta-citation__look-up__values">
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="resourceContent.image"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+                />
+                <img
+                  class="meta-citation__look-up__values__img"
+                  [src]="'/assets/images/no_photo.png'"
+                  *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) < 0"
+                />
+              </div>
+            </div>
+            <div class="meta-citation__row" *ngFor="let item of metaCitation | keyvalue: keepOrder">
+              <div class="meta-citation__row__keys">
+                {{ 'datasets.resource.metadata.' + item.key | translate }}
+              </div>
+              <div class="meta-citation__row__values" *ngIf="['download-url', 'deposit-date'].indexOf(item.key) === -1">
+                {{ item.value }}
+              </div>
+              <div class="meta-citation__row__values" *ngIf="item.key === 'download-url'">
+                <a href="{{ item.value }}">{{ item.value }}</a>
+              </div>
+              <div class="meta-citation__row__values" *ngIf="['deposit-date'].indexOf(item.key) >= 0">
+                {{ item.value | date: 'dd.MM.yyyy' }}
+              </div>
+            </div>
+          </ofd-agregator-data-container>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

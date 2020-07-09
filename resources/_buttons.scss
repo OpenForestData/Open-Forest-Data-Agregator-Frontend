@@ -1,31 +1,28 @@
 @import './_colors.scss';
 
 .button {
-  background-color: #fff;
-  border: 1px solid $accent-color;
+  background-color: transparent;
   color: $accent-color;
-  font-size: 16px;
-  font-weight: 700;
-  display: inline-flex;
-  padding: 8px 30px;
-  transition: 0.3s all ease;
-  cursor: pointer;
+  font-size: 18px;
+  border: 1px solid $accent-color;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 12px 38px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s all ease;
 
-  &.thin {
-    background-color: transparent;
-    border: none;
-    padding: 8px;
+  svg-icon {
+    margin-left: 15px;
 
-    &:hover {
-      background-color: transparent;
-      color: $accent-color;
-
-      svg {
-        path {
-          fill: $accent-color;
-        }
+    svg {
+      path {
+        transition: 0.3s all ease;
+        fill: $accent-color;
+      }
+      line {
+        transition: 0.3s all ease;
+        stroke: $accent-color;
       }
     }
   }
@@ -38,6 +35,24 @@
       path {
         fill: white;
       }
+      line {
+        stroke: white;
+      }
+    }
+  }
+
+  &:active {
+    color: $text-color;
+    border-color: $text-color;
+    background-color: transparent;
+
+    svg {
+      path {
+        fill: $text-color;
+      }
+      line {
+        stroke: $text-color;
+      }
     }
   }
 
@@ -46,28 +61,6 @@
 
     path {
       transition: 0.3s all ease;
-    }
-  }
-
-  &.fill {
-    background-color: $accent-color;
-    color: white;
-
-    svg {
-      path {
-        fill: white;
-      }
-    }
-
-    &:hover {
-      background-color: white;
-      color: $accent-color;
-
-      svg {
-        path {
-          fill: $accent-color;
-        }
-      }
     }
   }
 }

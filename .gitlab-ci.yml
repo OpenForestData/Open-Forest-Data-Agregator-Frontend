@@ -1,23 +1,33 @@
 image: node:10-alpine
 
 before_script:
-    - npm install
+  - npm install
 
 stages:
-    - test
-    - lint
-    - build
+  - sonar analysis
+  - test
+  - lint
+  - build
+
+sonarqube:
+  image: sonarsource/sonar-scanner-cli
+  stage: sonar analysis
+  before_script: []
+  script:
+    - sonar-scanner -Dsonar.projectKey=open-forest-data-agregator-frontend -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.whiteaster.com -Dsonar.login=650b2d645302b11d12bb0d1e72971ecf310a763c
+  only:
+    - master
 
 lint:
-    stage: lint
-    script:
-        - node_modules/.bin/nx lint
-        - node_modules/.bin/ng lint
+  stage: lint
+  script:
+    - node_modules/.bin/nx lint
+    - node_modules/.bin/ng lint
 
 tests:
-    stage: test
-    script:
-        - node_modules/.bin/ng test --passWithNoTests
+  stage: test
+  script:
+    - node_modules/.bin/ng test --passWithNoTests
 
 Build production image:
   image:
@@ -30,6 +40,7 @@ Build production image:
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.prod --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG --destination $CI_REGISTRY_IMAGE:$latest
   only:
     - tags
+    - master
 
 Build development image:
   image:
@@ -41,19 +52,4 @@ Build development image:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"gitlab-ci-token\",\"password\":\"$CI_JOB_TOKEN\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.dev --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA --destination $CI_REGISTRY_IMAGE:development
   only:
-    - development
-
-Build docker image:
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: ['']
-  stage: build
-  before_script: []
-  script:
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"gitlab-ci-token\",\"password\":\"$CI_JOB_TOKEN\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.dev --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  only:
-    - branches
-  except:
-    - master
     - development

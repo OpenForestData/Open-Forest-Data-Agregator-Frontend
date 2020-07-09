@@ -1,0 +1,48 @@
+@import '../../../../../../../../resources/_colors.scss';
+
+.filter {
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #fff;
+    line-height: 28px;
+    padding: 7px 15px;
+    border-radius: 5px;
+    position: relative;
+    margin: 10px 0 0 0;
+  }
+
+  &__range {
+    width: calc(100% - 20px);
+    height: 300px;
+    border: 8px solid #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    margin: 21px 0;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+
+    svg-icon {
+      display: flex;
+      width: 11px;
+      height: 6px;
+      transition: 0.3s transform ease;
+      transform: rotate(0);
+    }
+  }
+}
+
+.filter__title--expanded {
+  svg-icon {
+    transform: rotate(180deg);
+  }
+}

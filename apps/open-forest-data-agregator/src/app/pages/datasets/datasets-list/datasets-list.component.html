@@ -1,0 +1,69 @@
+<div class="datasets-list__container">
+  <div class="datasets-list__header">
+    <div>
+      <span class="datasets-list__count">
+        {{ DSService.searchData['list']['amount'] }} {{ 'datasets.count' | translate }}
+      </span>
+      <ui-select [items]="sortItems" [options]="options" (valueChange)="sortChanged($event)" [(value)]="sortBy">
+      </ui-select>
+    </div>
+    <button class="button datasets-list__export">
+      {{ 'global.export' | translate }}
+      <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
+    </button>
+  </div>
+
+  <div class="datasets-list__datasets">
+    <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
+      <a [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
+        <picture class="datasets-list__datasets__item__picture">
+          <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+          <img
+            src="/assets/images/no_photo.png"
+            *ngIf="!dataset.preview && dataset.preview !== 'wait'"
+            [alt]="dataset.title"
+          />
+        </picture>
+      </a>
+
+      <article>
+        <div class="pointer" [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
+          <header>
+            <h3 class="datasets-list__datasets__item__title">
+              <picture class="datasets-list__datasets__item__picture--mobile">
+                <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
+                <img
+                  [src]="dataset.preview"
+                  *ngIf="dataset.preview && dataset.preview !== 'wait'"
+                  [alt]="dataset.title"
+                />
+                <img
+                  src="/assets/images/no_photo.png"
+                  *ngIf="!dataset.preview && dataset.preview !== 'wait'"
+                  [alt]="dataset.title"
+                />
+              </picture>
+              <a> {{ dataset.title }} </a>
+            </h3>
+            <time [dateTime]="dataset.createdAt">{{ dataset.createdAt | date: 'dd.MM.yyyy' }}</time> |
+            <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>
+          </header>
+          <p class="datasets-list__datasets__item__description">
+            {{ dataset.description }}
+          </p>
+        </div>
+        <footer
+          class="datasets-list__datasets__item__source"
+          [routerLink]="dataset.sourceLink ? [] : ['detail']"
+          [queryParams]="{ doi: dataset.identifier64 }"
+        >
+          <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
+          <a href="{{ dataset.sourceLink }}" [ngClass]="{ 'events-none': !dataset.sourceLink }" target="_blank">
+            {{ 'global.source' | translate }}: <b>{{ dataset.source }}</b>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </div>
+</div>

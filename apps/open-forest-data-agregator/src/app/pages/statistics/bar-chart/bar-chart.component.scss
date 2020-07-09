@@ -1,0 +1,18 @@
+@import '../../../../../../../resources/colors';
+
+.chart-wrapper {
+  margin: 38px 0;
+}
+
+.title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.sum {
+  color: $accent-color;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 600;
+}

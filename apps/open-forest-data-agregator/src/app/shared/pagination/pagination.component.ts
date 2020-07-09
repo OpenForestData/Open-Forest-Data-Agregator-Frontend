@@ -1,14 +1,18 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 /**
- * Pagination component
+ * Generate pagination
+ *
+ * @export
+ * @class PaginationComponent
+ * @implements {OnChanges}
  */
 @Component({
-  selector: 'ofd-pagination',
+  selector: 'ofd-agregator-pagination',
   templateUrl: 'pagination.component.html',
   styleUrls: ['pagination.component.scss']
 })
-export class PaginationComponent implements OnInit, OnChanges {
+export class PaginationComponent implements OnChanges {
   /**
    * Number of items on page
    */
@@ -35,6 +39,13 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() pageChange = new EventEmitter();
 
   /**
+   * Emiter for changes. Working outside pageChange( page value changed )
+   *
+   * @memberof PaginationComponent
+   */
+  @Output() changes = new EventEmitter();
+
+  /**
    * Array of pages
    */
   public pagesArray: number[] = [];
@@ -53,13 +64,10 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   /**
    * @ignore
+   *
+   * @memberof PaginationComponent
    */
-  constructor() {}
-
-  /**
-   * @ignore
-   */
-  ngOnInit() {}
+  public inputValue = 1;
 
   /**
    * Rerender pagination on every change
@@ -88,5 +96,40 @@ export class PaginationComponent implements OnInit, OnChanges {
    */
   pageClick(page: number) {
     this.pageChange.emit(page);
+    this.page = page;
+    this.emitChanges(this.pageSize);
+  }
+
+  /**
+   * Emit events of page change after time passes from last key up.
+   * Debouce page input.
+   *
+   * @param {number} newPage
+   * @memberof PaginationComponent
+   */
+  debouncePage(newPage: number) {
+    newPage = Number(newPage);
+    if (Number.isInteger(newPage) && newPage > 0) {
+      if (newPage > this.pages) newPage = this.pages;
+
+      this.pageClick(newPage);
+    } else {
+      this.inputValue = this.page;
+    }
+  }
+
+  /**
+   * Emit page change via emiter
+   *
+   * @param {*} pageSize
+   * @memberof PaginationComponent
+   */
+  emitChanges(pageSize) {
+    this.inputValue = this.page;
+
+    this.changes.emit({
+      page: this.page,
+      limit: pageSize
+    });
   }
 }

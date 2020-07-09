@@ -1,0 +1,75 @@
+<div class="content" *ngIf="activeFilters">
+  <div class="group">
+    <b>{{ 'search.active_filters' | translate }}:</b>
+  </div>
+  <div class="group-wrapper">
+    <div class="group" *ngFor="let group of activeFilters">
+      <b>{{ group.name | translate }}:</b>
+
+      <ng-container *ngIf="group.type === 'DATERANGE'">
+        <span class="value">
+          {{ getDateValue(group.values[0]) }} - {{ getDateValue(group.values[1]) }}
+          <svg-icon
+            src="assets/modules/search/small_times.svg"
+            (click)="removeFilter(group.key, 0)"
+            class="m-l-10 cursor"
+            [applyCss]="true"
+          ></svg-icon>
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="group.type === 'DATE'">
+        <span class="value">
+          {{ getDateValue(group.values[0]) }}
+          <svg-icon
+            src="assets/modules/search/small_times.svg"
+            (click)="removeFilter(group.key, 0)"
+            class="m-l-10 cursor"
+            [applyCss]="true"
+          ></svg-icon>
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="group.type === 'MAP'">
+        <span class="value">
+          Lat: {{ group.values[0]?.lat }} - {{ group.values[1]?.lat }}<br />
+          Lng: {{ group.values[0]?.lng }} - {{ group.values[1]?.lng }}
+          <svg-icon
+            src="assets/modules/search/small_times.svg"
+            (click)="removeFilter(group.key, 0)"
+            class="m-l-10 cursor"
+            [applyCss]="true"
+          ></svg-icon>
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="group.type === 'SIGNLE-SELECT'">
+        <span class="value">
+          {{ group.values }}
+          <svg-icon
+            src="assets/modules/search/small_times.svg"
+            (click)="removeFilter(group.key, 0)"
+            class="m-l-10 cursor"
+            [applyCss]="true"
+          ></svg-icon>
+        </span>
+      </ng-container>
+
+      <ng-container
+        *ngIf="
+          group.type !== 'MAP' && group.type !== 'DATERANGE' && group.type !== 'SIGNLE-SELECT' && group.type !== 'DATE'
+        "
+      >
+        <span *ngFor="let value of group.values; let i = index" class="value">
+          {{ value }}
+          <svg-icon
+            src="assets/modules/search/small_times.svg"
+            (click)="removeFilter(group.key, i)"
+            class="m-l-10 cursor"
+            [applyCss]="true"
+          ></svg-icon>
+        </span>
+      </ng-container>
+    </div>
+  </div>
+</div>
