@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
-import { DatasetService } from '@app/services/dataset.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatasetsService } from '../datasets.service';
 
 /**
  * Dataset component
@@ -23,11 +23,7 @@ export class DatasetComponent implements OnInit {
   /**
    * Sort by type values
    */
-  public sortItemsType = [
-    { name: 'All', value: 0 },
-    { name: 'Image', value: 1 },
-    { name: 'Video', value: 2 }
-  ];
+  public sortItemsType = [{ name: 'All', value: 0 }];
   /**
    * Sort by access values
    */
@@ -130,10 +126,10 @@ export class DatasetComponent implements OnInit {
 
   /**
    * Dataset constructor
-   * @param {datasetService} datasetService Dataset Service
+   * @param {datasetSservice} datasetService Dataset Service
    * @param {route} route Route
    */
-  constructor(private datasetService: DatasetService, private route: ActivatedRoute) {}
+  constructor(private datasetService: DatasetsService, private route: ActivatedRoute) {}
 
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
@@ -159,6 +155,7 @@ export class DatasetComponent implements OnInit {
     this.datasetService.getDatasetByDOI(doi).subscribe(response => {
       this.dataset = response;
       this.getMetrics(this.dataset);
+      this.getFilterTypes();
       this.files = this.dataset.latestVersion.files.map(file => {
         file.isChecked = false;
         return file;
@@ -169,15 +166,27 @@ export class DatasetComponent implements OnInit {
   }
 
   /**
+   * Filter all files and get types
+   */
+  getFilterTypes() {
+    this.dataset?.latestVersion?.files?.forEach((file, index: number) => {
+      this.sortItemsType.push({ name: this.formatConverter(file.label), value: index + 1 });
+    });
+    this.sortItemsType = this.sortItemsType.filter(
+      (elem, index, self) => self.findIndex(temp => temp.name === elem.name) === index
+    );
+  }
+
+  /**
    * Function for getting extension from filename
    * @param { string } filename Name of file
    * @example
    * formatConverter('test.abc')
    * // returns abc
    */
-  formatConverter(filename: string) {
+  formatConverter(filename: string): string {
     let format = filename;
-    format = format.substr(format.lastIndexOf('.') + 1);
+    format = format.substr(format.lastIndexOf('.') + 1).toUpperCase();
     return format;
   }
 
@@ -267,13 +276,10 @@ export class DatasetComponent implements OnInit {
    */
   onSortTypeChange(sort) {
     const copyOfInitialFiles = [...this.dataset.latestVersion?.files];
-    if (sort.value === 0) {
-      this.files = copyOfInitialFiles;
-    } else if (sort.value === 1) {
-      this.files = copyOfInitialFiles.filter(file => file.dataFile.contentType === 'image/jpeg');
-    } else if (sort.value === 2) {
-      this.files = copyOfInitialFiles.filter(file => file.dataFile.contentType === 'video/mp4');
-    }
+    this.files =
+      sort.value === 0
+        ? copyOfInitialFiles
+        : copyOfInitialFiles.filter(file => this.formatConverter(file.label) === sort.name);
   }
 
   /**

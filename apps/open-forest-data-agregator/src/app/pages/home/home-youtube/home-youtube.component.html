@@ -1,14 +1,16 @@
-<ofd-agregator-section-title
-  [iconURL]="'assets/modules/home/yt_icon.png'"
-  [titleText]="'home.youtube' | translate"
-></ofd-agregator-section-title>
+<div *ngIf="utilService.homePageData">
+  <ofd-agregator-section-title
+    [iconURL]="'assets/modules/home/yt_icon.png'"
+    [titleText]="utilService.homePageData.youtube_title"
+  ></ofd-agregator-section-title>
 
-<div class="iframe-wrapper">
-  <iframe
-    src="https://www.youtube.com/watch?v=2lEhEBCzUY4"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-  <p class="iframe-title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, maiores.</p>
+  <div class="iframe-wrapper">
+    <iframe
+      [src]="sanitizer.bypassSecurityTrustResourceUrl(utilService.homePageData.youtube_link)"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <p class="iframe-title">{{ utilService.homePageData.youtube_mobie_text }}</p>
+  </div>
 </div>

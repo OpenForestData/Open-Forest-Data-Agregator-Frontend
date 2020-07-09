@@ -1,50 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { HeaderBarComponent } from '../header-bar/header-bar.component';
 /**
- * Data-container component
+ * Creates collapsable container for datasets metrics
+ *
+ * @export
+ * @class DataContainerComponent
+ * @extends {HeaderBarComponent}
  */
 @Component({
   selector: 'ofd-agregator-data-container',
   templateUrl: './data-container.component.html',
   styleUrls: ['./data-container.component.scss']
 })
-export class DataContainerComponent implements OnInit {
+export class DataContainerComponent extends HeaderBarComponent {
   /**
-   * Icon source
-   */
-  @Input() iconSrc: string;
-  /**
-   * Expandable toggle
-   */
-  @Input() expandable: boolean;
-  /**
-   * Expanded value
-   */
-  @Input() expanded: boolean;
-  /**
-   * title
+   * Title of section
+   *
+   * @type {string}
+   * @memberof DataContainerComponent
    */
   @Input() title: string;
-  /**
-   * Toggle event emitter
-   */
-  @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
-
-  /**
-   * Data-container constructor
-   */
-  constructor() {}
-
-  /**
-   * Initialize at the start
-   */
-  ngOnInit(): void {}
-
-  /**
-   * Toggle expanded view
-   */
-  onToggle() {
-    this.expanded = !this.expanded;
-    this.toggle.emit();
-  }
 }

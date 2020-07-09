@@ -8,7 +8,7 @@ import { LanguageService } from './services/language.service';
 import { HttpClient } from '@angular/common/http';
 
 /**
- * App component
+ * Entry component for app
  */
 @Component({
   selector: 'ofd-root',

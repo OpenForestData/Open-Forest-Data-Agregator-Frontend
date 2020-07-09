@@ -50,11 +50,27 @@
     <div class="selector" #selector></div>
   </div>
   <div class="datasets-presentation__views--mobile">
-    <select (change)="selectPresentation($event.target['value'])" [(ngModel)]="presentation">
-      <option value="list">{{ 'datasets.presentation.list' | translate }}</option>
-      <option value="table">{{ 'datasets.presentation.table' | translate }}</option>
-      <option value="gallery">{{ 'datasets.presentation.gallery' | translate }}</option>
-      <option value="map">{{ 'datasets.presentation.map' | translate }}</option>
-    </select>
+    <ng-select
+      [clearAllText]="'search.clear_all' | translate"
+      [loadingText]="'search.loading_text' | translate"
+      [notFoundText]="'search.not_found_text' | translate"
+      [typeToSearchText]="'search.type_to_search' | translate"
+      [addTagText]="'search.add_tag' | translate"
+      [multiple]="false"
+      [searchable]="false"
+      [addTag]="false"
+      bindValue="id"
+      bindLabel="label"
+      (change)="selectPresentation($event.id)"
+      [closeOnSelect]="true"
+      [items]="[
+        { id: 'list', label: 'datasets.presentation.list' | translate },
+        { id: 'table', label: 'datasets.presentation.table' | translate },
+        { id: 'gallery', label: 'datasets.presentation.gallery' | translate },
+        { id: 'map', label: 'datasets.presentation.map' | translate }
+      ]"
+      [(ngModel)]="presentation"
+    >
+    </ng-select>
   </div>
 </div>

@@ -10,7 +10,12 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { ChartsModule } from 'ng2-charts';
 
 const components = [StatisticsComponent, PieChartComponent, BarChartComponent, ChartFiltersComponent];
-
+/**
+ * Statistics Module
+ *
+ * @export
+ * @class StatisticsModule
+ */
 @NgModule({
   declarations: components,
   imports: [CommonModule, StatisticsRoutingModule, SharedModule, DpDatePickerModule, ChartsModule]

@@ -3,6 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 
 /**
  * Footer Component
+ *
+ * @export
+ * @class FooterComponent
  */
 @Component({
   selector: 'ofd-footer',

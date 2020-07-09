@@ -1,24 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 /**
- * Social component
+ * Creates social links
+ *
+ * @export
+ * @class SocialComponent
  */
 @Component({
   selector: 'ofd-agregator-social',
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss']
 })
-export class SocialComponent implements OnInit {
-  /**
-   * Social constructor
-   */
-  constructor() {}
-
-  /**
-   * Initialize on start
-   */
-  ngOnInit() {}
-
+export class SocialComponent {
   /**
    * Creates href for email which opens window for sending emails
    * @example

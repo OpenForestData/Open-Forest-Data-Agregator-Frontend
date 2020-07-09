@@ -1,17 +1,45 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
-
+/**
+ * News page component
+ *
+ * @export
+ * @class NewsComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'ofd-agregator-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit, OnDestroy {
+  /**
+   * tags and keywords
+   *
+   * @memberof NewsComponent
+   */
   public activeTags = new Set();
+  /**
+   * Hide year filter
+   *
+   * @memberof NewsComponent
+   */
   public collapseYear = true;
+
+  /**
+   * If mobile filter are visible
+   *
+   * @memberof NewsComponent
+   */
   public mobileFilters = false;
 
+  /**
+   * Settings for filters headers
+   *
+   * @memberof NewsComponent
+   */
   public filters = {
     filters: {
       key: 'filters',
@@ -29,6 +57,11 @@ export class NewsComponent implements OnInit, OnDestroy {
     }
   };
 
+  /**
+   * Year filter values
+   *
+   * @memberof NewsComponent
+   */
   public yearFilter = [
     { name: '2020', value: 2020, checked: false },
     { name: '2019', value: 2019, checked: false },
@@ -37,31 +70,91 @@ export class NewsComponent implements OnInit, OnDestroy {
     { name: '2016', value: 2016, checked: false }
   ];
 
+  /**
+   * Pagination page
+   *
+   * @memberof NewsComponent
+   */
   public page = 1;
 
+  /**
+   * Chnage language subscription
+   *
+   * @type {Subscription}
+   * @memberof NewsComponent
+   */
   public languageSubscription: Subscription = new Subscription();
+
+  /**
+   * @ignore
+   * @param {LanguageService} languageService
+   * @memberof NewsComponent
+   */
   constructor(public languageService: LanguageService) {}
+
+  /**
+   * @ignore
+   *
+   * @memberof NewsComponent
+   */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
   }
+
+  /**
+   * Fetch data from API
+   *
+   * @memberof NewsComponent
+   */
   getData() {}
+
+  /**
+   * @ignore
+   *
+   * @memberof NewsComponent
+   */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();
   }
 
+  /**
+   * Clear year filter
+   *
+   * @memberof NewsComponent
+   */
   clearYear() {
     this.yearFilter = this.yearFilter.map(item => ({ ...item, checked: false }));
   }
 
+  /**
+   * Toggle filter
+   *
+   * @param {*} payload
+   * @param {*} name
+   * @memberof NewsComponent
+   */
   toggleFilter(payload, name) {
     this.filters[name].isExpanded = payload;
   }
 
+  /**
+   * Adds or removes tag
+   *
+   * @param {string} tag
+   * @memberof NewsComponent
+   */
   toogleTag(tag: string) {
     if (this.activeTags.has(tag)) this.activeTags.delete(tag);
     else this.activeTags.add(tag);
   }
 
+  /**
+   * Check whatever tag is in Set
+   *
+   * @param {*} tag
+   * @returns
+   * @memberof NewsComponent
+   */
   hasTag(tag) {
     return this.activeTags.has(tag);
   }
