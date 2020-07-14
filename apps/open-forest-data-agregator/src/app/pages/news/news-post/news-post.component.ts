@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
+import { NewsService } from '@app/services/news.service';
 /**
  * View of news post
  *
@@ -39,16 +40,24 @@ export class NewsPostComponent implements OnInit, OnDestroy {
    */
   public newsID = 0;
 
+  news: any = {};
+
   /**
    *
    * @param {LanguageService} languageService
    * @param {ActivatedRoute} route
    * @memberof NewsPostComponent
    */
-  constructor(public languageService: LanguageService, public route: ActivatedRoute) {
-    this.routerSubscription = this.route.params.subscribe(params => {
-      this.newsID = params['id'];
+  constructor(public languageService: LanguageService, private newsService: NewsService, public route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.newsService.getSingleNews(params['slug']).subscribe(response => {
+        this.news = response.article;
+        console.log('single news: ', this.news);
+      });
     });
+    // this.routerSubscription = this.route.params.subscribe(params => {
+    //   this.newsID = params['id'];
+    // });
   }
 
   /**

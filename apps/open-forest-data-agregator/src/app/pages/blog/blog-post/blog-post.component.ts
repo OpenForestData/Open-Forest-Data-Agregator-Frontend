@@ -26,10 +26,8 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
     this.route.params.subscribe(params => {
-      console.log('params: ', params);
       this.blogService.getBlogSlug(params['slug']).subscribe(response => {
         this.article = response.article[0];
-        console.log('blog article: ', this.article);
       });
     });
   }

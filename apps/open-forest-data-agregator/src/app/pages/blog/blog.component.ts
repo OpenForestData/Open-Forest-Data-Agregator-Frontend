@@ -25,7 +25,11 @@ export class BlogComponent implements OnInit, OnDestroy {
   /**
    * Filters object
    */
-  filters = { page: 1, limit: 10, tag: '' };
+  filters = { page: 1, limit: 4, keyword: '' };
+
+  globalScrollValue = 1;
+
+  maxPages;
 
   /**
    * Language subscription
@@ -51,9 +55,11 @@ export class BlogComponent implements OnInit, OnDestroy {
       .subscribe(params => {
         Object.keys(this.filters).forEach(filter => {
           if (params[filter]) {
-            this.filters[filter] = params[filter];
+            this.filters[filter] = decodeURIComponent(params[filter]);
+            console.log('decore filter: ', decodeURIComponent(params[filter]));
           }
         });
+        console.log('init filters: ', this.filters);
         this.getData();
       });
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
@@ -64,11 +70,20 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   getData(filters = this.filters) {
     this.filters = filters;
+    console.log('this filter get data: ', filters);
     this.blogService.getBlog(filters).subscribe(response => {
       this.newestArticle = response.articles[0];
       this.blogData = response;
       console.log('blog response: ', response);
       console.log('nestwest article: ', this.newestArticle);
+      console.log('this blog data: ', this.blogData);
+      this.maxPages = response.offset.num_pages;
+    });
+  }
+
+  getDataForScroll() {
+    this.blogService.getBlog({ page: this.globalScrollValue, limit: 4, keyword: '' }).subscribe(response => {
+      this.blogData.articles = [...this.blogData.articles, ...response.articles];
     });
   }
 
@@ -85,14 +100,13 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.languageSubscription.unsubscribe();
   }
 
-  bottomReached() {
-    return window.innerHeight + window.scrollY * 1.1 >= document.body.offsetHeight;
-  }
-
   @HostListener('window:scroll', [])
   onScroll() {
-    if (this.bottomReached) {
-      console.log('Load more elements');
+    if (window.innerHeight + window.scrollY * 1.1 >= document.body.offsetHeight) {
+      if (this.maxPages > this.globalScrollValue) {
+        this.globalScrollValue++;
+        this.getDataForScroll();
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 /**
  * Main news tiles
  *
@@ -10,4 +10,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './news-tile-main.component.html',
   styleUrls: ['../news.component.scss', './news-tile-main.component.scss']
 })
-export class NewsTileMainComponent {}
+export class NewsTileMainComponent {
+  @Input() news;
+}

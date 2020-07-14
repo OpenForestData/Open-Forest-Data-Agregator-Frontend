@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
+import { NewsService } from '@app/services/news.service';
 /**
  * News page component
  *
@@ -77,6 +78,8 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   public page = 1;
 
+  pageSize = 15;
+
   /**
    * Chnage language subscription
    *
@@ -85,12 +88,14 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   public languageSubscription: Subscription = new Subscription();
 
+  news: any = [];
+
   /**
    * @ignore
    * @param {LanguageService} languageService
    * @memberof NewsComponent
    */
-  constructor(public languageService: LanguageService) {}
+  constructor(public languageService: LanguageService, private newsService: NewsService) {}
 
   /**
    * @ignore
@@ -99,6 +104,7 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+    this.getData({ page: 1, limit: 15 });
   }
 
   /**
@@ -106,7 +112,11 @@ export class NewsComponent implements OnInit, OnDestroy {
    *
    * @memberof NewsComponent
    */
-  getData() {}
+  getData(filters: any = this.filters) {
+    this.newsService.getNews(filters).subscribe(response => {
+      this.news = response;
+    });
+  }
 
   /**
    * @ignore
@@ -157,5 +167,13 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   hasTag(tag) {
     return this.activeTags.has(tag);
+  }
+
+  paginationChanged(payload) {
+    this.page = payload.page;
+    this.pageSize = payload.limit;
+    this.newsService.getNews({ page: payload.page, limit: payload.limit }).subscribe(response => {
+      this.news = response;
+    });
   }
 }

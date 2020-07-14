@@ -62,45 +62,31 @@
           </ul>
 
           <button class="expand-years" (click)="collapseYear = !collapseYear">
-            <svg-icon
-              [src]="'/assets/modules/news/' + (collapseYear ? 'plus' : 'minus') + '.svg'"
-              [applyCss]="true"
-            ></svg-icon>
+            <svg-icon [src]="'/assets/modules/news/' + (collapseYear ? 'plus' : 'minus') + '.svg'" [applyCss]="true">
+            </svg-icon>
             <span>
               {{ (collapseYear ? 'news.see_more' : 'news.see_less') | translate }}
             </span>
           </button>
         </div>
 
-        <div class="mobile-only filter-title">
-          <ofd-agregator-header-bar
-            [iconSrc]="filters.tags.iconSrc"
-            [expandable]="filters.tags.expandable"
-            [expanded]="filters.tags.isExpanded"
-            >{{ 'news.' + filters.tags.key | translate }}
+        <!-- <div class="mobile-only filter-title">
+          <ofd-agregator-header-bar [iconSrc]="filters.tags.iconSrc" [expandable]="filters.tags.expandable"
+            [expanded]="filters.tags.isExpanded">{{ 'news.' + filters.tags.key | translate }}
           </ofd-agregator-header-bar>
-        </div>
+        </div> -->
 
-        <div class="desktop-only">
-          <ofd-agregator-header-bar
-            [iconSrc]="filters.tags.iconSrc"
-            [expandable]="filters.tags.expandable"
-            [expanded]="filters.tags.isExpanded"
-            (toggle)="toggleFilter($event, 'tags')"
-          >
+        <!-- <div class="desktop-only">
+          <ofd-agregator-header-bar [iconSrc]="filters.tags.iconSrc" [expandable]="filters.tags.expandable"
+            [expanded]="filters.tags.isExpanded" (toggle)="toggleFilter($event, 'tags')">
             {{ 'news.' + filters.tags.key | translate }}
           </ofd-agregator-header-bar>
         </div>
 
         <div class="tags-filter tag-wrapper" *ngIf="filters.tags.isExpanded">
-          <span
-            *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
-            (click)="toogleTag(i)"
-            [ngClass]="{ active: hasTag(i) }"
-            class="tag"
-            >{{ i * 53 }}</span
-          >
-        </div>
+          <span *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]" (click)="toogleTag(i)" [ngClass]="{ active: hasTag(i) }"
+            class="tag">{{ i * 53 }}</span>
+        </div> -->
       </div>
       <div class="col-lg-9 col-md-9 col-xs-12 news-grid">
         <div class="row">
@@ -115,13 +101,19 @@
         <div class="m-t-30"></div>
 
         <div class="news-wrapper">
-          <div class="news-tile" *ngFor="let news of [0, 1, 2, 3]">
-            <ofd-agregator-news-tile-main></ofd-agregator-news-tile-main>
+          <div class="news-tile" *ngFor="let new of news.articles">
+            <ofd-agregator-news-tile-main [news]="new"></ofd-agregator-news-tile-main>
             <hr class="news-separator-hr" />
           </div>
         </div>
 
-        <ofd-agregator-pagination [items]="50" [pageSize]="15" [(page)]="page" [showOffsets]="true">
+        <ofd-agregator-pagination
+          [items]="news?.offset?.count"
+          [pageSize]="pageSize"
+          [(page)]="page"
+          [showOffsets]="true"
+          (changes)="paginationChanged($event)"
+        >
         </ofd-agregator-pagination>
       </div>
     </div>
