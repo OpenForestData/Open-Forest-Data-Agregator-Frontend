@@ -11,7 +11,7 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let keyword of blogData.keywords" (click)="keywordFilter(keyword.url)">{{
+      <span class="tag" *ngFor="let keyword of blogData?.keywords" (click)="keywordFilter(keyword.url)">{{
         keyword.title
       }}</span>
     </div>
