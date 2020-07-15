@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BlogTile } from '@app/interfaces/blog-tile';
 /**
  * Post tile component
  */
@@ -11,7 +12,7 @@ export class PostTileComponent {
   /**
    * Article input
    */
-  @Input() article;
+  @Input() article: BlogTile;
   /**
    * Keyword link
    */
@@ -22,6 +23,7 @@ export class PostTileComponent {
    * @param keywordSlug Keyword slug
    */
   createKeywordsLink(keywordSlug) {
+    console.log('article: ', this.article);
     return (this.keywordLink = window.location.origin + '/blog?keyword=' + keywordSlug);
   }
 }
