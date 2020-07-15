@@ -27,8 +27,14 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   filters = { page: 1, limit: 4, keyword: '' };
 
+  /**
+   * Value holder for scroll
+   */
   globalScrollValue = 1;
 
+  /**
+   * Maximum amount of pages
+   */
   maxPages;
 
   /**
@@ -38,8 +44,10 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   /**
    * Blog constructor
+   *
    * @param {LanguageService} languageService Language Service
    * @param {BlogService} blogService Blog Service
+   * @param {ActivatedRoute} route Route
    */
   constructor(public languageService: LanguageService, public blogService: BlogService, public route: ActivatedRoute) {}
 
@@ -56,10 +64,8 @@ export class BlogComponent implements OnInit, OnDestroy {
         Object.keys(this.filters).forEach(filter => {
           if (params[filter]) {
             this.filters[filter] = decodeURIComponent(params[filter]);
-            console.log('decore filter: ', decodeURIComponent(params[filter]));
           }
         });
-        console.log('init filters: ', this.filters);
         this.getData();
       });
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
@@ -70,28 +76,23 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   getData(filters = this.filters) {
     this.filters = filters;
-    console.log('this filter get data: ', filters);
     this.blogService.getBlog(filters).subscribe(response => {
-      this.newestArticle = response.articles[0];
+      if (response.articles && response.articles[0]) {
+        this.newestArticle = response.articles[0];
+      }
       this.blogData = response;
-      console.log('blog response: ', response);
-      console.log('nestwest article: ', this.newestArticle);
-      console.log('this blog data: ', this.blogData);
       this.maxPages = response.offset.num_pages;
     });
   }
 
+  /**
+   * Fetch data for scroll
+   */
   getDataForScroll() {
     this.blogService.getBlog({ page: this.globalScrollValue, limit: 4, keyword: '' }).subscribe(response => {
       this.blogData.articles = [...this.blogData.articles, ...response.articles];
     });
   }
-
-  /**
-   * Change of pagination
-   * @param payload Payload
-   */
-  paginationChange(payload) {}
 
   /**
    * Destroy component on web leave and unsubscribe subscriptions
@@ -100,6 +101,9 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.languageSubscription.unsubscribe();
   }
 
+  /**
+   * Check if bottom of page is reached and if so fetch data and load it
+   */
   @HostListener('window:scroll', [])
   onScroll() {
     if (window.innerHeight + window.scrollY * 1.1 >= document.body.offsetHeight) {
@@ -110,6 +114,10 @@ export class BlogComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Filter for keywords
+   * @param keywordUrl Keyword url
+   */
   keywordFilter(keywordUrl: any) {
     this.blogService.getArticlesByKeyword(keywordUrl).subscribe(response => {
       this.blogData = response;

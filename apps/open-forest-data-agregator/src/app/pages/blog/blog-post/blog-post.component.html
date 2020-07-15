@@ -48,11 +48,11 @@
         </div>
 
         <h2 class="news-title">
-          {{ article.title }}
+          {{ article?.title }}
         </h2>
         <span class="news-date">
-          {{ article.date }} |
-          <span class="author">{{ article.author }}</span>
+          {{ article?.date }} |
+          <span class="author">{{ article?.author }}</span>
         </span>
       </div>
     </div>
@@ -63,9 +63,9 @@
 
       <div class="row news-body ckeditor-content">
         <div class="col-xs-12 col-md-12 col-lg-12">
-          <h3>{{ article.title }}</h3>
+          <h3>{{ article?.title }}</h3>
           <p class="news-content">
-            {{ article.description }}
+            {{ article?.description }}
           </p>
 
           <!-- <ol>
@@ -108,7 +108,7 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let keyword of article.keywords">{{ keyword.title }}</span>
+      <span class="tag" *ngFor="let keyword of article?.keywords">{{ keyword.title }}</span>
     </div>
   </div>
 

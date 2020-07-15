@@ -19,7 +19,12 @@
 
       <p class="tags-p">
         <span class="news-tags">
-          <a [href]="createKeywordsLink(keyword.slug)" *ngFor="let keyword of article.keywords">{{ keyword.title }}</a>
+          <a
+            [title]="keyword.title"
+            [href]="createKeywordsLink(keyword.slug)"
+            *ngFor="let keyword of article.keywords"
+            >{{ keyword.title }}</a
+          >
         </span>
       </p>
 

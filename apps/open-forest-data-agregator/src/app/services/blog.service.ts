@@ -13,6 +13,7 @@ export class BlogService {
 
   /**
    * Get blog data
+   * @param {any} filters Filters
    * @example
    * getBlog()
    * // returns blog data object
@@ -24,6 +25,7 @@ export class BlogService {
 
   /**
    * Get blog slug data
+   * @param {any} slug Article slug
    * @example
    * getBlogSlug()
    * // returns blog slug data object
@@ -52,7 +54,11 @@ export class BlogService {
       .join('&');
   }
 
-  getArticlesByKeyword(url: any) {
-    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=${url}`);
+  /**
+   * Get article for blog by slug
+   * @param {string} slug Slug
+   */
+  getArticlesByKeyword(slug: string) {
+    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=${slug}`);
   }
 }

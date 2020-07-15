@@ -11,13 +11,13 @@ import { AppConfigService } from './app-config.service';
 export class DatasetService {
   /**
    * Dataset constructor
-   * @param {HttpClient} http Http Client
+   * @param {HttpClient} http HttpClient
    */
   constructor(private http: HttpClient) {}
 
   /**
    * Get dataset object by doi
-   * @param doi doi identifier
+   * @param {doi} doi identifier
    */
   getDatasetByDOI(doi: any) {
     return this.http.get<any>(`${AppConfigService.config.api}dataset?identifier=${doi}`);

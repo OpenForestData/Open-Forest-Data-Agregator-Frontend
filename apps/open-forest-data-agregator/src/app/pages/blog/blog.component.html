@@ -35,12 +35,12 @@
         </div>
       </div>
 
-      <p class="news-title" *ngIf="newestArticle">
-        {{ newestArticle.title }}
+      <p class="news-title">
+        {{ newestArticle?.title }}
       </p>
 
-      <p class="news-content ckeditor-content" *ngIf="newestArticle">
-        {{ newestArticle.description }}
+      <p class="news-content ckeditor-content">
+        {{ newestArticle?.description }}
       </p>
 
       <p class="tags-p">
