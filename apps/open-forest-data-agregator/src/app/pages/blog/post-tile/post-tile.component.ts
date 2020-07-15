@@ -23,7 +23,6 @@ export class PostTileComponent {
    * @param keywordSlug Keyword slug
    */
   createKeywordsLink(keywordSlug) {
-    console.log('article: ', this.article);
     return (this.keywordLink = window.location.origin + '/blog?keyword=' + keywordSlug);
   }
 }

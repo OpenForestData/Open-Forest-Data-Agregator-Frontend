@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { NewsService } from '@app/services/news.service';
+import { NewsList } from '@app/interfaces/news-list';
 /**
  * News page component
  *
@@ -78,6 +79,9 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   public page = 1;
 
+  /**
+   * Page size
+   */
   pageSize = 15;
 
   /**
@@ -88,11 +92,15 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   public languageSubscription: Subscription = new Subscription();
 
-  news: any = [];
+  /**
+   * News
+   */
+  news: NewsList;
 
   /**
    * @ignore
-   * @param {LanguageService} languageService
+   * @param {LanguageService} languageService Language service
+   * @param {NewsService} newsService News service
    * @memberof NewsComponent
    */
   constructor(public languageService: LanguageService, private newsService: NewsService) {}
@@ -169,6 +177,11 @@ export class NewsComponent implements OnInit, OnDestroy {
     return this.activeTags.has(tag);
   }
 
+  /**
+   * Pagination function
+   *
+   * @param {any} payload Payload
+   */
   paginationChanged(payload) {
     this.page = payload.page;
     this.pageSize = payload.limit;

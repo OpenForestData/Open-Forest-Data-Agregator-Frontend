@@ -1,10 +1,12 @@
+import { Keyword } from './keyword';
+
 export interface BlogTile {
   author: string;
   date: string;
   desc: string;
   description: string;
   image_in_list: string;
-  keywords: [];
+  keywords: Keyword[];
   keywords_seo: string;
   movie_youtube_link: string;
   og_image: string;

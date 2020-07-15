@@ -160,6 +160,7 @@ export class DatasetComponent implements OnInit {
         file.isChecked = false;
         return file;
       });
+      this.breadCrumbs.push({ name: this.dataset?.providers[0]?.authorAffiliation?.value, href: '' });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
       this.allFiles = [...response?.latestVersion?.files];
     });

@@ -53,7 +53,7 @@
         </span>
       </p>
 
-      <a href="#" class="read_more" [routerLink]="['/blog/', newestArticle.slug]">
+      <a href="#" class="read_more" [routerLink]="['/blog/', newestArticle?.slug]">
         {{ 'home.read_more' | translate }}
         <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
       </a>
