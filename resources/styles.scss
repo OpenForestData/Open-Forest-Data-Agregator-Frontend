@@ -369,9 +369,11 @@ ui-checkbox {
 .dp-nav-header {
   display: block;
   display: block !important;
-  width: 100%;
+  width: 20%;
   position: relative !important;
-  text-align: center;
+  text-align: left;
+  z-index: 20;
+  left: 40% !important;
 
   button {
     border: none;
@@ -426,6 +428,21 @@ ui-checkbox {
   width: 20px;
   transform: translateY(-50%);
 }
+
+dp-month-calendar .dp-calendar-month {
+  background-color: white;
+  border: none;
+}
+
+dp-month-calendar .dp-calendar-month.dp-selected {
+  background-color: $accent-color !important;
+  border-radius: 50px;
+}
+
+dp-day-time-calendar dp-time-select {
+  display: none !important;
+}
+
 .hide-overflow {
   overflow: hidden;
 }

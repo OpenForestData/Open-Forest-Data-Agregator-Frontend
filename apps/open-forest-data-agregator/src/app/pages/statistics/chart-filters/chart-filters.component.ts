@@ -52,7 +52,8 @@ export class ChartFiltersComponent implements OnInit {
     locale: 'pl-PL',
     disableKeypress: true,
     unSelectOnClick: false,
-    firstDayOfWeek: 'mo'
+    firstDayOfWeek: 'mo',
+    format: 'DD-MM-yyyy'
   };
 
   /**
@@ -66,7 +67,8 @@ export class ChartFiltersComponent implements OnInit {
     unSelectOnClick: false,
     minDate: this.startDate,
     firstDayOfWeek: 'mo',
-    locale: 'pl-PL'
+    locale: 'pl-PL',
+    format: 'DD-MM-yyyy'
   };
 
   /**
@@ -118,7 +120,8 @@ export class ChartFiltersComponent implements OnInit {
       unSelectOnClick: false,
       minDate: this.startDate,
       firstDayOfWeek: 'mo',
-      locale: 'pl-PL'
+      locale: 'pl-PL',
+      format: 'DD-MM-yyyy'
     };
 
     const d1 = Date.parse(this.startDate);

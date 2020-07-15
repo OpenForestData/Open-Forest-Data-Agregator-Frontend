@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '@env/environment';
 
 /**
  * Footer Component
@@ -23,7 +24,7 @@ export class FooterComponent {
    * Set cookie for cookie acceptance
    */
   acceptAndSetCookies() {
-    this.cookieService.set('cookie-accept', 'true');
+    this.cookieService.set('cookie-accept', 'true', environment.userCookieTime, '/');
   }
 
   /**

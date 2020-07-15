@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppConfigService } from './app-config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
+import { environment } from '@env/environment';
 
 /**
  * Language service
@@ -29,7 +30,7 @@ export class LanguageService {
       AppConfigService.config.language = value;
     }
 
-    this.cookieService.set('language', value);
+    this.cookieService.set('language', value, environment.userCookieTime, '/');
     this.translate.setDefaultLang(value);
     this.translate.use(value);
 

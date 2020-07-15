@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 import { Subscription } from 'rxjs';
+import { UtilsService } from '@app/services/utils.service';
 /**
  * Header for datasets view
  *
@@ -30,12 +31,14 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
    */
   public sub: Subscription;
 
+  buttonsAddData = [];
+
   /**
    * Creates an instance of DatasetsHeaderComponent.
    * @param {DatasetsService} DSService
    * @memberof DatasetsHeaderComponent
    */
-  constructor(public DSService: DatasetsService) {
+  constructor(public DSService: DatasetsService, private utilsService: UtilsService) {
     this.sub = this.DSService.updateQuerySubject.subscribe(query => {
       this.searchValue = query;
     });
@@ -47,6 +50,7 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
    * @memberof DatasetsHeaderComponent
    */
   ngOnInit(): void {
+    this.getButtons();
     setTimeout(() => {
       this.searchValue = this.DSService.searchFilters.data['q'];
     }, 300);
@@ -69,6 +73,15 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
    */
   showAdvanced() {
     this.DSService.showAdvancedSubject.next();
+  }
+
+  /**
+   * Create content for download buttons
+   */
+  getButtons() {
+    this.utilsService.getWholeStructure().subscribe(response => {
+      this.buttonsAddData = response['add_menu'];
+    });
   }
 
   /**

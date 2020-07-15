@@ -277,4 +277,8 @@ export class UtilsService {
   getHomePage() {
     return this.http.get(`${AppConfigService.config.api}home`);
   }
+
+  getWholeStructure() {
+    return this.http.get(`${AppConfigService.config.api}structure`);
+  }
 }

@@ -6,6 +6,7 @@
       {{ 'stats.from' | translate }}
       <dp-date-picker
         (onSelect)="emitNewFilters()"
+        [mode]="'daytime'"
         [(ngModel)]="startDate"
         [config]="startDatePickerConfig"
       ></dp-date-picker>
@@ -15,6 +16,7 @@
       {{ 'stats.to' | translate }}
       <dp-date-picker
         (onSelect)="emitNewFilters()"
+        [mode]="'daytime'"
         [(ngModel)]="endDate"
         [minDate]="startDate"
         [config]="endDatePickerConfig"

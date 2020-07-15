@@ -80,6 +80,7 @@ export class HeaderActionsComponent implements OnInit, OnDestroy {
    */
   setNewLanguage(value) {
     if (this.languageService.language !== value) this.languageService.language = value;
+    window.location.reload();
   }
 
   /**
