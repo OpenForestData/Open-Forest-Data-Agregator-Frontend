@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeWhile, takeLast } from 'rxjs/operators';
 import { BlogArticle } from '@app/interfaces/blog-article';
 import { NewsList } from '@app/interfaces/news-list';
+import { BlogData } from '@app/interfaces/blog-data';
 
 /**
  * Blog component
@@ -19,7 +20,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   /**
    * Blog data object
    */
-  public blogData: NewsList;
+  public blogData: BlogData;
   /**
    * Newest article object
    */
