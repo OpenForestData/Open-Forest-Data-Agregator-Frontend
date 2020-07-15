@@ -101,7 +101,7 @@
         <div class="m-t-30"></div>
 
         <div class="news-wrapper">
-          <div class="news-tile" *ngFor="let new of news.articles">
+          <div class="news-tile" *ngFor="let new of news?.articles">
             <ofd-agregator-news-tile-main [news]="new"></ofd-agregator-news-tile-main>
             <hr class="news-separator-hr" />
           </div>

@@ -1,9 +1,8 @@
-import { BlogTile } from './blog-tile';
-import { Keyword } from './keyword';
 import { PaginationOffset } from './offset';
+import { NewsArticle } from './news-article';
 
 export interface NewsList {
-  articles: BlogTile[];
+  articles: NewsArticle[];
   current_page: [];
   offset: PaginationOffset;
 }
