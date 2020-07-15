@@ -4,6 +4,7 @@ import { LanguageService } from '@app/services/language.service';
 import { BlogService } from '@app/services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeWhile, takeLast } from 'rxjs/operators';
+import { BlogArticle } from '@app/interfaces/blog-article';
 
 /**
  * Blog component
@@ -21,7 +22,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   /**
    * Newest article object
    */
-  newestArticle: any = {};
+  newestArticle: BlogArticle;
   /**
    * Filters object
    */

@@ -415,6 +415,9 @@ export class DatasetsService {
     return this.http.get<any>(`${AppConfigService.config.api}resource/${id}`);
   }
 
+  /**
+   * Get all metadata name fields
+   */
   getMetadata() {
     return this.http.get<any>(`${AppConfigService.config.api}avilable-metadata`);
   }

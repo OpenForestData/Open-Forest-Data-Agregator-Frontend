@@ -59,6 +59,9 @@ export class DatasetsListComponent implements OnDestroy {
    */
   @Input() datasets: any[];
 
+  /**
+   * Column keys
+   */
   columnKeys: any = [];
 
   /**
@@ -91,6 +94,9 @@ export class DatasetsListComponent implements OnDestroy {
     this.sub.unsubscribe();
   }
 
+  /**
+   * Gets column keys and triggers fetch data for CSV
+   */
   getMetadata() {
     this.DSService.getMetadata().subscribe(response => {
       Object.values(response).forEach((value: any) => {
@@ -100,6 +106,9 @@ export class DatasetsListComponent implements OnDestroy {
     });
   }
 
+  /**
+   * Fetches metadata from backend and triggers converting to file
+   */
   getData() {
     const allMetadata = [];
     this.DSService.searchFilters = { field: 'start', data: 1, search: true };
@@ -131,6 +140,11 @@ export class DatasetsListComponent implements OnDestroy {
     });
   }
 
+  /**
+   * Convert raw data to CSV and downloads it
+   * @param keys Column keys
+   * @param allMetadata All metadata
+   */
   convertMetadataToFile(keys: any, allMetadata) {
     let firstRow = '';
     const indexer = {};
@@ -162,6 +176,10 @@ export class DatasetsListComponent implements OnDestroy {
     a.remove();
   }
 
+  /**
+   * Search through object values and format them into readable object
+   * @param metadata Metadata
+   */
   convertMetadata(metadata) {
     const metadataObject = {};
     Object.values(metadata).forEach((meta: any) => {

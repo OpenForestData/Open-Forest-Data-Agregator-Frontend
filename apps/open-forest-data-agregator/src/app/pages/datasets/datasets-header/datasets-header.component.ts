@@ -75,6 +75,9 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
     this.DSService.showAdvancedSubject.next();
   }
 
+  /**
+   * Create content for download buttons
+   */
   getButtons() {
     this.utilsService.getWholeStructure().subscribe(response => {
       this.buttonsAddData = response['add_menu'];
