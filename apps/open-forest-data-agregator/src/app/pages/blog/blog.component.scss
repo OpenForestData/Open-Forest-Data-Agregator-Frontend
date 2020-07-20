@@ -18,6 +18,7 @@
   text-align: center;
   flex-shrink: 0;
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .p-l-20 {
@@ -106,11 +107,11 @@
   .read_more {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end !important;
     font-size: 16px;
     font-weight: 500;
 
-    img {
+    svg-icon {
       margin-left: 30px;
     }
   }

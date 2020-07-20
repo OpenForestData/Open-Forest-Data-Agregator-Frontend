@@ -9,7 +9,7 @@
     <div class="col-xs-6">
       <a class="post-link end">
         {{ 'blog.next' | translate }}
-        <img src="assets/modules/home/arrow_right_green.png" class="m-l-25" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
     </div>
   </div>
@@ -25,7 +25,7 @@
     <div class="col-lg-4 col-md-3 desktop-only">
       <a class="post-link end">
         {{ 'blog.next' | translate }}
-        <img src="assets/modules/home/arrow_right_green.png" class="m-l-25" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
     </div>
   </div>
@@ -33,9 +33,7 @@
   <div class="row news-body ckeditor-content">
     <div class="col-xs-12 news-social">
       <div class="news_social">
-        <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-        <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-        <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+        <ofd-agregator-social [linkTo]="" class="social-container"></ofd-agregator-social>
       </div>
     </div>
     <div class="col-xs-12">

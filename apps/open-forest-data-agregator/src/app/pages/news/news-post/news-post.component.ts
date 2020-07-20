@@ -55,9 +55,6 @@ export class NewsPostComponent implements OnInit, OnDestroy {
         console.log('single news: ', this.news);
       });
     });
-    // this.routerSubscription = this.route.params.subscribe(params => {
-    //   this.newsID = params['id'];
-    // });
   }
 
   /**

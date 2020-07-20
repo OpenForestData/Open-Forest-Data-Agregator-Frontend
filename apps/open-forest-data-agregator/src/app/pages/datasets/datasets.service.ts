@@ -127,7 +127,7 @@ export class DatasetsService {
    * @type {Ifilters}
    * @memberof DatasetsService
    */
-  private _searchFilters: Ifilters = {
+  public _searchFilters: Ifilters = {
     q: '',
     start: 1,
     rows: 15,

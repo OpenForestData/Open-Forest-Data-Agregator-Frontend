@@ -1,9 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Host, Inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
+import { DatasetsComponent } from '../datasets.component';
+import { DatasetsService } from '../datasets.service';
 /**
  * Tab view with types of datasets view to choose
  *
@@ -35,9 +37,10 @@ export class DatasetsDataPresentationComponent {
   /**
    * Creates an instance of DatasetsDataPresentationComponent.
    * @param {Store<AppState>} store
+   * @param {DatasetsComponent} parent Parent of current component
    * @memberof DatasetsDataPresentationComponent
    */
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, @Host() private parent: DatasetsComponent) {}
 
   /**
    * Change type of data presentation
@@ -50,7 +53,11 @@ export class DatasetsDataPresentationComponent {
 
     const button = document.querySelector('#view-' + presentation) as HTMLElement;
     this.changeSelectorPosition(button.offsetLeft, button.clientWidth);
-
+    if (presentation === 'gallery') {
+      this.parent.setDatasetsView(true);
+    } else {
+      this.parent.setDatasetsView(false);
+    }
     this.store.dispatch(new DatasetsChangeViewMode(presentation));
   }
 

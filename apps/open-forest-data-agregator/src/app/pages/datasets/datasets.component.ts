@@ -201,7 +201,6 @@ export class DatasetsComponent implements OnInit, OnDestroy {
         },
         ...advanced
       ];
-
       return activeArr.filter(item => item.values.length);
     }
 
@@ -214,6 +213,13 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.DSService.resetFilters();
     this.getData();
+  }
+
+  /**
+   * Sets datasets view
+   */
+  setDatasetsView(type: any) {
+    this.DSService.searchFilters = { field: 'mediaStatic', data: type, search: true };
   }
 
   /**
@@ -233,8 +239,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    * @memberof DatasetsComponent
    */
   paginationChanged(payload) {
-    this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
     this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
+    this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
   }
 
   /**

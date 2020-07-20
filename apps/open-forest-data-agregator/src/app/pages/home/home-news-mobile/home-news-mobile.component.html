@@ -2,16 +2,14 @@
   <div class="search-wrapper">
     <input type="text" class="search" [placeholder]="'home.search_placeholder' | translate" />
     <button class="search-button">
-      <img src="assets/modules/home/search_icon.png" alt="{{ 'home.all_news' | translate }}" />
+      <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
     </button>
   </div>
   <p class="advanced-search">{{ 'home.advanced_search' | translate }}</p>
 </section>
 
-<ofd-agregator-section-title
-  [iconURL]="'assets/modules/home/book.png'"
-  [titleText]="'home.news' | translate"
-></ofd-agregator-section-title>
+<ofd-agregator-section-title [iconURL]="'assets/modules/home/book.png'" [titleText]="'home.news' | translate">
+</ofd-agregator-section-title>
 
 <div class="slider" (swipeleft)="swipeLeftNews()" (swiperight)="swipeRightNews()">
   <div class="slider-window active-{{ mobileActiveNews }}">
@@ -20,6 +18,7 @@
         <div class="news-social">
           <span class="news-date">04.04.2020</span>
           <div class="news_social">
+            <!-- <ofd-agregator-social [linkTo]="newestArticle?.slug" class="social-container"></ofd-agregator-social> -->
             <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
             <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
             <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
@@ -52,7 +51,7 @@
 
         <a href="#" class="read_more">
           {{ 'home.read_more' | translate }}
-          <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+          <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
         </a>
       </div>
     </div>
@@ -95,7 +94,7 @@
   <div class="details-wrapper">
     <button class="btn">
       {{ 'home.details' | translate }}
-      <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+      <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
     </button>
   </div>
 </section>
