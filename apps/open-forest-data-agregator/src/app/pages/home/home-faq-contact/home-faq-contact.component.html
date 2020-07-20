@@ -2,22 +2,21 @@
   <div class="container">
     <div class="row mlr-0">
       <div class="col-lg-7 col-xs-12">
-        <ofd-agregator-section-title
-          [iconURL]="'assets/modules/home/question_mark.png'"
-          [titleText]="'home.faq' | translate"
-        ></ofd-agregator-section-title>
+        <ofd-agregator-section-title [iconURL]="'assets/images/question_mark.svg'" [titleText]="'home.faq' | translate">
+        </ofd-agregator-section-title>
         <ul class="faq-list">
           <li *ngFor="let item of utilService.homePageData.faqs">
             <a href="#">
               <span>{{ item.title }}</span>
-              <img src="assets/modules/home/arrow_right.png" class="desktop-only" width="16" height="11" alt="Go to" />
+              <svg-icon src="assets/images/arrow_right.svg" class="desktop-only" width="16" height="11" alt="Go to">
+              </svg-icon>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-lg-4 ml-auto col-xs-12">
         <ofd-agregator-section-title
-          [iconURL]="'assets/modules/home/envelope_icon.png'"
+          [iconURL]="'assets/images/envelope_icon.svg'"
           [titleText]="'home.contact' | translate"
         ></ofd-agregator-section-title>
 
@@ -29,6 +28,7 @@
         </button>
       </div>
     </div>
+    <!-- <svg-icon src="assets/images/small_trees.svg" class="trees"></svg-icon> -->
     <img src="assets/modules/home/trees.png" width="80" class="trees" />
   </div>
 </section>

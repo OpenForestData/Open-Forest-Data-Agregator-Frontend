@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-7">
         <ofd-agregator-section-title
-          [iconURL]="'assets/modules/home/clock.png'"
+          [iconURL]="'assets/images/clock.svg'"
           [titleText]="'home.latest_added' | translate"
         ></ofd-agregator-section-title>
       </div>
@@ -23,6 +23,7 @@
         </p>
 
         <div class="add-social">
+          <!-- <ofd-agregator-social [linkTo]="newestArticle?.slug" class="social-container"></ofd-agregator-social> -->
           <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
           <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
           <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
@@ -32,7 +33,7 @@
           <a href="#">
             <button class="btn no-border">
               {{ 'home.see' | translate }}
-              <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+              <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
             </button>
           </a>
         </div>

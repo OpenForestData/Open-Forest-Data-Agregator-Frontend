@@ -16,7 +16,6 @@ export class NewsService {
    */
   getNews(filters) {
     const queryParams = this.getQueryParamsFromObject(filters);
-    console.log('queryParams: ', queryParams);
     return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`);
   }
 

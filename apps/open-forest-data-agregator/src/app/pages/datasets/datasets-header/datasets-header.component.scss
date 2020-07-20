@@ -147,7 +147,7 @@
     position: relative;
     border-radius: 20px;
     background: transparent !important;
-    color: $accent-color !important;
+    color: $accent-color;
 
     &:hover {
       .drop-down {

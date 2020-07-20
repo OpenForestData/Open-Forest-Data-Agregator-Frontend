@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { DatasetsService } from '../datasets.service';
 import { Subscription } from 'rxjs';
+import { UtilsService } from '@app/services/utils.service';
 /**
  * Datasets as list
  *
@@ -77,9 +78,10 @@ export class DatasetsListComponent implements OnDestroy {
   /**
    * Creates an instance of DatasetsListComponent.
    * @param {DatasetsService} DSService
+   * @param {UtilsService} utilsService Utility service
    * @memberof DatasetsListComponent
    */
-  constructor(public DSService: DatasetsService) {
+  constructor(public DSService: DatasetsService, public utilsService: UtilsService) {
     this.sub = this.DSService.sortSubject.subscribe(_ => {
       this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
     });
@@ -102,103 +104,14 @@ export class DatasetsListComponent implements OnDestroy {
       Object.values(response).forEach((value: any) => {
         this.columnKeys = [...this.columnKeys, ...Object.keys(value.fields)];
       });
-      this.getData();
+      this.utilsService.getDataForMetadataExport(this.columnKeys);
     });
   }
 
   /**
-   * Fetches metadata from backend and triggers converting to file
+   * Get current pagination page for metadata
    */
-  getData() {
-    const allMetadata = [];
-    this.DSService.searchFilters = { field: 'start', data: 1, search: true };
-    this.DSService.searchFilters = { field: 'rows', data: 1000, search: true };
-    this.DSService.search().subscribe((response: any) => {
-      this.DSService.searchData = response;
-      const identifiers = [];
-      const identifiersIndex = {};
-
-      response['list']['results'].map((item, index) => {
-        identifiers.push(item.identifier);
-        identifiersIndex[item.identifier] = index;
-
-        return {
-          datasetPersistentID: item.dsPersistentId
-        };
-      });
-      this.DSService.searchFilters = { field: 'start', data: 1, search: true };
-      this.DSService.searchFilters = { field: 'rows', data: 15, search: true };
-
-      if (identifiers.length) {
-        this.DSService.details(identifiers).subscribe((details: any) => {
-          Object.values(details).forEach((singleDataset: any) => {
-            allMetadata.push(this.convertMetadata(singleDataset?.latestVersion?.metadataBlocks));
-          });
-          this.convertMetadataToFile(this.columnKeys, allMetadata);
-        });
-      }
-    });
-  }
-
-  /**
-   * Convert raw data to CSV and downloads it
-   * @param keys Column keys
-   * @param allMetadata All metadata
-   */
-  convertMetadataToFile(keys: any, allMetadata) {
-    let firstRow = '';
-    const indexer = {};
-    let temp = [];
-    let row = '';
-    keys.forEach((first, index) => {
-      firstRow += first + ';';
-      indexer[first] = index;
-    });
-    const csvArray: any = [firstRow];
-    Object.values(allMetadata).forEach(meta => {
-      temp = [];
-      Object.keys(meta).forEach((key: any) => {
-        temp[indexer[key]] = meta[key];
-      });
-      csvArray.push('\r\n');
-      row = temp.join(';');
-      csvArray.push(row);
-    });
-
-    const a = document.createElement('a');
-    const blob = new Blob(csvArray, { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-
-    a.href = url;
-    a.download = `Metadane.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-    a.remove();
-  }
-
-  /**
-   * Search through object values and format them into readable object
-   * @param metadata Metadata
-   */
-  convertMetadata(metadata) {
-    const metadataObject = {};
-    Object.values(metadata).forEach((meta: any) => {
-      meta?.fields.forEach(field => {
-        if (field.multiple === true) {
-          if (field.typeName === 'subject') {
-            metadataObject[field.typeName] = field.value[0];
-          } else if (field.typeName !== 'subject') {
-            field.value.forEach(value => {
-              Object.values(value).forEach((val: any) => {
-                metadataObject[val.typeName] = val.value;
-              });
-            });
-          }
-        } else if (field.multiple === false) {
-          metadataObject[field.typeName] = field.value;
-        }
-      });
-    });
-    return metadataObject;
+  public get page() {
+    return this.DSService.searchFilters.data.start;
   }
 }

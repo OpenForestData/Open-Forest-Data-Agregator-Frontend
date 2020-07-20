@@ -1,9 +1,14 @@
 <div class="row mobile-app" *ngIf="utilService.homePageData">
   <div class="col-lg-7 col-xs-12">
     <ofd-agregator-section-title
+      [iconURL]="'assets/images/phone_icon.svg'"
+      [titleText]="utilService.homePageData.mobile_app_title"
+    >
+    </ofd-agregator-section-title>
+    <!-- <ofd-agregator-section-title
       [iconURL]="'assets/modules/home/phone_icon.png'"
       [titleText]="utilService.homePageData.mobile_app_title"
-    ></ofd-agregator-section-title>
+    ></ofd-agregator-section-title> -->
 
     <p class="content" [innerHTML]="utilService.homePageData.mobile_app_content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem dolor veniam repellat iste at nam, quae quasi eum

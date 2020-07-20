@@ -29,9 +29,7 @@
           <span class="author">{{ newestArticle.author }}</span>
         </span>
         <div class="news_social">
-          <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-          <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-          <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+          <ofd-agregator-social [linkTo]="newestArticle?.slug" class="social-container"></ofd-agregator-social>
         </div>
       </div>
 
@@ -55,7 +53,7 @@
 
       <a href="#" class="read_more" [routerLink]="['/blog/', newestArticle?.slug]">
         {{ 'home.read_more' | translate }}
-        <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
       </a>
     </div>
   </div>

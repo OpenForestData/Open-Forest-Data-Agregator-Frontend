@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 /**
  * Creates social links
  *
@@ -8,17 +8,23 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'ofd-agregator-social',
   templateUrl: './social.component.html',
-  styleUrls: ['./social.component.scss']
+  styleUrls: ['./social.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SocialComponent {
+  /**
+   * Link
+   */
+  @Input() linkTo = '';
+
   /**
    * Creates href for email which opens window for sending emails
    * @example
    * // returns mailto:?subject=ip_site;body=ip_site
    */
-  setEmail() {
-    return `mailto:?subject=${encodeURIComponent(`${window.location}`)};body=${encodeURIComponent(
-      `${window.location}`
+  get email() {
+    return `mailto:?subject=${encodeURIComponent(`${this.linkTo}`)};body=${encodeURIComponent(
+      `${this.linkTo ? this.createLinkTo() : window.location}`
     )}`;
   }
 
@@ -27,8 +33,8 @@ export class SocialComponent {
    * @example
    * // returns https://www.facebook.com/sharer/sharer.php?u=ip_site
    */
-  setFBLink() {
-    return `https://www.facebook.com/sharer/sharer.php?u=${window.location}`;
+  get FBLink() {
+    return `https://www.facebook.com/sharer/sharer.php?u=${this.linkTo ? this.createLinkTo() : window.location}`;
   }
 
   /**
@@ -36,7 +42,19 @@ export class SocialComponent {
    * @example
    * // returns http://twitter.com/share?url=ip_site
    */
-  setTwitterLink() {
-    return `http://twitter.com/share?url=${window.location}`;
+  get twitterLink() {
+    return `http://twitter.com/share?url=${this.linkTo ? this.createLinkTo() : window.location}`;
+  }
+
+  /**
+   * Create external link from window
+   */
+  createLinkTo() {
+    const url = window.location.toString();
+    if (url.charAt(url.length - 1) === '/') {
+      return url + this.linkTo;
+    } else {
+      return url + '/' + this.linkTo;
+    }
   }
 }
