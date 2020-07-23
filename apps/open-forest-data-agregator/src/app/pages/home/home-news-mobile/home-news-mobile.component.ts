@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeNewsComponent } from '../home-news/home-news.component';
 /**
  * Mobile view of news at home page

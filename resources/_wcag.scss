@@ -1,0 +1,850 @@
+body.wcag-contrast {
+  background-color: black !important;
+  .container {
+    background-color: black;
+  }
+
+  .slogan-text {
+    color: white;
+  }
+
+  .navigation-items {
+    &__list {
+      &-item {
+        a {
+          color: white !important;
+          background-color: black !important;
+        }
+        a:hover {
+          color: yellow !important;
+          background-color: black !important;
+        }
+        &.has-children {
+          > a {
+            &:after {
+              background-image: url('/assets/images/white_arrow_down.svg') !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navigation-items__dropdown-list {
+    background-color: black !important;
+    border: 1px solid yellow;
+    border-top: none;
+  }
+
+  .language-btn.active {
+    color: white !important;
+    border-bottom: 1px solid yellow;
+  }
+
+  .language-btn {
+    color: white;
+  }
+
+  .tree-image {
+    svg {
+      path {
+        fill: white;
+      }
+      rect {
+        fill: white;
+      }
+    }
+  }
+
+  header {
+    background-color: black;
+  }
+
+  .bg-gray {
+    background-color: black;
+  }
+
+  .bg-green {
+    background-color: black;
+  }
+
+  .latest-added {
+    background-color: black;
+  }
+
+  .action-button {
+    svg {
+      path {
+        fill: white;
+      }
+      text {
+        fill: white;
+      }
+    }
+  }
+
+  p {
+    color: white;
+  }
+
+  a {
+    color: yellow !important;
+  }
+
+  h2 {
+    color: white;
+  }
+
+  h3 {
+    color: white;
+  }
+
+  .faq-contact {
+    background-color: black;
+  }
+
+  .main-footer {
+    background-color: black;
+    border-top: 5px solid white;
+  }
+
+  .news-body .tags-p a {
+    color: yellow !important;
+  }
+
+  .news-body .read_more {
+    color: yellow;
+    svg {
+      margin-left: 30px;
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .btn {
+    color: yellow;
+    svg {
+      path {
+        fill: yellow;
+      }
+    }
+  }
+
+  .btn.svg-btn {
+    color: white;
+    border: 1px solid yellow;
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
+
+  .btn.svg-btn:hover,
+  .btn.svg-btn:active {
+    background-color: yellow;
+    color: black;
+    svg {
+      path {
+        fill: black;
+      }
+    }
+  }
+
+  .animal-name {
+    color: white;
+  }
+
+  aside .animal-length {
+    color: white;
+  }
+
+  aside .animal-weight {
+    color: white;
+  }
+
+  .add-date {
+    color: white;
+  }
+
+  .color-green {
+    color: white;
+  }
+
+  .search-btn {
+    svg {
+      line {
+        stroke: white;
+      }
+      ellipse {
+        stroke: white;
+      }
+    }
+  }
+
+  .header-search {
+    border-bottom: 2px solid yellow;
+  }
+
+  .header-search.active {
+    background-color: black;
+    color: white;
+  }
+
+  .header-search.active::placeholder {
+    color: yellow;
+  }
+
+  .search-section input.search {
+    border: 3px solid yellow !important;
+    background-color: black;
+    color: white;
+  }
+
+  .search-section input.search::placeholder {
+    color: yellow !important;
+  }
+
+  .search-section input.search:focus {
+    color: white;
+  }
+
+  .search-section .advanced-search {
+    color: white !important;
+  }
+
+  .news-body .news-date {
+    color: white;
+  }
+
+  h2 .green_bar hr {
+    background: white !important;
+    border-top: 2px solid white !important;
+    border-bottom: 2px solid white !important;
+  }
+
+  h2 svg-icon {
+    path {
+      fill: white;
+    }
+  }
+
+  .faq-list li a {
+    color: yellow !important;
+    svg {
+      path {
+        fill: yellow;
+      }
+    }
+  }
+
+  .main-nav__logo {
+    svg {
+      #Rectangle_312 {
+        fill: transparent;
+      }
+      path {
+        fill: white;
+      }
+      rect {
+        fill: white;
+      }
+    }
+  }
+
+  .desktop-only {
+    p {
+      svg {
+        path {
+          fill: white;
+        }
+      }
+    }
+  }
+
+  .back-to-top {
+    background-color: black;
+    border: 1px solid yellow;
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .svg-arrow-right {
+    svg {
+      path {
+        fill: yellow;
+      }
+    }
+  }
+
+  .trees {
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
+
+  .drop-down li a {
+    color: yellow !important;
+    background-color: black;
+  }
+
+  .drop-down li:hover a {
+    background-color: black !important;
+  }
+
+  .drop-down li a:hover {
+    background-color: black !important;
+  }
+
+  .drop-down {
+    background-color: black !important;
+    border: 1px solid yellow;
+    border-top: none;
+  }
+
+  .button-wrapper button {
+    border: 1px solid yellow;
+    color: yellow !important;
+  }
+
+  .page-nav {
+    background-color: black;
+  }
+
+  .header-bar {
+    background-color: black;
+    // color: yellow;
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .datasets-presentation__header {
+    color: white;
+  }
+
+  .datasets-presentation__view.active {
+    color: yellow;
+    span {
+      svg {
+        rect {
+          stroke: yellow !important;
+        }
+        line {
+          stroke: yellow !important;
+        }
+        path {
+          fill: yellow !important;
+        }
+      }
+    }
+  }
+
+  .datasets-presentation__view {
+    color: yellow;
+    span {
+      svg {
+        rect {
+          stroke: yellow !important;
+        }
+        line {
+          stroke: yellow !important;
+        }
+        path {
+          fill: yellow !important;
+        }
+      }
+    }
+  }
+
+  .group b {
+    color: white;
+  }
+
+  .datasets-list__container {
+    background-color: black;
+  }
+
+  .datasets__content {
+    background-color: black;
+  }
+
+  .datasets {
+    background-color: black;
+  }
+
+  .datasets:before {
+    background-color: black;
+  }
+
+  .datasets:after {
+    background-color: black;
+  }
+
+  .background-wcag {
+    background-color: black;
+  }
+
+  .datasets-list__count {
+    color: white;
+  }
+
+  .dataset-list__count {
+    color: white;
+  }
+
+  .search-section__advanced-search {
+    color: yellow;
+  }
+
+  .ui-select__selected-item {
+    border: 1px solid yellow !important;
+    color: white;
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .button {
+    border: 1px solid yellow;
+    color: white;
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .button:hover {
+    background-color: yellow;
+    color: black;
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .checkbox-field .checkbox-label {
+    color: yellow;
+  }
+
+  .checkbox-field .check_box + label {
+    background: url('/assets/images/yellow_checkbox.png') no-repeat !important;
+  }
+
+  .search-section__button {
+    background-color: black;
+    border-top: 1px solid yellow;
+    border-bottom: 1px solid yellow;
+    border-right: 0 solid transparent;
+    svg {
+      ellipse {
+        stroke: white !important;
+      }
+      line {
+        stroke: white !important;
+      }
+    }
+  }
+
+  .search-section__input {
+    background-color: black;
+    color: white;
+  }
+
+  .search-section__input::placeholder {
+    color: yellow;
+  }
+
+  .pointer {
+    color: yellow;
+  }
+
+  .datasets-list__datasets__item__source {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .filter__title {
+    background-color: black;
+    color: yellow;
+  }
+
+  .filter__arrow {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .datasets-category__item:not(:last-child) {
+    color: yellow;
+  }
+
+  .datasets-category__item {
+    color: yellow;
+  }
+
+  .search-section__input {
+    border-top: 1px solid yellow;
+    border-left: 1px solid yellow;
+    border-bottom: 1px solid yellow;
+  }
+
+  .datasets-list__export {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .datasets-list__export:hover {
+    svg {
+      path {
+        fill: black !important;
+      }
+    }
+  }
+
+  ofd-agregator-datasets-header {
+    background-color: black;
+  }
+
+  .calendar-char {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .input-area label {
+    color: white;
+  }
+
+  .accordion-content {
+    color: white;
+  }
+
+  .chevron {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .news-body .author {
+    color: white !important;
+  }
+
+  .post-link {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .post-link.end {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .main-container {
+    background-color: black;
+  }
+
+  .dataset-right {
+    background-color: black;
+  }
+
+  .metadata-header__text {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .right-container__files__download-single__row .single-checkbox .background-gray {
+    background-color: black;
+    border: 1px solid yellow;
+  }
+
+  .header-bar > button {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .right-container__files__download-all__buttons__download {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .right-container__files__download-single__row .buttons-download__style {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .right-container__files__sorting__bar-right {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .right-container__files__sorting__bar-right__file-type {
+    color: white;
+  }
+
+  .full-width svg {
+    path {
+      fill: white !important;
+    }
+  }
+
+  .right-container__header__title {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .breadcrumbs li {
+    color: white !important;
+  }
+
+  .right-container__files__download-all__buttons__download {
+    color: yellow !important;
+  }
+
+  .ui-select__items__list__item button {
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .ui-select__items__list__item button:hover {
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .meta-citation .meta-citation__row__keys,
+  .meta-citation .meta-citation__row__values {
+    color: white;
+  }
+
+  .header-bar-dataset .header-bar {
+    background-color: black;
+  }
+
+  .ui-select__items {
+    background-color: black !important;
+  }
+
+  .main-footer__cookies {
+    background-color: black;
+    color: white;
+  }
+
+  .button-accept {
+    background-color: black;
+    color: white;
+    border: 1px solid yellow;
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .button-accept:hover {
+    background-color: yellow;
+    color: black;
+    border: 1px solid yellow;
+    svg {
+      path {
+        fill: black !important;
+      }
+    }
+  }
+
+  .main-footer__cookies__image {
+    display: none;
+  }
+
+  .main-footer__cookies__text p {
+    padding-left: 20px;
+  }
+
+  .social-bar a {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .background-gray {
+    background-color: black;
+    color: white;
+  }
+
+  .dataset-left {
+    background-color: black;
+  }
+
+  .header-bar {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .banner-container h1 {
+    color: white;
+  }
+
+  .datasets-map__container {
+    background-color: black;
+  }
+
+  .datasets-map__header {
+    color: white;
+  }
+
+  label {
+    color: white !important;
+  }
+
+  .pagination__queries {
+    color: white !important;
+  }
+
+  .input {
+    color: white !important;
+    border: 1px solid yellow;
+  }
+
+  .pagination__pages .active button {
+    background-color: black !important;
+  }
+
+  .pagination__pages .prev-page,
+  .pagination__pages .next-page {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .tag {
+    color: yellow;
+    background-color: black;
+    cursor: pointer;
+  }
+
+  .keywords {
+    color: yellow;
+  }
+
+  .news-grid {
+    background: black;
+  }
+
+  .page {
+    background-color: black;
+  }
+
+  .clear {
+    color: yellow;
+  }
+
+  .year-title {
+    background-color: black;
+  }
+
+  .expand-years {
+    color: yellow;
+    svg {
+      line {
+        stroke: yellow !important;
+      }
+    }
+  }
+
+  .search-button {
+    svg {
+      ellipse {
+        stroke: yellow !important;
+      }
+      line {
+        stroke: yellow !important;
+      }
+    }
+  }
+
+  .selector {
+    background-color: yellow !important;
+  }
+
+  .datasets-table__container {
+    background-color: black !important;
+  }
+
+  table.dataTable thead th,
+  table.dataTable thead td {
+    color: yellow !important;
+  }
+
+  .dt-buttons .dt-button {
+    border: 1px solid yellow !important;
+    color: yellow !important;
+  }
+
+  table.dataTable tbody th,
+  table.dataTable tbody td {
+    color: white !important;
+    background-color: black !important;
+  }
+
+  .bottom-bar {
+    svg {
+      rect {
+        fill: white;
+      }
+    }
+  }
+}

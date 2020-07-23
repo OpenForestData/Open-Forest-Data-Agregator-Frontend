@@ -95,20 +95,6 @@
   }
 }
 
-::ng-deep {
-  @media (max-width: 1200px) {
-    .header-bar {
-      padding: 20px 0 !important;
-      align-items: center;
-      justify-content: center;
-    }
-
-    ofd-page-nav {
-      display: none;
-    }
-  }
-}
-
 .datasets-list__pagination {
   padding-left: 40px;
 }
@@ -137,6 +123,18 @@
 }
 
 ::ng-deep {
+  @media (max-width: 1200px) {
+    .header-bar {
+      padding: 20px 0 !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    ofd-page-nav {
+      display: none;
+    }
+  }
+
   .fullScreen {
     .datasets-table__container {
       padding: 30px;

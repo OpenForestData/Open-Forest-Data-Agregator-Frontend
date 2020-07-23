@@ -2,7 +2,7 @@
   <ofd-page-nav [breadcrumbs]="breadcrumbs"></ofd-page-nav>
   <ofd-agregator-datasets-header></ofd-agregator-datasets-header>
 
-  <div class="">
+  <div class="background-wcag">
     <main class="datasets container mobile-white-1200">
       <div class="datasets__filters">
         <div class="datasets__filters__category-filter">
@@ -19,7 +19,8 @@
             [categories]="categories"
             (selectedCategoryChange)="setCategory($event)"
             [selectedCategory]="selectedCategory"
-          ></ofd-agregator-datasets-category>
+          >
+          </ofd-agregator-datasets-category>
         </div>
         <div class="datasets__filters__filters">
           <ofd-agregator-header-bar
@@ -40,25 +41,26 @@
       <div class="datasets__content" [ngClass]="{ fullScreen: fullscreen && datasets.mode === 'table' }">
         <ofd-agregator-datasets-data-presentation
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
-        ></ofd-agregator-datasets-data-presentation>
+        >
+        </ofd-agregator-datasets-data-presentation>
 
         <ofd-agregator-datasets-active-filters
           [activeFilters]="advancedSelected"
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
-        ></ofd-agregator-datasets-active-filters>
+        >
+        </ofd-agregator-datasets-active-filters>
 
         <ofd-agregator-datasets-category-description
           [ngClass]="{ 'display-none': fullscreen && datasets.mode === 'table' }"
-        ></ofd-agregator-datasets-category-description>
+        >
+        </ofd-agregator-datasets-category-description>
 
         <div class="datasets__list" *ngIf="datasets.mode === 'list'">
           <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
         </div>
         <div class="datasets__table" *ngIf="datasets.mode === 'table'">
-          <ofd-agregator-datasets-table
-            (fullscreenEvent)="setFullscreen($event)"
-            [datasets]="datasetsItems"
-          ></ofd-agregator-datasets-table>
+          <ofd-agregator-datasets-table (fullscreenEvent)="setFullscreen($event)" [datasets]="datasetsItems">
+          </ofd-agregator-datasets-table>
         </div>
         <div class="datasets__gallery" *ngIf="datasets.mode === 'gallery'">
           <ofd-agregator-datasets-gallery [datasets]="datasetsItems"></ofd-agregator-datasets-gallery>

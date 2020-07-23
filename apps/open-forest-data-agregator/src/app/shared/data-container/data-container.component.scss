@@ -13,7 +13,7 @@
   font-weight: 400;
   background-color: $light-gray-color;
   width: 100%;
-  border-radius: 0px;
+  border-radius: 0;
   position: relative;
   display: flex;
   padding: 11px 14px;
@@ -63,9 +63,6 @@
     > button {
       svg-icon {
         transform: rotate(180deg);
-
-        svg {
-        }
       }
     }
   }

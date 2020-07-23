@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
@@ -320,9 +320,7 @@ export class DatasetsFiltersComponent implements OnDestroy {
             key: 'category',
             isExpanded: this.structureFirstTimeCreated
               ? this.queryParams['category']
-              : this.filtersByKey['category'].values
-              ? true
-              : false,
+              : !!this.filtersByKey['category'].values,
             name: 'search.categories',
             values: categoryValue,
             multiple: false,

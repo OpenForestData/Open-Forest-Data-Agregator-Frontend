@@ -48,7 +48,7 @@
           </div>
 
           <div class="metric__social">
-            <ofd-agregator-social class="social-container"></ofd-agregator-social>
+            <ofd-agregator-social [linkTo]="" class="social-container"></ofd-agregator-social>
           </div>
         </div>
         <div class="versions">
@@ -101,17 +101,6 @@
                 >
                 </ui-select>
               </div>
-
-              <!-- <div class="right-container__files__sorting__bar-right__access">
-                {{ 'datasets.dataset.headers.access' | translate }}
-                <ui-select
-                  class="access-sort"
-                  [items]="sortItemsAccess"
-                  [options]="optionsAccess"
-                  [(value)]="sortByAccess"
-                >
-                </ui-select>
-              </div> -->
             </div>
 
             <div class="right-container__files__sorting__bar-mobile">
@@ -138,22 +127,10 @@
                   >
                   </ui-select>
                 </div>
-
-                <!-- <div class="right-container__files__sorting__bar-right__access">
-                  {{ 'datasets.dataset.headers.access' | translate }}
-                  <ui-select
-                    class="access-sort"
-                    [items]="sortItemsAccess"
-                    [options]="optionsAccess"
-                    [(value)]="sortByAccess"
-                  >
-                  </ui-select>
-                </div> -->
               </div>
             </div>
 
             <div class="right-container__files__sorting__bar-left">
-              <!-- <svg-icon [src]="'/assets/images/dataset/search.svg'" [applyCss]="true"></svg-icon> -->
               <div class="right-container__files__sorting__bar-left__sort-by">
                 <ui-select
                   [items]="sortItemsFilter"
@@ -227,7 +204,10 @@
             {{ 'datasets.dataset.headers.metadata' | translate }}
           </div>
           <div class="metadata-header__export">
-            <button class="button" (click)="convertMetadataToFile(getMetadata(dataset?.latestVersion?.metadataBlocks))">
+            <button
+              class="button button-accept"
+              (click)="convertMetadataToFile(getMetadata(dataset?.latestVersion?.metadataBlocks))"
+            >
               {{ 'global.export' | translate }}
               <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
             </button>

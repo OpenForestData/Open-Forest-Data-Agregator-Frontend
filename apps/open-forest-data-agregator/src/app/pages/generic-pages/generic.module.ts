@@ -7,8 +7,6 @@ import { AboutResourcesComponent } from './about-resources/about-resources.compo
 import { FaqComponent } from './faq/faq.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { PartnersComponent } from './partners/partners.component';
-import { NewDataMobileComponent } from '../home/new-data-mobile/new-data-mobile.component';
-import { NewDataComponent } from '../home/new-data/new-data.component';
 
 const components = [
   AboutProjectComponent,

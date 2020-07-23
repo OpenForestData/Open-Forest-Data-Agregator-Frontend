@@ -1,7 +1,7 @@
 <div class="datasets-map__container" [ngClass]="{ 'display-none': datasets.length == 0 }">
   <div class="datasets-map__header">
     <div class="datasets-map__showed-datasets">Zaprezentowano {{ activeMarkes }} z {{ datasets.length }} rekordów</div>
-    <button class="button datasets-map__export">
+    <button class="button datasets-map__export" (click)="utilsService.getMetadata()">
       {{ 'global.export' | translate }}
       <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
     </button>

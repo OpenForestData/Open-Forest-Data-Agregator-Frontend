@@ -2,7 +2,7 @@
   <span class="green_bar left" *ngIf="dobuleSideLine">
     <hr />
   </span>
-  <img [src]="iconURL" [alt]="titleText" *ngIf="iconURL" />
+  <svg-icon [src]="iconURL" [applyCss]="true"></svg-icon>
   <span class="titleText">{{ titleText }}</span>
   <span class="green_bar">
     <hr />

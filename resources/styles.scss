@@ -7,6 +7,7 @@
 @import '_grid.scss';
 @import '_generic_pages.scss';
 @import 'media.scss';
+@import '_wcag.scss';
 
 input,
 button,
@@ -322,7 +323,7 @@ ui-checkbox {
 }
 
 .dp-calendar-wrapper {
-  border: none;
+  border: none !important;
 }
 
 .dp-calendar-day {
@@ -352,10 +353,6 @@ ui-checkbox {
   border: none;
 }
 
-.dp-calendar-wrapper {
-  border: none !important;
-}
-
 .dp-calendar-nav-container {
   border: none !important;
   height: 45px !important;
@@ -367,11 +364,12 @@ ui-checkbox {
 }
 
 .dp-nav-header {
-  display: block;
   display: block !important;
-  width: 100%;
+  width: 20%;
   position: relative !important;
-  text-align: center;
+  text-align: left;
+  z-index: 20;
+  left: 40% !important;
 
   button {
     border: none;
@@ -386,6 +384,7 @@ ui-checkbox {
 .dp-calendar-weekday {
   width: 45px !important;
   border: none !important;
+  padding: 15px 0 !important;
 }
 
 .dp-nav-btns-container {
@@ -395,10 +394,6 @@ ui-checkbox {
   transform: none !important;
   width: 100%;
   height: 100%;
-}
-
-.dp-calendar-weekday {
-  padding: 15px 0 !important;
 }
 
 .dp-calendar-nav-container-left,
@@ -426,6 +421,21 @@ ui-checkbox {
   width: 20px;
   transform: translateY(-50%);
 }
+
+dp-month-calendar .dp-calendar-month {
+  background-color: white;
+  border: none;
+}
+
+dp-month-calendar .dp-calendar-month.dp-selected {
+  background-color: $accent-color !important;
+  border-radius: 50px;
+}
+
+dp-day-time-calendar dp-time-select {
+  display: none !important;
+}
+
 .hide-overflow {
   overflow: hidden;
 }

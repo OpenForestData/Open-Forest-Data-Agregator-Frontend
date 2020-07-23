@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, OnInit, ViewChild, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, ViewChild, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 /* tslint:disable */

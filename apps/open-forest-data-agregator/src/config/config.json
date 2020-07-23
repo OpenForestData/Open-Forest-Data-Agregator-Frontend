@@ -11,5 +11,6 @@
       "value": "EN"
     }
   ],
-  "api": "https://agregator.whiteaster.com/api/v1/"
+  "api": "https://agregator.whiteaster.com/api/v1/",
+  "cms": "https://agregator.whiteaster.com/cms-api/v1/"
 }

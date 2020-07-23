@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import 'lightgallery.js';
 import 'lg-zoom.js';
@@ -9,6 +9,7 @@ import 'lg-thumbnail.js';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { DatasetsService } from '../datasets.service';
 import { Subscription } from 'rxjs';
+import { UtilsService } from '@app/services/utils.service';
 /**
  * Gallery view of dataset
  *
@@ -69,9 +70,10 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
   /**
    * Creates an instance of DatasetsGalleryComponent.
    * @param {DatasetsService} DSService
+   * @param {UtilsService} utilsService Utility service
    * @memberof DatasetsGalleryComponent
    */
-  constructor(public DSService: DatasetsService) {
+  constructor(public DSService: DatasetsService, public utilsService: UtilsService) {
     this.sub = this.DSService.sortSubject.subscribe(_ => {
       this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
     });
@@ -104,7 +106,16 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
    * @memberof DatasetsGalleryComponent
    */
   showGallery(index, el) {
-    const item = this.datasets[index];
+    const item = { images: [], labels: [] };
+    const datasetsFromIndex = this.datasets.slice(index, this.datasets.length);
+    datasetsFromIndex.forEach((dataset: any) => {
+      dataset.images.forEach(image => {
+        item.images.push(image);
+      });
+      dataset.labels.forEach(label => {
+        item.labels.push(label);
+      });
+    });
     const dynamicEl = item.images.map((img, imgIndex) =>
       Object.create({
         src: img,

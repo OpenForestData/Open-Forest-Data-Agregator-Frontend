@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
+import { NewsService } from '@app/services/news.service';
+import { NewsList } from '@app/interfaces/news-list';
+
 /**
  * News page component
  *
@@ -78,6 +81,11 @@ export class NewsComponent implements OnInit, OnDestroy {
   public page = 1;
 
   /**
+   * Page size
+   */
+  pageSize = 15;
+
+  /**
    * Chnage language subscription
    *
    * @type {Subscription}
@@ -86,11 +94,17 @@ export class NewsComponent implements OnInit, OnDestroy {
   public languageSubscription: Subscription = new Subscription();
 
   /**
+   * News
+   */
+  news: NewsList;
+
+  /**
    * @ignore
-   * @param {LanguageService} languageService
+   * @param {LanguageService} languageService Language service
+   * @param {NewsService} newsService News service
    * @memberof NewsComponent
    */
-  constructor(public languageService: LanguageService) {}
+  constructor(public languageService: LanguageService, private newsService: NewsService) {}
 
   /**
    * @ignore
@@ -99,6 +113,7 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+    this.getData({ page: 1, limit: 15 });
   }
 
   /**
@@ -106,7 +121,11 @@ export class NewsComponent implements OnInit, OnDestroy {
    *
    * @memberof NewsComponent
    */
-  getData() {}
+  getData(filters: any = this.filters) {
+    this.newsService.getNews(filters).subscribe(response => {
+      this.news = response;
+    });
+  }
 
   /**
    * @ignore
@@ -157,5 +176,18 @@ export class NewsComponent implements OnInit, OnDestroy {
    */
   hasTag(tag) {
     return this.activeTags.has(tag);
+  }
+
+  /**
+   * Pagination function
+   *
+   * @param {any} payload Payload
+   */
+  paginationChanged(payload) {
+    this.page = payload.page;
+    this.pageSize = payload.limit;
+    this.newsService.getNews({ page: payload.page, limit: payload.limit }).subscribe(response => {
+      this.news = response;
+    });
   }
 }

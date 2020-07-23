@@ -73,6 +73,6 @@ export class UIModalService {
    * @returns {boolean}
    */
   checkModalIsOpen(): boolean {
-    return this.openedModals.length > 0 ? true : false;
+    return this.openedModals.length > 0;
   }
 }

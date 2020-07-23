@@ -8,7 +8,7 @@
       [placeholder]="'home.search_placeholder' | translate"
     />
     <button class="search-button" (click)="search()">
-      <img src="assets/modules/home/search_icon.png" alt="{{ 'home.all_news' | translate }}" />
+      <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
     </button>
   </div>
   <a [routerLink]="['datasets']" [queryParams]="{ adv: true }">
@@ -18,7 +18,7 @@
 
 <section class="animal-of-the-day">
   <ofd-agregator-section-title
-    [iconURL]="'assets/modules/home/heart_icon.png'"
+    [iconURL]="'assets/images/heart_icon.svg'"
     [titleText]="'home.animal_of_the_day' | translate"
   ></ofd-agregator-section-title>
 
@@ -39,7 +39,7 @@
   <div class="details-wrapper">
     <button class="btn">
       {{ 'home.details' | translate }}
-      <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+      <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
     </button>
   </div>
 </section>

@@ -122,6 +122,11 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       this.resource = response;
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
+      this.breadCrumbs.push({ name: this.resource?.dataset_details?.providers[0]?.authorAffiliation?.value, href: '' });
+      this.breadCrumbs.push({
+        name: this.resource?.dataset_details?.latestVersion.metadataBlocks.citation.fields[0].value,
+        href: ''
+      });
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
       } else if (['MS Word', 'MS Excel Spreadsheet'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
@@ -161,7 +166,6 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
         ) >= 0
       ) {
         this.resourceContent.map = this.resource.download_url;
-      } else {
       }
     });
   }

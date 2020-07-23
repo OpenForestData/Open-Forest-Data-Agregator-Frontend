@@ -127,7 +127,7 @@ export class DatasetsService {
    * @type {Ifilters}
    * @memberof DatasetsService
    */
-  private _searchFilters: Ifilters = {
+  public _searchFilters: Ifilters = {
     q: '',
     start: 1,
     rows: 15,
@@ -413,5 +413,23 @@ export class DatasetsService {
    */
   getResourceByID(id: number) {
     return this.http.get<any>(`${AppConfigService.config.api}resource/${id}`);
+  }
+
+  /**
+   * Get all metadata name fields
+   */
+  getMetadata() {
+    return this.http.get<any>(`${AppConfigService.config.api}avilable-metadata`);
+  }
+
+  /**
+   * Get dataset of the day data
+   */
+  getDatasetOfTheDay() {
+    return this.http.get(`${AppConfigService.config.api}dataset-of-the-day`);
+  }
+
+  getLastAddedDatasets() {
+    return this.http.get(`${AppConfigService.config.api}search?start=0&rows=3`);
   }
 }

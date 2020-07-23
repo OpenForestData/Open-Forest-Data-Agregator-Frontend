@@ -7,7 +7,7 @@
       <ui-select [items]="sortItems" [options]="options" (valueChange)="sortChanged($event)" [(value)]="sortBy">
       </ui-select>
     </div>
-    <button class="button datasets-list__export">
+    <button class="button datasets-list__export" (click)="utilsService.getMetadata()">
       {{ 'global.export' | translate }}
       <svg-icon src="/assets/images/export.svg" [applyCss]="true"></svg-icon>
     </button>
@@ -23,7 +23,6 @@
           [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
           [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
         >
-          <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
           <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
           <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
         </a>

@@ -29,7 +29,7 @@
               <a href="#">
                 <button class="btn no-border">
                   {{ 'home.see' | translate }}
-                  <img src="assets/modules/home/arrow_right_green.png" alt="{{ 'home.read_more' | translate }}" />
+                  <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
                 </button>
               </a>
             </div>
@@ -58,7 +58,10 @@
           <svg-icon src="assets/images/plus.svg" class="m-t-3" [applyCss]="true"></svg-icon>
 
           <ul class="drop-down excluded">
-            <li>
+            <li *ngFor="let button of buttonsAddData">
+              <a [href]="button.url">{{ button.title }}</a>
+            </li>
+            <!-- <li>
               <a href="#">{{ 'home.science' | translate }}</a>
             </li>
             <li>
@@ -66,7 +69,7 @@
             </li>
             <li>
               <a href="#">{{ 'home.metric' | translate }}</a>
-            </li>
+            </li> -->
           </ul>
         </button>
       </div>

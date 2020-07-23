@@ -2,14 +2,15 @@
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
       <a class="post-link">
-        <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
+        <!-- <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" /> -->
+        <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-xs-6">
       <a class="post-link end">
         {{ 'blog.next' | translate }}
-        <img src="assets/modules/home/arrow_right_green.png" class="m-l-25" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
     </div>
   </div>
@@ -17,7 +18,8 @@
   <div class="row post-links">
     <div class="col-lg-4 col-md-3 desktop-only">
       <a class="post-link">
-        <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
+        <!-- <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" /> -->
         {{ 'blog.previous' | translate }}
       </a>
     </div>
@@ -31,7 +33,7 @@
     <div class="col-lg-4 col-md-3 desktop-only">
       <a class="post-link end">
         {{ 'blog.next' | translate }}
-        <img src="assets/modules/home/arrow_right_green.png" class="m-l-25" alt="{{ 'home.read_more' | translate }}" />
+        <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
     </div>
   </div>
@@ -41,19 +43,16 @@
       <div class="fixed">
         <div class="news-social">
           <div class="news_social">
-            <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-            <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-            <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+            <ofd-agregator-social [linkTo]="" class="social-container"></ofd-agregator-social>
           </div>
         </div>
 
         <h2 class="news-title">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex fugiat delectus corporis ipsa voluptates
-          mollitia?
+          {{ article?.title }}
         </h2>
         <span class="news-date">
-          04.04.2020 |
-          <span class="author">Daniel Pasoń</span>
+          {{ article?.date }} |
+          <span class="author">{{ article?.author }}</span>
         </span>
       </div>
     </div>
@@ -64,46 +63,9 @@
 
       <div class="row news-body ckeditor-content">
         <div class="col-xs-12 col-md-12 col-lg-12">
-          <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+          <h3>{{ article?.title }}</h3>
           <p class="news-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, similique. At quasi debitis nisi
-            possimus, consequatur illum eligendi minus esse dolorum adipisci temporibus vel doloremque culpa magni
-            tenetur sapiente saepe quis libero.At quasi debitis nisi possimus, consequatur illum eligendi minus esse
-            dolorum adipisci temporibus vel doloremque culpa magni tenetur sapiente saepe quis libero.
-          </p>
-
-          <ol>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.</li>
-            <li>Lorem ipsum dolor sit</li>
-            <li>Lorem ipsum.</li>
-          </ol>
-
-          <p class="news-content">
-            <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong> Repudiandae, similique. At quasi
-            debitis nisi possimus, consequatur illum eligendi minus esse dolorum adipisci temporibus vel doloremque
-            culpa magni tenetur sapiente saepe quis libero.At quasi debitis nisi possimus, consequatur illum eligendi
-            minus esse dolorum adipisci temporibus vel doloremque culpa <b> magni tenetur sapiente </b>saepe quis
-            libero.
-          </p>
-          <br />
-          <div style="text-align: center;">
-            <blockquote style="margin: auto;">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, fugit laudantium eos odit perspiciatis
-                quas deleniti minus libero.
-              </p>
-            </blockquote>
-          </div>
-          <br />
-          <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
-          <p class="news-content">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam ducimus repellendus hic velit tenetur
-            excepturi voluptas harum itaque maiores sunt praesentium aperiam, ipsum iure facilis officiis recusandae
-            eius, facere voluptatum similique est officia veniam odit eos? Non dolorum eius impedit. Lorem ipsum dolor,
-            sit amet consectetur adipisicing elit. Ipsam ducimus repellendus hic velit tenetur excepturi voluptas harum
-            itaque maiores sunt praesentium aperiam, ipsum iure facilis officiis recusandae eius, facere voluptatum
-            similique est officia veniam odit eos? Non dolorum eius impedit.
+            {{ article?.description }}
           </p>
         </div>
       </div>
@@ -112,16 +74,14 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let item of randomWords">{{ item }}</span>
+      <span class="tag" *ngFor="let keyword of article?.keywords">{{ keyword.title }}</span>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12 col-md-7 col-lg-7">
-      <ofd-agregator-section-title
-        [iconURL]="'assets/modules/blog/blog.png'"
-        [titleText]="'blog.similar' | translate"
-      ></ofd-agregator-section-title>
+      <ofd-agregator-section-title [iconURL]="'assets/modules/blog/blog.png'" [titleText]="'blog.similar' | translate">
+      </ofd-agregator-section-title>
     </div>
   </div>
 

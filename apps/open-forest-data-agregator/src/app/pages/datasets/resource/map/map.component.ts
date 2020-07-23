@@ -1,17 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {
-  featureGroup,
-  latLng,
-  tileLayer,
-  Map,
-  canvas,
-  circleMarker,
-  map,
-  icon,
-  Marker,
-  geoJSON,
-  TileLayer
-} from 'leaflet';
+import { icon, Marker, geoJSON } from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import '@asymmetrik/ngx-leaflet';
 import 'leaflet-kml';
@@ -104,7 +92,6 @@ export class MapComponent implements OnInit {
     } else if (this.type === 'wkt') {
       omnivore.wkt(path).addTo(this.map);
     } else if (this.type === 'Shape') {
-      console.log('IM IN SHP ELSE IF');
       this.getShp(path);
     }
   }
@@ -115,16 +102,13 @@ export class MapComponent implements OnInit {
    */
   getShp(path) {
     const shpLayer = L.geoJSON().addTo(this.map);
-    shapefile
-      .open(path)
-      .then(source =>
-        source.read().then(function log(result) {
-          if (result.done) return;
-          shpLayer.addData(result.value);
-          return source.read().then(log);
-        })
-      )
-      .catch(error => console.error(error.stack));
+    shapefile.open(path).then(source =>
+      source.read().then(function log(result) {
+        if (result.done) return;
+        shpLayer.addData(result.value);
+        return source.read().then(log);
+      })
+    );
   }
 
   /**

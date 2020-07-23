@@ -110,7 +110,8 @@
     }
     &__social {
       display: block;
-      padding-left: 14px;
+      // padding-left: 14px;
+      padding: 40px 0 40px 14px;
     }
   }
 
@@ -384,7 +385,7 @@
       justify-content: center;
 
       svg {
-        margin-left: 0px;
+        margin-left: 0;
       }
 
       &:disabled {
@@ -493,7 +494,7 @@
 
   .dataset-left {
     width: 100%;
-    padding-right: 0px;
+    padding-right: 0;
     max-width: none;
   }
 
@@ -507,7 +508,7 @@
     }
   }
   .right-container {
-    padding: 25px 28px 0px 36px;
+    padding: 25px 28px 0 36px;
     &__header {
       &__api {
         a {
@@ -620,7 +621,7 @@
       }
     }
     .header-bar {
-      border-radius: 0px;
+      border-radius: 0;
       padding-left: 36px;
       > svg-icon {
         height: 18px;

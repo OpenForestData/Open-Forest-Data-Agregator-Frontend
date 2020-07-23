@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
+
+// TODO - Kontakt do spięcia, dorobienie captchy
 /**
  * Contact modal content
  *
@@ -45,7 +47,5 @@ export class HomeContactFormComponent {
    *
    * @memberof HomeContactFormComponent
    */
-  submitForm() {
-    console.log(this.form);
-  }
+  submitForm() {}
 }

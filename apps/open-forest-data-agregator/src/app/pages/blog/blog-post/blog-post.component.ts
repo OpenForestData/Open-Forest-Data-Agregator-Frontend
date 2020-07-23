@@ -2,41 +2,57 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
+import { BlogService } from '@app/services/blog.service';
+import { first } from 'rxjs/operators';
+import { BlogArticle } from '@app/interfaces/blog-article';
 
+/**
+ * Blog post component
+ */
 @Component({
   selector: 'ofd-agregator-blog-post',
   templateUrl: './blog-post.component.html',
   styleUrls: ['../blog.component.scss', './blog-post.component.scss']
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
-  public randomWords = [];
-
+  /**
+   * Router subscripton
+   */
   public routerSubscription: Subscription = new Subscription();
+  /**
+   * Language subscription
+   */
   public languageSubscription: Subscription = new Subscription();
-  public newsID = 0;
+  /**
+   * Article
+   */
+  public article: BlogArticle;
 
-  constructor(public languageService: LanguageService, public route: ActivatedRoute) {
-    this.routerSubscription = this.route.params.subscribe(params => {
-      this.newsID = params['id'];
+  // TODO - Prev i next i proponowane posty (jeśli nie ma klucza to nie pokazuj - proste, klucz related_posts[])
+  /**
+   * Blog post constructor
+   *
+   * @param {LanguageService} languageService Language service
+   * @param {ActivatedRoute} route Route
+   * @param {BlogService} blogService Blog service
+   */
+  constructor(public languageService: LanguageService, public route: ActivatedRoute, public blogService: BlogService) {}
+
+  /**
+   * Initialize on start and get data based on params in URL
+   */
+  ngOnInit() {
+    // this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
+    this.route.params.pipe(first()).subscribe(params => {
+      this.blogService.getBlogSlug(params['slug']).subscribe(response => {
+        this.article = response['article'];
+      });
     });
   }
 
-  ngOnInit() {
-    for (let i = 0; i < 25; i++) this.randomWords.push(this.random());
-    this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
-  }
-
-  random() {
-    const words = [
-      ...'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, provident.'.split(' '),
-      ...'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, provident.'.split('e')
-    ];
-
-    return words[Math.floor(Math.random() * words.length - 1)];
-  }
-
-  getData() {}
-
+  /**
+   * Unsubscribes to subcribed items
+   */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();
     this.routerSubscription.unsubscribe();

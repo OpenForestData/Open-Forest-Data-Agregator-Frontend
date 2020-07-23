@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChange, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy } from '@angular/core';
 
 import { DrawEvents, FeatureGroup, latLng, tileLayer, Map, featureGroup, rectangle } from 'leaflet';
 import { Subscription } from 'rxjs';
@@ -139,7 +139,6 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
           this.drawnItems.addLayer(layer);
         } else {
           this.layers.forEach(layer => {
-            // console.log(layer);
             this.map.removeLayer(layer);
           });
         }
