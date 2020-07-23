@@ -145,7 +145,7 @@ export class ChartFiltersComponent implements OnInit {
    * @memberof ChartFiltersComponent
    */
   ngOnInit() {
-    this.selectItems.map((item, index) => {
+    this.selectItems.forEach((item, index) => {
       this.translate.get(item.name).subscribe(value => {
         this.selectItems[index].name = value;
       });

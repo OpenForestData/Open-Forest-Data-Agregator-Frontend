@@ -17,6 +17,7 @@ export interface NavigationItem {
   key: string;
   url?: string;
   children?: NavigationItem[];
+  target?: string;
 }
 
 /**
@@ -75,8 +76,9 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: '/mobile-application',
-      key: 'mobile-application'
+      path: 'https://bioloc.biaman.pl/',
+      key: 'mobile-application',
+      target: '_blank'
     }
   ];
 
@@ -104,8 +106,9 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: '/mobile-application',
-      key: 'mobile-application'
+      path: 'https://bioloc.biaman.pl/',
+      key: 'mobile-application',
+      target: '_blank'
     }
   ];
 

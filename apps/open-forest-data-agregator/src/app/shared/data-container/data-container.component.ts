@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HeaderBarComponent } from '../header-bar/header-bar.component';
 /**
  * Creates collapsable container for datasets metrics

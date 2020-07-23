@@ -323,7 +323,7 @@ ui-checkbox {
 }
 
 .dp-calendar-wrapper {
-  border: none;
+  border: none !important;
 }
 
 .dp-calendar-day {
@@ -353,10 +353,6 @@ ui-checkbox {
   border: none;
 }
 
-.dp-calendar-wrapper {
-  border: none !important;
-}
-
 .dp-calendar-nav-container {
   border: none !important;
   height: 45px !important;
@@ -368,7 +364,6 @@ ui-checkbox {
 }
 
 .dp-nav-header {
-  display: block;
   display: block !important;
   width: 20%;
   position: relative !important;
@@ -389,6 +384,7 @@ ui-checkbox {
 .dp-calendar-weekday {
   width: 45px !important;
   border: none !important;
+  padding: 15px 0 !important;
 }
 
 .dp-nav-btns-container {
@@ -398,10 +394,6 @@ ui-checkbox {
   transform: none !important;
   width: 100%;
   height: 100%;
-}
-
-.dp-calendar-weekday {
-  padding: 15px 0 !important;
 }
 
 .dp-calendar-nav-container-left,

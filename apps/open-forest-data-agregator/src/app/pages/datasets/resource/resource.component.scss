@@ -513,7 +513,7 @@ b {
 
 .button {
   svg {
-    margin-left: 0px;
+    margin-left: 0;
   }
 }
 
@@ -527,8 +527,10 @@ b {
 
   .dataset-left {
     width: 100%;
-    padding-right: 0px;
+    padding-right: 0;
     max-width: 1199px;
+    margin-bottom: 40px;
+    background-color: white;
   }
 
   .dataset-right {
@@ -587,10 +589,6 @@ b {
     display: flex;
     justify-content: center;
   }
-  .dataset-left {
-    margin-bottom: 40px;
-    background-color: white;
-  }
   .header-bar-dataset::ng-deep {
     button {
       visibility: visible;
@@ -608,7 +606,7 @@ b {
       }
     }
     .header-bar {
-      border-radius: 0px;
+      border-radius: 0;
       padding-left: 28px;
       > svg-icon {
         height: 18px;

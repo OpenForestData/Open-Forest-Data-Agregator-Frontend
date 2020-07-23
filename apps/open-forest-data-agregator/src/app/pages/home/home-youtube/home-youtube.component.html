@@ -1,18 +1,15 @@
 <div *ngIf="utilService.homePageData">
-  <!-- <ofd-agregator-section-title [iconURL]="'assets/modules/home/yt_icon.png'"
-    [titleText]="utilService.homePageData.youtube_title"></ofd-agregator-section-title> -->
   <ofd-agregator-section-title
     [iconURL]="'assets/images/yt_icon.svg'"
     [titleText]="utilService.homePageData.youtube_title"
   ></ofd-agregator-section-title>
 
-  <!-- [src]="sanitizer.bypassSecurityTrustResourceUrl(utilService.homePageData.youtube_link) + '&output=embed'" -->
   <div class="iframe-wrapper">
     <iframe
-      [src]="createYTLink(utilService.homePageData.youtube_link)"
-      frameborder="0"
+      [src]="url"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      title="YouTube iframe"
     ></iframe>
     <p class="iframe-title">{{ utilService.homePageData.youtube_mobie_text }}</p>
   </div>

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { NewsService } from '@app/services/news.service';
 import { NewsList } from '@app/interfaces/news-list';
+
 /**
  * News page component
  *

@@ -5,7 +5,6 @@ import { BlogService } from '@app/services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeWhile, takeLast } from 'rxjs/operators';
 import { BlogArticle } from '@app/interfaces/blog-article';
-import { NewsList } from '@app/interfaces/news-list';
 import { BlogData } from '@app/interfaces/blog-data';
 
 /**
@@ -54,6 +53,7 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   constructor(public languageService: LanguageService, public blogService: BlogService, public route: ActivatedRoute) {}
 
+  // TODO - nie działa fitlrownie po keywords'ach
   /**
    * Initialize at the start of page and fetch blog informations, takes arguments from URL
    */
@@ -84,7 +84,6 @@ export class BlogComponent implements OnInit, OnDestroy {
         this.newestArticle = response.articles[0];
       }
       this.blogData = response;
-      console.log('blog data: ', this.blogData);
       this.maxPages = response.offset.num_pages;
     });
   }

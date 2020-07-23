@@ -1,6 +1,7 @@
 @import '../../../../../../../../resources/_colors.scss';
 
 .datasets-filters {
+  margin-bottom: 20px;
   &__type {
     padding: 21px 15px 0 15px;
 
@@ -19,6 +20,75 @@
 }
 
 ::ng-deep {
+  .ng-option:empty {
+    display: none;
+  }
+
+  .advanced {
+    .filter-details.adv {
+      .filter__time-range {
+        padding: 0 !important;
+      }
+
+      .datepicker-label {
+        margin-right: 30px !important;
+      }
+    }
+
+    .filter-value svg-icon {
+      margin-left: 5px;
+    }
+
+    dp-date-picker {
+      width: 100%;
+      margin-left: 5px;
+    }
+
+    .dp-open + div {
+      position: fixed !important;
+      top: auto !important;
+      left: auto !important;
+      z-index: 10;
+    }
+
+    .datepicker-label {
+      display: block;
+      width: 100%;
+      color: $text-color;
+      font-size: 12px;
+
+      > div {
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 95%;
+        color: #333;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        align-items: center;
+        margin: 0;
+      }
+    }
+
+    .lunchSearch {
+      padding: 8px 0;
+      min-width: 150px;
+      color: white;
+      background-color: $accent-color;
+      height: 50px;
+
+      svg {
+        height: 16px;
+      }
+
+      svg * {
+        stroke: white;
+      }
+    }
+  }
+
   .button-wrapper {
     button {
       &:hover {
@@ -195,7 +265,7 @@
   }
 
   .main-row {
-    margin-top: 0px;
+    margin-top: 0;
 
     .scrollable {
       height: calc(100vh - 300px);
@@ -260,11 +330,6 @@
     width: 100%;
   }
 
-  .filter-name {
-    font-size: 12px;
-    font-weight: 600;
-  }
-
   .filter-value {
     font-size: 12px;
     padding: 5px;
@@ -315,83 +380,8 @@
   }
 }
 
-::ng-deep {
-  .ng-option:empty {
-    display: none;
-  }
-
-  .advanced {
-    .filter-details.adv {
-      .filter__time-range {
-        padding: 0 !important;
-      }
-
-      .datepicker-label {
-        margin-right: 30px !important;
-      }
-    }
-
-    .filter-value svg-icon {
-      margin-left: 5px;
-    }
-
-    dp-date-picker {
-      width: 100%;
-      margin-left: 5px;
-    }
-
-    .dp-open + div {
-      position: fixed !important;
-      top: auto !important;
-      left: auto !important;
-      z-index: 10;
-    }
-
-    .datepicker-label {
-      display: block;
-      width: 100%;
-      color: $text-color;
-      font-size: 12px;
-
-      > div {
-        margin-bottom: 5px;
-      }
-
-      input {
-        width: 95%;
-        color: #333;
-        background-color: #fff;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        align-items: center;
-        margin: 0;
-      }
-    }
-
-    .lunchSearch {
-      padding: 8px 0;
-      min-width: 150px;
-      color: white;
-      background-color: $accent-color;
-      height: 50px;
-
-      svg {
-        height: 16px;
-      }
-
-      svg * {
-        stroke: white;
-      }
-    }
-  }
-}
-
 .times {
   cursor: pointer;
-}
-
-.datasets-filters__type {
-  margin-bottom: 20px;
 }
 
 .showAdvencedListMobile {
@@ -416,9 +406,6 @@
   svg * {
     fill: white;
   }
-}
-
-@media (max-width: 1200px) {
 }
 
 @media (max-width: 992px) {

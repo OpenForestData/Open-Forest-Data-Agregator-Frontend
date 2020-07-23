@@ -1,14 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
+import { StatisticsService } from '@app/pages/statistics/statistics.service';
+
 /**
  * Main statistics component
- *
- * @export
- * @class StatisticsComponent
  */
 @Component({
   selector: 'ofd-agregator-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent {}
+export class StatisticsComponent implements OnInit {
+  constructor(public statisticsService: StatisticsService) {}
+
+  ngOnInit() {
+    this.getStatistics();
+  }
+
+  getStatistics() {
+    this.statisticsService.getStatistics().subscribe(response => {});
+  }
+}

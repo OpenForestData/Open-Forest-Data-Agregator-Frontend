@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '@app/services/news.service';
+// TODO - wywalić related, następny poprzedni
 /**
  * View of news post
  *
@@ -52,7 +53,6 @@ export class NewsPostComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.newsService.getSingleNews(params['slug']).subscribe(response => {
         this.news = response.article;
-        console.log('single news: ', this.news);
       });
     });
   }

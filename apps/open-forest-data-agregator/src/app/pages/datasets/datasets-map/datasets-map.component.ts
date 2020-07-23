@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, NgZone, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
 import { featureGroup, latLng, tileLayer, Map, canvas, circleMarker } from 'leaflet';
 import { UtilsService } from '@app/services/utils.service';
 /**
@@ -76,12 +76,11 @@ export class DatasetsMapComponent implements OnChanges {
 
   /**
    * Creates an instance of DatasetsMapComponent.
-   * @param {NgZone} zone
    * @param {ChangeDetectorRef} changeDetectorRef
    * @param {UtilsService} utilsService Utility service
    * @memberof DatasetsMapComponent
    */
-  constructor(private zone: NgZone, private changeDetectorRef: ChangeDetectorRef, public utilsService: UtilsService) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef, public utilsService: UtilsService) {}
 
   /**
    * Gets map reference once leaflet is ready

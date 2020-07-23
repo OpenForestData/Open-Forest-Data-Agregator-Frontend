@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, Host, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, Host } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 import { DatasetsComponent } from '../datasets.component';
-import { DatasetsService } from '../datasets.service';
+
 /**
  * Tab view with types of datasets view to choose
  *
@@ -51,7 +51,7 @@ export class DatasetsDataPresentationComponent {
   selectPresentation(presentation) {
     this.presentation = presentation;
 
-    const button = document.querySelector('#view-' + presentation) as HTMLElement;
+    const button: HTMLElement = document.querySelector('#view-' + presentation);
     this.changeSelectorPosition(button.offsetLeft, button.clientWidth);
     if (presentation === 'gallery') {
       this.parent.setDatasetsView(true);

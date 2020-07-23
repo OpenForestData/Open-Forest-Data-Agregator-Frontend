@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
-import { datasetsMock, categoriesMock } from '@app/pages/datasets/datasets.mock';
 import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 import { DatasetsService } from './datasets.service';

@@ -4,10 +4,35 @@
     *ngFor="let item of items"
     [ngClass]="{ 'has-children': item.children && item.children.length > 0 }"
   >
-    <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
-      {{ item.name | translate }}
-      <img src="assets/modules/home/arrow_right.png" class="mobile-only" width="16" height="11" alt="{{ item.name }}" />
-    </a>
+    <ng-container *ngIf="!item['target']">
+      <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+        {{ item.name | translate }}
+        <img
+          src="assets/modules/home/arrow_right.png"
+          class="mobile-only"
+          width="16"
+          height="11"
+          alt="{{ item.name }}"
+        />
+      </a>
+    </ng-container>
+    <ng-container *ngIf="item['target']">
+      <a
+        [href]="item.path"
+        [target]="item.target"
+        [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ item.name | translate }}
+        <img
+          src="assets/modules/home/arrow_right.png"
+          class="mobile-only"
+          width="16"
+          height="11"
+          alt="{{ item.name }}"
+        />
+      </a>
+    </ng-container>
 
     <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
       <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">

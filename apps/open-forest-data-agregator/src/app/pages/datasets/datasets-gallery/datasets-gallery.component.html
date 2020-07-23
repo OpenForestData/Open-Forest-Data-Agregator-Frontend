@@ -23,7 +23,6 @@
           [attr.data-sub-html]="'<a href=http://localhost:4200/datasets/>' + dataset.title + '</a>'"
           [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
         >
-          <!-- <img [src]="dataset.preview" [alt]="dataset.title" /> -->
           <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
           <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
         </a>

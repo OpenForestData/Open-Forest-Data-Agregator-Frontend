@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 /**
  * Component with category description above datasets

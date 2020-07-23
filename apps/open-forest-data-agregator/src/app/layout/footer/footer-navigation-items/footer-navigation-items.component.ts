@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { TranslateService } from '@ngx-translate/core';
+import { Component } from '@angular/core';
 
 interface NavigationItem {
   name: string;
@@ -26,8 +24,7 @@ export class FooterNavigationItemsComponent {
    * @memberof FooterNavigationItemsComponent
    */
   public items: NavigationItem[] = [
-    { name: 'footer.items.datasets', path: '/more/about-resources' },
-    { name: 'footer.items.about-page', path: '/more/about-project' },
+    { name: 'footer.items.datasets', path: '/datasets' },
     { name: 'footer.items.policy', path: '/more/privacy-policy' },
     { name: 'footer.items.api', path: 'api-docs' },
     { name: 'footer.items.faq', path: '/more/faq' }

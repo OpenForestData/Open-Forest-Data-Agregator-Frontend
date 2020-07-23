@@ -166,20 +166,6 @@
   margin-left: -5px;
 }
 
-::ng-deep {
-  .expand-years {
-    svg {
-      margin-right: 10px;
-    }
-  }
-
-  .news-tile {
-    .news-body {
-      margin: 0;
-    }
-  }
-}
-
 .news-grid {
   background: white;
   padding: 40px 30px 30px 30px;
@@ -244,6 +230,18 @@
 }
 
 ::ng-deep {
+  .expand-years {
+    svg {
+      margin-right: 10px;
+    }
+  }
+
+  .news-tile {
+    .news-body {
+      margin: 0;
+    }
+  }
+
   .mobile-filter-header {
     h3 {
       justify-content: center;

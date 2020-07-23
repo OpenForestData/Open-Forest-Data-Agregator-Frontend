@@ -170,12 +170,14 @@ export class DatasetComponent implements OnInit {
    * Filter all files and get types
    */
   getFilterTypes() {
-    this.dataset?.latestVersion?.files?.forEach((file, index: number) => {
-      this.sortItemsType.push({ name: this.formatConverter(file.label), value: index + 1 });
-    });
-    this.sortItemsType = this.sortItemsType.filter(
-      (elem, index, self) => self.findIndex(temp => temp.name === elem.name) === index
-    );
+    if (this.dataset && this.dataset.latestVersion && this.dataset.latestVersion.files) {
+      this.dataset.latestVersion.files.forEach((file, index: number) => {
+        this.sortItemsType.push({ name: this.formatConverter(file.label), value: index + 1 });
+      });
+      this.sortItemsType = this.sortItemsType.filter(
+        (elem, index, self) => self.findIndex(temp => temp.name === elem.name) === index
+      );
+    }
   }
 
   /**
@@ -264,7 +266,7 @@ export class DatasetComponent implements OnInit {
     if (sort.value === 0) {
       this.files = copyOfInitialFiles;
     } else if (sort.value === 1) {
-      this.files = copyOfInitialFiles.reverse();
+      this.files = [...copyOfInitialFiles].reverse();
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '@app/services/utils.service';
 import { LanguageService } from '@app/services/language.service';
 /**

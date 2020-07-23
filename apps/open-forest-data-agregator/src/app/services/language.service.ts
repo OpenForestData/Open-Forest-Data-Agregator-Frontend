@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -50,9 +50,5 @@ export class LanguageService {
    * Set language from cookie or from config
    * @param {CookieService} cookieService Cookie service
    */
-  constructor(
-    public cookieService: CookieService,
-    public translate: TranslateService,
-    @Inject(PLATFORM_ID) private platformId: string
-  ) {}
+  constructor(public cookieService: CookieService, public translate: TranslateService) {}
 }

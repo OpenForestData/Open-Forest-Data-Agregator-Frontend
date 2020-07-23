@@ -166,7 +166,6 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
         ) >= 0
       ) {
         this.resourceContent.map = this.resource.download_url;
-      } else {
       }
     });
   }

@@ -45,7 +45,7 @@
     max-width: 960px;
     margin: auto;
     align-items: center;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     padding: 20px 0;
     position: fixed;
     left: 50%;
@@ -151,7 +151,7 @@ ofd-agregator-footer-navigation-items {
   }
 
   .right-side {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   .ue-logo {
@@ -167,7 +167,7 @@ ofd-agregator-footer-navigation-items {
       max-width: 960px;
       margin: auto;
       align-items: center;
-      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
       padding: 0;
       position: fixed;
       left: 50%;

@@ -36,8 +36,18 @@
 }
 
 .add-social {
+  display: flex;
+
   a {
     margin-right: 10px;
+
+    svg-icon {
+      display: flex;
+
+      svg {
+        height: 16px;
+      }
+    }
   }
 }
 

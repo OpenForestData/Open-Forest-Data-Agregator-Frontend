@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
@@ -28,6 +28,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   public article: BlogArticle;
 
+  // TODO - Prev i next i proponowane posty (jeśli nie ma klucza to nie pokazuj - proste, klucz related_posts[])
   /**
    * Blog post constructor
    *

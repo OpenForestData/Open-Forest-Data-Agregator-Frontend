@@ -113,7 +113,11 @@
               class="right-container__files__file-viewer__as-image"
               *ngIf="['JPEG Image', 'PNG Image', 'GIF Image'].indexOf(resource.details?.fileTypeDisplay) >= 0"
             >
-              <img class="right-container__files__file-viewer__as-image__source" [src]="resourceContent.image" />
+              <img
+                class="right-container__files__file-viewer__as-image__source"
+                alt="Resource image"
+                [src]="resourceContent.image"
+              />
             </div>
             <div
               class="right-container__files__file-viewer__as-pdf"
@@ -239,11 +243,13 @@
                 <img
                   class="meta-citation__look-up__values__img"
                   [src]="resourceContent.image"
+                  alt="Resource image"
                   *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) >= 0"
                 />
                 <img
                   class="meta-citation__look-up__values__img"
                   [src]="'/assets/images/no_photo.png'"
+                  alt="Resource image"
                   *ngIf="['JPEG Image', 'png', 'gif'].indexOf(resource.details?.fileTypeDisplay) < 0"
                 />
               </div>

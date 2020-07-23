@@ -421,4 +421,15 @@ export class DatasetsService {
   getMetadata() {
     return this.http.get<any>(`${AppConfigService.config.api}avilable-metadata`);
   }
+
+  /**
+   * Get dataset of the day data
+   */
+  getDatasetOfTheDay() {
+    return this.http.get(`${AppConfigService.config.api}dataset-of-the-day`);
+  }
+
+  getLastAddedDatasets() {
+    return this.http.get(`${AppConfigService.config.api}search?start=0&rows=3`);
+  }
 }

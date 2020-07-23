@@ -60,7 +60,7 @@ export class UIModalComponent implements OnInit, OnDestroy {
     private el: ElementRef,
     @Inject(PLATFORM_ID) private platformId: string
   ) {
-    this.element = el.nativeElement;
+    this.element = this.el.nativeElement;
   }
 
   /**
@@ -68,7 +68,6 @@ export class UIModalComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if (!this.id) {
-      console.error('modal must have an id');
       return;
     }
 

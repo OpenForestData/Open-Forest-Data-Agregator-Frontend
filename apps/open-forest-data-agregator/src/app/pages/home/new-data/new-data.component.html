@@ -10,27 +10,32 @@
     </div>
 
     <div class="row data-row">
-      <div class="col-lg-3 data-info" *ngFor="let i of [0, 1, 2]">
-        <span class="add-date">04.04.2020</span>
-        <h3 class="add-title">Lorem ipsum dolor sit amet</h3>
+      <div class="col-lg-3 data-info" *ngFor="let dataset of datasets">
+        <span class="add-date">{{ dataset.dateSort | date: 'dd.MM.yyyy' }}</span>
+        <h3 class="add-title">{{ dataset.title }}</h3>
         <p class="add-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro cupiditate sit in autem quas magnam! Nobis
-          accusamus labore, eum voluptates vel.
+          {{ dataset.dsDescriptionValue[0] ? dataset.dsDescriptionValue[0] : '' }}
         </p>
 
         <p class="add-owner">
-          <b class="semibold">{{ 'home.owner' | translate }}: </b> <span class="color-green">IBS PAN</span>
+          <b class="semibold">{{ 'home.owner' | translate }}: </b>
+          <span class="color-green">{{ dataset.authorName[0] ? dataset.authorName[0] : '' }}</span>
         </p>
 
         <div class="add-social">
-          <!-- <ofd-agregator-social [linkTo]="newestArticle?.slug" class="social-container"></ofd-agregator-social> -->
-          <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-          <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-          <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+          <a href="#" (click)="shareLink(dataset.link, 'facebook')">
+            <svg-icon src="/assets/images/social/facebook-icon.svg" [applyCss]="true"></svg-icon>
+          </a>
+          <a href="#" (click)="shareLink(dataset.link, 'twitter')">
+            <svg-icon src="/assets/images/social/twitter-icon.svg" [applyCss]="true"></svg-icon>
+          </a>
+          <a href="#" (click)="shareLink(dataset.link, 'email')"
+            ><svg-icon src="/assets/images/social/email-icon.svg" [applyCss]="true"></svg-icon
+          ></a>
         </div>
 
         <div class="see_more_wrapper">
-          <a href="#">
+          <a [routerLink]="'/datasets/details'" [queryParams]="{ doi: dataset.identifier64 }">
             <button class="btn no-border">
               {{ 'home.see' | translate }}
               <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
@@ -50,7 +55,6 @@
         <div class="button-wrapper">
           <button class="btn green-svg">
             {{ 'home.add_data' | translate }}
-            <!-- <img src="assets/modules/home/plus_icon.png" alt="{{ 'home.add_data' | translate }}" /> -->
             <svg-icon src="assets/images/plus.svg" class="m-t-3" [applyCss]="true"></svg-icon>
 
             <ul class="drop-down excluded">
