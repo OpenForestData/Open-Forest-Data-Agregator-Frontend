@@ -461,6 +461,9 @@ body.wcag-contrast {
   .search-section__input {
     background-color: black;
     color: white;
+    border-top: 1px solid yellow;
+    border-left: 1px solid yellow;
+    border-bottom: 1px solid yellow;
   }
 
   .search-section__input::placeholder {
@@ -498,12 +501,6 @@ body.wcag-contrast {
 
   .datasets-category__item {
     color: yellow;
-  }
-
-  .search-section__input {
-    border-top: 1px solid yellow;
-    border-left: 1px solid yellow;
-    border-bottom: 1px solid yellow;
   }
 
   .datasets-list__export {
@@ -600,6 +597,7 @@ body.wcag-contrast {
   }
 
   .right-container__files__download-all__buttons__download {
+    color: yellow !important;
     svg {
       path {
         fill: yellow !important;
@@ -643,10 +641,6 @@ body.wcag-contrast {
 
   .breadcrumbs li {
     color: white !important;
-  }
-
-  .right-container__files__download-all__buttons__download {
-    color: yellow !important;
   }
 
   .ui-select__items__list__item button {
