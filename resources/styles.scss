@@ -163,6 +163,11 @@ a {
   color: $accent-color;
   transition: background-color 0.6s ease, color 0.6s ease;
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &.no-border {
     border: none;
   }

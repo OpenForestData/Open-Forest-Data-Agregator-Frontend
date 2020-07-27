@@ -6,7 +6,7 @@
         </ofd-agregator-section-title>
         <ul class="faq-list">
           <li *ngFor="let item of utilService.homePageData.faqs">
-            <a href="#">
+            <a [routerLink]="'/more/faq'" [fragment]="'faq-' + item.anchor">
               <span>{{ item.title }}</span>
               <svg-icon src="assets/images/arrow_right.svg" class="desktop-only" width="16" height="11" alt="Go to">
               </svg-icon>

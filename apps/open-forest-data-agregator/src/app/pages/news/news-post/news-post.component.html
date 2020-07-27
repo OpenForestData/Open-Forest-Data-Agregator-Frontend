@@ -16,14 +16,14 @@
 
   <div class="row post-links">
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link">
+      <a class="post-link" [routerLink]="'/news/' + news.prev">
         <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-lg-4 col-md-6 col-xs-12"></div>
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link end">
+      <a class="post-link end" [routerLink]="'/news/' + news.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>

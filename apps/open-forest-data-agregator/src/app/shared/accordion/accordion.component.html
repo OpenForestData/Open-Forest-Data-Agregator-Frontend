@@ -1,5 +1,9 @@
 <ul class="accordion">
-  <li *ngFor="let item of accordionContent; let i = index" [ngClass]="{ active: activeAccordion == i }">
+  <li
+    *ngFor="let item of accordionContent; let i = index"
+    [ngClass]="{ active: activeAccordion == i }"
+    [id]="item['html_id'] ? item['html_id'] : ''"
+  >
     <h3 (click)="activeAccordion = activeAccordion === i ? -1 : i">
       <span>{{ item.title }}</span>
       <svg-icon src="assets/images/chevron_down.svg" class="chevron"></svg-icon>

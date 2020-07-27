@@ -28,7 +28,8 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   public article: BlogArticle;
 
-  // TODO - Prev i next i proponowane posty (jeśli nie ma klucza to nie pokazuj - proste, klucz related_posts[])
+  public relatedPosts: BlogArticle[] = [];
+
   /**
    * Blog post constructor
    *
@@ -46,6 +47,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
     this.route.params.pipe(first()).subscribe(params => {
       this.blogService.getBlogSlug(params['slug']).subscribe(response => {
         this.article = response['article'];
+        this.relatedPosts = response['related_posts'] ? response['related_posts'].slice(0, 2) : [];
       });
     });
   }

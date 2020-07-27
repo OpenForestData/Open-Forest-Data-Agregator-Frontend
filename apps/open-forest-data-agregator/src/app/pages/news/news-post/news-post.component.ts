@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '@app/services/news.service';
-// TODO - wywalić related, następny poprzedni
+
 /**
  * View of news post
  *

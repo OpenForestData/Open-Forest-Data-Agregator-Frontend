@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
+import { HomeService, IContactForm } from '@app/pages/home/home.service';
 
-// TODO - Kontakt do spięcia, dorobienie captchy
 /**
  * Contact modal content
  *
@@ -27,12 +27,19 @@ export class HomeContactFormComponent {
     text: '',
     checkbox: ''
   };
+
+  public formError = {
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    text: ''
+  };
   /**
    * Creates an instance of HomeContactFormComponent.
    * @param {UIModalService} modal
    * @memberof HomeContactFormComponent
    */
-  constructor(public modal: UIModalService) {}
+  constructor(public modal: UIModalService, private homeService: HomeService) {}
   /**
    * Close modal window
    *
@@ -40,6 +47,13 @@ export class HomeContactFormComponent {
    */
   closeModal() {
     this.modal.close('contact-modal');
+    this.form = {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      checkbox: '',
+      text: ''
+    };
   }
 
   /**
@@ -47,5 +61,18 @@ export class HomeContactFormComponent {
    *
    * @memberof HomeContactFormComponent
    */
-  submitForm() {}
+  submitForm() {
+    const payload: IContactForm = {
+      name: this.form.firstName,
+      last_name: this.form.lastName,
+      e_mail: this.form.emailAddress,
+      content: this.form.text,
+      recaptcha_response: 'test'
+    };
+
+    this.homeService.sendContactForm(payload).subscribe(response => {
+      alert('Pomyślnie wysłano wiadomość');
+      this.closeModal();
+    });
+  }
 }

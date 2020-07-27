@@ -15,4 +15,6 @@ export interface BlogArticle {
   title: string;
   title_seo: string;
   url: string;
+  prev?: string;
+  next?: string;
 }

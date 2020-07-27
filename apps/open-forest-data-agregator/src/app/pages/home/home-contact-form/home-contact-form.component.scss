@@ -68,8 +68,8 @@ textarea:focus + label {
 
 input[type='text']::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder,
-input[type='text']::-moz-input-placeholder,
-textarea::-moz-input-placeholder {
+input[type='text']::-moz-placeholder,
+textarea::-moz-placeholder {
   color: transparent;
 }
 

@@ -147,8 +147,7 @@ export class UtilsService {
    * @memberof UtilsService
    */
   public getMenuBySlug(slug) {
-    const currentLang = this.lang.language;
-    const menu = this.responseData['menu'][currentLang];
+    const menu = this.responseData['menu'];
     if (menu) {
       return menu.find(item => item.slug === slug);
     }
@@ -239,31 +238,28 @@ export class UtilsService {
    * @memberof UtilsService
    */
   buildStructure() {
-    const currentLang = this.lang.language;
-    const menu = this.responseData['menu'][currentLang];
+    const menu = this.responseData['menu'];
     if (menu) {
       this.menuStructure = [
         ...this.basicStructure,
-        ...menu
-          .filter(item => item.parent_id === null)
-          .map(item => {
-            return (item = {
-              name: item.title,
-              path: `/more/${item.slug}`,
-              url: item.url,
-              key: '',
-              children: menu
-                .filter(child => child.parent_id === item.id)
-                .map(childItem => {
-                  return {
-                    name: childItem.title,
-                    path: `/more/${childItem.slug}`,
-                    url: childItem.url,
-                    key: ''
-                  };
-                })
-            });
-          }),
+        ...menu.map(item => {
+          return (item = {
+            name: item.title,
+            path: `/more/${item.slug}`,
+            url: item.url,
+            key: '',
+            children: menu
+              .filter(child => child.parent_id === item.id)
+              .map(childItem => {
+                return {
+                  name: childItem.title,
+                  path: `/more/${childItem.slug}`,
+                  url: childItem.url,
+                  key: ''
+                };
+              })
+          });
+        }),
         {
           name: 'Blog',
           path: '/blog',

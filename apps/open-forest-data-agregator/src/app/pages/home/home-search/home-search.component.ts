@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
 import { Router } from '@angular/router';
 
-// TODO Obiekt dnia
 /**
  * Search section at home page
  *
@@ -24,6 +23,9 @@ export class HomeSearchComponent {
 
   public datasetOfTheDay: {
     name: string;
+    latinName: string;
+    preview: string;
+    identifier64: string;
   } = null;
 
   /**
@@ -38,7 +40,13 @@ export class HomeSearchComponent {
         this.datasetOfTheDay = {
           name: response['latestVersion']['metadataBlocks']['citation']['fields'].filter(
             field => field['typeName'] === 'title'
-          )[0]['value']
+          )[0]['value'],
+          preview:
+            response['latestVersion']['files']
+              .filter((_: any) => _.thumbnail_url)
+              .map((_: any) => _.thumbnail_url)[0] || null,
+          latinName: '',
+          identifier64: btoa(response['identifier'])
         };
       } catch (e) {}
     });

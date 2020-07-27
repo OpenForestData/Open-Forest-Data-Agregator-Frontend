@@ -23,21 +23,28 @@
   ></ofd-agregator-section-title>
 
   <div class="image-holder">
-    <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+    <div class="spinning-loader" *ngIf="datasetOfTheDay.preview === 'wait'"></div>
+    <img
+      [src]="datasetOfTheDay.preview"
+      *ngIf="datasetOfTheDay.preview && datasetOfTheDay.preview !== 'wait'"
+      [alt]="datasetOfTheDay.name"
+    />
+    <img
+      src="/assets/images/no_photo.png"
+      *ngIf="!datasetOfTheDay.preview && datasetOfTheDay.preview !== 'wait'"
+      [alt]="datasetOfTheDay.name"
+    />
   </div>
 
   <aside>
-    <span class="animal-name"> <b class="semibold">Żubr europejski </b> <i>(Bison banasus)</i> </span>
-    <span class="animal-length">
-      <b class="medium">{{ 'home.animal_length' | translate }}:</b> 2.9m (Dorosły)
-    </span>
-    <span class="animal-weight">
-      <b class="medium">{{ 'home.animal_weight' | translate }}:</b> 60 kg (Dorosły)
+    <span class="animal-name">
+      <b class="semibold">{{ datasetOfTheDay.name }} </b>
+      <i *ngIf="datasetOfTheDay.latinName !== ''">({{ datasetOfTheDay.latinName }})</i>
     </span>
   </aside>
 
   <div class="details-wrapper">
-    <button class="btn">
+    <button class="btn" [routerLink]="['/datasets/detail']" [queryParams]="{ doi: datasetOfTheDay.identifier64 }">
       {{ 'home.details' | translate }}
       <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
     </button>
