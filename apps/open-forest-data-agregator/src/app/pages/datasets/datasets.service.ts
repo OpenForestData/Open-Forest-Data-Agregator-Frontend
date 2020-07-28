@@ -1,7 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '@app/services/app-config.service';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, isPlatformBrowser } from '@angular/common';
 
@@ -11,13 +11,37 @@ import { Location, isPlatformBrowser } from '@angular/common';
  * @interface Ifilters
  */
 interface Ifilters {
+  /**
+   * Q
+   */
   q: string;
+  /**
+   * Page start
+   */
   start: number;
+  /**
+   * Rows per page
+   */
   rows: number;
+  /**
+   * Sort key
+   */
   sort: string;
+  /**
+   * Selected category
+   */
   category: string;
+  /**
+   * Returns only geo static datasets
+   */
   geoStatic: boolean;
+  /**
+   * Returns only datasets with media
+   */
   mediaStatic: boolean;
+  /**
+   * Basic
+   */
   basic: {};
 }
 
@@ -29,6 +53,9 @@ interface Ifilters {
  * @interface IsearchData
  */
 interface IsearchData {
+  /**
+   * Search data response list
+   */
   list: {
     available_filter_fields: {};
     results: [];
@@ -37,9 +64,6 @@ interface IsearchData {
 
 /**
  * Dataset service, makes http reuqests and prepare format to send
- *
- * @export
- * @class DatasetsService
  */
 @Injectable({
   providedIn: 'root'
@@ -48,84 +72,54 @@ export class DatasetsService {
   /**
    * If page header is visible.
    * It's hidden when any component must bo on top of the page, ex. modals
-   *
-   * @memberof DatasetsService
    */
   public hideHeaderValue = false;
 
   /**
    * Subject for new search data
    * Triggered after http request
-   *
-   * @type {Subject<any>}
-   * @memberof DatasetsService
    */
   public dataChangedSubject: Subject<any> = new Subject();
   /**
    * Subject for search data.
    * Trigger before, and it's ask for get new data
-   *
-   * @type {Subject<any>}
-   * @memberof DatasetsService
    */
   public triggerSearchSubject: Subject<any> = new Subject();
   /**
    * Subject, send when advanced filters have to be opened
-   *
-   * @type {Subject<any>}
-   * @memberof DatasetsService
    */
   public showAdvancedSubject: Subject<any> = new Subject();
 
   /**
    * Update search query for datasets in every search input for this purpuse
-   *
-   * @type {Subject<string>}
-   * @memberof DatasetsService
    */
   public updateQuerySubject: Subject<string> = new Subject();
 
   /**
    * Send to filters component what filter need to be deleted.
    * Triggered by filters in tag form at dataset list
-   *
-   * @type {Subject<{ name: string; index: number }>}
-   * @memberof DatasetsService
    */
   public removeFilterSubject: Subject<{ name: string; index: number }> = new Subject();
 
   /**
    * Triggered after new data has been fetch and new filters structure must be created
-   *
-   * @type {Subject<any>}
-   * @memberof DatasetsService
    */
   public newFiltersStructureSubject: Subject<any> = new Subject();
 
   /**
    * Triggered after data from queryParams where loaded.
    * All related components load type (default or from queryParams) of sort after that
-   *
-   * @type {Subject<any>}
-   * @memberof DatasetsService
    */
   public sortSubject: Subject<any> = new Subject();
 
   /**
    * Time out function hold, time out after search begins.
    * That way we control if search is no triggered twice.
-   *
-   * @private
-   * @memberof DatasetsService
    */
   private searchDebounceTimeout = null;
 
   /**
    * Holds filters value
-   *
-   * @private
-   * @type {Ifilters}
-   * @memberof DatasetsService
    */
   public _searchFilters: Ifilters = {
     q: '',
@@ -140,10 +134,6 @@ export class DatasetsService {
 
   /**
    * Holds API data
-   *
-   * @private
-   * @type {IsearchData}
-   * @memberof DatasetsService
    */
   private _searchData: IsearchData = {
     list: {
@@ -154,8 +144,6 @@ export class DatasetsService {
 
   /**
    * Getter of _searchData
-   *
-   * @memberof DatasetsService
    */
   public get searchData() {
     return this._searchData;
@@ -163,8 +151,6 @@ export class DatasetsService {
 
   /**
    * Getter of hideHeaderValue
-   *
-   * @memberof DatasetsService
    */
   public get hideHeader() {
     return this.hideHeaderValue;
@@ -173,9 +159,9 @@ export class DatasetsService {
   /**
    * Toggles app header
    *
-   * @memberof DatasetsService
+   * @param {boolean} newValue App header status
    */
-  public set hideHeader(newValue) {
+  public set hideHeader(newValue: boolean) {
     this.hideHeaderValue = newValue;
     if (isPlatformBrowser(this.platformId)) {
       if (newValue) {
@@ -190,7 +176,7 @@ export class DatasetsService {
    * Sets new value of _searchData
    * If there are no new filters values shows preserve previous one
    *
-   * @memberof DatasetsService
+   * @param {IsearchData} newValue New search data
    */
   public set searchData(newValue: IsearchData) {
     // tslint:disable-next-line: adjacent-overload-signatures
@@ -207,7 +193,7 @@ export class DatasetsService {
    * Always set one value with key `value.field` and value `value.data`
    * if `value.search` is true, at the end timeout with search subject will be set
    *
-   * @memberof DatasetsService
+   * @param {any} value New filters
    */
   public set searchFilters(value: { field: string; data: any; search?: boolean }) {
     const excludeReset = ['sort', 'start'];
@@ -240,8 +226,6 @@ export class DatasetsService {
 
   /**
    * Creates queryString for all filters and returns current filters state
-   *
-   * @memberof DatasetsService
    */
   public get searchFilters() {
     const queryString = `
@@ -265,12 +249,11 @@ export class DatasetsService {
 
   /**
    * Creates an instance of DatasetsService.
-   * @param {HttpClient} http
-   * @param {Location} location
-   * @param {Router} router
-   * @param {string} platformId
-   * @param {ActivatedRoute} activatedRoute
-   * @memberof DatasetsService
+   * @param {HttpClient} http Angular http client
+   * @param {Location} location Angular location
+   * @param {Router} router Angular router
+   * @param {string} platformId PlatrofmId
+   * @param {ActivatedRoute} activatedRoute Angular activated route
    */
   constructor(
     public http: HttpClient,
@@ -283,17 +266,14 @@ export class DatasetsService {
   /**
    * Shots to API for datasets
    *
-   * @returns
-   * @memberof DatasetsService
+   * @returns {Observable<any>}
    */
-  search() {
+  search(): Observable<any> {
     return this.http.get(`${AppConfigService.config.api}search${this.searchFilters.field}`);
   }
 
   /**
    * Resets filters state to default
-   *
-   * @memberof DatasetsService
    */
   resetFilters() {
     this._searchFilters = {
@@ -313,12 +293,10 @@ export class DatasetsService {
    * If encode is eq. true the out is typical browsere query String
    * If not it's query string for humans
    *
-   * @param {*} object
-   * @param {boolean} [encode=true]
-   * @returns
-   * @memberof DatasetsService
+   * @param {any} object Object
+   * @param {boolean} encode String encode
    */
-  public objectToQuery(object, encode = true) {
+  public objectToQuery(object: any, encode: boolean = true) {
     const objectQueryString = [];
 
     Object.keys(object).forEach(index => {
@@ -385,20 +363,16 @@ export class DatasetsService {
   /**
    * Gets details about datasets by their identifiers
    *
-   * @param {*} identifiers
-   * @returns
-   * @memberof DatasetsService
+   * @param {any} identifiers
    */
-  details(identifiers) {
+  details(identifiers: any) {
     return this.http.post(`${AppConfigService.config.api}datasets`, { identifiers });
   }
 
   /**
    * Gets dataset by DOI
    *
-   * @param {*} doi
-   * @returns
-   * @memberof DatasetsService
+   * @param {any} doi
    */
   getDatasetByDOI(doi: any) {
     return this.http.get<any>(`${AppConfigService.config.api}dataset?identifier=${doi}`);
@@ -408,8 +382,6 @@ export class DatasetsService {
    * Gets resource by ID
    *
    * @param {number} id
-   * @returns
-   * @memberof DatasetsService
    */
   getResourceByID(id: number) {
     return this.http.get<any>(`${AppConfigService.config.api}resource/${id}`);
@@ -429,6 +401,9 @@ export class DatasetsService {
     return this.http.get(`${AppConfigService.config.api}dataset-of-the-day`);
   }
 
+  /**
+   * Get last 3 added datasets
+   */
   getLastAddedDatasets() {
     return this.http.get(`${AppConfigService.config.api}search?start=0&rows=3`);
   }

@@ -33,8 +33,7 @@
 
 .news-body {
   width: 100%;
-  margin: 0;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 
   .news-image-holder {
     max-width: 95%;
@@ -143,8 +142,7 @@
     .news-image-holder {
       width: 50vw;
       max-height: 50vw;
-      margin: auto;
-      margin-bottom: 20px;
+      margin: auto auto 20px;
     }
   }
 }

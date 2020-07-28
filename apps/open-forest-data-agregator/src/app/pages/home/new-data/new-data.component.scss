@@ -79,7 +79,6 @@
 
 .drop-down {
   display: none;
-  padding: 0;
   position: absolute;
   bottom: -3px;
   left: -1px;
@@ -88,7 +87,6 @@
   border-radius: 0 0 25px 25px;
   border-top: none;
   transform: translateY(100%);
-  padding-top: 5px;
   padding-top: 10px;
   background-color: $light-gray-color;
   overflow: hidden;
@@ -98,8 +96,7 @@
     text-align: left;
 
     a {
-      padding: 12px 0;
-      padding-left: 30px;
+      padding: 12px 0 12px 30px;
       display: block;
       color: $text-color;
       transition: color 0.3s ease, background-color 0.3s ease;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { ChartOptions, ChartType } from 'chart.js';
+
 /**
  * Pie Chart
  *
@@ -40,8 +41,7 @@ export class PieChartComponent {
       datalabels: {
         display: false,
         formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
+          return ctx.chart.data.labels[ctx.dataIndex];
         }
       }
     }
@@ -90,7 +90,7 @@ export class PieChartComponent {
    *
    * @memberof PieChartComponent
    */
-  public pieChartPlugins = [pluginDataLabels];
+  public pieChartPlugins: any = [pluginDataLabels];
 
   /**
    * Colors for chart
@@ -125,5 +125,9 @@ export class PieChartComponent {
     }
   ];
 
+  /**
+   * Get data
+   * @param {any} payload Payload
+   */
   getData(payload) {}
 }

@@ -55,7 +55,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   // TODO - nie działa fitlrownie po keywords'ach
   /**
-   * Initialize at the start of page and fetch blog informations, takes arguments from URL
+   * Initialize at the start of page and fetch blog information, takes arguments from URL
    */
   ngOnInit() {
     this.route.queryParams

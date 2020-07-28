@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '@app/services/app-config.service';
+import { Observable } from 'rxjs';
 
 /**
  * Statistics service
@@ -13,7 +14,12 @@ export class StatisticsService {
    */
   constructor(public http: HttpClient) {}
 
-  getStatistics() {
+  /**
+   * Get statistics
+   *
+   * @returns {Observable<any>}
+   */
+  getStatistics(): Observable<any> {
     return this.http.get(`${AppConfigService.config.api}metrics-total`);
   }
 }

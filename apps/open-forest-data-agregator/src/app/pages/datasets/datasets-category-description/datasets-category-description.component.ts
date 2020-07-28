@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
+
 /**
  * Component with category description above datasets
- *
- * @export
- * @class DatasetsCategoryDescriptionComponent
  */
 @Component({
   selector: 'ofd-agregator-datasets-category-description',
@@ -14,24 +12,19 @@ import { DatasetsService } from '../datasets.service';
 export class DatasetsCategoryDescriptionComponent {
   /**
    * Creates an instance of DatasetsCategoryDescriptionComponent.
-   * @param {DatasetsService} DSService
-   * @memberof DatasetsCategoryDescriptionComponent
+   * @param {DatasetsService} DSService Datasets service
    */
   constructor(public DSService: DatasetsService) {}
 
   /**
    * Get active category
-   *
-   * @readonly
-   * @memberof DatasetsCategoryDescriptionComponent
    */
   public get category() {
     return this.DSService.searchFilters.data['category'];
   }
+
   /**
-   * Get descrption for active category
-   *
-   * @memberof DatasetsCategoryDescriptionComponent
+   * Get description for active category
    */
   public get data() {
     try {

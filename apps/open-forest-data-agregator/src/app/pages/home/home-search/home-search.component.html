@@ -16,7 +16,7 @@
   </a>
 </section>
 
-<section class="animal-of-the-day">
+<section class="animal-of-the-day" *ngIf="datasetOfTheDay">
   <ofd-agregator-section-title
     [iconURL]="'assets/images/heart_icon.svg'"
     [titleText]="'home.animal_of_the_day' | translate"

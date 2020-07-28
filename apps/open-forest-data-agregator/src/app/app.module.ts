@@ -50,6 +50,9 @@ export function initializeApp(appConfigService: AppConfigService) {
   return () => appConfigService.load();
 }
 
+/**
+ * App module components
+ */
 const components = [
   AppComponent,
   MainLayoutComponent,

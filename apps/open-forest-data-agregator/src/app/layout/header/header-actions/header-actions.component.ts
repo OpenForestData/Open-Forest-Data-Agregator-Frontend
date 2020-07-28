@@ -6,11 +6,6 @@ import { DatasetsService } from '@app/pages/datasets/datasets.service';
 import { Subscription } from 'rxjs';
 /**
  * Language and search header section
- *
- * @export
- * @class HeaderActionsComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-header-actions',
@@ -20,39 +15,29 @@ import { Subscription } from 'rxjs';
 export class HeaderActionsComponent implements OnInit, OnDestroy {
   /**
    * is search input collapsed
-   *
-   * @memberof HeaderActionsComponent
    */
   public searchActive = false;
 
   /**
    * Search input value
-   *
-   * @memberof HeaderActionsComponent
    */
   public searchPhrase = '';
 
   /**
-   * Subscript for queryUpdateSuject
-   *
-   * @type {Subscription}
-   * @memberof HeaderActionsComponent
+   * Subscript for queryUpdate Subject
    */
   public sub: Subscription;
 
   /**
-   *
-   * @param {LanguageService} languageService
-   * @param {Router} router
-   * @param {DatasetsService} DSService
-   * @memberof HeaderActionsComponent
+   * Header actions constructor component
+   * @param {LanguageService} languageService Language service
+   * @param {Router} router Router
+   * @param {DatasetsService} DSService Datasets service
    */
   constructor(public languageService: LanguageService, public router: Router, public DSService: DatasetsService) {}
 
   /**
    * @ignore
-   *
-   * @memberof HeaderActionsComponent
    */
   ngOnInit(): void {
     this.sub = this.DSService.updateQuerySubject.subscribe(query => (this.searchPhrase = query));
@@ -60,8 +45,6 @@ export class HeaderActionsComponent implements OnInit, OnDestroy {
 
   /**
    * Callback on search, redirect to datasets page, on emit event for search if already there
-   *
-   * @memberof HeaderActionsComponent
    */
   searchClick() {
     if (!this.searchActive) {
@@ -77,8 +60,9 @@ export class HeaderActionsComponent implements OnInit, OnDestroy {
 
   /**
    * Language change
+   * @param {string} value Language to set
    */
-  setNewLanguage(value) {
+  setNewLanguage(value: string) {
     if (this.languageService.language !== value) this.languageService.language = value;
     window.location.reload();
   }

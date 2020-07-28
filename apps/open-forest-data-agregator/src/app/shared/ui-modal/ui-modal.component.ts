@@ -38,12 +38,15 @@ export class UIModalComponent implements OnInit, OnDestroy {
    */
   @Input() direction = 'up';
 
+  /**
+   * Emit event when modal was closed
+   */
   @Output() hasClosed: EventEmitter<any> = new EventEmitter();
 
   /**
    * Modal native element
    */
-  private element: any;
+  private readonly element: any;
 
   /**
    * Close modal duration in ms

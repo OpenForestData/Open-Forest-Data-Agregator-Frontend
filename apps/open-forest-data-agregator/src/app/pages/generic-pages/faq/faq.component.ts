@@ -8,11 +8,6 @@ import { AccordionComponent } from '@app/shared/accordion/accordion.component';
 
 /**
  * Faq page view
- *
- * @export
- * @class FaqComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-faq',
@@ -22,32 +17,29 @@ import { AccordionComponent } from '@app/shared/accordion/accordion.component';
 export class FaqComponent implements OnInit, OnDestroy {
   /**
    * Accordion content
-   *
-   * @memberof FaqComponent
    */
   public accordionContent = [];
 
+  /**
+   * Accordion component reference
+   */
   @ViewChild('accordionComponent') public accordionComponent: AccordionComponent;
 
   /**
    * Language change subscription
-   *
-   * @type {Subscription}
-   * @memberof HomeNewsComponent
    */
   public languageSubscription: Subscription = new Subscription();
+
   /**
-   *
-   * @param {LanguageService} languageService
-   * @param {FAQService} faqService
-   * @param {AudioContextInfo} route
+   * FAQ Component constructor
+   * @param {LanguageService} languageService Language service
+   * @param {FAQService} faqService Faq Service
+   * @param {ActivatedRoute} route Activated route
    */
   constructor(public languageService: LanguageService, public faqService: FAQService, private route: ActivatedRoute) {}
 
   /**
    * @ignore
-   *
-   * @memberof HomeNewsComponent
    */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
@@ -79,15 +71,11 @@ export class FaqComponent implements OnInit, OnDestroy {
 
   /**
    * Fetch data from API
-   *
-   * @memberof HomeNewsComponent
    */
   getData() {}
 
   /**
    * @ignore
-   *
-   * @memberof HomeNewsComponent
    */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();

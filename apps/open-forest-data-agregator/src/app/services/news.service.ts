@@ -2,10 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 
+/**
+ * News service
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
+  /**
+   * News service constructor
+   * @param {HttpClient} http Http client
+   */
   constructor(private http: HttpClient) {}
 
   /**
@@ -19,7 +26,11 @@ export class NewsService {
     return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`);
   }
 
-  getSingleNews(url: any) {
+  /**
+   * Get news data from url
+   * @param {string} url News Url
+   */
+  getSingleNews(url: string) {
     return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`);
   }
 

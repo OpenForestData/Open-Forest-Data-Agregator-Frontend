@@ -7,8 +7,14 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { PostTileComponent } from './post-tile/post-tile.component';
 import { BlogPostComponent } from './blog-post/blog-post.component';
 
+/**
+ * Blog module components
+ */
 const components = [BlogComponent, PostTileComponent, BlogPostComponent];
 
+/**
+ * Blog module
+ */
 @NgModule({
   declarations: components,
   imports: [CommonModule, BlogRoutingModule, SharedModule]

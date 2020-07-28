@@ -15,6 +15,9 @@ import { HomeContactFormComponent } from './home-contact-form/home-contact-form.
 import { HomeNewsMobileComponent } from './home-news-mobile/home-news-mobile.component';
 import { HomeService } from '@app/pages/home/home.service';
 
+/**
+ * Home module components
+ */
 const components = [
   HomeComponent,
   HomeBannerComponent,
@@ -28,9 +31,6 @@ const components = [
 ];
 /**
  * Home module
- *
- * @export
- * @class HomeModule
  */
 @NgModule({
   declarations: components,

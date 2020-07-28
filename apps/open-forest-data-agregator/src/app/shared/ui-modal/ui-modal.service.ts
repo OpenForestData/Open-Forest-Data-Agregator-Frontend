@@ -15,6 +15,9 @@ export class UIModalService {
    */
   public openedModals: any[] = [];
 
+  /**
+   * Modal generated unique id
+   */
   public generatedId = window.crypto.getRandomValues(new Uint32Array(10))[0];
 
   /**

@@ -2,10 +2,6 @@ import { Component } from '@angular/core';
 import { HomeNewsComponent } from '../home-news/home-news.component';
 /**
  * Mobile view of news at home page
- *
- * @export
- * @class HomeNewsMobileComponent
- * @extends {HomeNewsComponent}
  */
 @Component({
   selector: 'ofd-agregator-home-news-mobile',

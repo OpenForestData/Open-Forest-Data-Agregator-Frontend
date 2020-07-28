@@ -61,7 +61,7 @@ export class BarChartComponent implements OnChanges {
   public barChartLegend = false;
 
   /**
-   * Charty
+   * Chart plugins
    *
    * @memberof BarChartComponent
    */

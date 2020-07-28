@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
+import { IDatePickerConfig } from 'ng2-date-picker';
 
 /**
  * Filters for charts
@@ -48,7 +49,7 @@ export class ChartFiltersComponent implements OnInit {
    *
    * @memberof ChartFiltersComponent
    */
-  public startDatePickerConfig = {
+  public startDatePickerConfig: IDatePickerConfig = {
     locale: 'pl-PL',
     disableKeypress: true,
     unSelectOnClick: false,
@@ -61,7 +62,7 @@ export class ChartFiltersComponent implements OnInit {
    *
    * @memberof ChartFiltersComponent
    */
-  public endDatePickerConfig = {
+  public endDatePickerConfig: any = {
     min: this.startDate,
     disableKeypress: true,
     unSelectOnClick: false,

@@ -4,9 +4,6 @@ import { Router } from '@angular/router';
 
 /**
  * Search section at home page
- *
- * @export
- * @class HomeSearchComponent
  */
 @Component({
   selector: 'ofd-agregator-home-search',
@@ -16,23 +13,35 @@ import { Router } from '@angular/router';
 export class HomeSearchComponent {
   /**
    * Input search value
-   *
-   * @memberof HomeSearchComponent
    */
   public searchValue = '';
 
+  /**
+   * Dataset of the day
+   */
   public datasetOfTheDay: {
+    /**
+     * Dataset name
+     */
     name: string;
+    /**
+     * Dataset latin name
+     */
     latinName: string;
+    /**
+     * Dataset preview URL
+     */
     preview: string;
+    /**
+     * Dataset DOI
+     */
     identifier64: string;
   } = null;
 
   /**
    * Creates an instance of HomeSearchComponent.
-   * @param {DatasetsService} DSService
-   * @param {Router} router
-   * @memberof HomeSearchComponent
+   * @param {DatasetsService} DSService Datasets service
+   * @param {Router} router Router
    */
   constructor(public DSService: DatasetsService, public router: Router) {
     this.DSService.getDatasetOfTheDay().subscribe(response => {
@@ -54,8 +63,6 @@ export class HomeSearchComponent {
 
   /**
    * Redirects to datasets view with serach params set
-   *
-   * @memberof HomeSearchComponent
    */
   search() {
     this.DSService.searchFilters = { field: 'q', data: this.searchValue, search: true };

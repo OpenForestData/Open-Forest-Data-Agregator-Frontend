@@ -12,11 +12,6 @@ import { Subscription } from 'rxjs';
 import { UtilsService } from '@app/services/utils.service';
 /**
  * Gallery view of dataset
- *
- * @export
- * @class DatasetsGalleryComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-datasets-gallery',
@@ -26,8 +21,6 @@ import { UtilsService } from '@app/services/utils.service';
 export class DatasetsGalleryComponent implements OnInit, OnDestroy {
   /**
    * Sort select options
-   *
-   * @memberof DatasetsListComponent
    */
   public sortItems = [
     { name: 'A-Z', value: 1 },
@@ -36,24 +29,16 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
 
   /**
    * Current selected sort options
-   *
-   * @memberof DatasetsListComponent
    */
   public sortBy = this.sortItems[0];
 
   /**
    * @ignore
-   *
-   * @type {Subscription}
-   * @memberof DatasetsListComponent
    */
   public sub: Subscription;
 
   /**
    * UI Select options
-   *
-   * @type {IUISelectOptions}
-   * @memberof DatasetsListComponent
    */
   public options: IUISelectOptions = {
     placeholder: 'Sortuj wg'
@@ -61,15 +46,12 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
 
   /**
    * Datasets
-   *
-   * @type {any[]}
-   * @memberof DatasetsListComponent
    */
   @Input() datasets: any[];
 
   /**
    * Creates an instance of DatasetsGalleryComponent.
-   * @param {DatasetsService} DSService
+   * @param {DatasetsService} DSService Datasets service
    * @param {UtilsService} utilsService Utility service
    * @memberof DatasetsGalleryComponent
    */
@@ -81,8 +63,6 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
 
   /**
    * @ignore
-   *
-   * @memberof DatasetsGalleryComponent
    */
   ngOnInit(): void {
     this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
@@ -92,7 +72,6 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
    * Change sort value
    *
    * @param {*} sortValue
-   * @memberof DatasetsGalleryComponent
    */
   sortChanged(sortValue) {
     this.DSService.searchFilters = { field: 'sort', data: sortValue.value ? 'asc' : 'desc', search: true };
@@ -103,7 +82,6 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
    *
    * @param {*} index
    * @param {*} el
-   * @memberof DatasetsGalleryComponent
    */
   showGallery(index, el) {
     const item = { images: [], labels: [] };

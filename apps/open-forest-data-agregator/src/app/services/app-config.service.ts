@@ -30,7 +30,7 @@ export class AppConfigService {
           AppConfigService.config = response;
           resolve();
         })
-        .catch((error: any) => {
+        .catch(() => {
           reject('No config provided!');
         });
     });

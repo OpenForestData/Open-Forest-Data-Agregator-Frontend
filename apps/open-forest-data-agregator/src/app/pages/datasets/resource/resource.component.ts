@@ -84,22 +84,12 @@ export class ResourceComponent implements OnInit {
    * Mobile view
    */
   mobile = false;
-  /**
-   * Mocks
-   */
-  externalTools = `
-3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
-Micro: https://data-epuszcza.biaman.pl/tools/microViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
-Tiff: https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1
-Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=232&datasetid=231&datasetversion=1.0
-Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
-  `;
 
   /**
    * Resource constructor
-   * @param {Http} http Http
-   * @param {DatasetSservice} datasetService Dataset Service
-   * @param {Route} route Route
+   * @param {HttpClient} http Http
+   * @param {DatasetsService} datasetService Dataset Service
+   * @param {ActivatedRoute} route Route
    */
   constructor(private http: HttpClient, private datasetService: DatasetsService, private route: ActivatedRoute) {}
   /**
@@ -177,16 +167,6 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   getTextFromURL(url: string) {
     this.http.get(url, { responseType: 'text' }).subscribe(response => {
       this.resourceContent.plain_text = response;
-    });
-  }
-
-  /**
-   * Get file content from given URL
-   * @param url URL to file
-   */
-  getJSONFromURL(url: string) {
-    this.http.get(url, { responseType: 'text' }).subscribe(response => {
-      this.resourceContent.iframe = JSON.parse(response);
     });
   }
 

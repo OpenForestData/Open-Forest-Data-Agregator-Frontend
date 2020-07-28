@@ -4,10 +4,6 @@ import { HomeService, IContactForm } from '@app/pages/home/home.service';
 
 /**
  * Contact modal content
- *
- * @export
- * @class HomeContactFormComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-home-contact-form',
@@ -28,6 +24,9 @@ export class HomeContactFormComponent {
     checkbox: ''
   };
 
+  /**
+   * Form field errors
+   */
   public formError = {
     firstName: '',
     lastName: '',
@@ -36,7 +35,8 @@ export class HomeContactFormComponent {
   };
   /**
    * Creates an instance of HomeContactFormComponent.
-   * @param {UIModalService} modal
+   * @param {UIModalService} modal UI Modal Service
+   * @param {HomeService} homeService Home Service
    * @memberof HomeContactFormComponent
    */
   constructor(public modal: UIModalService, private homeService: HomeService) {}
@@ -70,7 +70,7 @@ export class HomeContactFormComponent {
       recaptcha_response: 'test'
     };
 
-    this.homeService.sendContactForm(payload).subscribe(response => {
+    this.homeService.sendContactForm(payload).subscribe(() => {
       alert('Pomyślnie wysłano wiadomość');
       this.closeModal();
     });

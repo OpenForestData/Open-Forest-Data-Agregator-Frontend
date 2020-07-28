@@ -17,7 +17,7 @@ export class DatasetService {
 
   /**
    * Get dataset object by doi
-   * @param {doi} doi identifier
+   * @param {any} doi identifier
    */
   getDatasetByDOI(doi: any) {
     return this.http.get<any>(`${AppConfigService.config.api}dataset?identifier=${doi}`);

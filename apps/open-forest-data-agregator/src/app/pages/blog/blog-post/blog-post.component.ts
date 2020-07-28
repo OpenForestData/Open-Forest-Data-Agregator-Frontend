@@ -16,7 +16,7 @@ import { BlogArticle } from '@app/interfaces/blog-article';
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
   /**
-   * Router subscripton
+   * Router subscription
    */
   public routerSubscription: Subscription = new Subscription();
   /**
@@ -28,6 +28,9 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   public article: BlogArticle;
 
+  /**
+   * Post related posts
+   */
   public relatedPosts: BlogArticle[] = [];
 
   /**
@@ -53,7 +56,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Unsubscribes to subcribed items
+   * Unsubscribes to subscribed items
    */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();

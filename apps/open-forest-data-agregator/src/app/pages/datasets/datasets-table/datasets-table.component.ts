@@ -2,10 +2,6 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 /**
  * Datasets view as table
- *
- * @export
- * @class DatasetsTableComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-datasets-table',
@@ -46,7 +42,7 @@ export class DatasetsTableComponent implements OnInit {
 
   /**
    * Creates an instance of DatasetsTableComponent.
-   * @param {DatasetsService} DSService
+   * @param {DatasetsService} DSService Datasets service
    * @memberof DatasetsTableComponent
    */
   constructor(public DSService: DatasetsService) {}

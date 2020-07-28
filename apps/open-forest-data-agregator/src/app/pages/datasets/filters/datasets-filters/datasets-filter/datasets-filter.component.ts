@@ -68,7 +68,7 @@ export class DatasetsFilterComponent {
    */
   @Input() multiple = true;
   /**
-   * Event emmiter for value change
+   * Event emitter for value change
    *
    * @memberof DatasetsFilterComponent
    */
@@ -125,7 +125,7 @@ export class DatasetsFilterComponent {
   }
 
   /**
-   * Emit value manualy
+   * Emit value manually
    *
    * @param {*} payload
    * @memberof DatasetsFilterComponent

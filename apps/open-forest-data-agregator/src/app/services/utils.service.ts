@@ -12,41 +12,51 @@ import { DatasetsService } from '@app/pages/datasets/datasets.service';
  * @interface NavigationItem
  */
 export interface NavigationItem {
+  /**
+   * Navigation item name
+   */
   name: string;
+  /**
+   * Path
+   */
   path: string;
+  /**
+   * Unique navigation item key
+   */
   key: string;
+  /**
+   * Navigation item URL
+   */
   url?: string;
+  /**
+   * Children of item
+   */
   children?: NavigationItem[];
+  /**
+   * Browser target eq _blank
+   */
   target?: string;
 }
 
 /**
- * Utility service with usefull data and functions
- *
- * @export
- * @class UtilsService
+ * Utility service with useful data and functions
  */
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
   /**
-   * Sends information about menu beeing ready
-   *
-   * @type {Subject<any>}
-   * @memberof UtilsService
+   * Sends information about menu being
    */
   public menuReadySubject: Subject<any> = new Subject();
 
   /**
    * Holds data from API
-   *
-   * @memberof UtilsService
    */
   public homePageData;
 
   /**
-   * Defines whatever menu strucutre has been created
+   * Defines whatever menu structure has been created
    *
    * @memberof UtilsService
    */
@@ -54,9 +64,6 @@ export class UtilsService {
 
   /**
    * Menu basic structure
-   *
-   * @private
-   * @memberof UtilsService
    */
   private basicStructure: NavigationItem[] = [
     {
@@ -84,9 +91,6 @@ export class UtilsService {
 
   /**
    * Menu Structure
-   *
-   * @private
-   * @memberof UtilsService
    */
   private _menuStructure: NavigationItem[] = [
     {
@@ -114,17 +118,11 @@ export class UtilsService {
 
   /**
    * Menu structure returned by API
-   *
-   * @type {*}
-   * @memberof UtilsService
    */
   public responseData: any;
 
   /**
    * Getter of menu structure
-   *
-   * @type {NavigationItem[]}
-   * @memberof UtilsService
    */
   public get menuStructure(): NavigationItem[] {
     return this._menuStructure;
@@ -133,7 +131,7 @@ export class UtilsService {
   /**
    * Setter for menu structure
    *
-   * @memberof UtilsService
+   * @param {NavigationItem[]} newValue Navigation items
    */
   public set menuStructure(newValue: NavigationItem[]) {
     this._menuStructure = newValue;
@@ -143,8 +141,6 @@ export class UtilsService {
    * Returns menu object by slug name
    *
    * @param {*} slug
-   * @returns
-   * @memberof UtilsService
    */
   public getMenuBySlug(slug) {
     const menu = this.responseData['menu'];
@@ -157,8 +153,11 @@ export class UtilsService {
 
   /**
    * Creates an instance of UtilsService.
-   * @param {HttpClient} http
-   * @param {LanguageService} lang
+   * @param {HttpClient} http Http Client
+   * @param {LanguageService} lang Language service
+   * @param {Title} titleService Title service
+   * @param {Meta} metaService Meta service
+   * @param {DatasetsService} DSService Datasets service
    * @memberof UtilsService
    */
   constructor(
@@ -342,10 +341,10 @@ export class UtilsService {
 
   /**
    * Convert raw data to CSV and downloads it
-   * @param keys Column keys
-   * @param allMetadata All metadata
+   * @param {any} keys Column keys
+   * @param {any} allMetadata All metadata
    */
-  convertMetadataToFile(keys: any, allMetadata) {
+  convertMetadataToFile(keys: any, allMetadata: any) {
     let firstRow = '';
     const indexer = {};
     let temp = [];

@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '@app/services/utils.service';
 /**
  * Mobile section of New Data
- *
- * @export
- * @class NewDataMobileComponent
  */
 @Component({
   selector: 'ofd-agregator-new-data-mobile',
@@ -23,7 +20,7 @@ export class NewDataMobileComponent implements OnInit {
    */
   buttonsAddData = [];
   /**
-   *
+   * New Data mobile component constructor
    * @param {UtilsService} utilsService Utils service
    */
   constructor(private utilsService: UtilsService) {}

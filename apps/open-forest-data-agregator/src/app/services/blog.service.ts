@@ -9,6 +9,10 @@ import { AppConfigService } from './app-config.service';
   providedIn: 'root'
 })
 export class BlogService {
+  /**
+   * Blog service constructor
+   * @param {HttpClient} http Http Client
+   */
   constructor(private http: HttpClient) {}
 
   /**

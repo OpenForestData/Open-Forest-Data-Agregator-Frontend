@@ -7,12 +7,13 @@ import { NewsPostComponent } from './news-post/news-post.component';
 import { NewsTileComponent } from './news-tile/news-tile.component';
 import { NewsTileMainComponent } from './news-tile-main/news-tile-main.component';
 
+/**
+ * News module components
+ */
 const components = [NewsComponent, NewsPostComponent, NewsTileComponent, NewsTileMainComponent];
+
 /**
  * News module
- *
- * @export
- * @class NewsModule
  */
 @NgModule({
   declarations: components,

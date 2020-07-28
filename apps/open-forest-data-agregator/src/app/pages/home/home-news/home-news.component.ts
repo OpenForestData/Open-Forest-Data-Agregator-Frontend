@@ -4,11 +4,6 @@ import { LanguageService } from '@app/services/language.service';
 import { NewsService } from '@app/services/news.service';
 /**
  * Desktop view of news at home page
- *
- * @export
- * @class HomeNewsComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-home-news',
@@ -27,14 +22,16 @@ export class HomeNewsComponent implements OnInit, OnDestroy {
    * News
    */
   news = [];
+
   /**
    * Filters list
    */
   filters = {};
 
   /**
-   *
-   * @param {LanguageService} languageService
+   * Home news component construcotr
+   * @param {LanguageService} languageService Language service
+   * @param {NewsService} newsService News service
    * @memberof HomeNewsComponent
    */
   constructor(public languageService: LanguageService, public newsService: NewsService) {}

@@ -6,11 +6,6 @@ import { NewsService } from '@app/services/news.service';
 
 /**
  * View of news post
- *
- * @export
- * @class NewsPostComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-news-post',
@@ -41,13 +36,16 @@ export class NewsPostComponent implements OnInit, OnDestroy {
    */
   public newsID = 0;
 
-  news: any = {};
+  /**
+   * News data
+   */
+  public news: any = {};
 
   /**
-   *
-   * @param {LanguageService} languageService
-   * @param {ActivatedRoute} route
-   * @memberof NewsPostComponent
+   * News post component constructor
+   * @param {LanguageService} languageService Language service
+   * @param {ActivatedRoute} route Activated route
+   * @param {NewsService} newsService News service
    */
   constructor(public languageService: LanguageService, private newsService: NewsService, public route: ActivatedRoute) {
     this.route.params.subscribe(params => {

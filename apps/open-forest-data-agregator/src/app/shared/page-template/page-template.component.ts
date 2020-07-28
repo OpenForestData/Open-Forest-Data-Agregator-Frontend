@@ -5,9 +5,6 @@ import { UtilsService } from '@app/services/utils.service';
 import { LanguageService } from '@app/services/language.service';
 /**
  * Template for generic page
- *
- * @export
- * @class PageTemplateComponent
  */
 @Component({
   selector: 'ofd-agregator-page-template',
@@ -17,34 +14,29 @@ import { LanguageService } from '@app/services/language.service';
 export class PageTemplateComponent implements OnInit, OnDestroy {
   /**
    * Accordion data
-   *
-   * @memberof PageTemplateComponent
    */
   public accordionData = [];
+
   /**
    * If accordion is present
-   *
-   * @memberof PageTemplateComponent
    */
   public ifAccordion = false;
 
   /**
    * If latest date module is present
    *
-   * @memberof PageTemplateComponent
    */
   public ifNewData = false;
 
   /**
    * Icon URL for title component
    *
-   * @memberof PageTemplateComponent
    */
   @Input() iconURL = '';
+
   /**
    * Title of news for title component
    *
-   * @memberof PageTemplateComponent
    */
   @Input() pageTitle = '';
 
@@ -57,9 +49,6 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
 
   /**
    * @ignore
-   *
-   * @type {Subscription}
-   * @memberof PageTemplateComponent
    */
   public routerSubscription: Subscription = new Subscription();
 
@@ -72,16 +61,14 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
 
   /**
    * Creates an instance of PageTemplateComponent.
-   * @param {ActivatedRoute} route
-   * @param {UtilsService} utils
-   * @memberof PageTemplateComponent
+   * @param {ActivatedRoute} route Activated route
+   * @param {UtilsService} utils Utils service
+   * @param {LanguageService} lang Language service
    */
   constructor(public route: ActivatedRoute, public utils: UtilsService, public lang: LanguageService) {}
 
   /**
    * @ignore
-   *
-   * @memberof PageTemplateComponent
    */
   ngOnInit() {
     this.routerSubscription.add(
@@ -111,7 +98,6 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
    * Sets data to component from API
    *
    * @param {*} pageContent
-   * @memberof PageTemplateComponent
    */
   readPageData(pageContent) {
     if (pageContent.accordions) {

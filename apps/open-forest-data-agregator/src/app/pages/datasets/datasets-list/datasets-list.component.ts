@@ -5,11 +5,6 @@ import { Subscription } from 'rxjs';
 import { UtilsService } from '@app/services/utils.service';
 /**
  * Datasets as list
- *
- * @export
- * @class DatasetsListComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-datasets-list',
@@ -77,7 +72,7 @@ export class DatasetsListComponent implements OnDestroy {
 
   /**
    * Creates an instance of DatasetsListComponent.
-   * @param {DatasetsService} DSService
+   * @param {DatasetsService} DSService Datasets service
    * @param {UtilsService} utilsService Utility service
    * @memberof DatasetsListComponent
    */

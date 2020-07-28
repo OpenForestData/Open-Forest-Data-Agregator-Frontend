@@ -20,7 +20,7 @@ const routes: Routes = [
   }
 ];
 /**
- * Routing module for app. Contains routings path for basic modules
+ * Routing module for app. Contains routing path for basic modules
  *
  * @export
  * @class AppRoutingModule

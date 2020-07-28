@@ -1,11 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 /**
- *
- *
- * @export
- * @class DatasetsActiveFiltersComponent
- * @implements {OnInit}
+ * Datasets active filters component
  */
 @Component({
   selector: 'ofd-agregator-datasets-active-filters',
@@ -15,25 +11,17 @@ import { DatasetsService } from '../datasets.service';
 export class DatasetsActiveFiltersComponent {
   /**
    * Creates an instance of DatasetsActiveFiltersComponent.
-   * @param {DatasetsService} DSService
-   * @memberof DatasetsActiveFiltersComponent
+   * @param {DatasetsService} DSService Datasets service
    */
   constructor(public DSService: DatasetsService) {}
 
   /**
    * Active filters
-   *
-   * @type {*}
-   * @memberof DatasetsActiveFiltersComponent
    */
   @Input() activeFilters: any;
 
   /**
    * Send action to subject to remove filter
-   *
-   * @param {*} name
-   * @param {*} index
-   * @memberof DatasetsActiveFiltersComponent
    */
   removeFilter(name, index) {
     this.DSService.removeFilterSubject.next({ name, index });
@@ -42,9 +30,7 @@ export class DatasetsActiveFiltersComponent {
   /**
    * Parses moment value to readable date format
    *
-   * @param {*} date
-   * @returns
-   * @memberof DatasetsActiveFiltersComponent
+   * @param {*} date Date
    */
   getDateValue(date) {
     if (date) {

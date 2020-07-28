@@ -2,8 +2,7 @@
 
 .news-body {
   width: 100%;
-  margin: 0;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 
   .news-image-holder {
     max-width: 95%;
@@ -125,15 +124,13 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  margin: 10px 0;
-  margin-top: 20px;
+  margin: 20px 0 10px;
 }
 
 .clear {
   border: none;
   background: none;
-  margin: 15px 0;
-  margin-left: auto;
+  margin: 15px 0 15px auto;
   font-weight: 400;
   font-size: 12px;
   display: block;
@@ -162,8 +159,7 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  margin: 15px 0;
-  margin-left: -5px;
+  margin: 15px 0 15px -5px;
 }
 
 .news-grid {

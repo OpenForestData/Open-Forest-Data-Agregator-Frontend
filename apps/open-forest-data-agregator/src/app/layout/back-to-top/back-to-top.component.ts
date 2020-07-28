@@ -33,7 +33,7 @@ export function debounce(delay: number = 100): MethodDecorator {
 })
 export class BackToTopComponent {
   /**
-   * View referenece to button
+   * View reference to button
    *
    * @memberof BackToTopComponent
    */
@@ -48,7 +48,7 @@ export class BackToTopComponent {
 
   /**
    * Callback for page scrolling
-   * Valids arrow visiblity condition
+   * Valid arrow visibility condition
    */
   @HostListener('window:scroll', [])
   @debounce()
@@ -58,7 +58,7 @@ export class BackToTopComponent {
 
   /**
    * Callback for page resize
-   * Valids arrow visiblity condition
+   * Valid arrow visibility condition
    */
   @HostListener('window:resize', [])
   onWindowResize() {

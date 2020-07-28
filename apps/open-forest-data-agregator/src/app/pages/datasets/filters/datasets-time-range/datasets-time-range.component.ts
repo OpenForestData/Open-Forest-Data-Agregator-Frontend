@@ -54,7 +54,7 @@ export class DatasetsTimeRangeComponent {
   @Input() single = false;
 
   /**
-   * Event emmiter for value change
+   * Event emitter for value change
    *
    * @memberof DatasetsFilterComponent
    */

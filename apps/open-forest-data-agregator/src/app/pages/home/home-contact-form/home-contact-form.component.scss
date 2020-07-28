@@ -125,12 +125,11 @@ textarea:not(:placeholder-shown) + label {
 .check_box + label {
   cursor: pointer;
 
-  background: url('./../../../../../../../resources/assets/modules/auth/checkbox.png') no-repeat;
   height: 20px;
   width: 20px;
   display: inline-block;
   padding: 0 0 0 0;
-  background-position: 0 0;
+  background: url('./../../../../../../../resources/assets/modules/auth/checkbox.png') no-repeat 0 0;
 }
 
 .check_box:checked + label {

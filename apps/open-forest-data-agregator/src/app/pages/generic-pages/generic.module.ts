@@ -8,6 +8,9 @@ import { FaqComponent } from './faq/faq.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { PartnersComponent } from './partners/partners.component';
 
+/**
+ * Generic module components
+ */
 const components = [
   AboutProjectComponent,
   AboutResourcesComponent,
@@ -17,9 +20,6 @@ const components = [
 ];
 /**
  * Generic pages module
- *
- * @export
- * @class GenericModule
  */
 @NgModule({
   declarations: components,
