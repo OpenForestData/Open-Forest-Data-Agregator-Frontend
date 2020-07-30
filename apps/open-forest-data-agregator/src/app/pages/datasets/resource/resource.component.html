@@ -133,7 +133,11 @@
             </div>
             <div
               class="right-container__files__file-viewer__as-table"
-              *ngIf="['Comma Separated Values', 'Tab-Separated Values'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+              *ngIf="
+                ['Comma Separated Values', 'Tab-Separated Values', 'Tab-Delimited'].indexOf(
+                  resource.details?.fileTypeDisplay
+                ) >= 0
+              "
             >
               <ofd-agregator-table [resource]="resourceContent.csv" [type]="resource.details?.fileTypeDisplay">
               </ofd-agregator-table>
@@ -176,7 +180,8 @@
                   'micro',
                   'map_geonode',
                   'dashboard_grafana',
-                  'application/vnd.ms-pki.stl'
+                  'application/vnd.ms-pki.stl',
+                  'image/x-3ds'
                 ].indexOf(resource.details?.fileTypeDisplay) >= 0
               "
             >
@@ -212,7 +217,9 @@
                   'map_geonode',
                   'dashboard_grafana',
                   'application/vnd.ms-pki.stl',
-                  'Shape'
+                  'Shape',
+                  'Tab-Delimited',
+                  'image/x-3ds'
                 ].indexOf(resource.details?.fileTypeDisplay) === -1
               "
             >
