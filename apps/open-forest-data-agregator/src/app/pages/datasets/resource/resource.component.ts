@@ -142,7 +142,9 @@ export class ResourceComponent implements OnInit {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'grafanaViewer';
       } else if (
-        ['3ds', 'application/x-tgif', 'application/vnd.ms-pki.stl'].indexOf(this.resource.details?.fileTypeDisplay) >= 0
+        ['image/x-3ds', 'application/x-tgif', 'application/vnd.ms-pki.stl'].indexOf(
+          this.resource.details?.fileTypeDisplay
+        ) >= 0
       ) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = '3dViewer';
