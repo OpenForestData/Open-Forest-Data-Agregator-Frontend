@@ -21,7 +21,7 @@
     <div class="row animals-container">
       <div class="col-lg-12 col-md-12 middle-md animal-box-wrapper">
         <div class="animal-box desktop-flex-only" *ngFor="let item of utilService.homePageData.categories">
-          <a>
+          <a href="{{ item.href ? item.href : '' }}">
             <img [src]="item.image" alt="Animal name" />
             <p class="animal-name">{{ item.title }}</p>
           </a>
