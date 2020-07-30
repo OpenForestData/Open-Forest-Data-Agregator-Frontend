@@ -42,7 +42,17 @@ export class NewsService {
    * @param {string} url News Url
    */
   getSingleNews(url: string) {
-    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`);
+    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`).pipe(
+      map(response => {
+        if (response['article']) {
+          response['article']['image_in_list'] =
+            response['article']['image_in_list'] !== ''
+              ? AppConfigService.config.api + response['article']['image_in_list'].replace('/api/v1/', '')
+              : '/assets/images/no_photo.png';
+        }
+        return response;
+      })
+    );
   }
 
   /**
