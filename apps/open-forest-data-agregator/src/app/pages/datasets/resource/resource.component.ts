@@ -130,7 +130,9 @@ export class ResourceComponent implements OnInit {
       } else if (['application/rdf+xml', 'XML'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
       } else if (
-        ['Comma Separated Values', 'Tab-Separated Values'].indexOf(this.resource.details?.fileTypeDisplay) >= 0
+        ['Comma Separated Values', 'Tab-Separated Values', 'Tab-Delimited'].indexOf(
+          this.resource.details?.fileTypeDisplay
+        ) >= 0
       ) {
         this.resourceContent.csv = this.resource.download_url;
       } else if (['map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
