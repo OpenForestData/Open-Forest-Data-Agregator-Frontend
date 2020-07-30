@@ -11,15 +11,15 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let keyword of blogData?.keywords" (click)="keywordFilter(keyword.url)">{{
+      <span class="tag" *ngFor="let keyword of blogData?.keywords" (click)="keywordFilter(keyword.slug)">{{
         keyword.title
       }}</span>
     </div>
   </div>
-  <div class="row news-body">
+  <div class="row news-body" *ngIf="newestArticle">
     <div class="col-lg-5 col-md-4 col-xs-12 middle-xs">
       <div class="news-image-holder">
-        <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+        <img [src]="newestArticle.image_in_list" [alt]="newestArticle.title" />
       </div>
     </div>
     <div class="col-lg-7 col-md-8 col-xs-12 p-l-20">
@@ -43,7 +43,7 @@
 
       <p class="tags-p">
         <span class="news-tags" *ngIf="newestArticle">
-          <span class="keywords" *ngFor="let keyword of newestArticle.keywords" (click)="keywordFilter(keyword.url)">{{
+          <span class="keywords" *ngFor="let keyword of newestArticle.keywords" (click)="keywordFilter(keyword.slug)">{{
             keyword.title
           }}</span>
         </span>

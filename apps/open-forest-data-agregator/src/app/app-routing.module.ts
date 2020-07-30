@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MainLayoutComponent } from '@app/layout/main-layout/main-layout.component';
 import { NotFoundComponent } from '@app/pages/not-found/not-fount.component';
@@ -26,12 +26,7 @@ const routes: Routes = [
  * @class AppRoutingModule
  */
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-      scrollPositionRestoration: 'enabled'
-    })
-  ],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', anchorScrolling: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

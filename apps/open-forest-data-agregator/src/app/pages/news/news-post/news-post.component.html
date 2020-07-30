@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="news">
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
       <a class="post-link">
@@ -49,7 +49,7 @@
     </div>
     <div class="col-lg-7 col-md-6 col-xs-12 middle-xs">
       <div class="news-image-holder">
-        <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+        <img [src]="news['image_in_list']" [alt]="news.title" />
       </div>
     </div>
     <div class="col-lg-5 col-md-6 col-xs-12">

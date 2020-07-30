@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+import { map } from 'rxjs/operators';
 
 /**
  * Blog service
@@ -24,7 +25,17 @@ export class BlogService {
    */
   getBlog(filters) {
     const queryParams = this.getQueryParamsFromObject(filters);
-    return this.http.get<any>(`${AppConfigService.config.api}blog?${queryParams}`);
+    return this.http.get<any>(`${AppConfigService.config.api}blog?${queryParams}`).pipe(
+      map(response => {
+        response['articles'].map(article => {
+          article['image_in_list'] =
+            article['image_in_list'] !== ''
+              ? AppConfigService.config.api + article['image_in_list'].replace('/api/v1/', '')
+              : '/assets/images/no_photo.png';
+        });
+        return response;
+      })
+    );
   }
 
   /**
@@ -35,7 +46,17 @@ export class BlogService {
    * // returns blog slug data object
    */
   getBlogSlug(slug: any) {
-    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=/cms-api/v1/blog/article/${slug}`);
+    return this.http.get<any>(`${AppConfigService.config.api}pages?slug=/cms-api/v1/blog/article/${slug}`).pipe(
+      map(response => {
+        if (response['article'] && response['article']['image_in_list']) {
+          response['article']['image_in_list'] =
+            response['article']['image_in_list'] !== ''
+              ? AppConfigService.config.api + response['article']['image_in_list'].replace('/api/v1/', '')
+              : '';
+        }
+        return response;
+      })
+    );
   }
 
   /**

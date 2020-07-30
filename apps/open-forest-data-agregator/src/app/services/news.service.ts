@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+import { map } from 'rxjs/operators';
 
 /**
  * News service
@@ -23,7 +24,17 @@ export class NewsService {
    */
   getNews(filters) {
     const queryParams = this.getQueryParamsFromObject(filters);
-    return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`);
+    return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`).pipe(
+      map(response => {
+        response['articles'].map(article => {
+          article['image_in_list'] =
+            article['image_in_list'] !== ''
+              ? AppConfigService.config.api + article['image_in_list'].replace('/api/v1/', '')
+              : '/assets/images/no_photo.png';
+        });
+        return response;
+      })
+    );
   }
 
   /**

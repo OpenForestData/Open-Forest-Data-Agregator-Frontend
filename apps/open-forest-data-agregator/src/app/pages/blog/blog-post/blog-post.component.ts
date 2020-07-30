@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '@app/services/blog.service';
-import { first } from 'rxjs/operators';
+
 import { BlogArticle } from '@app/interfaces/blog-article';
 
 /**
@@ -47,7 +47,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     // this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
-    this.route.params.pipe(first()).subscribe(params => {
+    this.route.params.subscribe(params => {
       this.blogService.getBlogSlug(params['slug']).subscribe(response => {
         this.article = response['article'];
         this.relatedPosts = response['related_posts'] ? response['related_posts'].slice(0, 2) : [];

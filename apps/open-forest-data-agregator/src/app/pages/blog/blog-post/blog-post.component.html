@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="article">
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
       <a class="post-link">
@@ -56,7 +56,17 @@
     </div>
     <div class="col-md-7 col-xs-12 middle-xs">
       <div class="news-image-holder">
-        <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+        <!--        <img src="assets/modules/home/ex_1.jpg" alt="Example" />-->
+        <img
+          [src]="article.image_in_list"
+          *ngIf="article.image_in_list && article.image_in_list !== ''"
+          [alt]="article.title"
+        />
+        <img
+          src="/assets/images/no_photo.png"
+          *ngIf="!article.image_in_list && article.image_in_list === ''"
+          [alt]="article.title"
+        />
       </div>
 
       <div class="row news-body ckeditor-content">
