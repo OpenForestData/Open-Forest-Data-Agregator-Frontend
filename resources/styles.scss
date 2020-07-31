@@ -432,6 +432,12 @@ dp-month-calendar .dp-calendar-month {
   border: none;
 }
 
+dp-month-calendar .dp-calendar-month:hover {
+  background-color: $accent-color !important;
+  border-radius: 50px;
+  color: white;
+}
+
 dp-month-calendar .dp-calendar-month.dp-selected {
   background-color: $accent-color !important;
   border-radius: 50px;
@@ -451,4 +457,10 @@ dp-day-time-calendar dp-time-select {
 
 .pointer {
   cursor: pointer;
+}
+
+dp-calendar-nav .dp-calendar-secondary-nav-left,
+dp-calendar-nav .dp-calendar-secondary-nav-right {
+  border: none;
+  background-color: transparent;
 }
