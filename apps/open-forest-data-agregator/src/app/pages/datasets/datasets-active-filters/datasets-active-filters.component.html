@@ -8,7 +8,7 @@
 
       <ng-container *ngIf="group.type === 'DATERANGE'">
         <span class="value">
-          {{ getDateValue(group.values[0]) }} - {{ getDateValue(group.values[1]) }}
+          {{ getDateValue(group.values[0]) | date: 'yyyy' }} - {{ getDateValue(group.values[1]) | date: 'yyyy' }}
           <svg-icon
             src="assets/modules/search/small_times.svg"
             (click)="removeFilter(group.key, 0)"
@@ -20,7 +20,7 @@
 
       <ng-container *ngIf="group.type === 'DATE'">
         <span class="value">
-          {{ getDateValue(group.values[0]) }}
+          {{ getDateValue(group.values[0]) | date: 'yyyy' }}
           <svg-icon
             src="assets/modules/search/small_times.svg"
             (click)="removeFilter(group.key, 0)"

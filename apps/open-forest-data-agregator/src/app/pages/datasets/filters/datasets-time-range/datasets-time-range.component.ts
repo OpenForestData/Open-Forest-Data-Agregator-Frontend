@@ -70,7 +70,7 @@ export class DatasetsTimeRangeComponent {
     disableKeypress: true,
     unSelectOnClick: false,
     firstDayOfWeek: 'mo',
-    format: 'DD-MM-yyyy',
+    format: 'yyyy',
     hideOnOutsideClick: true,
     closeOnSelect: true,
     showMultipleYearsNavigation: true
