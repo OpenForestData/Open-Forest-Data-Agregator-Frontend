@@ -8,7 +8,22 @@
     <tbody>
       <tr *ngFor="let row of convertedData?.data; let i = index">
         <td *ngFor="let details of row | keyvalue: keepOrder">
-          {{ details.value }}
+          <p *ngIf="details.key !== 'file_location'">{{ details.value }}</p>
+          <img
+            [src]="row['file_location']"
+            [alt]="row['file_location']"
+            *ngIf="row['file_mimetype'] === 'image/jpeg' && details.key === 'file_location'"
+            (click)="showGallery(i, $event.target)"
+          />
+          <iframe
+            *ngIf="row['file_mimetype'] === 'video/mp4' && details.key === 'file_location'"
+            [src]="sanitizeVideo(row['file_location'])"
+            style="border:0 #ffffff none;"
+            height="40px"
+            width="40px"
+            title="Video frame"
+            allowfullscreen
+          ></iframe>
         </td>
       </tr>
     </tbody>
