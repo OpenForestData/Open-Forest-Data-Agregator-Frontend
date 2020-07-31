@@ -68,12 +68,12 @@ export class DatasetsTimeRangeComponent {
   public datePickerConfig: IDatePickerConfig = {
     locale: 'pl-PL',
     disableKeypress: true,
-    unSelectOnClick: true,
-    closeOnSelect: true,
-    enableMonthSelector: true,
-    showMultipleYearsNavigation: true,
+    unSelectOnClick: false,
     firstDayOfWeek: 'mo',
-    hideOnOutsideClick: false
+    format: 'DD-MM-yyyy',
+    hideOnOutsideClick: true,
+    closeOnSelect: true,
+    showMultipleYearsNavigation: true
   };
 
   /**
