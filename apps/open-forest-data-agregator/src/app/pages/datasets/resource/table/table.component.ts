@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Papa from 'papaparse';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Resource table component
@@ -31,8 +32,9 @@ export class TableComponent implements OnInit {
   /**
    * Resource table constructor
    * @param {HttpClient} http Http Client
+   * @param sanitizer Sanitizer
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   /**
    * Function that initialize on website loading and get CSV file.
@@ -80,5 +82,40 @@ export class TableComponent implements OnInit {
         this.convertedData = result;
       }
     });
+  }
+
+  /**
+   * Generate gallery view via lightGallery plugin
+   *
+   * @param {*} index
+   * @param {*} el
+   */
+  showGallery(index, el) {
+    const images = [];
+    const dataFromIndex = this.convertedData.data.slice(index, this.convertedData.data.length);
+    dataFromIndex.forEach((data: any) => {
+      if (data['file_mimetype'] === 'image/jpeg') {
+        images.push(data['file_location']);
+      }
+    });
+    const dynamicEl = images.map(img =>
+      Object.create({
+        src: img,
+        thumb: img
+      })
+    );
+    // @ts-ignore
+    window.lightGallery(el, {
+      dynamic: true,
+      dynamicEl
+    });
+  }
+
+  /**
+   * Sanitize video for iframe
+   * @param imageLocation Image location
+   */
+  sanitizeVideo(imageLocation: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(imageLocation);
   }
 }
