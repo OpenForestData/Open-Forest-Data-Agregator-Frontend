@@ -15,6 +15,7 @@ import { XmlComponent } from './xml/xml.component';
 import { MapComponent } from './map/map.component';
 import { IframeComponent } from './iframe/iframe.component';
 import { NotSupportedComponent } from './not-supported/not-supported.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,14 @@ import { NotSupportedComponent } from './not-supported/not-supported.component';
     IframeComponent,
     NotSupportedComponent
   ],
-  imports: [CommonModule, ResourceRoutingModule, SharedModule, PdfViewerModule, NgxJsonViewerModule, NgxDocViewerModule]
+  imports: [
+    CommonModule,
+    ResourceRoutingModule,
+    SharedModule,
+    PdfViewerModule,
+    NgxJsonViewerModule,
+    NgxDocViewerModule,
+    DataTablesModule
+  ]
 })
 export class ResourceModule {}

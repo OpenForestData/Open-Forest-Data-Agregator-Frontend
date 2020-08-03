@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Papa from 'papaparse';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subject } from 'rxjs';
 
 /**
  * Resource table component
@@ -28,6 +29,10 @@ export class TableComponent implements OnInit {
    * Converted data object
    */
   convertedData: any = {};
+  /**
+   * Data table trigger
+   */
+  dtTrigger: Subject<any> = new Subject();
 
   /**
    * Resource table constructor
@@ -80,6 +85,7 @@ export class TableComponent implements OnInit {
       delimiter: customDelimiter,
       complete: result => {
         this.convertedData = result;
+        this.dtTrigger.next();
       }
     });
   }

@@ -115,6 +115,7 @@ export class DatasetComponent implements OnInit {
       this.mobile = true;
     }
     this.route.queryParams.subscribe((queryParams): any => {
+      this.breadCrumbs.push({ name: queryParams.dvName, href: '' });
       const doi = atob(queryParams.doi);
       this.getDatasetDetails(doi);
     });
@@ -135,7 +136,6 @@ export class DatasetComponent implements OnInit {
         file.isChecked = false;
         return file;
       });
-      this.breadCrumbs.push({ name: this.dataset?.providers[0]?.authorAffiliation?.value, href: '' });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
       this.allFiles = [...response?.latestVersion?.files];
     });

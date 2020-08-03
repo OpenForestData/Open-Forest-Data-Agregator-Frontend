@@ -29,7 +29,7 @@
         <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
         <a
           [routerLink]="['detail']"
-          [queryParams]="{ doi: dataset.identifier64 }"
+          [queryParams]="{ doi: dataset.identifier64, dvName: dataset.dvName }"
           class="datasets-list__datasets__item__link"
           *ngIf="dataset.preview && dataset.preview !== 'wait'"
         >
