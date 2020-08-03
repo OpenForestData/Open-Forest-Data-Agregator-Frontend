@@ -92,3 +92,18 @@
 .display-none {
   display: none;
 }
+
+::ng-deep {
+  .filter {
+    .dp-nav-btns-container {
+      button {
+        background-color: transparent;
+        border: none;
+      }
+
+      .dp-calendar-nav-left {
+        margin-left: 8px;
+      }
+    }
+  }
+}

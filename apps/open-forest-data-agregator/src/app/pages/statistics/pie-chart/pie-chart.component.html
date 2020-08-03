@@ -1,8 +1,8 @@
 <ofd-agregator-chart-filters (filtersChanged)="getData($event)" [showRange]="false"></ofd-agregator-chart-filters>
 
 <div class="chart-wrapper">
-  <p class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, dolore.</p>
-  <p class="sum">150</p>
+  <p class="title">{{ chartTitle }}</p>
+  <p class="sum" *ngIf="showCount">{{ dataSum }}</p>
   <canvas
     baseChart
     [data]="pieChartData"

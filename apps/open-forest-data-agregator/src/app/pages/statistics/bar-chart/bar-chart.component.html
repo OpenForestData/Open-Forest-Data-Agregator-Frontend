@@ -1,11 +1,22 @@
 <ofd-agregator-chart-filters (filtersChanged)="getData($event)"></ofd-agregator-chart-filters>
 
 <div class="chart-wrapper">
-  <p class="title">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, dolore.</p>
-  <p class="sum">150</p>
+  <p class="title">{{ chartTitle }}</p>
+  <p class="sum" *ngIf="showCount">{{ dataSum }}</p>
   <canvas
+    *ngIf="barChartData.length > 0"
     baseChart
-    [datasets]="barChartData"
+    [data]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"
+  >
+  </canvas>
+  <canvas
+    *ngIf="barChartDatasets.length > 0"
+    baseChart
+    [datasets]="barChartDatasets"
     [labels]="barChartLabels"
     [options]="barChartOptions"
     [legend]="barChartLegend"

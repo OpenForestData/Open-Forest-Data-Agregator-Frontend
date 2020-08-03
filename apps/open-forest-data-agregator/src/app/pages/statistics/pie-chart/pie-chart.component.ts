@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { BaseChartDirective, Label } from 'ng2-charts';
 import { ChartOptions, ChartType } from 'chart.js';
+import { StatisticsService } from '@app/pages/statistics/statistics.service';
 
 /**
  * Pie Chart
@@ -15,7 +16,13 @@ import { ChartOptions, ChartType } from 'chart.js';
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss']
 })
-export class PieChartComponent {
+export class PieChartComponent implements OnChanges {
+  @Input() public chartType = '';
+
+  @Output() public filterChange = new EventEmitter();
+
+  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
+
   /**
    * Options for chart
    *
@@ -50,18 +57,7 @@ export class PieChartComponent {
   /**
    * Labels for chart
    */
-  public pieChartLabels: Label[] = [
-    'Koktajl truskawkowy',
-    'Placki ziemniaczane',
-    'Kluski na parze',
-    'Kotlet mielony',
-    'Ogórek kiszony',
-    'Buraczki',
-    'Kebab',
-    'Ziemniaczki',
-    'Surówka',
-    'Ryż jaśminowy'
-  ];
+  @Input() public pieChartLabels: Label[] = [];
 
   /**
    * Chart data
@@ -69,7 +65,7 @@ export class PieChartComponent {
    * @type {number[]}
    * @memberof PieChartComponent
    */
-  public pieChartData: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  @Input() public pieChartData: any[] = [];
 
   /**
    * Chart type
@@ -125,9 +121,39 @@ export class PieChartComponent {
     }
   ];
 
+  public dataSum = 0;
+
+  @Input() public chartTitle = '';
+
+  @Input() public showCount = true;
+
+  constructor(public statisticsService: StatisticsService) {}
+
+  ngOnChanges(changes) {
+    if (this.chart !== undefined) {
+      // this.chart.ngOnChanges({});
+      // this.chart.ngOnDestroy();
+      // this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
+      this.dataSum = this.pieChartData.reduce((prev, curr) => prev + curr, 0);
+    }
+  }
+
   /**
    * Get data
-   * @param {any} payload Payload
+   * @param {any} data Payload
    */
-  getData(payload) {}
+  getData(data) {
+    const payload = {
+      'data-type': this.chartType,
+      from: data.startDate
+        .split('-')
+        .reverse()
+        .join('-'),
+      to: data.endDate
+        .split('-')
+        .reverse()
+        .join('-')
+    };
+    this.filterChange.emit(payload);
+  }
 }

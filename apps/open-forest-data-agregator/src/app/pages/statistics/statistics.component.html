@@ -6,20 +6,27 @@
         [titleText]="'stats.datasets_stats_title' | translate"
       ></ofd-agregator-section-title>
     </div>
-    <div class="col-lg-offset-2 col-md-offset-0 col-lg-4 col-md-6 col-xs-12 center-xs">
-      <button class="btn export-btn svg-btn">
-        {{ 'stats.export' | translate }}
-        <svg-icon src="assets/modules/stats/export.svg" [applyCss]="true"></svg-icon>
-      </button>
-    </div>
   </div>
 
   <div class="row m-t-30">
     <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-right mobile-m-b-30">
-      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+      <ofd-agregator-pie-chart
+        chartType="datasets"
+        [chartTitle]="'Liczba dodanych datasetów w czasie'"
+        [pieChartLabels]="statisticsData.datasetsCategory.labels"
+        [pieChartData]="statisticsData.datasetsCategory.data"
+        (filterChange)="getDatasetsByCategoryData($event)"
+      ></ofd-agregator-pie-chart>
     </div>
     <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-left">
-      <ofd-agregator-bar-chart [bgColor]="0"></ofd-agregator-bar-chart>
+      <ofd-agregator-bar-chart
+        [bgColor]="0"
+        chartType="datasets"
+        [chartTitle]="'Liczba dodanych datasetów w czasie'"
+        [barChartLabels]="statisticsData.datasetsByDate.labels"
+        [barChartData]="statisticsData.datasetsByDate.data"
+        (filterChange)="getDatasetsByDate($event)"
+      ></ofd-agregator-bar-chart>
     </div>
   </div>
 
@@ -34,19 +41,100 @@
 
   <div class="row">
     <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
-      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+      <ofd-agregator-pie-chart
+        chartType="files"
+        [chartTitle]="'Liczba dodanych plików w czasie'"
+        [pieChartData]="statisticsData.addedFilesCategory.data"
+        [pieChartLabels]="statisticsData.addedFilesCategory.labels"
+        (filterChange)="getAddedFilesByCategory($event)"
+      ></ofd-agregator-pie-chart>
     </div>
     <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-left">
-      <ofd-agregator-bar-chart [bgColor]="1"></ofd-agregator-bar-chart>
+      <ofd-agregator-bar-chart
+        [bgColor]="1"
+        chartType="files"
+        [chartTitle]="'Liczba dodanych plików w czasie'"
+        (filterChange)="getAddedFilesByDate($event)"
+        [barChartData]="statisticsData.addedFilesByDate.data"
+        [barChartLabels]="statisticsData.addedFilesByDate.labels"
+      ></ofd-agregator-bar-chart>
     </div>
   </div>
 
   <div class="row m-t-60">
     <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
-      <ofd-agregator-pie-chart></ofd-agregator-pie-chart>
+      <ofd-agregator-pie-chart
+        chartType="downloads"
+        [chartTitle]="'Liczba pobranych plików w czasie'"
+        [pieChartLabels]="statisticsData.downloadedFilesCategory.labels"
+        [pieChartData]="statisticsData.downloadedFilesCategory.data"
+        (filterChange)="getDownloadedFilesByCategory($event)"
+      ></ofd-agregator-pie-chart>
     </div>
     <div class="col-lg-6 col-md-6 col-xs-12 middle-md chart-wrapper-left">
-      <ofd-agregator-bar-chart [bgColor]="2"></ofd-agregator-bar-chart>
+      <ofd-agregator-bar-chart
+        [bgColor]="2"
+        [chartTitle]="'Liczba pobranych plików w czasie'"
+        chartType="downloads"
+        [barChartLabels]="statisticsData.downloadedFilesByDate.labels"
+        [barChartData]="statisticsData.downloadedFilesByDate.data"
+        (filterChange)="getDownloadFilesByDate($event)"
+      ></ofd-agregator-bar-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
+      <ofd-agregator-pie-chart
+        chartType="files"
+        [showCount]="false"
+        [chartTitle]="'Stopień otwartości danych'"
+        [pieChartLabels]="statisticsData.fiveStarChart.labels"
+        [pieChartData]="statisticsData.fiveStarChart.data"
+        (filterChange)="getFiveStarStatisticsChart($event)"
+      ></ofd-agregator-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
+      <ofd-agregator-bar-chart
+        chartType="files"
+        [showCount]="false"
+        [chartTitle]="'Stopień otwartości danych'"
+        [barChartLabels]="statisticsData.fiveStarBar.labels"
+        [barChartData]="statisticsData.fiveStarBar.data"
+        (filterChange)="getFiveStarStatisticsBar($event)"
+      ></ofd-agregator-bar-chart>
+    </div>
+  </div>
+
+  <div class="row m-t-60 m-b-60">
+    <div class="col-lg-6 col-md-6 col-xs-12">
+      <ofd-agregator-section-title
+        [iconURL]="'assets/modules/stats/chart.png'"
+        [titleText]="'Statystyki dataversów'"
+      ></ofd-agregator-section-title>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-right">
+      <ofd-agregator-pie-chart
+        chartType="dataverses"
+        [chartTitle]="'Liczba dataversów w podziale na kategorie'"
+        [pieChartData]="statisticsData.addedDataversesCategory.data"
+        [pieChartLabels]="statisticsData.addedDataversesCategory.labels"
+        (filterChange)="getAddedDataversesCategory($event)"
+      ></ofd-agregator-pie-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 mobile-m-b-30 middle-md chart-wrapper-left">
+      <ofd-agregator-bar-chart
+        chartType="dataverses"
+        [bgColor]="1"
+        [chartTitle]="'Liczba dataversów dodana w czasie'"
+        [barChartDatasets]="statisticsData.addedDataversesBySubject.datasets"
+        [barChartLabels]="statisticsData.addedDataversesBySubject.labels"
+        (filterChange)="getAddedDataversesSubject($event)"
+      ></ofd-agregator-bar-chart>
     </div>
   </div>
 </div>
+<!--TODO - BY DATAVERSE i BY SUBJECT-->
+<!--Dla dataverse -->
+<!--Liczba dataversów w podziale na kategorie-->
+<!--Liczba datasetów w podziale na kategorie-->

@@ -400,4 +400,24 @@ export class UtilsService {
     });
     return metadataObject;
   }
+
+  /**
+   * Parse object to query param string
+   * @param {any} object Object
+   * @returns {string} Query params
+   */
+  getQueryParamsFromObject(object: any) {
+    return Object.keys(object)
+      .filter(key => {
+        return object[key] instanceof Array ? object[key].length > 0 : object[key] !== '' && object[key] !== null;
+      })
+      .map(key => {
+        if (object[key] instanceof Array) {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(object[key].join(','));
+        } else {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(object[key]);
+        }
+      })
+      .join('&');
+  }
 }
