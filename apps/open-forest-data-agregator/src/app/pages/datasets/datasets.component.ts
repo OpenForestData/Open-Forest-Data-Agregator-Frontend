@@ -239,7 +239,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    */
   paginationChanged(payload) {
     this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
-    this.DSService.searchFilters = { field: 'start', data: payload.page, search: true };
+    this.DSService.searchFilters = { field: 'start', data: this.page, search: true };
   }
 
   /**
