@@ -55,7 +55,7 @@ export class HomeSearchComponent {
               .filter((_: any) => _.thumbnail_url)
               .map((_: any) => _.thumbnail_url)[0] || null,
           latinName: '',
-          identifier64: btoa(response['identifier'])
+          identifier64: btoa(response['latestVersion']['datasetPersistentId'])
         };
       } catch (e) {}
     });
