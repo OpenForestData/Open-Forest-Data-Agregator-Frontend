@@ -24,7 +24,14 @@ export class FooterComponent {
    * Set cookie for cookie acceptance
    */
   acceptAndSetCookies() {
-    this.cookieService.set('cookie-accept', 'true', environment.userCookieTime, '/');
+    this.cookieService.set(
+      'cookie-accept',
+      'true',
+      environment.userCookieTime,
+      '/',
+      window.location.hostname,
+      location.protocol === 'https'
+    );
   }
 
   /**

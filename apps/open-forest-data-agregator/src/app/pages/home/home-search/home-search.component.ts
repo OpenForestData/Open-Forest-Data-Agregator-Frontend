@@ -29,7 +29,7 @@ export class HomeSearchComponent {
      */
     latinName: string;
     /**
-     * Dataset preview URL
+     * Dataset preview URL.
      */
     preview: string;
     /**
