@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '@env/environment';
-
+// TODO Zmienić desc na content w blogu
 /**
  * Footer Component
  *
@@ -24,13 +24,16 @@ export class FooterComponent {
    * Set cookie for cookie acceptance
    */
   acceptAndSetCookies() {
+    const secureFlag = location.protocol === 'https:';
+
     this.cookieService.set(
       'cookie-accept',
       'true',
       environment.userCookieTime,
       '/',
       window.location.hostname,
-      location.protocol === 'https'
+      secureFlag,
+      'None'
     );
   }
 
