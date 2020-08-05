@@ -16,7 +16,7 @@
         <a
           class="datasets-map__dataset-item__details"
           [routerLink]="['detail']"
-          [queryParams]="{ doi: datasetDetails.dataset.identifier64 }"
+          [queryParams]="{ doi: datasetDetails.dataset.identifier64, dvName: datasetDetails.dataset.dvName }"
         >
           {{ 'datasets.see-details' | translate }}
           <svg-icon src="/assets/images/arrow-green-right.svg" [applyCss]="true"></svg-icon>

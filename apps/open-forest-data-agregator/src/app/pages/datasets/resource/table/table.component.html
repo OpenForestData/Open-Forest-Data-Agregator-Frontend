@@ -1,5 +1,5 @@
 <div class="file-as-table">
-  <table>
+  <table datatable [dtTrigger]="dtTrigger" class="row-border hover datasets-table__table">
     <thead>
       <tr>
         <th *ngFor="let title of convertedData?.meta?.fields">{{ title }}</th>
@@ -19,8 +19,8 @@
             *ngIf="row['file_mimetype'] === 'video/mp4' && details.key === 'file_location'"
             [src]="sanitizeVideo(row['file_location'])"
             style="border:0 #ffffff none;"
-            height="40px"
-            width="40px"
+            height="60px"
+            width="60px"
             title="Video frame"
             allowfullscreen
           ></iframe>

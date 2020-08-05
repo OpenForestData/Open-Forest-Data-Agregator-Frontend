@@ -125,6 +125,7 @@ export class PaginationComponent implements OnChanges {
    * @memberof PaginationComponent
    */
   emitChanges(pageSize) {
+    this.page = 1;
     this.inputValue = this.page;
 
     this.changes.emit({

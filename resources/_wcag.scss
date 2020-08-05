@@ -319,7 +319,7 @@ body.wcag-contrast {
 
   .header-bar {
     background-color: black;
-    // color: yellow;
+    color: yellow;
     svg {
       path {
         fill: yellow !important;
@@ -435,12 +435,23 @@ body.wcag-contrast {
     }
   }
 
-  .checkbox-field .checkbox-label {
-    color: yellow;
+  // .checkbox-field .checkbox-label {
+  //   color: yellow;
+  // }
+
+  .check_box + label {
+    cursor: pointer;
+    background: url('/assets/images/yellow_checkbox.png') no-repeat !important;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    padding: 0 0 0 0;
+    background-position: 0 0 !important;
+    padding-top: 1px;
   }
 
-  .checkbox-field .check_box + label {
-    background: url('/assets/images/yellow_checkbox.png') no-repeat !important;
+  .check_box:checked + label {
+    background-position: -20px 0 !important;
   }
 
   .search-section__button {
@@ -591,7 +602,8 @@ body.wcag-contrast {
   .header-bar > button {
     svg {
       path {
-        fill: white !important;
+        fill: yellow !important;
+        // fill: white !important;
       }
     }
   }
@@ -718,14 +730,6 @@ body.wcag-contrast {
     background-color: black;
   }
 
-  .header-bar {
-    svg {
-      path {
-        fill: white !important;
-      }
-    }
-  }
-
   .banner-container h1 {
     color: white;
   }
@@ -840,5 +844,9 @@ body.wcag-contrast {
         fill: white;
       }
     }
+  }
+
+  .type-sort .ui-select__selected-item {
+    border: none !important;
   }
 }
