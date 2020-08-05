@@ -31,6 +31,14 @@ export class HeaderControlsComponent {
     } else {
       document.querySelector('body').classList.remove('wcag-contrast');
     }
-    this.cookieService.set('wcag', String(this.isContrast), 365, '/');
+    this.cookieService.set(
+      'wcag',
+      String(this.isContrast),
+      365,
+      '/',
+      window.location.hostname,
+      location.protocol === 'https:',
+      'None'
+    );
   }
 }

@@ -24,15 +24,13 @@ export class FooterComponent {
    * Set cookie for cookie acceptance
    */
   acceptAndSetCookies() {
-    const secureFlag = location.protocol === 'https:';
-
     this.cookieService.set(
       'cookie-accept',
       'true',
       environment.userCookieTime,
       '/',
       window.location.hostname,
-      secureFlag,
+      location.protocol === 'https:',
       'None'
     );
   }

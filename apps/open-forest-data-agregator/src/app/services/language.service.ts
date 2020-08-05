@@ -31,7 +31,15 @@ export class LanguageService {
       AppConfigService.config.language = value;
     }
 
-    this.cookieService.set('language', value, environment.userCookieTime, '/');
+    this.cookieService.set(
+      'language',
+      value,
+      environment.userCookieTime,
+      '/',
+      window.location.hostname,
+      location.protocol === 'https:',
+      'None'
+    );
     this.translate.setDefaultLang(value);
     this.translate.use(value);
 
