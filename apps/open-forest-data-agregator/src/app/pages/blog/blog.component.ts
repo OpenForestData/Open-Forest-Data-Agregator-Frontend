@@ -44,6 +44,9 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   public languageSubscription: Subscription = new Subscription();
 
+  /**
+   * Is load new blog on scroll locked
+   */
   public isLocked = false;
 
   /**

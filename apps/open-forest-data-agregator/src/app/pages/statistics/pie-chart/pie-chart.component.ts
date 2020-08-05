@@ -17,10 +17,19 @@ import { StatisticsService } from '@app/pages/statistics/statistics.service';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnChanges {
+  /**
+   * Chart type
+   */
   @Input() public chartType = '';
 
+  /**
+   * Emit event when filters was changed
+   */
   @Output() public filterChange = new EventEmitter();
 
+  /**
+   * Chart reference
+   */
   @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
 
   /**
@@ -121,15 +130,31 @@ export class PieChartComponent implements OnChanges {
     }
   ];
 
+  /**
+   * Sum of data
+   */
   public dataSum = 0;
 
+  /**
+   * Chart title
+   */
   @Input() public chartTitle = '';
 
+  /**
+   * Show data count
+   */
   @Input() public showCount = true;
 
+  /**
+   * Pie chart component constructor
+   * @param {StatisticsService} statisticsService Statistics service
+   */
   constructor(public statisticsService: StatisticsService) {}
 
-  ngOnChanges(changes) {
+  /**
+   * Recalc sum after data changes
+   */
+  ngOnChanges() {
     if (this.chart !== undefined) {
       // this.chart.ngOnChanges({});
       // this.chart.ngOnDestroy();

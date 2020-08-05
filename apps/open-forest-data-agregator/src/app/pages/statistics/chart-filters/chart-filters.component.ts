@@ -154,6 +154,9 @@ export class ChartFiltersComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Get new chart data after view init
+   */
   ngAfterViewInit() {
     this.filtersChanged.emit({
       startDate: this.startDate,

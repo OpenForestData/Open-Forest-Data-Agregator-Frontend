@@ -34,7 +34,7 @@
     button {
       background-color: transparent;
       border: none;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       color: $primary-color;
@@ -98,7 +98,7 @@
 @media (max-width: 1200px) {
   .pagination {
     flex-wrap: wrap;
-    font-size: 14px;
+    font-size: 0.875rem;
     justify-content: space-between;
 
     &__pages {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { FontResizerService } from '@app/services/font-resizer.service';
 
 /**
  * WCAG Control buttons
@@ -18,8 +19,9 @@ export class HeaderControlsComponent {
   /**
    * Constructor
    * @param {CookieService} cookieService Cookie service
+   * @param {FontResizerService} fontResizer Font resizer service
    */
-  constructor(public cookieService: CookieService) {}
+  constructor(public cookieService: CookieService, public fontResizer: FontResizerService) {}
 
   /**
    * Turn on/off contrast for WCGI
@@ -40,5 +42,26 @@ export class HeaderControlsComponent {
       location.protocol === 'https:',
       'None'
     );
+  }
+
+  /**
+   * Increase body font
+   */
+  public increaseFont() {
+    this.fontResizer.increaseFont();
+  }
+
+  /**
+   * Decrease body font
+   */
+  public decreaseFont() {
+    this.fontResizer.decreaseFont();
+  }
+
+  /**
+   * Reset body font
+   */
+  public resetFont() {
+    this.fontResizer.removeSize();
   }
 }

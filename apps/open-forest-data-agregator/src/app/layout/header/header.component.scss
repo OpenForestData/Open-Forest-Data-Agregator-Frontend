@@ -107,7 +107,7 @@ header {
   .times {
     display: flex;
     justify-content: flex-end;
-    font-size: 50px;
+    font-size: 3.125rem;
     font-weight: 200;
 
     span {
@@ -127,7 +127,7 @@ header {
     margin-bottom: 20px;
 
     ::ng-deep {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
   }
 
@@ -152,7 +152,7 @@ header {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          font-size: 18px;
+          font-size: 1.125rem;
         }
 
         margin-bottom: 15px;

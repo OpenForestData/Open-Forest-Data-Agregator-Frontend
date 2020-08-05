@@ -2,7 +2,7 @@
 
 .filter {
   &__title {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
     background-color: #fff;
     line-height: 28px;
@@ -57,7 +57,7 @@
 
     label {
       display: block;
-      font-size: 14px;
+      font-size: 0.875rem;
       margin-right: 13px;
     }
 
@@ -66,7 +66,7 @@
       border: 1px solid $accent-color;
       border-radius: 50px;
       padding: 8px 15px;
-      font-size: 12px;
+      font-size: 0.75rem;
       box-sizing: border-box;
       margin-right: 20px;
       display: block;
@@ -84,7 +84,7 @@
 .datepicker-label {
   width: 100%;
   color: $text-color;
-  font-size: 12px;
+  font-size: 0.75rem;
   display: flex !important;
   align-items: center;
 }

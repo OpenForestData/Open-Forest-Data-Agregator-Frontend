@@ -47,7 +47,7 @@ b {
   }
   &__content > p {
     display: block;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   &__social {
     display: block;
@@ -58,7 +58,7 @@ b {
   &__content {
     padding: 20px 0 0 5px;
     height: 20px;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   &__content > p {
     display: inline;
@@ -111,7 +111,7 @@ b {
     }
     &__content > p {
       display: block;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     &__social {
       display: block;
@@ -123,7 +123,7 @@ b {
     &__content {
       padding: 23px 0 0 5px;
       height: 20px;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     &__content > p {
       display: inline;
@@ -138,7 +138,7 @@ b {
   padding: 24px 100px 0 61px;
   &__header {
     p {
-      font-size: 14px;
+      font-size: 0.875rem;
       padding-top: 10px;
       margin: 0;
     }
@@ -150,7 +150,7 @@ b {
       }
       p {
         padding: 0;
-        font-size: 18px;
+        font-size: 1.125rem;
       }
     }
     &__api {
@@ -245,7 +245,7 @@ b {
           }
         }
         .single-checkbox {
-          font-size: 12px;
+          font-size: 0.75rem;
           width: 90%;
           .background-gray {
             font-size: 9px;
@@ -274,7 +274,7 @@ b {
       flex-direction: row;
       padding: 20px 0 10px 0;
       align-items: center;
-      font-size: 14px;
+      font-size: 0.875rem;
       width: 100%;
       justify-content: space-between;
       &__bar-right {
@@ -314,7 +314,7 @@ b {
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 16px 0 0 14px;
   }
   &__header::ng-deep {
@@ -325,7 +325,7 @@ b {
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 16px 0 0 14px;
     &__values {
       &__img {
@@ -349,7 +349,7 @@ b {
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 16px 0 0 14px;
   }
   .meta-citation__row__keys {
@@ -414,7 +414,7 @@ b {
     button {
       background-color: transparent;
       border: none;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       color: $primary-color;
@@ -645,7 +645,7 @@ b {
       width: 100%;
       display: flex;
       flex-direction: row;
-      font-size: 12px;
+      font-size: 0.75rem;
       padding: 16px 0 0 14px;
     }
     &__header::ng-deep {
@@ -656,7 +656,7 @@ b {
       width: 100%;
       display: flex;
       flex-direction: row;
-      font-size: 12px;
+      font-size: 0.75rem;
       padding: 16px 0 0 14px;
       &__values {
         &__img {
@@ -680,7 +680,7 @@ b {
       width: 100%;
       display: flex;
       flex-direction: row;
-      font-size: 12px;
+      font-size: 0.75rem;
       padding: 16px 0 0 14px;
     }
     .meta-citation__row__keys {

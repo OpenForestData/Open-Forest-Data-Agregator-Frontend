@@ -10,6 +10,9 @@ import { StatisticsService } from '@app/pages/statistics/statistics.service';
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
+  /**
+   * Statistics Data
+   */
   public statisticsData = {
     datasetsCategory: {
       labels: [],
@@ -52,6 +55,7 @@ export class StatisticsComponent implements OnInit {
       data: []
     }
   };
+
   /**
    * Statistics component constructor
    * @param {StatisticsService} statisticsService Statistics service
@@ -63,6 +67,10 @@ export class StatisticsComponent implements OnInit {
    */
   ngOnInit() {}
 
+  /**
+   * Get chart data for datasets
+   * @param {any} payload Filters
+   */
   getDatasetsByCategoryData(payload) {
     setTimeout(() => {
       this.statisticsData.datasetsCategory.labels = [];
@@ -81,6 +89,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for added files
+   * @param {any} payload Filters
+   */
   getAddedFilesByCategory(payload) {
     setTimeout(() => {
       this.statisticsData.addedFilesCategory.labels = [];
@@ -103,6 +115,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for downloaded files
+   * @param {any} payload Filters
+   */
   getDownloadedFilesByCategory(payload) {
     setTimeout(() => {
       this.statisticsData.downloadedFilesCategory.labels = [];
@@ -124,6 +140,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for datasets
+   * @param {any} payload Filters
+   */
   getDatasetsByDate(payload) {
     setTimeout(() => {
       this.statisticsData.datasetsByDate.labels = [];
@@ -139,6 +159,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for added files
+   * @param {any} payload Filters
+   */
   getAddedFilesByDate(payload) {
     this.statisticsService.getStatistics(payload).subscribe(response => {
       setTimeout(() => {
@@ -157,6 +181,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for downloaded files
+   * @param {any} payload Filters
+   */
   getDownloadFilesByDate(payload) {
     this.statisticsService.getStatistics(payload).subscribe(response => {
       setTimeout(() => {
@@ -175,6 +203,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for dataverses
+   * @param {any} payload Filters
+   */
   getAddedDataversesCategory(payload) {
     this.statisticsService.getStatistics(payload).subscribe(response => {
       setTimeout(() => {
@@ -196,6 +228,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for dataverses
+   * @param {any} payload Filters
+   */
   getAddedDataversesSubject(payload) {
     this.statisticsService.getStatistics(payload).subscribe(response => {
       setTimeout(() => {
@@ -237,6 +273,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for five star
+   * @param {any} payload Filters
+   */
   getFiveStarStatisticsChart(payload) {
     delete payload['data-type'];
     this.statisticsService.getStatistics(payload).subscribe(response => {
@@ -253,6 +293,10 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get chart data for five star
+   * @param {any} payload Filters
+   */
   getFiveStarStatisticsBar(payload) {
     delete payload['data-type'];
     this.statisticsService.getStatistics(payload).subscribe(response => {

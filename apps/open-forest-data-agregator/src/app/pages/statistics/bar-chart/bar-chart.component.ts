@@ -16,10 +16,19 @@ import { BaseChartDirective, Label } from 'ng2-charts';
   styleUrls: ['./bar-chart.component.scss']
 })
 export class BarChartComponent implements OnChanges {
+  /**
+   * Chart type (datasets, dataverse etc.)
+   */
   @Input() public chartType = '';
 
+  /**
+   * Emit event after filter was changed
+   */
   @Output() public filterChange: EventEmitter<any> = new EventEmitter<any>();
 
+  /**
+   * Chart reference
+   */
   @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
   /**
    * Chart color
@@ -87,12 +96,24 @@ export class BarChartComponent implements OnChanges {
    */
   @Input() public barChartData: any[] = [];
 
+  /**
+   * Chart datasets
+   */
   @Input() public barChartDatasets = [];
 
+  /**
+   * Sum of data values
+   */
   public dataSum = 0;
 
+  /**
+   * Show sum
+   */
   @Input() public showCount = true;
 
+  /**
+   * Chart title
+   */
   @Input() public chartTitle = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, dolore.';
 
   /**

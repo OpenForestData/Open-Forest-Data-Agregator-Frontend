@@ -24,7 +24,7 @@
   }
 
   .news-date {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 
@@ -43,20 +43,20 @@
   }
 
   .news-title {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 22px;
     font-weight: 600;
     margin-bottom: 15px;
   }
 
   .news-content {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 20px;
     margin-bottom: 25px;
   }
 
   .tags-p {
-    font-size: 12px;
+    font-size: 0.75rem;
 
     a {
       color: $accent-color;

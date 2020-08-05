@@ -7,7 +7,7 @@
 
 .times {
   text-align: right;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 0;
   margin-bottom: 30px;
   cursor: pointer;
@@ -26,13 +26,13 @@ input[type='text'] {
   height: 46px;
   border: 0;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-bottom: 1px solid $text-color;
   transition: border-bottom, box-shadow 0.25s ease-in-out;
 }
 
 textarea {
-  font-size: 14px;
+  font-size: 0.875rem;
   width: 100%;
   min-height: 120px;
   border: 0;
@@ -100,7 +100,7 @@ textarea:not(:placeholder-shown) + label {
 }
 
 .checkbox-label {
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-left: 15px;
   padding: 0 10px 0 25px;
   margin-top: 3px;

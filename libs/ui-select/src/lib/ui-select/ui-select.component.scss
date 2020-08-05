@@ -9,12 +9,12 @@
 
 .ui-select {
   position: relative;
-  font-size: 14px;
+  font-size: 0.875rem;
 
   &__selected-item {
     cursor: pointer;
     padding: 7px 18px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: $primary-font;
     color: $text-color;
     border: 1px solid $accent-color;
@@ -67,7 +67,7 @@
           cursor: pointer;
           background-color: transparent;
           color: $text-color;
-          font-size: 14px;
+          font-size: 0.875rem;
           text-align: left;
           width: 100%;
           box-sizing: border-box;
