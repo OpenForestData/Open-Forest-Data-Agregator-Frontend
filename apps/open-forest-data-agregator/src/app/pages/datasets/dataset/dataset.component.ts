@@ -115,9 +115,12 @@ export class DatasetComponent implements OnInit {
       this.mobile = true;
     }
     this.route.queryParams.subscribe((queryParams): any => {
-      this.breadCrumbs.push({ name: queryParams.dvName, href: '' });
       const doi = atob(queryParams.doi);
       this.getDatasetDetails(doi);
+      this.breadCrumbs.push({
+        name: queryParams.dvName,
+        href: `/datasets?start=0&rows=15&sort=asc&category=${queryParams.category}`
+      });
     });
   }
 
