@@ -72,9 +72,7 @@
       <div class="row news-body ckeditor-content">
         <div class="col-xs-12 col-md-12 col-lg-12">
           <h3>{{ article?.title }}</h3>
-          <p class="news-content">
-            {{ article?.description }}
-          </p>
+          <p class="news-content" [innerHTML]="article.content"></p>
         </div>
       </div>
     </div>
