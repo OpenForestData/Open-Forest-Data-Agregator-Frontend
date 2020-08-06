@@ -31,17 +31,19 @@ export class DatasetsActiveFiltersComponent implements OnChanges {
    * Parse lat and lng to number and change to fixed 2
    */
   ngOnChanges() {
-    this.activeFilters = this.activeFilters.map(filter => {
-      if (filter['type'] === 'MAP') {
-        filter['values'] = filter['values'].map(item => {
-          item.lat = Number(item.lat).toFixed(2);
-          item.lng = Number(item.lng).toFixed(2);
-          return item;
-        });
-      }
+    this.activeFilters = [
+      ...this.activeFilters.map(filter => {
+        if (filter['type'] === 'MAP') {
+          filter['values'] = filter['values'].map(item => {
+            item.lat = Number(item.lat).toFixed(2);
+            item.lng = Number(item.lng).toFixed(2);
+            return item;
+          });
+        }
 
-      return filter;
-    });
+        return filter;
+      })
+    ];
   }
 
   /**

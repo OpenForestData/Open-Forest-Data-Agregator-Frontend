@@ -141,6 +141,7 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   onDrawnDeleted(e) {
     this.zone.run(() => {
       this.layers = [];
+      this.valueChange.emit(null);
       this.drawnItems.clearLayers();
       this.changeDetectorRef.detectChanges();
     });
