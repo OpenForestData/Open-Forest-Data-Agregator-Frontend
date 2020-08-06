@@ -170,7 +170,7 @@ export class MapComponent implements OnInit {
    */
   private initMap(): void {
     this.map = new L.Map('map');
-    this.tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    this.tiles = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     this.map.setView([0, 0], 0);
     this.map.addLayer(this.tiles);
   }
