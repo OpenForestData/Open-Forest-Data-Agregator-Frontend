@@ -329,8 +329,8 @@ b {
     padding: 16px 0 0 14px;
     &__values {
       &__img {
-        width: 95px;
-        height: 132px;
+        max-width: 95px;
+        max-height: 132px;
       }
     }
   }
