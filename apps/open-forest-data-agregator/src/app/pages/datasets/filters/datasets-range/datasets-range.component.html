@@ -7,6 +7,7 @@
     (leafletMapReady)="onMapReady($event)"
     [leafletDrawOptions]="drawOptions"
     (leafletDrawCreated)="onDrawCreated($event)"
+    (leafletDrawDeleted)="onDrawnDeleted($event)"
   >
     <div [leafletLayer]="drawnItems"></div>
   </div>

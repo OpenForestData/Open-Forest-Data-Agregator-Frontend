@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, ChangeDetectorRef, NgZone } from '@angular/core';
 
-import { DrawEvents, FeatureGroup, latLng, tileLayer, Map, featureGroup, rectangle, Control } from 'leaflet';
+import { FeatureGroup, latLng, tileLayer, Map, featureGroup, rectangle, Control } from 'leaflet';
 import { Subscription } from 'rxjs';
 import { DatasetsService } from '../../datasets.service';
 /**
@@ -70,7 +70,7 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
       polyline: false,
       circlemarker: false
     },
-    edit: { featureGroup: this.drawnItems }
+    edit: { featureGroup: this.drawnItems, edit: false }
   };
 
   /**
@@ -91,19 +91,19 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   /**
    * Creates an instance of DatasetsRangeComponent.
    * @param {DatasetsService} DSService Datasets service
+   * @param {ChangeDetectorRef} changeDetectorRef Change Detector red
+   * @param {NgZone} zone Ng Zone
    */
-  constructor(public DSService: DatasetsService) {
+  constructor(public DSService: DatasetsService, public changeDetectorRef: ChangeDetectorRef, public zone: NgZone) {
     this.sub = this.DSService.newFiltersStructureSubject.subscribe(_ => {
       setTimeout(() => {
-        this.drawnItems = featureGroup();
         if (this.value.length) {
           const layer = rectangle(this.value);
           this.layers.push(layer);
-
           this.drawnItems.addLayer(layer);
         } else {
           this.layers.forEach(layer => {
-            this.map.removeLayer(layer);
+            this.drawnItems.removeLayer(layer);
           });
         }
       }, 50);
@@ -126,6 +126,7 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
    */
   onMapReady(map: Map) {
     this.map = map;
+
     if (this.value.length) {
       this.drawnItems.addLayer(rectangle(this.value));
       const layer = rectangle(this.value);
@@ -134,18 +135,33 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   }
 
   /**
+   * Clear layers on drawn delete
+   * @param e Event data
+   */
+  onDrawnDeleted(e) {
+    this.zone.run(() => {
+      this.layers = [];
+      this.drawnItems.clearLayers();
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  /**
    * Creates drawing layer on map when drawn
    *
    * @param {any} e Event
    */
   onDrawCreated(e: any) {
-    const layer = (e as DrawEvents.Created).layer;
-    this.drawnItems.addLayer(layer);
+    this.zone.run(() => {
+      this.drawnItems.clearLayers();
+      this.layers = [];
+      this.drawnItems.addLayer(e.layer);
+
+      this.layers.push(e.layer);
+      this.changeDetectorRef.detectChanges();
+    });
 
     const bounds = this.drawnItems.getBounds();
-
-    this.layers.push(layer);
-
     this.valueChange.emit([bounds[Object.keys(bounds)[0]], bounds[Object.keys(bounds)[1]]]);
   }
 
