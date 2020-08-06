@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 /**
  * Datasets active filters component
@@ -8,7 +8,7 @@ import { DatasetsService } from '../datasets.service';
   templateUrl: './datasets-active-filters.component.html',
   styleUrls: ['./datasets-active-filters.component.scss']
 })
-export class DatasetsActiveFiltersComponent {
+export class DatasetsActiveFiltersComponent implements OnChanges {
   /**
    * Creates an instance of DatasetsActiveFiltersComponent.
    * @param {DatasetsService} DSService Datasets service
@@ -25,6 +25,23 @@ export class DatasetsActiveFiltersComponent {
    */
   removeFilter(name, index) {
     this.DSService.removeFilterSubject.next({ name, index });
+  }
+
+  /**
+   * Parse lat and lng to number and change to fixed 2
+   */
+  ngOnChanges() {
+    this.activeFilters = this.activeFilters.map(filter => {
+      if (filter['type'] === 'MAP') {
+        filter['values'] = filter['values'].map(item => {
+          item.lat = Number(item.lat).toFixed(2);
+          item.lng = Number(item.lng).toFixed(2);
+          return item;
+        });
+      }
+
+      return filter;
+    });
   }
 
   /**
