@@ -135,10 +135,10 @@ export class ResourceComponent implements OnInit {
         ) >= 0
       ) {
         this.resourceContent.csv = this.resource.download_url;
-      } else if (['map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/abiword'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'geonodeViewer';
-      } else if (['dashboard_grafana'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/vnd.apple.installer+xml'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'grafanaViewer';
       } else if (
@@ -148,7 +148,7 @@ export class ResourceComponent implements OnInit {
       ) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = '3dViewer';
-      } else if (['micro'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/x-shockwave-flash'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'microViewer';
       } else if (['TIFF Image'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
