@@ -3,7 +3,7 @@
     <ol *ngIf="breadcrumbs.length > 0" class="breadcrumbs">
       <li *ngFor="let breadcrumb of breadcrumbs">
         <ng-container *ngIf="breadcrumb.href">
-          <a [routerLink]="breadcrumb.href">
+          <a href="{{ breadcrumb.href }}">
             {{ breadcrumb.name }}
           </a>
         </ng-container>

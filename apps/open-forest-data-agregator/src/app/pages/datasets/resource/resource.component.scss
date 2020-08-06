@@ -187,8 +187,8 @@ b {
       }
       &__as-image {
         &__source {
-          height: 400px;
-          width: 280px;
+          max-height: 400px;
+          max-width: 280px;
         }
       }
       &__as-map {
