@@ -183,7 +183,15 @@
         "timePeriodCoveredStart": "Time Perdiod Start",
         "dwcVerbatimLocality": "Verbatim Locality",
         "dwcPreparations": "Preparations",
-        "dwcVernacularName": "Vernacular Name"
+        "dwcVernacularName": "Vernacular Name",
+        "subtitle": "Subtitle",
+        "alternativeTitle": "Alternative Title",
+        "alternativeURL": "Alternative URL",
+        "otherIdAgency": "Other ID Agency",
+        "productionDate": "Production Date",
+        "productionPlace": "Production Place",
+        "distributionDate": "Distribution Date",
+        "softwareName": "Software Name"
       }
     },
     "resource": {
