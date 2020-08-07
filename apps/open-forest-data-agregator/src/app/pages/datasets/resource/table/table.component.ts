@@ -82,7 +82,7 @@ export class TableComponent implements OnInit {
     Papa.parse(content, {
       header: true,
       skipEmptyLines: true,
-      delimiter: customDelimiter,
+      // delimiter: customDelimiter,
       complete: result => {
         this.convertedData = result;
         this.dtTrigger.next();
