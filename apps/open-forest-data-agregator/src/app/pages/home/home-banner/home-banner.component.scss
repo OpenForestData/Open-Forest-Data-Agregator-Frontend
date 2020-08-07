@@ -134,3 +134,22 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .tree-image {
+    position: relative;
+    bottom: -25px;
+    left: 75%;
+
+    svg {
+      width: 115px;
+      height: 87px;
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
