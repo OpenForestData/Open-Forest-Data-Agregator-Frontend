@@ -78,7 +78,7 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
    */
   public options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
       })
@@ -141,6 +141,7 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   onDrawnDeleted(e) {
     this.zone.run(() => {
       this.layers = [];
+      this.valueChange.emit(null);
       this.drawnItems.clearLayers();
       this.changeDetectorRef.detectChanges();
     });
