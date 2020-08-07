@@ -327,5 +327,29 @@
     "see_less": "See less",
     "news": "News",
     "search_placeholder": "Search for news..."
+  },
+  "search": {
+    "advanced": "Advanced search",
+    "search_filters": "Search filters",
+    "search": "Search",
+    "filters": "Filters",
+    "categories": "Categories",
+    "filter_1": "Filter 1",
+    "filter_2": "Filter 2",
+    "filter_3": "Filter 3",
+    "active_filters": "Active filters",
+    "clear_all": "Clear all",
+    "show_query": "Show query",
+    "hide_query": "Hide query",
+    "loading_text": "Loading resources",
+    "not_found_text": "Not found any text",
+    "type_to_search": "Search or add your own tag",
+    "add_tag": "Press Enter or choose this opition to add your own tag",
+    "filter_title": "Section Title",
+    "category": "Category",
+    "mediaStatic": "Photo / multimedia",
+    "geoStatic": "Co-ordinates",
+    "show_list": "Choose filter",
+    "no_results": "No results matching your criteria were found"
   }
 }
