@@ -73,16 +73,16 @@ export class TableComponent implements OnInit {
    * @param content Content of file
    */
   parseToDisplay(content: string) {
-    let customDelimiter = ';';
-    if (this.type === 'Comma Separated Values') {
-      customDelimiter = ';';
-    } else if (this.type === 'Tab-Separated Values' || this.type === 'Tab-Delimited') {
-      customDelimiter = '\t';
-    }
+    // let customDelimiter = ';';
+    // if (this.type === 'Comma Separated Values') {
+    //   customDelimiter = ';';
+    // } else if (this.type === 'Tab-Separated Values' || this.type === 'Tab-Delimited') {
+    //   customDelimiter = '\t';
+    // }
     Papa.parse(content, {
       header: true,
       skipEmptyLines: true,
-      delimiter: customDelimiter,
+      // delimiter: customDelimiter,
       complete: result => {
         this.convertedData = result;
         this.dtTrigger.next();

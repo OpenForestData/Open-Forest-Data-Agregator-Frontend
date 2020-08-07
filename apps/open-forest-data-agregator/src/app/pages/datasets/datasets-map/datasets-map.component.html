@@ -17,9 +17,7 @@
           class="datasets-map__dataset-item__details"
           [routerLink]="['detail']"
           [queryParams]="{
-            doi: datasetDetails.dataset.identifier64,
-            dvName: datasetDetails.dataset.dvName,
-            category: datasetDetails.dataset.cate
+            doi: datasetDetails.dataset.identifier64
           }"
         >
           {{ 'datasets.see-details' | translate }}

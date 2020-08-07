@@ -117,10 +117,6 @@ export class DatasetComponent implements OnInit {
     this.route.queryParams.subscribe((queryParams): any => {
       const doi = atob(queryParams.doi);
       this.getDatasetDetails(doi);
-      this.breadCrumbs.push({
-        name: queryParams.dvName,
-        href: `/datasets?start=0&rows=15&sort=asc&category=${queryParams.category}`
-      });
     });
   }
 
@@ -138,6 +134,10 @@ export class DatasetComponent implements OnInit {
       this.files = this.dataset.latestVersion.files.map(file => {
         file.isChecked = false;
         return file;
+      });
+      this.breadCrumbs.push({
+        name: this.dataset.search_info.results[0].dvName,
+        href: `/datasets?start=0&rows=15&sort=asc&category=${this.dataset.search_info.results[0].identifierOfDataverse}`
       });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
       this.allFiles = [...response?.latestVersion?.files];
