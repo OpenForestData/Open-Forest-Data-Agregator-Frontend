@@ -135,7 +135,7 @@ export class ResourceComponent implements OnInit {
         ) >= 0
       ) {
         this.resourceContent.csv = this.resource.download_url;
-      } else if (['application/abiword', 'map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/x-abiword', 'map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'geonodeViewer';
       } else if (
