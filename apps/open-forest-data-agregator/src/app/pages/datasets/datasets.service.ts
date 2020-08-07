@@ -228,19 +228,13 @@ export class DatasetsService {
    * Creates queryString for all filters and returns current filters state
    */
   public get searchFilters() {
-    const queryString = `
-      ?start=${this._searchFilters.start - 1}&
-      rows=${this._searchFilters.rows}&
-      sort=${this._searchFilters.sort}
-      ${this._searchFilters.q ? '&q=' + this._searchFilters.q : ''}
-      ${this._searchFilters.geoStatic ? '&geoStatic=true' : ''}
-      ${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}
-      ${this._searchFilters.category ? '&category=' + this._searchFilters.category : ''}
-      ${this.objectToQuery(this._searchFilters.basic)}
-    `
-      .trim()
-      .replace(/\s/g, '');
-
+    const queryString = `?start=${this._searchFilters.start - 1}&rows=${this._searchFilters.rows}&sort=${
+      this._searchFilters.sort
+    }${this._searchFilters.q ? '&q=' + this._searchFilters.q : ''}${
+      this._searchFilters.geoStatic ? '&geoStatic=true' : ''
+    }${this._searchFilters.mediaStatic ? '&mediaStatic=true' : ''}${
+      this._searchFilters.category ? '&category=' + this._searchFilters.category : ''
+    }${this.objectToQuery(this._searchFilters.basic)}`.trim();
     return {
       field: queryString,
       data: this._searchFilters
