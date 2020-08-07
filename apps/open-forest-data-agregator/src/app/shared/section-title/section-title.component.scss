@@ -41,3 +41,9 @@ h2 {
     }
   }
 }
+
+@media (max-width: 500px) {
+  .titleText {
+    flex-shrink: 1 !important;
+  }
+}
