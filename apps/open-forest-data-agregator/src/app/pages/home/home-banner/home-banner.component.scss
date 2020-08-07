@@ -134,3 +134,60 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .tree-image {
+    position: relative;
+    bottom: -5px;
+    left: 75%;
+
+    svg {
+      width: 200px;
+      height: 150px;
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
+
+@media (max-width: 992px) {
+  .tree-image {
+    position: relative;
+    bottom: -5px;
+    left: 75%;
+
+    svg {
+      width: 115px;
+      height: 87px;
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .tree-image {
+    position: relative;
+    bottom: -25px;
+    left: 75%;
+
+    svg {
+      width: 115px;
+      height: 87px;
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
