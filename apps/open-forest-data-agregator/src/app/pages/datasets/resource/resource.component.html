@@ -83,9 +83,9 @@
             <div class="background-gray">
               {{ formatConverter(resource.details?.name) | lowercase }}
             </div>
-            <p>{{ metricData?.title?.value }}</p>
+            <p>{{ (resource?.details?.fileNameWithoutExtension)[0] }}</p>
           </div>
-          <p>{{ (metricData?.dsDescription?.value)[0].dsDescriptionValue.value }}</p>
+          <p>{{ resource?.details?.name }}</p>
           <div class="right-container__header__api">
             <button class="button button-accept" (click)="downloadSingleResource(this.resource.download_url)">
               {{ 'home.download' | translate }}

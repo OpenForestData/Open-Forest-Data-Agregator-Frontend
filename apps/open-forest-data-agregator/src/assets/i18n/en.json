@@ -91,17 +91,17 @@
           "public": "Public",
           "private": "Private",
           "global": "Global"
-        },
-        "metadata-all": {
-          "downloads": "Downloads: ",
-          "created": "Created at: ",
-          "source": "Source: ",
-          "author": "Author: ",
-          "data-openness": "Data openness: ",
-          "license": "License: ",
-          "domain": "Domain: ",
-          "keywords": "Keywords: "
         }
+      },
+      "metadata-all": {
+        "downloads": "Downloads: ",
+        "created": "Created at: ",
+        "source": "Source: ",
+        "author": "Author: ",
+        "data-openness": "Data openness: ",
+        "license": "License: ",
+        "domain": "Domain: ",
+        "keywords": "Keywords: "
       },
       "metadata": {
         "downloads": "Download counter:",
