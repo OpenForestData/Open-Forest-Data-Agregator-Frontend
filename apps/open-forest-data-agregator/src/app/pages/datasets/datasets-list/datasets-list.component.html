@@ -15,10 +15,7 @@
 
   <div class="datasets-list__datasets">
     <div class="datasets-list__datasets__item" *ngFor="let dataset of datasets">
-      <a
-        [routerLink]="['detail']"
-        [queryParams]="{ doi: dataset.identifier64, category: dataset.cate, dvName: dataset.dvName }"
-      >
+      <a [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
         <picture class="datasets-list__datasets__item__picture">
           <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
           <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
@@ -31,11 +28,7 @@
       </a>
 
       <article>
-        <div
-          class="pointer"
-          [routerLink]="['detail']"
-          [queryParams]="{ doi: dataset.identifier64, category: dataset.cate, dvName: dataset.dvName }"
-        >
+        <div class="pointer" [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
           <header>
             <h3 class="datasets-list__datasets__item__title">
               <picture class="datasets-list__datasets__item__picture--mobile">
@@ -63,7 +56,7 @@
         <footer
           class="datasets-list__datasets__item__source"
           [routerLink]="dataset.sourceLink ? [] : ['detail']"
-          [queryParams]="{ doi: dataset.identifier64, category: dataset.cate, dvName: dataset.dvName }"
+          [queryParams]="{ doi: dataset.identifier64 }"
         >
           <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
           <a href="{{ dataset.sourceLink }}" [ngClass]="{ 'events-none': !dataset.sourceLink }" target="_blank">
