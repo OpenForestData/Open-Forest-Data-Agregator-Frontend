@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
@@ -40,6 +40,19 @@ export class NewsPostComponent implements OnInit, OnDestroy {
    * News data
    */
   public news: any = {};
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    const header: HTMLElement = document.querySelector('ofd-header header');
+    const imageHolder: HTMLElement = document.querySelector('.news-image-holder');
+
+    const headerHeight = header.clientHeight - 70;
+
+    imageHolder.style.transform =
+      imageHolder.offsetTop <= window.scrollY + headerHeight
+        ? `translateY(${window.scrollY + headerHeight - imageHolder.offsetTop + 10}px)`
+        : `translateY(0)`;
+  }
 
   /**
    * News post component constructor
