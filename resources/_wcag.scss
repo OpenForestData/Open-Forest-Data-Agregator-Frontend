@@ -849,4 +849,58 @@ body.wcag-contrast {
   .type-sort .ui-select__selected-item {
     border: none !important;
   }
+
+  .modal-content {
+    background-color: black;
+  }
+
+  .filds {
+    background-color: black;
+  }
+
+  .filds > input,
+  label,
+  textarea {
+    background-color: black;
+    color: white;
+  }
+
+  .filds > input:focus,
+  label:focus,
+  textarea:focus {
+    border-bottom: 1px solid white;
+    box-shadow: none;
+  }
+
+  .mark {
+    background-color: none;
+  }
+
+  .normal {
+    background-color: transparent;
+  }
+
+  .button-wrapp .btn {
+    background-color: black !important;
+    color: white;
+  }
+
+  .button-wrapp .btn:hover {
+    background-color: yellow !important;
+    color: black;
+  }
+
+  .svg-btn:disabled {
+    background-color: black !important;
+  }
+
+  .svg-btn:disabled:hover {
+    background-color: black !important;
+    color: white !important;
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
 }
