@@ -115,6 +115,10 @@ export class UtilsService {
       target: '_blank'
     }
   ];
+  /**
+   * Is loading
+   */
+  isLoading = false;
 
   /**
    * Menu structure returned by API
@@ -296,6 +300,7 @@ export class UtilsService {
    * Gets column keys and triggers fetch data for CSV
    */
   getMetadata() {
+    this.isLoading = true;
     let columnKeys = [];
     this.DSService.getMetadata().subscribe(response => {
       Object.values(response).forEach((value: any) => {
@@ -370,6 +375,7 @@ export class UtilsService {
 
     a.href = url;
     a.download = `Metadane.csv`;
+    this.isLoading = false;
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
