@@ -141,6 +141,23 @@ textarea:not(:placeholder-shown) + label {
   line-height: 20px;
 }
 
+.filds > label:focus {
+  color: $accent-color;
+}
+
+.white-fill {
+  svg {
+    path {
+      fill: white !important;
+    }
+  }
+}
+
+input[type='text']:not(:placeholder-shown) + label,
+textarea:not(:placeholder-shown) + label {
+  color: $accent-color;
+}
+
 @media (max-width: 772px) {
   .modal-content {
     width: 90%;
