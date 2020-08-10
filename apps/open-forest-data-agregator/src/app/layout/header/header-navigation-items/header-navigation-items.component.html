@@ -7,13 +7,21 @@
     <ng-container *ngIf="!item['target']">
       <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
         {{ item.name | translate }}
-        <img
+        <svg-icon
+          src="assets/images/arrow_right_green.svg"
+          class="mobile-only"
+          width="16"
+          height="11"
+          alt="{{ item.name }}"
+          [applyCss]="true"
+        ></svg-icon>
+        <!-- <img
           src="assets/modules/home/arrow_right.png"
           class="mobile-only"
           width="16"
           height="11"
           alt="{{ item.name }}"
-        />
+        /> -->
       </a>
     </ng-container>
     <ng-container *ngIf="item['target']">
@@ -24,13 +32,22 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         {{ item.name | translate }}
-        <img
+        <svg-icon
+          src="assets/images/arrow_right_green.svg"
+          class="mobile-only"
+          width="16"
+          height="11"
+          alt="{{ item.name }}"
+          [applyCss]="true"
+        ></svg-icon>
+
+        <!-- <img
           src="assets/modules/home/arrow_right.png"
           class="mobile-only"
           width="16"
           height="11"
           alt="{{ item.name }}"
-        />
+        /> -->
       </a>
     </ng-container>
 

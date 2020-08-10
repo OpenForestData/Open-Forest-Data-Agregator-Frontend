@@ -1,13 +1,13 @@
 <div class="container" *ngIf="article">
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
-      <a class="post-link">
+      <a class="post-link" [routerLink]="'/blog/' + article.prev">
         <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-xs-6">
-      <a class="post-link end">
+      <a class="post-link end" [routerLink]="'/blog/' + article.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
