@@ -18,7 +18,7 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <a [href]="makeSource()">{{
+              <a [href]="makeSource()" target="_blank" rel="noopener noreferrer">{{
                 dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
                   ? (dataset?.providers)[0]?.authorAffiliation?.value
                   : 'Dataverse'
@@ -31,7 +31,9 @@
             <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
-              <a href="{{ mockLeftSide.license.link }}">{{ dataset.latestVersion?.license }}</a>
+              <a href="{{ mockLeftSide.license.link }}" target="_blank" rel="noopener noreferrer">{{
+                dataset.latestVersion?.license
+              }}</a>
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.domain' | translate }}
@@ -57,7 +59,9 @@
           </ofd-agregator-header-bar>
 
           <div class="versions__content">
-            <a [href]="makeSource()"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
+            <a [href]="makeSource()" target="_blank" rel="noopener noreferrer">
+              {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a
+            >
             <p>{{ ' - ' + (dataset.latestVersion?.releaseTime | date: 'dd.MM.yyyy') + ' | ' + dataset.publisher }}</p>
           </div>
         </div>
