@@ -77,10 +77,11 @@
     .next-page {
       margin: 0;
       padding: 2px;
-
-      svg {
-        path {
-          fill: $accent-color;
+      ::ng-deep {
+        svg {
+          path {
+            fill: $accent-color;
+          }
         }
       }
     }

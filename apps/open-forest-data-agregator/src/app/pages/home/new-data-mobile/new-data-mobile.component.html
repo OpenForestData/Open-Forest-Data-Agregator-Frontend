@@ -1,32 +1,38 @@
 <section class="latest-added">
   <div class="container">
     <ofd-agregator-section-title
-      [iconURL]="'assets/modules/home/clock.png'"
+      [iconURL]="'assets/images/clock.svg'"
       [titleText]="'home.latest_added' | translate"
     ></ofd-agregator-section-title>
 
     <div class="slider" (swipeleft)="swipeLeftNews()" (swiperight)="swipeRightNews()">
       <div class="slider-window active-{{ mobileActiveData }}">
         <div class="row data-row">
-          <div class="col-lg-12 data-info" *ngFor="let i of [0, 1, 2]">
-            <span class="add-date">04.04.2020</span>
-            <h3 class="add-title">Lorem ipsum dolor sit amet</h3>
+          <div class="col-lg-12 data-info" *ngFor="let dataset of datasets">
+            <span class="add-date">{{ dataset.dateSort | date: 'dd.MM.yyyy' }}</span>
+            <h3 class="add-title">{{ dataset.title }}</h3>
             <p class="add-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro cupiditate sit in autem quas magnam! Nobis
-              accusamus labore, eum voluptates vel.
+              {{ dataset.dsDescriptionValue[0] ? dataset.dsDescriptionValue[0] : '' }}
             </p>
             <p class="add-owner">
-              <b class="semibold">{{ 'home.owner' | translate }}: </b> <span class="color-green">IBS PAN</span>
+              <b class="semibold">{{ 'home.owner' | translate }}: </b>
+              <span class="color-green">{{ dataset.authorName[0] ? dataset.authorName[0] : '' }}</span>
             </p>
 
             <div class="add-social">
-              <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-              <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-              <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+              <a href="#" (click)="shareLink(dataset.link, 'facebook')">
+                <svg-icon src="/assets/images/social/facebook-icon.svg" [applyCss]="true"></svg-icon>
+              </a>
+              <a href="#" (click)="shareLink(dataset.link, 'twitter')">
+                <svg-icon src="/assets/images/social/twitter-icon.svg" [applyCss]="true"></svg-icon>
+              </a>
+              <a href="#" (click)="shareLink(dataset.link, 'email')"
+                ><svg-icon src="/assets/images/social/email-icon.svg" [applyCss]="true"></svg-icon
+              ></a>
             </div>
 
             <div class="see_more_wrapper">
-              <a href="#">
+              <a [routerLink]="'/datasets/details'" [queryParams]="{ doi: dataset.identifier64 }">
                 <button class="btn no-border">
                   {{ 'home.see' | translate }}
                   <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
@@ -39,9 +45,12 @@
     </div>
 
     <div class="dots-navigation">
-      <span (click)="mobileActiveData = 0" [ngClass]="{ active: mobileActiveData == 0 }" class="dot"></span>
-      <span (click)="mobileActiveData = 1" [ngClass]="{ active: mobileActiveData == 1 }" class="dot"></span>
-      <span (click)="mobileActiveData = 2" [ngClass]="{ active: mobileActiveData == 2 }" class="dot"></span>
+      <span
+        *ngFor="let dataset of datasets; let i = index"
+        (click)="mobileActiveData = i"
+        [ngClass]="{ active: mobileActiveData == i }"
+        class="dot"
+      ></span>
     </div>
 
     <div class="col-lg-12">

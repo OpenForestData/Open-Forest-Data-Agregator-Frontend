@@ -27,7 +27,7 @@ export class NewDataComponent implements OnInit {
    * @param {UtilsService} utilsService Utils service
    * @param {DatasetsService} datasetsService Datasets service
    */
-  constructor(private utilsService: UtilsService, public datasetsService: DatasetsService) {}
+  constructor(public utilsService: UtilsService, public datasetsService: DatasetsService) {}
 
   /**
    * Initialize on start and fetch data for buttons

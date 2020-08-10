@@ -8,47 +8,32 @@
   <p class="advanced-search">{{ 'home.advanced_search' | translate }}</p>
 </section>
 
-<ofd-agregator-section-title [iconURL]="'assets/modules/home/book.png'" [titleText]="'home.news' | translate">
+<ofd-agregator-section-title [iconURL]="'assets/images/book.svg'" [titleText]="'home.news' | translate">
 </ofd-agregator-section-title>
 
 <div class="slider" (swipeleft)="swipeLeftNews()" (swiperight)="swipeRightNews()">
   <div class="slider-window active-{{ mobileActiveNews }}">
-    <div class="row news-body" *ngFor="let i of [0, 1, 2]">
-      <div class="col-md-12">
+    <div class="row news-body" *ngFor="let singleNews of news; let i = index">
+      <div class="col-md-12 news-container">
         <div class="news-social">
-          <span class="news-date">04.04.2020</span>
           <div class="news_social">
-            <a href="#"> <img src="assets/modules/home/social_fb.png" alt="Facebook"/></a>
-            <a href="#"> <img src="assets/modules/home/social_instagram.png" alt="Instagram"/></a>
-            <a href="#"> <img src="assets/modules/home/social_twitter.png" alt="Twitter"/></a>
+            <ofd-agregator-social [linkTo]="'news/' + singleNews.slug" class="social-container"> </ofd-agregator-social>
           </div>
         </div>
 
         <div class="news-image-holder">
-          <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+          <img [src]="singleNews['image_in_list']" [alt]="singleNews.title" />
         </div>
 
         <p class="news-title">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex fugiat delectus corporis ipsa voluptates
-          mollitia?
+          {{ singleNews.title }}
         </p>
 
         <p class="news-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique ab odit libero inventore consequuntur
-          molestiae nostrum nemo dolore unde accusamus impedit, voluptas ipsum aliquid aspernatur totam dignissimos
-          deserunt aperiam? Optio.
+          {{ singleNews.description }}
         </p>
 
-        <p class="tags-p">
-          {{ 'home.tags' | translate }}:
-          <span class="news-tags">
-            <a href="#">Tag1</a>
-            <a href="#">Tag2</a>
-            <a href="#">Tag3</a>
-          </span>
-        </p>
-
-        <a href="#" class="read_more">
+        <a [href]="redirectToNews(singleNews.slug)" class="read_more">
           {{ 'home.read_more' | translate }}
           <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
         </a>
@@ -58,9 +43,12 @@
 </div>
 
 <div class="dots-navigation">
-  <span (click)="mobileActiveNews = 0" [ngClass]="{ active: mobileActiveNews == 0 }" class="dot"></span>
-  <span (click)="mobileActiveNews = 1" [ngClass]="{ active: mobileActiveNews == 1 }" class="dot"></span>
-  <span (click)="mobileActiveNews = 2" [ngClass]="{ active: mobileActiveNews == 2 }" class="dot"></span>
+  <span
+    *ngFor="let singleNews of news; let i = index"
+    (click)="mobileActiveNews = i"
+    [ngClass]="{ active: mobileActiveNews == i }"
+    class="dot"
+  ></span>
 </div>
 
 <div class="load-all-wrapper">
@@ -70,28 +58,34 @@
   </button>
 </div>
 
-<section class="animal-of-the-day">
+<section class="animal-of-the-day" *ngIf="datasetOfTheDay">
   <ofd-agregator-section-title
-    [iconURL]="'assets/modules/home/heart_icon.png'"
+    [iconURL]="'assets/images/heart_icon.svg'"
     [titleText]="'home.animal_of_the_day' | translate"
   ></ofd-agregator-section-title>
 
   <div class="image-holder">
-    <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+    <img
+      [src]="datasetOfTheDay.preview"
+      *ngIf="datasetOfTheDay.preview && datasetOfTheDay.preview !== 'wait'"
+      [alt]="datasetOfTheDay.name"
+    />
+    <img
+      src="/assets/images/no_photo.png"
+      *ngIf="!datasetOfTheDay.preview && datasetOfTheDay.preview !== 'wait'"
+      [alt]="datasetOfTheDay.name"
+    />
   </div>
 
   <aside>
-    <span class="animal-name"> <b class="semibold">Żubr europejski </b> <i>(Bison banasus)</i> </span>
-    <span class="animal-length">
-      <b class="medium">{{ 'home.animal_length' | translate }}:</b> 2.9m (Dorosły)
-    </span>
-    <span class="animal-weight">
-      <b class="medium">{{ 'home.animal_weight' | translate }}:</b> 60 kg (Dorosły)
+    <span class="animal-name">
+      <b class="semibold">{{ datasetOfTheDay.name }} </b>
+      <i *ngIf="datasetOfTheDay.latinName !== ''">({{ datasetOfTheDay.latinName }})</i>
     </span>
   </aside>
 
   <div class="details-wrapper">
-    <button class="btn">
+    <button class="btn" [routerLink]="['/datasets/detail']" [queryParams]="{ doi: datasetOfTheDay.identifier64 }">
       {{ 'home.details' | translate }}
       <svg-icon src="assets/images/arrow_right_green.svg"></svg-icon>
     </button>

@@ -2,7 +2,7 @@
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
       <a class="post-link" *ngIf="news.prev && news.prev !== ''" [routerLink]="'/news/' + news.prev">
-        <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />\
+        <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
         {{ 'blog.previous' | translate }}
       </a>
     </div>
