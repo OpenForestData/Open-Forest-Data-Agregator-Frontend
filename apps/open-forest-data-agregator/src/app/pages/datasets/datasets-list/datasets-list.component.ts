@@ -95,7 +95,6 @@ export class DatasetsListComponent implements OnDestroy {
    * Gets column keys and triggers fetch data for CSV
    */
   getMetadata() {
-    this.utilsService.isLoading = true;
     this.DSService.getMetadata().subscribe(response => {
       Object.values(response).forEach((value: any) => {
         this.columnKeys = [...this.columnKeys, ...Object.keys(value.fields)];

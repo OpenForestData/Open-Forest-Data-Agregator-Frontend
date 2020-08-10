@@ -5,6 +5,7 @@ import { LanguageService } from './language.service';
 import { Subject } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
+import { LoaderService } from './loader.service';
 
 /**
  * Interface for navigation items
@@ -115,10 +116,6 @@ export class UtilsService {
       target: '_blank'
     }
   ];
-  /**
-   * Is loading
-   */
-  isLoading = false;
 
   /**
    * Menu structure returned by API
@@ -162,6 +159,7 @@ export class UtilsService {
    * @param {Title} titleService Title service
    * @param {Meta} metaService Meta service
    * @param {DatasetsService} DSService Datasets service
+   * @param loaderService Loader service
    * @memberof UtilsService
    */
   constructor(
@@ -169,7 +167,8 @@ export class UtilsService {
     public lang: LanguageService,
     private titleService: Title,
     private metaService: Meta,
-    public DSService: DatasetsService
+    public DSService: DatasetsService,
+    public loaderService: LoaderService
   ) {}
 
   /**
@@ -300,7 +299,7 @@ export class UtilsService {
    * Gets column keys and triggers fetch data for CSV
    */
   getMetadata() {
-    this.isLoading = true;
+    this.loaderService.isLoading = true;
     let columnKeys = [];
     this.DSService.getMetadata().subscribe(response => {
       Object.values(response).forEach((value: any) => {
@@ -375,7 +374,7 @@ export class UtilsService {
 
     a.href = url;
     a.download = `Metadane.csv`;
-    this.isLoading = false;
+    this.loaderService.isLoading = false;
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
