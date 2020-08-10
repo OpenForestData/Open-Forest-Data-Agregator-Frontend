@@ -32,7 +32,7 @@
     "items": {
       "datasets": "Datasets",
       "about-page": "About",
-      "policy": "Privacy politics",
+      "policy": "Privacy policy",
       "api": "API",
       "faq": "FAQ"
     },
@@ -240,7 +240,7 @@
     "all_news": "All",
     "search_placeholder": "Search for data...",
     "advanced_search": "Advanced search",
-    "animal_of_the_day": "Object of teh day",
+    "animal_of_the_day": "Object of the day",
     "animal_length": "Body length",
     "animal_weight": "Body weight",
     "animal_age_grow": "Adult",
