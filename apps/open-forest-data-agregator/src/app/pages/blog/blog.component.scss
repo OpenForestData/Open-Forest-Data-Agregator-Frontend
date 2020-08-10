@@ -134,6 +134,10 @@
   cursor: pointer;
 }
 
+.keywords:not(:last-child):after {
+  content: ', ';
+}
+
 @media (max-width: 1200px) {
   .news-body {
     .news-image-holder {
