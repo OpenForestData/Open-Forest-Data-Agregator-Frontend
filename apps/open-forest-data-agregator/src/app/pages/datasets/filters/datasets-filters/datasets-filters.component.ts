@@ -88,6 +88,7 @@ export class DatasetsFiltersComponent implements OnDestroy {
   public typeConversion = {
     TEXT: 'INPUT',
     NONE: 'INPUT',
+    SELECT: 'SELECT',
     MAP: 'MAP',
     DATERANGE: 'DATERANGE',
     TEXTBOX: 'SELECT',
