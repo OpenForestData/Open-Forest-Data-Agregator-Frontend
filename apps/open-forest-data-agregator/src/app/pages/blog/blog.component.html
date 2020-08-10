@@ -37,9 +37,7 @@
         {{ newestArticle?.title }}
       </p>
 
-      <p class="news-content ckeditor-content">
-        {{ newestArticle?.description }}
-      </p>
+      <p class="news-content ckeditor-content" [innerHTML]="newestArticle?.description"></p>
 
       <p class="tags-p">
         <span class="news-tags" *ngIf="newestArticle">
