@@ -241,24 +241,27 @@ export class UtilsService {
     if (menu) {
       this.menuStructure = [
         ...this.basicStructure,
-        ...menu.map(item => {
-          return (item = {
-            name: item.title,
-            path: `/more/${item.slug}`,
-            url: item.url,
-            key: '',
-            children: menu
-              .filter(child => child.parent_id === item.id)
-              .map(childItem => {
-                return {
-                  name: childItem.title,
-                  path: `/more/${childItem.slug}`,
-                  url: childItem.url,
-                  key: ''
-                };
-              })
-          });
-        }),
+        ...menu
+          .map(item => {
+            return (item = {
+              name: item.title,
+              path: `/more/${item.slug}`,
+              url: item.url,
+              parent_id: item.parent_id,
+              key: '',
+              children: menu
+                .filter(child => child.parent_id === item.id)
+                .map(childItem => {
+                  return {
+                    name: childItem.title,
+                    path: `/more/${childItem.slug}`,
+                    url: childItem.url,
+                    key: ''
+                  };
+                })
+            });
+          })
+          .filter(item => item.parent_id === null),
         {
           name: 'Blog',
           path: '/blog',

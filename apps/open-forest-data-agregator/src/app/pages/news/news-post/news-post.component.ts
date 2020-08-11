@@ -45,12 +45,16 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   onScroll() {
     const header: HTMLElement = document.querySelector('ofd-header header');
     const imageHolder: HTMLElement = document.querySelector('.news-image-holder');
+    const newsContent: HTMLElement = document.querySelector('.news-container');
 
     const headerHeight = header.clientHeight - 70;
 
+    const maxTranslate = newsContent.clientHeight - imageHolder.clientHeight - 40;
+    const translate = window.scrollY + headerHeight - imageHolder.offsetTop + 10;
+
     imageHolder.style.transform =
       imageHolder.offsetTop <= window.scrollY + headerHeight
-        ? `translateY(${window.scrollY + headerHeight - imageHolder.offsetTop + 10}px)`
+        ? `translateY(${translate <= maxTranslate ? translate : maxTranslate}px)`
         : `translateY(0)`;
   }
 
