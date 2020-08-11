@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FontResizeService } from '@app/services/font-resizer.service';
 
@@ -10,11 +10,11 @@ import { FontResizeService } from '@app/services/font-resizer.service';
   templateUrl: './header-controls.component.html',
   styleUrls: ['./header-controls.component.scss']
 })
-export class HeaderControlsComponent {
+export class HeaderControlsComponent implements OnInit {
   /**
    * Contrast bool
    */
-  public isContrast = false;
+  public isContrast;
 
   /**
    * Constructor
@@ -23,25 +23,38 @@ export class HeaderControlsComponent {
    */
   constructor(public cookieService: CookieService, public fontResizer: FontResizeService) {}
 
+  ngOnInit() {
+    this.isContrast = Boolean(this.cookieService.get('wcag'));
+    this.setContrast();
+  }
+
   /**
-   * Turn on/off contrast for WCGI
+   * Set contrast class and cookie for WCGI
    */
   public setContrast() {
-    this.isContrast = !this.isContrast;
     if (this.isContrast) {
       document.querySelector('body').classList.add('wcag-contrast');
+      this.cookieService.set(
+        'wcag',
+        String(this.isContrast),
+        365,
+        '/',
+        window.location.hostname,
+        location.protocol === 'https:',
+        'None'
+      );
     } else {
       document.querySelector('body').classList.remove('wcag-contrast');
+      this.cookieService.delete('wcag');
     }
-    this.cookieService.set(
-      'wcag',
-      String(this.isContrast),
-      365,
-      '/',
-      window.location.hostname,
-      location.protocol === 'https:',
-      'None'
-    );
+  }
+
+  /**
+   * Change contrast
+   */
+  public changeContrast() {
+    this.isContrast = !this.isContrast;
+    this.setContrast();
   }
 
   /**
