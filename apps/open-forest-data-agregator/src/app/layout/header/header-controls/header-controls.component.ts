@@ -24,7 +24,7 @@ export class HeaderControlsComponent implements OnInit {
   constructor(public cookieService: CookieService, public fontResizer: FontResizeService) {}
 
   ngOnInit() {
-    this.isContrast = Boolean(this.cookieService.get('wcag'));
+    this.isContrast = this.cookieService.check('wcag') ? this.cookieService.get('wcag') === 'true' : false;
     this.setContrast();
   }
 
@@ -45,7 +45,7 @@ export class HeaderControlsComponent implements OnInit {
       );
     } else {
       document.querySelector('body').classList.remove('wcag-contrast');
-      this.cookieService.delete('wcag');
+      this.cookieService.delete('wcag', '/', window.location.hostname);
     }
   }
 
