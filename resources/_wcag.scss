@@ -253,7 +253,8 @@ body.wcag-contrast {
     }
   }
 
-  .desktop-only {
+  .desktop-only,
+  .mobile-only {
     p {
       svg {
         path {
