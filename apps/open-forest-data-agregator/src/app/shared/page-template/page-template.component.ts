@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '@app/services/utils.service';
 import { LanguageService } from '@app/services/language.service';
 /**
@@ -64,8 +64,14 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
    * @param {ActivatedRoute} route Activated route
    * @param {UtilsService} utils Utils service
    * @param {LanguageService} lang Language service
+   * @param {Router} router Angular router
    */
-  constructor(public route: ActivatedRoute, public utils: UtilsService, public lang: LanguageService) {}
+  constructor(
+    public route: ActivatedRoute,
+    public utils: UtilsService,
+    public lang: LanguageService,
+    public router: Router
+  ) {}
 
   /**
    * @ignore
@@ -74,18 +80,28 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
     this.routerSubscription.add(
       this.route.params.subscribe(params => {
         this.slug = params['slug'];
-      })
-    );
 
-    this.routerSubscription.add(
-      this.utils.menuReadySubject.subscribe(_ => {
-        this.utils.getPageContent(this.slug).subscribe((pageContent: any) => this.readPageData(pageContent));
-      })
-    );
+        this.utils.menuReadySubject.subscribe(_ => {
+          this.utils.getPageContent(this.slug).subscribe(
+            (pageContent: any) => this.readPageData(pageContent),
+            e => {
+              if (e.status === 404) {
+                this.router.navigate(['/404']);
+              }
+            }
+          );
+        });
 
-    this.routerSubscription.add(
-      this.lang.changeLanguage.subscribe(_ => {
-        this.utils.getPageContent(this.slug).subscribe((pageContent: any) => this.readPageData(pageContent));
+        if (this.utils.structureCreated) {
+          this.utils.getPageContent(this.slug).subscribe(
+            (pageContent: any) => this.readPageData(pageContent),
+            e => {
+              if (e.status === 404) {
+                this.router.navigate(['/404']);
+              }
+            }
+          );
+        }
       })
     );
 

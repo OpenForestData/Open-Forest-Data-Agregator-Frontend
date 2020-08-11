@@ -146,10 +146,11 @@
     position: relative;
     bottom: -5px;
     left: 75%;
-
-    svg {
-      width: 200px;
-      height: 150px;
+    ::ng-deep {
+      svg {
+        width: 200px;
+        height: 150px;
+      }
     }
   }
   .banner-container {
@@ -166,9 +167,11 @@
     bottom: -5px;
     left: 75%;
 
-    svg {
-      width: 115px;
-      height: 87px;
+    ::ng-deep {
+      svg {
+        width: 115px;
+        height: 87px;
+      }
     }
   }
   .banner-container {
@@ -185,9 +188,11 @@
     bottom: -25px;
     left: 75%;
 
-    svg {
-      width: 115px;
-      height: 87px;
+    ::ng-deep {
+      svg {
+        width: 115px;
+        height: 87px;
+      }
     }
   }
   .banner-container {
