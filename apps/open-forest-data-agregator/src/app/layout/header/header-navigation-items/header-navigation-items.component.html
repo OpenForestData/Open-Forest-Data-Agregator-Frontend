@@ -38,7 +38,7 @@
 
     <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
       <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">
-        <a [routerLink]="[childrenItem.path]">{{ childrenItem.name }}</a>
+        <a [routerLink]="[childrenItem.path]">{{ childrenItem.name | translate }}</a>
       </li>
     </ul>
   </li>

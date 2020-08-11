@@ -16,7 +16,7 @@
   "nav": {
     "items": {
       "start": "Start",
-      "datasets": "Zbiory danych",
+      "datasets": "Zasoby danych",
       "stats": "Statystyki",
       "mobile-application": "Aplikacja mobilna",
       "more": "Dowiedz się więcej",
@@ -30,7 +30,7 @@
   },
   "footer": {
     "items": {
-      "datasets": "Zbiory danych",
+      "datasets": "Zasoby danych",
       "about-page": "O serwisie",
       "policy": "Polityka prywatności",
       "api": "Dokumentacja techniczna API",
@@ -42,7 +42,7 @@
   "datasets": {
     "breadcrumbs": {
       "start": "Start",
-      "datasets": "Zbiory danych"
+      "datasets": "Zasoby danych"
     },
     "filters": {
       "category": "Kategoria",
@@ -309,8 +309,8 @@
   "blog": {
     "blog": "Blog",
     "read_more": "Czytaj dalej",
-    "previous": "Poprzedni",
-    "next": "Następny",
+    "previous": "Poprzednia",
+    "next": "Następna",
     "similar": "Proponowane post"
   },
   "news": {

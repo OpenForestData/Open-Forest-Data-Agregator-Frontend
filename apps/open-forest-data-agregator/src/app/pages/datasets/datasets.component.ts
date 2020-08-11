@@ -36,7 +36,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    */
   public breadcrumbs: IBreadcrumbs[] = [
     { name: 'Start', href: '/' },
-    { name: 'Zbiory danych', href: '/datasets' }
+    { name: 'Zasoby danych', href: '/datasets' }
   ];
 
   /**

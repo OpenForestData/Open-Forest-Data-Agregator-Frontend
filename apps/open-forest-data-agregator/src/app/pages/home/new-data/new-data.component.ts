@@ -69,12 +69,12 @@ export class NewDataComponent implements OnInit {
   shareLink(link: string, social: string) {
     switch (social) {
       case 'facebook': {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`, '_blank', 'height=300,width=600');
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`, '_blank noopener noreferrer');
         break;
       }
 
       case 'twitter': {
-        window.open(`http://twitter.com/share?url=${link}`, '_blank', 'height=300,width=600');
+        window.open(`http://twitter.com/share?url=${link}`, '_blank noopener noreferrer');
         break;
       }
 
