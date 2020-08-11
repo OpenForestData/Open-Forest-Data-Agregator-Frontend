@@ -64,8 +64,10 @@
     </div>
 
     <div class="animal-box show-all">
-      <p class="animal-name">{{ 'home.all' | translate }}</p>
-      <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+      <a [routerLink]="['datasets']">
+        <p class="animal-name">{{ 'home.all' | translate }}</p>
+        <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+      </a>
     </div>
   </div>
 </div>

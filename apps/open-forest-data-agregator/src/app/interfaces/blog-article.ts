@@ -21,6 +21,10 @@ export interface BlogArticle {
    */
   description: string;
   /**
+   * Blog desc
+   */
+  desc: string;
+  /**
    * Images in article
    */
   image_in_list?: string;

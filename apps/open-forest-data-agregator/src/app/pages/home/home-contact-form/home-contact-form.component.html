@@ -2,7 +2,7 @@
   <div class="times" (click)="closeModal()">&times;</div>
 
   <ofd-agregator-section-title
-    [iconURL]="'assets/modules/home/contact.png'"
+    [iconURL]="'assets/images/question_mark.svg'"
     [titleText]="'home.contact_header' | translate"
   ></ofd-agregator-section-title>
 
@@ -65,7 +65,12 @@
     <div class="field button-wrapp">
       <button type="submit" class="btn svg-btn" [disabled]="!f.valid">
         {{ 'home.contact_form.send' | translate }}
-        <svg-icon src="assets/modules/home/envelop_green.svg" [applyCss]="true" alt="Submit"></svg-icon>
+        <svg-icon
+          src="assets/modules/home/envelop_green.svg"
+          class="white-fill"
+          [applyCss]="true"
+          alt="Submit"
+        ></svg-icon>
       </button>
     </div>
   </form>
