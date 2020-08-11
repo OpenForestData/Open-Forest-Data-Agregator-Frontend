@@ -1,7 +1,13 @@
 <section class="search-section">
   <div class="search-wrapper">
-    <input type="text" class="search" [placeholder]="'home.search_placeholder' | translate" />
-    <button class="search-button">
+    <input
+      type="text"
+      class="search"
+      (keyup.enter)="search()"
+      [(ngModel)]="searchValue"
+      [placeholder]="'home.search_placeholder' | translate"
+    />
+    <button class="search-button" (click)="search()">
       <svg-icon src="/assets/images/search_icon.svg" [applyCss]="true"></svg-icon>
     </button>
   </div>

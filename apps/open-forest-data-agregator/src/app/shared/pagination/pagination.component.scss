@@ -8,6 +8,8 @@
   &__go-to-page {
     input {
       margin-left: 10px;
+      width: 90px;
+      box-sizing: border-box;
     }
   }
 
@@ -52,8 +54,10 @@
     }
 
     .prev-page {
-      svg {
-        transform: rotate(180deg);
+      ::ng-deep {
+        svg {
+          transform: rotate(180deg);
+        }
       }
     }
 

@@ -3,6 +3,7 @@ import { HomeNewsComponent } from '../home-news/home-news.component';
 import { NewsService } from '@app/services/news.service';
 import { LanguageService } from '@app/services/language.service';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
+import { Router } from '@angular/router';
 /**
  * Mobile view of news at home page
  */
@@ -22,6 +23,11 @@ export class HomeNewsMobileComponent extends HomeNewsComponent {
    * @memberof HomeNewsMobileComponent
    */
   public mobileActiveNews = 0;
+
+  /**
+   * Input search value
+   */
+  public searchValue = '';
 
   /**
    * Dataset of the day
@@ -45,10 +51,18 @@ export class HomeNewsMobileComponent extends HomeNewsComponent {
     identifier64: string;
   } = null;
 
+  /**
+   * Home nws mobile component constructor
+   * @param DSService Datasets Service
+   * @param newsService News Service
+   * @param languageService Language Service
+   * @param router Angular router
+   */
   constructor(
     public DSService: DatasetsService,
     public newsService: NewsService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    public router: Router
   ) {
     super(languageService, newsService);
 
@@ -87,5 +101,14 @@ export class HomeNewsMobileComponent extends HomeNewsComponent {
   swipeRightNews() {
     this.mobileActiveNews -= 1;
     this.mobileActiveNews = this.mobileActiveNews < 0 ? 0 : this.mobileActiveNews;
+  }
+
+  /**
+   * Redirects to datasets view with serach params set
+   */
+  search() {
+    this.DSService.searchFilters = { field: 'q', data: this.searchValue, search: true };
+    this.DSService.updateQuerySubject.next(this.searchValue);
+    this.router.navigate(['/datasets'], { queryParams: { start: 0, rows: 15, q: this.searchValue } });
   }
 }

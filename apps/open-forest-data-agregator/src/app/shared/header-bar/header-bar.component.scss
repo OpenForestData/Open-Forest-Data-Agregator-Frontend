@@ -22,9 +22,11 @@
     margin-right: 13px;
     display: block;
 
-    svg {
-      path {
-        fill: #fff;
+    ::ng-deep {
+      svg {
+        path {
+          fill: #fff;
+        }
       }
     }
   }
