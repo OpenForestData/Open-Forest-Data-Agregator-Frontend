@@ -54,6 +54,12 @@ export class HomeContactFormComponent {
       checkbox: '',
       text: ''
     };
+    this.formError = {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      text: ''
+    };
   }
 
   /**
@@ -70,9 +76,14 @@ export class HomeContactFormComponent {
       recaptcha_response: 'test'
     };
 
-    this.homeService.sendContactForm(payload).subscribe(() => {
-      alert('Pomyślnie wysłano wiadomość');
-      this.closeModal();
-    });
+    this.homeService.sendContactForm(payload).subscribe(
+      () => {
+        alert('Pomyślnie wysłano wiadomość');
+        this.closeModal();
+      },
+      error => {
+        this.formError.emailAddress = error.error.e_mail;
+      }
+    );
   }
 }

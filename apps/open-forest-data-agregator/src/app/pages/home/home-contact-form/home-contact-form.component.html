@@ -39,8 +39,12 @@
         required
         [(ngModel)]="form.emailAddress"
         [placeholder]="'home.contact_form.email' | translate"
+        [ngClass]="formError.emailAddress !== '' ? 'error-circle' : ''"
       />
-      <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
+      <label for="emailAddress" [ngClass]="formError.emailAddress !== '' ? 'error-label' : ''">{{
+        'home.contact_form.email' | translate
+      }}</label>
+      <span class="error-message">{{ formError.emailAddress }}</span>
     </div>
 
     <div class="filds">
