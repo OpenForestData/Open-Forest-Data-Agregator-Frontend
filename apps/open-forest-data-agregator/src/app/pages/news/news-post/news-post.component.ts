@@ -41,6 +41,9 @@ export class NewsPostComponent implements OnInit, OnDestroy {
    */
   public news: any = {};
 
+  /**
+   * Change image position on scroll
+   */
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const header: HTMLElement = document.querySelector('ofd-header header');

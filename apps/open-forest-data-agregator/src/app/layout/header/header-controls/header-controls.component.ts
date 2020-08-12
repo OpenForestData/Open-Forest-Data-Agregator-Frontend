@@ -23,6 +23,9 @@ export class HeaderControlsComponent implements OnInit {
    */
   constructor(public cookieService: CookieService, public fontResizer: FontResizeService) {}
 
+  /**
+   * Check if wcag cookie exists and has 'true' value and set contrast
+   */
   ngOnInit() {
     this.isContrast = this.cookieService.check('wcag') ? this.cookieService.get('wcag') === 'true' : false;
     this.setContrast();
