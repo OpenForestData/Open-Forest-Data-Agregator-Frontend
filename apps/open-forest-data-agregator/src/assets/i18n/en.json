@@ -197,7 +197,10 @@
         "productionDate": "Production Date",
         "productionPlace": "Production Place",
         "distributionDate": "Distribution Date",
-        "softwareName": "Software Name"
+        "softwareName": "Software Name",
+        "speciesCommon": "Species Common",
+        "speciesCount": "Species Count",
+        "speciesLatin": "Species Latin"
       }
     },
     "resource": {
