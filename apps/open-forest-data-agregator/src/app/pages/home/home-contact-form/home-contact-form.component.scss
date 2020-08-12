@@ -170,6 +170,10 @@ textarea:not(:placeholder-shown) + label {
   }
 }
 
+.captcha-container {
+  padding-top: 10px;
+}
+
 input[type='text']:not(:placeholder-shown) + label,
 textarea:not(:placeholder-shown) + label {
   color: $accent-color;

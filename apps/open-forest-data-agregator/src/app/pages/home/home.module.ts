@@ -14,6 +14,7 @@ import { HomeFaqContactComponent } from './home-faq-contact/home-faq-contact.com
 import { HomeContactFormComponent } from './home-contact-form/home-contact-form.component';
 import { HomeNewsMobileComponent } from './home-news-mobile/home-news-mobile.component';
 import { HomeService } from '@app/pages/home/home.service';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 /**
  * Home module components
@@ -34,7 +35,7 @@ const components = [
  */
 @NgModule({
   declarations: components,
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [CommonModule, HomeRoutingModule, SharedModule, RecaptchaModule, RecaptchaFormsModule],
   providers: [HomeService]
 })
 export class HomeModule {}

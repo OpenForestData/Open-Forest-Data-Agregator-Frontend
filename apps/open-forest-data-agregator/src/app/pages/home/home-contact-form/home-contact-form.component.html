@@ -66,6 +66,10 @@
       </label>
     </div>
 
+    <div class="captcha-container">
+      <re-captcha name="captcha" (resolved)="resolved($event)" [siteKey]="config.captcha"></re-captcha>
+    </div>
+
     <div class="field button-wrapp">
       <button type="submit" class="btn svg-btn" [disabled]="!f.valid">
         {{ 'home.contact_form.send' | translate }}
