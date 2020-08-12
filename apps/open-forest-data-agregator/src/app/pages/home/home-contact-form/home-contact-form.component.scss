@@ -145,12 +145,33 @@ textarea:not(:placeholder-shown) + label {
   color: $accent-color;
 }
 
+.error-circle {
+  background-image: url('./../../../../assets/images/exclamation-mark-in-circle.svg');
+  background-repeat: no-repeat;
+  background-position: 100% 75%;
+  border-bottom: 1px solid red !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.error-label {
+  color: red !important;
+}
+
 .white-fill {
   svg {
     path {
       fill: white !important;
     }
   }
+}
+
+.captcha-container {
+  padding-top: 10px;
 }
 
 input[type='text']:not(:placeholder-shown) + label,
