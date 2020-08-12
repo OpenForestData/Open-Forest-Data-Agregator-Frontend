@@ -118,7 +118,7 @@ export class ResourceComponent implements OnInit {
   getResourceByID(id: any) {
     this.datasetService.getResourceByID(id).subscribe(response => {
       this.resource = response;
-      if (this.resource.details.fileTag[0]) {
+      if (this.resource.details.fileTag !== undefined) {
         this.fiveStarCreate(Number(this.resource.details.fileTag[0]));
       } else {
         this.fiveStarCreate(0);
