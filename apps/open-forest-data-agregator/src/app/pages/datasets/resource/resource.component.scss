@@ -516,6 +516,10 @@ b {
   }
 }
 
+.star-spacing {
+  padding-right: 4px;
+}
+
 @media only screen and (max-width: 1200px) {
   .container {
     flex-direction: column;
