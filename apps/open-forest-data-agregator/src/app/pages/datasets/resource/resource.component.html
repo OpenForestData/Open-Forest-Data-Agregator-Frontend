@@ -32,7 +32,19 @@
               {{ (metricData?.author?.value)[0].authorName.value }}
             </p>
             <p>
-              <b>{{ 'datasets.dataset.metadata-all.data-openness' | translate }}</b> {{ mockLeftSide.dataOpenness }}
+              <b>{{ 'datasets.dataset.metadata-all.data-openness' | translate }}</b>
+              <svg-icon
+                class="star-spacing"
+                *ngFor="let star of greenStars"
+                [src]="'/assets/images/green-star.svg'"
+                [applyCss]="true"
+              ></svg-icon>
+              <svg-icon
+                class="star-spacing"
+                *ngFor="let star of grayStars"
+                [src]="'/assets/images/star.svg'"
+                [applyCss]="true"
+              ></svg-icon>
             </p>
             <p>
               <b>{{ 'datasets.dataset.metadata-all.license' | translate }}</b>
