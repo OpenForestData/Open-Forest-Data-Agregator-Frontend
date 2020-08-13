@@ -3,6 +3,7 @@ import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.co
 import { DatasetsService } from '../datasets.service';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '@app/services/utils.service';
+import { TranslateService } from '@ngx-translate/core';
 /**
  * Datasets as list
  */
@@ -74,11 +75,23 @@ export class DatasetsListComponent implements OnDestroy {
    * Creates an instance of DatasetsListComponent.
    * @param {DatasetsService} DSService Datasets service
    * @param {UtilsService} utilsService Utility service
+   * @param {TranslateService} translate Translate service
    * @memberof DatasetsListComponent
    */
-  constructor(public DSService: DatasetsService, public utilsService: UtilsService) {
+  constructor(
+    public DSService: DatasetsService,
+    public utilsService: UtilsService,
+    public translate: TranslateService
+  ) {
     this.sub = this.DSService.sortSubject.subscribe(_ => {
       this.sortBy = this.DSService.searchFilters.data['sort'] === 'asc' ? this.sortItems[0] : this.sortItems[1];
+    });
+
+    this.translate.get('datasets.filters').subscribe(response => {
+      this.sortItems = [
+        { name: response['oldest'], value: 1 },
+        { name: response['newest'], value: 0 }
+      ];
     });
   }
 

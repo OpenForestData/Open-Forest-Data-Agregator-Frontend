@@ -59,7 +59,9 @@
       "created-year": "Data utworzenia",
       "author": "Autor",
       "range": "Zasięg",
-      "time-range": "Zakres czasowy"
+      "time-range": "Zakres czasowy",
+      "oldest": "Najnowsze",
+      "newest": "Najstarsze"
     },
     "dataset": {
       "headers": {

@@ -59,7 +59,9 @@
       "created-year": "Created at",
       "author": "Author",
       "range": "Range",
-      "time-range": "Time period"
+      "time-range": "Time period",
+      "oldest": "Oldest",
+      "newest": "Newest"
     },
     "dataset": {
       "headers": {
