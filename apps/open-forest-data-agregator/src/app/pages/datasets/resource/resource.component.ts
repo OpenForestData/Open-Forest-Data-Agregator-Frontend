@@ -92,6 +92,10 @@ export class ResourceComponent implements OnInit {
    * Amount of gray stars for display
    */
   grayStars: number[] = [];
+  /**
+   * Fullscreen for table
+   */
+  fullScreen = false;
 
   /**
    * Resource constructor
@@ -255,7 +259,7 @@ export class ResourceComponent implements OnInit {
    * // returns https://data-epuszcza.biaman.pl/file.xhtml?fileId=73&version=1.0
    */
   makeSource() {
-    if (this.resource.detaset_details?.alternativeURL) {
+    if (this.resource.dataset_details?.alternativeURL) {
       return this.resource.dataset_details?.alternativeURL;
     } else {
       return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
@@ -284,5 +288,42 @@ export class ResourceComponent implements OnInit {
   fiveStarCreate(amountOfStars: number) {
     this.greenStars = Array(amountOfStars).fill(0);
     this.grayStars = Array(5 - amountOfStars).fill(0);
+  }
+
+  /**
+   * Export metadata of file to csv
+   * @param data Data of file
+   */
+  exportFileData(data: any) {
+    const csvArray = [];
+    let firstRow = '';
+    let secondRow = '';
+    Object.keys(data).forEach((first: any) => {
+      firstRow += first + ';';
+    });
+    Object.values(data).forEach((second: any) => {
+      secondRow += second + ';';
+    });
+    csvArray.push(firstRow);
+    csvArray.push('\r\n');
+    csvArray.push(secondRow);
+
+    const a = document.createElement('a');
+    const blob = new Blob(csvArray, { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = this.resource.details.name + `_metadane.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
+
+  /**
+   * Set fullscreen on table
+   * @param value Value
+   */
+  setFullScreen(value) {
+    this.fullScreen = value;
   }
 }

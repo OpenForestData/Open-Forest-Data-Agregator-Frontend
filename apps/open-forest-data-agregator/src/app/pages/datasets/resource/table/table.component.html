@@ -1,5 +1,5 @@
-<div class="file-as-table">
-  <table datatable [dtTrigger]="dtTrigger" class="row-border hover datasets-table__table">
+<div class="file-as-table" [ngStyle]="{ 'max-width.percent': fullScreen ? '100%' : '80%' }">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover datasets-table__table">
     <thead>
       <tr>
         <th *ngFor="let title of convertedData?.meta?.fields">{{ title }}</th>
