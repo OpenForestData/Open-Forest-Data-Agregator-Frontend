@@ -97,7 +97,7 @@
             </div>
             <p>{{ (resource?.details?.fileNameWithoutExtension)[0] }}</p>
           </div>
-          <p>{{ resource?.details?.name }}</p>
+          <p>{{ resource?.details?.fileDescription }}</p>
           <div class="right-container__header__api">
             <button class="button button-accept" (click)="downloadSingleResource(this.resource.download_url)">
               {{ 'home.download' | translate }}

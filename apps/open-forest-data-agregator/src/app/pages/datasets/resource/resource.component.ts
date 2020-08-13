@@ -259,7 +259,7 @@ export class ResourceComponent implements OnInit {
    * // returns https://data-epuszcza.biaman.pl/file.xhtml?fileId=73&version=1.0
    */
   makeSource() {
-    if (this.resource.detaset_details?.alternativeURL) {
+    if (this.resource.dataset_details?.alternativeURL) {
       return this.resource.dataset_details?.alternativeURL;
     } else {
       return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
