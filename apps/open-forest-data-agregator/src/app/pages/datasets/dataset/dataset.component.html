@@ -226,13 +226,26 @@
             [expanded]="false"
           >
             <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
-              <div class="meta-citation__row__multiple" *ngIf="field.multiple">
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName !== 'keyword'">
                 <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
                     {{ value.value.value }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName === 'keyword'">
+                <div class="meta-citation__row__container">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + 'keywordValue' | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    <span class="comma" *ngFor="let keyword of field.value; let i = index">{{
+                      keyword.keywordValue.value
+                    }}</span>
                   </div>
                 </div>
               </div>
