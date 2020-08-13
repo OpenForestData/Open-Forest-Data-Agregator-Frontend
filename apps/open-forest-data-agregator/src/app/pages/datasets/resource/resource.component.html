@@ -1,7 +1,7 @@
 <section class="main-container">
   <ofd-page-nav class="breadcrumbs" [breadcrumbs]="breadCrumbs"></ofd-page-nav>
-  <section class="container">
-    <div class="dataset-left">
+  <section class="container" [ngStyle]="{ 'min-width': fullScreen ? '100%' : '' }">
+    <div class="dataset-left" [ngStyle]="{ display: fullScreen ? 'none' : '' }">
       <ofd-agregator-data-container
         class="header-bar-dataset"
         [iconSrc]="'/assets/images/pencil.svg'"
@@ -88,7 +88,7 @@
       </ofd-agregator-data-container>
     </div>
 
-    <div class="dataset-right">
+    <div class="dataset-right" [ngStyle]="{ width: fullScreen ? '100%' : '70%' }">
       <div class="right-container">
         <div class="right-container__header">
           <div class="right-container__header__title">
@@ -151,7 +151,11 @@
                 ) >= 0
               "
             >
-              <ofd-agregator-table [resource]="resourceContent.csv" [type]="resource.details?.fileTypeDisplay">
+              <ofd-agregator-table
+                [resource]="resourceContent.csv"
+                [type]="resource.details?.fileTypeDisplay"
+                (fullscreenEvent)="setFullScreen($event)"
+              >
               </ofd-agregator-table>
             </div>
             <div
@@ -246,7 +250,7 @@
           </div>
         </div>
 
-        <div class="meta-citation-box">
+        <div class="meta-citation-box" [ngStyle]="{ display: fullScreen ? 'none' : '' }">
           <ofd-agregator-data-container
             class="meta-citation"
             [iconSrc]="'/assets/images/metadata-content.svg'"

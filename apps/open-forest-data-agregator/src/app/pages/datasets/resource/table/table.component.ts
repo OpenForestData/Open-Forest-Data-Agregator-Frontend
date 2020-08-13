@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as Papa from 'papaparse';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -33,6 +33,18 @@ export class TableComponent implements OnInit {
    * Data table trigger
    */
   dtTrigger: Subject<any> = new Subject();
+  /**
+   * Data table options
+   */
+  dtOptions: any = {};
+  /**
+   * Fullscreen
+   */
+  fullScreen = false;
+  /**
+   * Full screen event emitter
+   */
+  @Output() fullscreenEvent: EventEmitter<any> = new EventEmitter();
 
   /**
    * Resource table constructor
@@ -45,6 +57,30 @@ export class TableComponent implements OnInit {
    * Function that initialize on website loading and get CSV file.
    */
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      dom: 'Bfrtip',
+      bInfo: false,
+      scrollY: '73vh',
+      scrollCollapse: true,
+      scrollX: true,
+      buttons: [
+        {
+          text: 'Fullscreen',
+          titleAttr: 'Fullscreen',
+          className: 'fullscreen',
+          action: () => {
+            if (!this.fullScreen) {
+              this.fullScreen = true;
+              this.fullscreenEvent.emit(true);
+            } else {
+              this.fullScreen = false;
+              this.fullscreenEvent.emit(false);
+            }
+          }
+        }
+      ]
+    };
     this.getCSV(this.resource);
   }
 

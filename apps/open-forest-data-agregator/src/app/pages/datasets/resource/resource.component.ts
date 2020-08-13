@@ -92,6 +92,10 @@ export class ResourceComponent implements OnInit {
    * Amount of gray stars for display
    */
   grayStars: number[] = [];
+  /**
+   * Fullscreen for table
+   */
+  fullScreen = false;
 
   /**
    * Resource constructor
@@ -313,5 +317,13 @@ export class ResourceComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
+  }
+
+  /**
+   * Set fullscreen on table
+   * @param value Value
+   */
+  setFullScreen(value) {
+    this.fullScreen = value;
   }
 }
