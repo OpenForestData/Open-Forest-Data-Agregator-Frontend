@@ -364,7 +364,8 @@ export class UtilsService {
     Object.values(allMetadata).forEach(meta => {
       temp = [];
       Object.keys(meta).forEach((key: any) => {
-        temp[indexer[key]] = meta[key];
+        const noNewLineInMeta = meta[key].replace(/(\r\n|\n|\r)/gm, '');
+        temp[indexer[key]] = noNewLineInMeta;
       });
       csvArray.push('\r\n');
       row = temp.join(';');
