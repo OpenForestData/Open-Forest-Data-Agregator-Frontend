@@ -361,16 +361,17 @@ export class UtilsService {
       indexer[first] = index;
     });
     const csvArray: any = [firstRow];
+    csvArray.push('\r\n');
     Object.values(allMetadata).forEach(meta => {
       temp = [];
       Object.keys(meta).forEach((key: any) => {
-        temp[indexer[key]] = meta[key];
+        const noNewLineInMeta = meta[key].replace(/(\r\n|\n|\r)/gm, '');
+        temp[indexer[key]] = noNewLineInMeta;
       });
       csvArray.push('\r\n');
       row = temp.join(';');
       csvArray.push(row);
     });
-
     const a = document.createElement('a');
     const blob = new Blob(csvArray, { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
