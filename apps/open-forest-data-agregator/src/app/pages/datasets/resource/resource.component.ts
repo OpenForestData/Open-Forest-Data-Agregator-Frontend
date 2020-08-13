@@ -286,11 +286,15 @@ export class ResourceComponent implements OnInit {
     this.grayStars = Array(5 - amountOfStars).fill(0);
   }
 
+  /**
+   * Export metadata of file to csv
+   * @param data Data of file
+   */
   exportFileData(data: any) {
     const csvArray = [];
     let firstRow = '';
     let secondRow = '';
-    Object.keys(data).forEach((first, index) => {
+    Object.keys(data).forEach((first: any) => {
       firstRow += first + ';';
     });
     Object.values(data).forEach((second: any) => {
