@@ -200,6 +200,7 @@
     },
     "resource": {
       "not-supported-type": "Chosen type is not supported.",
+      "ask-for-access": "Poproś o dostęp do tego zasobu w Dataverse",
       "headers": {
         "look-up": "Podgląd"
       },

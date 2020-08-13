@@ -205,6 +205,8 @@
       }
     },
     "resource": {
+      "not-supported-type": "Chosen type is not supported.",
+      "ask-for-access": "Ask for access to this file in Dataverse",
       "headers": {
         "look-up": "Preview"
       },

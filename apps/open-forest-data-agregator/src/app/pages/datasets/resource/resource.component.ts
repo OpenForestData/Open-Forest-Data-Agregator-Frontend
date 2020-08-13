@@ -131,8 +131,8 @@ export class ResourceComponent implements OnInit {
       this.getMetadataOfFile(this.resource);
       this.breadCrumbs.push({ name: this.resource?.dataset_details?.providers[0]?.authorAffiliation?.value, href: '' });
       this.breadCrumbs.push({
-        name: this.resource?.dataset_details?.latestVersion.metadataBlocks.citation.fields[0].value,
-        href: ''
+        name: this.resource?.details.parentName,
+        href: `https://agregator.whiteaster.com/datasets/detail?doi=${btoa(this.resource.details.parentIdentifier)}`
       });
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);

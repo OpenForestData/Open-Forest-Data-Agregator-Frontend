@@ -488,6 +488,27 @@
   content: ', ';
 }
 
+.tooltip-button {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-button:hover .tooltipText {
+  visibility: visible;
+}
+
+.tooltipText {
+  visibility: hidden;
+  width: 200px;
+  background-color: $accent-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 11;
+}
+
 @media only screen and (max-width: 1200px) {
   .container {
     flex-direction: column;
