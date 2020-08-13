@@ -84,6 +84,14 @@ export class ResourceComponent implements OnInit {
    * Mobile view
    */
   mobile = false;
+  /**
+   * Amount of green stars for display
+   */
+  greenStars: number[] = [];
+  /**
+   * Amount of gray stars for display
+   */
+  grayStars: number[] = [];
 
   /**
    * Resource constructor
@@ -110,6 +118,11 @@ export class ResourceComponent implements OnInit {
   getResourceByID(id: any) {
     this.datasetService.getResourceByID(id).subscribe(response => {
       this.resource = response;
+      if (this.resource.details.fileTag !== undefined) {
+        this.fiveStarCreate(Number(this.resource.details.fileTag[0]));
+      } else {
+        this.fiveStarCreate(0);
+      }
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
       this.breadCrumbs.push({ name: this.resource?.dataset_details?.providers[0]?.authorAffiliation?.value, href: '' });
@@ -262,5 +275,14 @@ export class ResourceComponent implements OnInit {
       format = format.substr(format.lastIndexOf('.') + 1);
       return format;
     }
+  }
+
+  /**
+   * Fill arrays with zeros based on amount of stars for Angular to display
+   * @param {number} amountOfStars
+   */
+  fiveStarCreate(amountOfStars: number) {
+    this.greenStars = Array(amountOfStars).fill(0);
+    this.grayStars = Array(5 - amountOfStars).fill(0);
   }
 }

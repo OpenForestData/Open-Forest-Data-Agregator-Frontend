@@ -39,8 +39,12 @@
         required
         [(ngModel)]="form.emailAddress"
         [placeholder]="'home.contact_form.email' | translate"
+        [ngClass]="formError.emailAddress !== '' ? 'error-circle' : ''"
       />
-      <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
+      <label for="emailAddress" [ngClass]="formError.emailAddress !== '' ? 'error-label' : ''">{{
+        'home.contact_form.email' | translate
+      }}</label>
+      <span class="error-message">{{ formError.emailAddress }}</span>
     </div>
 
     <div class="filds">
@@ -60,6 +64,10 @@
       <label class="normal" for="checkbox1">
         <span class="checkbox-label">{{ 'home.contact_form.checkbox' | translate }}</span>
       </label>
+    </div>
+
+    <div class="captcha-container">
+      <re-captcha name="captcha" (resolved)="resolved($event)" [siteKey]="config.captcha"></re-captcha>
     </div>
 
     <div class="field button-wrapp">

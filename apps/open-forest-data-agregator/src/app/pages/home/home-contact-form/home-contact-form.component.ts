@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
 import { HomeService, IContactForm } from '@app/pages/home/home.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
 /**
  * Contact modal content
@@ -21,7 +22,8 @@ export class HomeContactFormComponent {
     lastName: '',
     emailAddress: '',
     text: '',
-    checkbox: ''
+    checkbox: '',
+    captcha: ''
   };
 
   /**
@@ -33,13 +35,26 @@ export class HomeContactFormComponent {
     emailAddress: '',
     text: ''
   };
+
+  /**
+   * Config
+   */
+  config: any;
+
   /**
    * Creates an instance of HomeContactFormComponent.
    * @param {UIModalService} modal UI Modal Service
    * @param {HomeService} homeService Home Service
+   * @param appConfigService App config service
    * @memberof HomeContactFormComponent
    */
-  constructor(public modal: UIModalService, private homeService: HomeService) {}
+  constructor(
+    public modal: UIModalService,
+    private homeService: HomeService,
+    public appConfigService: AppConfigService
+  ) {
+    this.config = AppConfigService.config;
+  }
   /**
    * Close modal window
    *
@@ -52,6 +67,13 @@ export class HomeContactFormComponent {
       lastName: '',
       emailAddress: '',
       checkbox: '',
+      text: '',
+      captcha: ''
+    };
+    this.formError = {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
       text: ''
     };
   }
@@ -67,12 +89,25 @@ export class HomeContactFormComponent {
       last_name: this.form.lastName,
       e_mail: this.form.emailAddress,
       content: this.form.text,
-      recaptcha_response: 'test'
+      recaptcha_response: this.form.captcha
     };
 
-    this.homeService.sendContactForm(payload).subscribe(() => {
-      alert('Pomyślnie wysłano wiadomość');
-      this.closeModal();
-    });
+    this.homeService.sendContactForm(payload).subscribe(
+      () => {
+        alert('Pomyślnie wysłano wiadomość');
+        this.closeModal();
+      },
+      error => {
+        this.formError.emailAddress = error.error.e_mail;
+      }
+    );
+  }
+
+  /**
+   * Captcha resolve trigger
+   * @param event Event
+   */
+  resolved(event) {
+    this.form.captcha = event;
   }
 }
