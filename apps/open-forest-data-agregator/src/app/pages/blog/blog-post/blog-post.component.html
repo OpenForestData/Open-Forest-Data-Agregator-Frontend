@@ -16,7 +16,7 @@
 
   <div class="row post-links">
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link" [routerLink]="'/blog/' + article.prev">
+      <a class="post-link" [routerLink]="'/blog/' + article.prev" *ngIf="article.prev">
         <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
         {{ 'blog.previous' | translate }}
       </a>
@@ -29,7 +29,7 @@
       ></ofd-agregator-section-title>
     </div>
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link end" [routerLink]="'/blog/' + article.next">
+      <a class="post-link end" [routerLink]="'/blog/' + article.next" *ngIf="article.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
