@@ -194,7 +194,8 @@
         "softwareName": "Software Name",
         "speciesCommon": "Species Common",
         "speciesCount": "Species Count",
-        "speciesLatin": "Species Latin"
+        "speciesLatin": "Species Latin",
+        "publicationURL": "Publication URL"
       }
     },
     "resource": {
