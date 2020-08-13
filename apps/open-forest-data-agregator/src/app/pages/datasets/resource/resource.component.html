@@ -255,7 +255,7 @@
             [expanded]="false"
           >
             <div class="meta-citation__header">
-              <button class="button">
+              <button class="button" (click)="exportFileData(metaCitation)">
                 {{ 'global.export' | translate }}
                 <svg-icon [src]="'/assets/images/export.svg'" [applyCss]="true"></svg-icon>
               </button>

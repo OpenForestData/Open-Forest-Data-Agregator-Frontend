@@ -285,4 +285,29 @@ export class ResourceComponent implements OnInit {
     this.greenStars = Array(amountOfStars).fill(0);
     this.grayStars = Array(5 - amountOfStars).fill(0);
   }
+
+  exportFileData(data: any) {
+    const csvArray = [];
+    let firstRow = '';
+    let secondRow = '';
+    Object.keys(data).forEach((first, index) => {
+      firstRow += first + ';';
+    });
+    Object.values(data).forEach((second: any) => {
+      secondRow += second + ';';
+    });
+    csvArray.push(firstRow);
+    csvArray.push('\r\n');
+    csvArray.push(secondRow);
+
+    const a = document.createElement('a');
+    const blob = new Blob(csvArray, { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = this.resource.details.name + `_metadane.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
 }
