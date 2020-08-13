@@ -520,6 +520,19 @@ b {
   padding-right: 4px;
 }
 
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 20;
+}
+
 @media only screen and (max-width: 1200px) {
   .container {
     flex-direction: column;
