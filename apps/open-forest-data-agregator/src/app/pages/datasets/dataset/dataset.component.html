@@ -172,19 +172,23 @@
                 <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}">{{ file.label }}</p>
               </ui-checkbox>
               <div class="buttons-download">
-                <button class="buttons-download__style">
+                <button class="buttons-download__style" *ngIf="!file.restricted">
                   <svg-icon
                     [src]="'/assets/images/dataset/download.svg'"
                     [applyCss]="true"
                     (click)="downloadSingleResource(file.download_url)"
                   ></svg-icon>
                 </button>
-                <button class="buttons-download__style">
+                <button class="buttons-download__style" *ngIf="!file.restricted">
                   <svg-icon
                     [src]="'/assets/images/dataset/look.svg'"
                     [applyCss]="true"
                     routerLink="/datasets/resource/{{ file.dataFile.id }}"
                   ></svg-icon>
+                </button>
+                <button class="buttons-download__style tooltip-button" *ngIf="file.restricted">
+                  <svg-icon [src]="'/assets/images/dataset/gray_look.svg'" [applyCss]="true"></svg-icon>
+                  <span class="tooltipText">{{ 'datasets.resource.ask-for-access' | translate }}</span>
                 </button>
               </div>
             </div>

@@ -196,11 +196,13 @@
         "softwareName": "Software Name",
         "speciesCommon": "Species Common",
         "speciesCount": "Species Count",
-        "speciesLatin": "Species Latin"
+        "speciesLatin": "Species Latin",
+        "publicationURL": "Publication URL"
       }
     },
     "resource": {
       "not-supported-type": "Chosen type is not supported.",
+      "ask-for-access": "Poproś o dostęp do tego zasobu w Dataverse",
       "headers": {
         "look-up": "Podgląd"
       },

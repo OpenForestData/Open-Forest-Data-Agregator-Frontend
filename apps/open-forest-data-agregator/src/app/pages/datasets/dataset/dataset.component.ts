@@ -198,7 +198,7 @@ export class DatasetComponent implements OnInit {
    */
   downloadCheckedFiles() {
     this.dataset.latestVersion.files.forEach(file => {
-      if (file.isChecked) {
+      if (file.isChecked && !file.restricted) {
         this.downloadSingleResource(file.download_url);
       }
     });

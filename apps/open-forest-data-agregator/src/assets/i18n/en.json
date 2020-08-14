@@ -202,10 +202,13 @@
         "softwareName": "Software Name",
         "speciesCommon": "Species Common",
         "speciesCount": "Species Count",
-        "speciesLatin": "Species Latin"
+        "speciesLatin": "Species Latin",
+        "publicationURL": "Publication URL"
       }
     },
     "resource": {
+      "not-supported-type": "Chosen type is not supported.",
+      "ask-for-access": "Ask for access to this file in Dataverse",
       "headers": {
         "look-up": "Preview"
       },
