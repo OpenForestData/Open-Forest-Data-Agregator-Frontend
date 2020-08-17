@@ -3,6 +3,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
 /**
  * Resource component
@@ -28,7 +29,8 @@ export class ResourceComponent implements OnInit {
     csv: null,
     doc: null,
     map: null,
-    iframe: null
+    iframe: null,
+    video: null
   };
   /**
    * Viewer type
@@ -129,10 +131,13 @@ export class ResourceComponent implements OnInit {
       }
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
-      this.breadCrumbs.push({ name: this.resource?.dataset_details?.providers[0]?.authorAffiliation?.value, href: '' });
+      this.breadCrumbs.push({
+        name: this.resource?.dataset_details?.dvName,
+        href: `${AppConfigService.config.siteURL}/datasets?start=0&rows=15&sort=asc&category=${this.resource.dataset_details.identifierOfDataverse}`
+      });
       this.breadCrumbs.push({
         name: this.resource?.details.parentName,
-        href: `https://agregator.whiteaster.com/datasets/detail?doi=${btoa(this.resource.details.parentIdentifier)}`
+        href: `${AppConfigService.config.siteURL}datasets/detail?doi=${btoa(this.resource.details.parentIdentifier)}`
       });
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
@@ -180,6 +185,8 @@ export class ResourceComponent implements OnInit {
         ) >= 0
       ) {
         this.resourceContent.map = this.resource.download_url;
+      } else if (['MPEG-4 Video'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.video = this.resource;
       }
     });
   }

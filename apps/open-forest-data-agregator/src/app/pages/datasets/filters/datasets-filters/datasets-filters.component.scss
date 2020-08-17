@@ -189,13 +189,24 @@
     object-fit: cover;
     object-position: 0 0;
 
-    &.active {
-      object-position: -25px 0;
+    svg {
+      path {
+        fill: white;
+      }
     }
 
     &.active-green {
-      object-position: -44px 0;
+      svg {
+        path {
+          fill: $accent-color;
+        }
+      }
     }
+  }
+
+  .close-button-svg {
+    border: none !important;
+    background-color: transparent !important;
   }
 
   .group-row ul {
