@@ -211,6 +211,14 @@
               >
               </ofd-agregator-iframe>
             </div>
+
+            <div
+              class="right-container__files__file-viewer__as-video"
+              *ngIf="['MPEG-4 Video'].indexOf(resource.details?.fileTypeDisplay) >= 0"
+            >
+              <ofd-agregator-video [resource]="resourceContent.video"> </ofd-agregator-video>
+            </div>
+
             <div
               class="right-container__files__file-viewer__not-supported"
               *ngIf="
@@ -241,7 +249,8 @@
                   'application/vnd.ms-pki.stl',
                   'Shape',
                   'Tab-Delimited',
-                  'image/x-3ds'
+                  'image/x-3ds',
+                  'MPEG-4 Video'
                 ].indexOf(resource.details?.fileTypeDisplay) === -1
               "
             >

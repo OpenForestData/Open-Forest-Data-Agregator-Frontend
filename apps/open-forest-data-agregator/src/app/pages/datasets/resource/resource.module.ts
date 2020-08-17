@@ -16,6 +16,7 @@ import { MapComponent } from './map/map.component';
 import { IframeComponent } from './iframe/iframe.component';
 import { NotSupportedComponent } from './not-supported/not-supported.component';
 import { DataTablesModule } from 'angular-datatables';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DataTablesModule } from 'angular-datatables';
     XmlComponent,
     MapComponent,
     IframeComponent,
-    NotSupportedComponent
+    NotSupportedComponent,
+    VideoComponent
   ],
   imports: [
     CommonModule,

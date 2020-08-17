@@ -12,5 +12,6 @@
     }
   ],
   "api": "https://agregator.whiteaster.com/api/v1/",
-  "captcha": "6Lf37L0ZAAAAAMJIe6d0CB4EcGoxeZ3WmvzDxRND"
+  "captcha": "6Lf37L0ZAAAAAMJIe6d0CB4EcGoxeZ3WmvzDxRND",
+  "siteURL": "https://agregator.whiteaster.com/"
 }
