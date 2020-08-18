@@ -60,8 +60,8 @@
       "author": "Autor",
       "range": "Zasięg",
       "time-range": "Zakres czasowy",
-      "oldest": "Najnowsze",
-      "newest": "Najstarsze"
+      "oldest": "Najstarsze",
+      "newest": "Najnowsze"
     },
     "dataset": {
       "headers": {
