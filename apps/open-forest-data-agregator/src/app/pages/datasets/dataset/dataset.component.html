@@ -169,7 +169,10 @@
                 <div class="background-gray">
                   {{ formatConverter(file.label) | uppercase }}
                 </div>
-                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}">{{ file.label }}</p>
+                <p class="title" *ngIf="file.restricted">{{ file.label }}</p>
+                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}" *ngIf="!file.restricted">
+                  {{ file.label }}
+                </p>
               </ui-checkbox>
               <div class="buttons-download">
                 <button class="buttons-download__style" *ngIf="!file.restricted">
