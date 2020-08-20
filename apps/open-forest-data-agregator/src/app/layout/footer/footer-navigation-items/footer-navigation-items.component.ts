@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 
+/**
+ * Footer navigation item interface
+ */
 interface NavigationItem {
+  /**
+   * Navigation name
+   */
   name: string;
+  /**
+   * Path to page
+   */
   path: string;
 }
 /**
  * Footer navigation
- *
- * @export
- * @class FooterNavigationItemsComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-footer-navigation-items',

@@ -1,13 +1,10 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '@app/services/utils.service';
 import { LanguageService } from '@app/services/language.service';
 /**
  * Template for generic page
- *
- * @export
- * @class PageTemplateComponent
  */
 @Component({
   selector: 'ofd-agregator-page-template',
@@ -17,34 +14,29 @@ import { LanguageService } from '@app/services/language.service';
 export class PageTemplateComponent implements OnInit, OnDestroy {
   /**
    * Accordion data
-   *
-   * @memberof PageTemplateComponent
    */
   public accordionData = [];
+
   /**
    * If accordion is present
-   *
-   * @memberof PageTemplateComponent
    */
   public ifAccordion = false;
 
   /**
    * If latest date module is present
    *
-   * @memberof PageTemplateComponent
    */
   public ifNewData = false;
 
   /**
    * Icon URL for title component
    *
-   * @memberof PageTemplateComponent
    */
   @Input() iconURL = '';
+
   /**
    * Title of news for title component
    *
-   * @memberof PageTemplateComponent
    */
   @Input() pageTitle = '';
 
@@ -57,9 +49,6 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
 
   /**
    * @ignore
-   *
-   * @type {Subscription}
-   * @memberof PageTemplateComponent
    */
   public routerSubscription: Subscription = new Subscription();
 
@@ -72,33 +61,47 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
 
   /**
    * Creates an instance of PageTemplateComponent.
-   * @param {ActivatedRoute} route
-   * @param {UtilsService} utils
-   * @memberof PageTemplateComponent
+   * @param {ActivatedRoute} route Activated route
+   * @param {UtilsService} utils Utils service
+   * @param {LanguageService} lang Language service
+   * @param {Router} router Angular router
    */
-  constructor(public route: ActivatedRoute, public utils: UtilsService, public lang: LanguageService) {}
+  constructor(
+    public route: ActivatedRoute,
+    public utils: UtilsService,
+    public lang: LanguageService,
+    public router: Router
+  ) {}
 
   /**
    * @ignore
-   *
-   * @memberof PageTemplateComponent
    */
   ngOnInit() {
     this.routerSubscription.add(
       this.route.params.subscribe(params => {
         this.slug = params['slug'];
-      })
-    );
 
-    this.routerSubscription.add(
-      this.utils.menuReadySubject.subscribe(_ => {
-        this.utils.getPageContent(this.slug).subscribe((pageContent: any) => this.readPageData(pageContent));
-      })
-    );
+        this.utils.menuReadySubject.subscribe(_ => {
+          this.utils.getPageContent(this.slug).subscribe(
+            (pageContent: any) => this.readPageData(pageContent),
+            e => {
+              if (e.status === 404) {
+                this.router.navigate(['/404']);
+              }
+            }
+          );
+        });
 
-    this.routerSubscription.add(
-      this.lang.changeLanguage.subscribe(_ => {
-        this.utils.getPageContent(this.slug).subscribe((pageContent: any) => this.readPageData(pageContent));
+        if (this.utils.structureCreated) {
+          this.utils.getPageContent(this.slug).subscribe(
+            (pageContent: any) => this.readPageData(pageContent),
+            e => {
+              if (e.status === 404) {
+                this.router.navigate(['/404']);
+              }
+            }
+          );
+        }
       })
     );
 
@@ -111,7 +114,6 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
    * Sets data to component from API
    *
    * @param {*} pageContent
-   * @memberof PageTemplateComponent
    */
   readPageData(pageContent) {
     if (pageContent.accordions) {

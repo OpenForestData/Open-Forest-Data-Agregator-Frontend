@@ -16,7 +16,9 @@
         <a
           class="datasets-map__dataset-item__details"
           [routerLink]="['detail']"
-          [queryParams]="{ doi: datasetDetails.dataset.identifier64 }"
+          [queryParams]="{
+            doi: datasetDetails.dataset.identifier64
+          }"
         >
           {{ 'datasets.see-details' | translate }}
           <svg-icon src="/assets/images/arrow-green-right.svg" [applyCss]="true"></svg-icon>
@@ -25,8 +27,8 @@
           {{ datasetDetails.dataset.title }} - {{ datasetDetails.dataset.id }}
         </h4>
         <p class="datasets-map__dataset-item__time">
-          <time [dateTime]="datasetDetails.dataset.createdAt">{{
-            datasetDetails.dataset.createdAt | date: 'dd.MM.yyyy'
+          <time [dateTime]="datasetDetails.dataset.sortDate">{{
+            datasetDetails.dataset.sortDate | date: 'dd.MM.yyyy'
           }}</time>
           | <span>{{ datasetDetails.dataset.author }}</span> - <a href="#">{{ datasetDetails.dataset.category }}</a>
         </p>

@@ -68,6 +68,10 @@
     width: calc((100vw - 100px));
     margin-right: 50px;
   }
+
+  .news-container {
+    width: 100%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -81,6 +85,14 @@
     .news-body {
       width: calc(100vw - 60px);
       margin-right: 30px;
+    }
+  }
+}
+
+::ng-deep {
+  .animal-of-the-day {
+    .titleText {
+      white-space: nowrap;
     }
   }
 }

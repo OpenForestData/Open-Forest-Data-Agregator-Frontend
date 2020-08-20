@@ -12,7 +12,7 @@
         </p>
       </div>
     </div>
-    <svg-icon src="assets/images/trees.svg" class="tree-image" alt="Open Forest Data"></svg-icon>
+    <svg-icon src="assets/images/trees.svg" class="tree-image" [applyCss]="true"></svg-icon>
   </div>
 </div>
 
@@ -21,8 +21,8 @@
     <div class="row animals-container">
       <div class="col-lg-12 col-md-12 middle-md animal-box-wrapper">
         <div class="animal-box desktop-flex-only" *ngFor="let item of utilService.homePageData.categories">
-          <a>
-            <img [src]="item.image" alt="Animal name" />
+          <a href="{{ item.href ? item.href : '' }}">
+            <img [src]="item.image" [alt]="item.title" />
             <p class="animal-name">{{ item.title }}</p>
           </a>
         </div>
@@ -55,28 +55,19 @@
     <img src="assets/modules/home/folder_icon.png" alt="" />
     {{ 'home.categories' | translate }}
   </h3>
-  <div class="mobile-categories-wrapper">
-    <div
-      class="animal-box"
-      *ngFor="
-        let i of [
-          'birds_icon',
-          'insects_icon',
-          'mammals_icon',
-          'mushrooms_icon',
-          'map_icon',
-          'phototrap_icon',
-          'plants_icon'
-        ]
-      "
-    >
-      <img src="assets/modules/home/categories/{{ i }}.png" alt="Animal name" />
-      <p class="animal-name">{{ i }}</p>
+  <div class="mobile-categories-wrapper" *ngIf="utilService.homePageData">
+    <div class="animal-box" *ngFor="let item of utilService.homePageData.categories">
+      <a href="{{ item.href ? item.href : '' }}">
+        <img [src]="item.image" [alt]="item.title" />
+        <p class="animal-name">{{ item.title }}</p>
+      </a>
     </div>
 
     <div class="animal-box show-all">
-      <p class="animal-name">{{ 'home.all' | translate }}</p>
-      <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+      <a [routerLink]="['datasets']">
+        <p class="animal-name">{{ 'home.all' | translate }}</p>
+        <img src="assets/modules/home/arrow_right_white.png" alt="{{ 'home.all' | translate }}" />
+      </a>
     </div>
   </div>
 </div>

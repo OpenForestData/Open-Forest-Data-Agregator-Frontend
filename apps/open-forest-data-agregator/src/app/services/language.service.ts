@@ -12,6 +12,9 @@ import { environment } from '@env/environment';
  */
 @Injectable()
 export class LanguageService {
+  /**
+   * Change language subject
+   */
   public changeLanguage: Subject<any> = new Subject();
   /**
    * Application language
@@ -22,15 +25,21 @@ export class LanguageService {
 
   /**
    * Sets new language
-   *
-   * @memberof LanguageService
    */
   public set language(value) {
     if (AppConfigService.config) {
       AppConfigService.config.language = value;
     }
 
-    this.cookieService.set('language', value, environment.userCookieTime, '/');
+    this.cookieService.set(
+      'language',
+      value,
+      environment.userCookieTime,
+      '/',
+      window.location.hostname,
+      location.protocol === 'https:',
+      'None'
+    );
     this.translate.setDefaultLang(value);
     this.translate.use(value);
 
@@ -49,6 +58,7 @@ export class LanguageService {
   /**
    * Set language from cookie or from config
    * @param {CookieService} cookieService Cookie service
+   * @param {TranslateService} translate Translate service
    */
   constructor(public cookieService: CookieService, public translate: TranslateService) {}
 }

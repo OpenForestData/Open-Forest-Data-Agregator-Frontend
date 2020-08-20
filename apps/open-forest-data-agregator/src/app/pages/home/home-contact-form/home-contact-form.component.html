@@ -2,7 +2,7 @@
   <div class="times" (click)="closeModal()">&times;</div>
 
   <ofd-agregator-section-title
-    [iconURL]="'assets/modules/home/contact.png'"
+    [iconURL]="'assets/images/question_mark.svg'"
     [titleText]="'home.contact_header' | translate"
   ></ofd-agregator-section-title>
 
@@ -39,8 +39,12 @@
         required
         [(ngModel)]="form.emailAddress"
         [placeholder]="'home.contact_form.email' | translate"
+        [ngClass]="formError.emailAddress !== '' ? 'error-circle' : ''"
       />
-      <label for="emailAddress">{{ 'home.contact_form.email' | translate }}</label>
+      <label for="emailAddress" [ngClass]="formError.emailAddress !== '' ? 'error-label' : ''">{{
+        'home.contact_form.email' | translate
+      }}</label>
+      <span class="error-message">{{ formError.emailAddress }}</span>
     </div>
 
     <div class="filds">
@@ -62,10 +66,19 @@
       </label>
     </div>
 
+    <div class="captcha-container">
+      <re-captcha name="captcha" (resolved)="resolved($event)" [siteKey]="config.captcha"></re-captcha>
+    </div>
+
     <div class="field button-wrapp">
-      <button type="submit" class="btn">
+      <button type="submit" class="btn svg-btn" [disabled]="!f.valid">
         {{ 'home.contact_form.send' | translate }}
-        <img src="assets/modules/home/envelop_white.png" alt="Submit" />
+        <svg-icon
+          src="assets/modules/home/envelop_green.svg"
+          class="white-fill"
+          [applyCss]="true"
+          alt="Submit"
+        ></svg-icon>
       </button>
     </div>
   </form>

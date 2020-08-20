@@ -5,10 +5,6 @@ import { LanguageService } from '@app/services/language.service';
 
 /**
  * Header navigation component
- *
- * @export
- * @class HeaderNavigationItemsComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-header-navigation-items',
@@ -18,9 +14,6 @@ import { LanguageService } from '@app/services/language.service';
 export class HeaderNavigationItemsComponent implements OnInit {
   /**
    * Navgiation components
-   *
-   * @type {NavigationItem[]}
-   * @memberof HeaderNavigationItemsComponent
    */
   public get items(): NavigationItem[] {
     return this.utilService.menuStructure || [];
@@ -28,22 +21,18 @@ export class HeaderNavigationItemsComponent implements OnInit {
 
   /**
    * @ignore
-   *
-   * @type {Subscription}
-   * @memberof HeaderNavigationItemsComponent
    */
   public sub: Subscription;
 
   /**
    * Creates an instance of HeaderNavigationItemsComponent.
-   * @memberof HeaderNavigationItemsComponent
+   * @param {UtilsService} utilService Utils service
+   * @param {LanguageService} languageService Language service
    */
   constructor(public utilService: UtilsService, public languageService: LanguageService) {}
 
   /**
    * @ignore
-   *
-   * @memberof HeaderNavigationItemsComponent
    */
   ngOnInit() {
     this.sub = this.languageService.changeLanguage.subscribe(_ => {

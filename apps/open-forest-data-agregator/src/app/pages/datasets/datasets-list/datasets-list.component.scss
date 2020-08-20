@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
 
     select {
@@ -32,7 +32,7 @@
       align-items: flex-start;
       border: 1px solid $light-gray-color;
       margin-bottom: 20px;
-      font-size: 12px;
+      font-size: 0.75rem;
       line-height: 18px;
 
       &__picture,
@@ -55,7 +55,7 @@
       }
 
       &__title {
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 20px;
         font-weight: 500;
         color: $accent-color;
@@ -63,14 +63,14 @@
       }
 
       &__description {
-        font-size: 14px;
+        font-size: 0.875rem;
         line-height: 21px;
         margin: 20px 0;
       }
 
       &__source {
         display: flex;
-        font-size: 12px;
+        font-size: 0.75rem;
         cursor: pointer;
 
         a {

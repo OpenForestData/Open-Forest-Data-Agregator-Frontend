@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '@app/services/blog.service';
-import { first } from 'rxjs/operators';
+
 import { BlogArticle } from '@app/interfaces/blog-article';
 
 /**
@@ -16,7 +16,7 @@ import { BlogArticle } from '@app/interfaces/blog-article';
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
   /**
-   * Router subscripton
+   * Router subscription
    */
   public routerSubscription: Subscription = new Subscription();
   /**
@@ -28,7 +28,11 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   public article: BlogArticle;
 
-  // TODO - Prev i next i proponowane posty (jeśli nie ma klucza to nie pokazuj - proste, klucz related_posts[])
+  /**
+   * Post related posts
+   */
+  public relatedPosts: BlogArticle[] = [];
+
   /**
    * Blog post constructor
    *
@@ -43,15 +47,16 @@ export class BlogPostComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     // this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());
-    this.route.params.pipe(first()).subscribe(params => {
+    this.route.params.subscribe(params => {
       this.blogService.getBlogSlug(params['slug']).subscribe(response => {
         this.article = response['article'];
+        this.relatedPosts = response['related_posts'] ? response['related_posts'].slice(0, 2) : [];
       });
     });
   }
 
   /**
-   * Unsubscribes to subcribed items
+   * Unsubscribes to subscribed items
    */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();

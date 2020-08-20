@@ -4,11 +4,6 @@ import { Subscription } from 'rxjs';
 import { UtilsService } from '@app/services/utils.service';
 /**
  * Header for datasets view
- *
- * @export
- * @class DatasetsHeaderComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-datasets-header',
@@ -31,11 +26,15 @@ export class DatasetsHeaderComponent implements OnInit, OnDestroy {
    */
   public sub: Subscription;
 
+  /**
+   * Add data buttons
+   */
   buttonsAddData = [];
 
   /**
    * Creates an instance of DatasetsHeaderComponent.
-   * @param {DatasetsService} DSService
+   * @param {DatasetsService} DSService Datasets service
+   * @param {UtilsService} utilsService Utils service
    * @memberof DatasetsHeaderComponent
    */
   constructor(public DSService: DatasetsService, private utilsService: UtilsService) {

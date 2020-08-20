@@ -16,11 +16,11 @@
 .bg-gray {
   background-color: $light-gray-color;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .slogan-text {
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-top: 25px;
   max-width: 50%;
   line-height: 32px;
@@ -72,7 +72,7 @@
 
     .animal-name {
       font-weight: 500;
-      font-size: 16px;
+      font-size: 1rem;
       color: white;
     }
   }
@@ -86,14 +86,13 @@
   width: 100%;
   background: $accent-color;
   color: white;
-  z-index: 2;
-  padding: 30px 50px;
+  z-index: 1001;
   box-sizing: border-box;
   transform: translateX(105%);
   will-change: transform;
   transition: transform 0.6s ease;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
-  padding-right: calc(25% + 60px);
+  padding: 30px calc(25% + 60px) 30px 50px;
   overflow: hidden;
 
   &.active {
@@ -103,14 +102,14 @@
   .times {
     display: flex;
     justify-content: flex-end;
-    font-size: 50px;
+    font-size: 3.125rem;
     font-weight: 200;
   }
 
   h3 {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.125rem;
     letter-spacing: 1px;
     display: flex;
     align-items: center;
@@ -126,6 +125,12 @@
     align-items: center;
     margin-bottom: 15px;
 
+    a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+    }
+
     p {
       font-weight: 600;
     }
@@ -133,5 +138,67 @@
     img {
       margin-right: 15px;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .tree-image {
+    position: relative;
+    bottom: -5px;
+    left: 75%;
+    ::ng-deep {
+      svg {
+        width: 200px;
+        height: 150px;
+      }
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
+
+@media (max-width: 992px) {
+  .tree-image {
+    position: relative;
+    bottom: -5px;
+    left: 75%;
+
+    ::ng-deep {
+      svg {
+        width: 115px;
+        height: 87px;
+      }
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .tree-image {
+    position: relative;
+    bottom: -25px;
+    left: 75%;
+
+    ::ng-deep {
+      svg {
+        width: 115px;
+        height: 87px;
+      }
+    }
+  }
+  .banner-container {
+    min-width: 0;
+  }
+  .bg-gray {
+    overflow-x: unset;
   }
 }

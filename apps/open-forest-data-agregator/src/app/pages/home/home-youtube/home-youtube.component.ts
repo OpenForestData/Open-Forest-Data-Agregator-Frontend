@@ -4,9 +4,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 /**
  * Youtube section at home
- *
- * @export
- * @class HomeYoutubeComponent
  */
 @Component({
   selector: 'ofd-agregator-home-youtube',
@@ -15,11 +12,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeYoutubeComponent implements OnInit {
+  /**
+   * Safe Resource url to youtube movie
+   */
   public url: string | SafeResourceUrl = '';
   /**
    * Home Youtube constructor
    * @param {UtilsService} utilService Utils service
    * @param {DomSanitizer} sanitizer Sanitizer
+   * @param {ChangeDetectorRef} changeDetectorRef Change detector reference
    */
   constructor(
     public utilService: UtilsService,
@@ -27,6 +28,9 @@ export class HomeYoutubeComponent implements OnInit {
     public changeDetectorRef: ChangeDetectorRef
   ) {}
 
+  /**
+   * Set safe url resource to youtube movie on component init
+   */
   ngOnInit() {
     setTimeout(() => {
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(

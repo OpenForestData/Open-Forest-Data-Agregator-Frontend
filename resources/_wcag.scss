@@ -253,7 +253,8 @@ body.wcag-contrast {
     }
   }
 
-  .desktop-only {
+  .desktop-only,
+  .mobile-only {
     p {
       svg {
         path {
@@ -319,7 +320,7 @@ body.wcag-contrast {
 
   .header-bar {
     background-color: black;
-    // color: yellow;
+    color: yellow;
     svg {
       path {
         fill: yellow !important;
@@ -391,6 +392,14 @@ body.wcag-contrast {
 
   .background-wcag {
     background-color: black;
+
+    .datasets__filters {
+      background-color: black;
+    }
+
+    .datasets-presentation {
+      background-color: black;
+    }
   }
 
   .datasets-list__count {
@@ -435,19 +444,30 @@ body.wcag-contrast {
     }
   }
 
-  .checkbox-field .checkbox-label {
-    color: yellow;
+  // .checkbox-field .checkbox-label {
+  //   color: yellow;
+  // }
+
+  .check_box + label {
+    cursor: pointer;
+    background: url('/assets/images/yellow_checkbox.png') no-repeat !important;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    padding: 0 0 0 0;
+    background-position: 0 0 !important;
+    padding-top: 1px;
   }
 
-  .checkbox-field .check_box + label {
-    background: url('/assets/images/yellow_checkbox.png') no-repeat !important;
+  .check_box:checked + label {
+    background-position: -20px 0 !important;
   }
 
   .search-section__button {
-    background-color: black;
-    border-top: 1px solid yellow;
-    border-bottom: 1px solid yellow;
-    border-right: 0 solid transparent;
+    background-color: black !important;
+    border-top: 1px solid yellow !important;
+    border-bottom: 1px solid yellow !important;
+    border-right: 0 solid transparent !important;
     svg {
       ellipse {
         stroke: white !important;
@@ -459,11 +479,44 @@ body.wcag-contrast {
   }
 
   .search-section__input {
-    background-color: black;
+    background-color: black !important;
+    color: white !important;
+    border-top: 1px solid yellow !important;
+    border-left: 1px solid yellow !important;
+    border-bottom: 1px solid yellow !important;
+  }
+
+  .filter-li {
+    color: white !important;
+  }
+
+  .advanced .query-string {
+    color: white !important;
+  }
+
+  .filter-name {
     color: white;
-    border-top: 1px solid yellow;
-    border-left: 1px solid yellow;
-    border-bottom: 1px solid yellow;
+  }
+
+  .lunchSearch {
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid yellow !important;
+  }
+
+  .advanced {
+    background: black !important;
+  }
+
+  .wcag-icon {
+    svg {
+      ellipse {
+        stroke: white !important;
+      }
+      line {
+        stroke: white !important;
+      }
+    }
   }
 
   .search-section__input::placeholder {
@@ -591,7 +644,8 @@ body.wcag-contrast {
   .header-bar > button {
     svg {
       path {
-        fill: white !important;
+        fill: yellow !important;
+        // fill: white !important;
       }
     }
   }
@@ -718,14 +772,6 @@ body.wcag-contrast {
     background-color: black;
   }
 
-  .header-bar {
-    svg {
-      path {
-        fill: white !important;
-      }
-    }
-  }
-
   .banner-container h1 {
     color: white;
   }
@@ -838,6 +884,136 @@ body.wcag-contrast {
     svg {
       rect {
         fill: white;
+      }
+    }
+  }
+
+  .type-sort .ui-select__selected-item {
+    border: none !important;
+  }
+
+  .modal-content {
+    background-color: black;
+  }
+
+  .filds {
+    background-color: black;
+  }
+
+  .filds > input,
+  label,
+  textarea {
+    background-color: black;
+    color: white;
+  }
+
+  .filds > input:focus,
+  label:focus,
+  textarea:focus {
+    border-bottom: 1px solid white;
+    box-shadow: none;
+  }
+
+  .mark {
+    background-color: none;
+  }
+
+  .normal {
+    background-color: transparent;
+  }
+
+  .button-wrapp .btn {
+    background-color: black !important;
+    color: white;
+  }
+
+  .button-wrapp .btn:hover {
+    background-color: yellow !important;
+    color: black;
+  }
+
+  .svg-btn:disabled {
+    background-color: black !important;
+  }
+
+  .svg-btn:disabled:hover {
+    background-color: black !important;
+    color: white !important;
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .mobile-menu {
+    background-color: black;
+  }
+
+  .mobile-menu .times span {
+    color: yellow;
+  }
+
+  .navigation-items__list-item > a {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .navigation-items__list-item > a.active {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .dots-navigation .dot {
+    box-shadow: 0 0 5px yellow inset !important;
+  }
+
+  .dots-navigation .dot.active {
+    background-color: yellow !important;
+  }
+
+  .hamburger {
+    svg {
+      path {
+        fill: yellow !important;
+      }
+    }
+  }
+
+  .mobile-categories-menu {
+    background-color: black;
+  }
+
+  .close-button-svg {
+    border: none !important;
+    background-color: transparent !important;
+    svg {
+      width: 16px;
+      height: 16px;
+      path {
+        fill: white !important;
+      }
+    }
+  }
+
+  .check {
+    svg {
+      path {
+        fill: black !important;
+      }
+    }
+
+    &.active-green {
+      svg {
+        path {
+          fill: white !important;
+        }
       }
     }
   }

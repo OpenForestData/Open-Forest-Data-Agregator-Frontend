@@ -43,6 +43,6 @@
   </ol>
   <div class="pagination__queries">
     {{ 'pagination.show' | translate }}
-    <ui-select (valueChange)="emitChanges($event)" [items]="[15, 30]" [(value)]="pageSize"> </ui-select>
+    <ui-select (valueChange)="emitChanges($event)" [items]="[15, 30, 50, 100]" [(value)]="pageSize"> </ui-select>
   </div>
 </div>

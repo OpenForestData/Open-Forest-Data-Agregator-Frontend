@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 /**
  * Main news tiles
- *
- * @export
- * @class NewsTileMainComponent
  */
 @Component({
   selector: 'ofd-agregator-news-tile-main',
@@ -11,5 +8,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['../news.component.scss', './news-tile-main.component.scss']
 })
 export class NewsTileMainComponent {
+  /**
+   * News item
+   */
   @Input() news;
 }

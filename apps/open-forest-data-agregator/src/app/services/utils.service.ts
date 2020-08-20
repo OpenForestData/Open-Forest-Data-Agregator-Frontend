@@ -5,6 +5,7 @@ import { LanguageService } from './language.service';
 import { Subject } from 'rxjs';
 import { Meta, Title } from '@angular/platform-browser';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
+import { LoaderService } from './loader.service';
 
 /**
  * Interface for navigation items
@@ -12,41 +13,51 @@ import { DatasetsService } from '@app/pages/datasets/datasets.service';
  * @interface NavigationItem
  */
 export interface NavigationItem {
+  /**
+   * Navigation item name
+   */
   name: string;
+  /**
+   * Path
+   */
   path: string;
+  /**
+   * Unique navigation item key
+   */
   key: string;
+  /**
+   * Navigation item URL
+   */
   url?: string;
+  /**
+   * Children of item
+   */
   children?: NavigationItem[];
+  /**
+   * Browser target eq _blank
+   */
   target?: string;
 }
 
 /**
- * Utility service with usefull data and functions
- *
- * @export
- * @class UtilsService
+ * Utility service with useful data and functions
  */
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
   /**
-   * Sends information about menu beeing ready
-   *
-   * @type {Subject<any>}
-   * @memberof UtilsService
+   * Sends information about menu being
    */
   public menuReadySubject: Subject<any> = new Subject();
 
   /**
    * Holds data from API
-   *
-   * @memberof UtilsService
    */
   public homePageData;
 
   /**
-   * Defines whatever menu strucutre has been created
+   * Defines whatever menu structure has been created
    *
    * @memberof UtilsService
    */
@@ -54,9 +65,6 @@ export class UtilsService {
 
   /**
    * Menu basic structure
-   *
-   * @private
-   * @memberof UtilsService
    */
   private basicStructure: NavigationItem[] = [
     {
@@ -84,9 +92,6 @@ export class UtilsService {
 
   /**
    * Menu Structure
-   *
-   * @private
-   * @memberof UtilsService
    */
   private _menuStructure: NavigationItem[] = [
     {
@@ -114,17 +119,11 @@ export class UtilsService {
 
   /**
    * Menu structure returned by API
-   *
-   * @type {*}
-   * @memberof UtilsService
    */
   public responseData: any;
 
   /**
    * Getter of menu structure
-   *
-   * @type {NavigationItem[]}
-   * @memberof UtilsService
    */
   public get menuStructure(): NavigationItem[] {
     return this._menuStructure;
@@ -133,7 +132,7 @@ export class UtilsService {
   /**
    * Setter for menu structure
    *
-   * @memberof UtilsService
+   * @param {NavigationItem[]} newValue Navigation items
    */
   public set menuStructure(newValue: NavigationItem[]) {
     this._menuStructure = newValue;
@@ -143,12 +142,9 @@ export class UtilsService {
    * Returns menu object by slug name
    *
    * @param {*} slug
-   * @returns
-   * @memberof UtilsService
    */
   public getMenuBySlug(slug) {
-    const currentLang = this.lang.language;
-    const menu = this.responseData['menu'][currentLang];
+    const menu = this.responseData['menu'];
     if (menu) {
       return menu.find(item => item.slug === slug);
     }
@@ -158,8 +154,12 @@ export class UtilsService {
 
   /**
    * Creates an instance of UtilsService.
-   * @param {HttpClient} http
-   * @param {LanguageService} lang
+   * @param {HttpClient} http Http Client
+   * @param {LanguageService} lang Language service
+   * @param {Title} titleService Title service
+   * @param {Meta} metaService Meta service
+   * @param {DatasetsService} DSService Datasets service
+   * @param loaderService Loader service
    * @memberof UtilsService
    */
   constructor(
@@ -167,7 +167,8 @@ export class UtilsService {
     public lang: LanguageService,
     private titleService: Title,
     private metaService: Meta,
-    public DSService: DatasetsService
+    public DSService: DatasetsService,
+    public loaderService: LoaderService
   ) {}
 
   /**
@@ -239,18 +240,17 @@ export class UtilsService {
    * @memberof UtilsService
    */
   buildStructure() {
-    const currentLang = this.lang.language;
-    const menu = this.responseData['menu'][currentLang];
+    const menu = this.responseData['menu'];
     if (menu) {
       this.menuStructure = [
         ...this.basicStructure,
         ...menu
-          .filter(item => item.parent_id === null)
           .map(item => {
             return (item = {
               name: item.title,
               path: `/more/${item.slug}`,
               url: item.url,
+              parent_id: item.parent_id,
               key: '',
               children: menu
                 .filter(child => child.parent_id === item.id)
@@ -263,7 +263,8 @@ export class UtilsService {
                   };
                 })
             });
-          }),
+          })
+          .filter(item => item.parent_id === null),
         {
           name: 'Blog',
           path: '/blog',
@@ -301,6 +302,7 @@ export class UtilsService {
    * Gets column keys and triggers fetch data for CSV
    */
   getMetadata() {
+    this.loaderService.isLoading = true;
     let columnKeys = [];
     this.DSService.getMetadata().subscribe(response => {
       Object.values(response).forEach((value: any) => {
@@ -346,10 +348,10 @@ export class UtilsService {
 
   /**
    * Convert raw data to CSV and downloads it
-   * @param keys Column keys
-   * @param allMetadata All metadata
+   * @param {any} keys Column keys
+   * @param {any} allMetadata All metadata
    */
-  convertMetadataToFile(keys: any, allMetadata) {
+  convertMetadataToFile(keys: any, allMetadata: any) {
     let firstRow = '';
     const indexer = {};
     let temp = [];
@@ -362,7 +364,12 @@ export class UtilsService {
     Object.values(allMetadata).forEach(meta => {
       temp = [];
       Object.keys(meta).forEach((key: any) => {
-        temp[indexer[key]] = meta[key];
+        if (meta[key] !== undefined && typeof meta[key] !== 'object') {
+          const noNewLineInMeta = meta[key].replace(/(\r\n|\n|\r)/gm, '');
+          temp[indexer[key]] = noNewLineInMeta;
+        } else {
+          temp[indexer[key]] = meta[key];
+        }
       });
       csvArray.push('\r\n');
       row = temp.join(';');
@@ -375,6 +382,7 @@ export class UtilsService {
 
     a.href = url;
     a.download = `Metadane.csv`;
+    this.loaderService.isLoading = false;
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
@@ -404,5 +412,25 @@ export class UtilsService {
       });
     });
     return metadataObject;
+  }
+
+  /**
+   * Parse object to query param string
+   * @param {any} object Object
+   * @returns {string} Query params
+   */
+  getQueryParamsFromObject(object: any) {
+    return Object.keys(object)
+      .filter(key => {
+        return object[key] instanceof Array ? object[key].length > 0 : object[key] !== '' && object[key] !== null;
+      })
+      .map(key => {
+        if (object[key] instanceof Array) {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(object[key].join(','));
+        } else {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(object[key]);
+        }
+      })
+      .join('&');
   }
 }

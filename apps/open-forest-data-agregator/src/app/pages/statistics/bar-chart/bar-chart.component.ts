@@ -1,7 +1,7 @@
-import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { ChartType, ChartDataSets } from 'chart.js';
+import { Component, Input, SimpleChanges, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
+import { ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { BaseChartDirective, Label } from 'ng2-charts';
 /**
  * Bar chart
  *
@@ -16,6 +16,20 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./bar-chart.component.scss']
 })
 export class BarChartComponent implements OnChanges {
+  /**
+   * Chart type (datasets, dataverse etc.)
+   */
+  @Input() public chartType = '';
+
+  /**
+   * Emit event after filter was changed
+   */
+  @Output() public filterChange: EventEmitter<any> = new EventEmitter<any>();
+
+  /**
+   * Chart reference
+   */
+  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
   /**
    * Chart color
    *
@@ -45,7 +59,7 @@ export class BarChartComponent implements OnChanges {
    * @type {Label[]}
    * @memberof BarChartComponent
    */
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  @Input() public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   /**
    * Chart type
    *
@@ -61,7 +75,7 @@ export class BarChartComponent implements OnChanges {
   public barChartLegend = false;
 
   /**
-   * Charty
+   * Chart plugins
    *
    * @memberof BarChartComponent
    */
@@ -80,9 +94,27 @@ export class BarChartComponent implements OnChanges {
    * @type {ChartDataSets[]}
    * @memberof BarChartComponent
    */
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', backgroundColor: this.colorsArray[this.bgColor] }
-  ];
+  @Input() public barChartData: any[] = [];
+
+  /**
+   * Chart datasets
+   */
+  @Input() public barChartDatasets = [];
+
+  /**
+   * Sum of data values
+   */
+  public dataSum = 0;
+
+  /**
+   * Show sum
+   */
+  @Input() public showCount = true;
+
+  /**
+   * Chart title
+   */
+  @Input() public chartTitle = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, dolore.';
 
   /**
    * Set color of chart on change
@@ -91,14 +123,35 @@ export class BarChartComponent implements OnChanges {
    * @memberof BarChartComponent
    */
   ngOnChanges(changes: SimpleChanges): void {
-    this.barChartData[0].backgroundColor = this.colorsArray[this.bgColor];
+    // this.barChartData[0].backgroundColor = this.colorsArray[this.bgColor];
+    if (this.barChartData.length > 0) this.dataSum = this.barChartData.reduce((prev, curr) => prev + curr, 0);
+    if (this.barChartDatasets.length > 0) {
+      let sum = 0;
+      this.barChartDatasets.forEach(item => {
+        sum = item.data.reduce((prev, curr) => prev + curr, sum);
+      });
+      this.dataSum = sum;
+    }
   }
 
   /**
    * Fetch data from API
    *
-   * @param {*} payload
+   * @param {*} data
    * @memberof BarChartComponent
    */
-  getData(payload) {}
+  getData(data) {
+    const payload = {
+      'data-type': this.chartType,
+      from: data.startDate
+        .split('-')
+        .reverse()
+        .join('-'),
+      to: data.endDate
+        .split('-')
+        .reverse()
+        .join('-')
+    };
+    this.filterChange.emit(payload);
+  }
 }

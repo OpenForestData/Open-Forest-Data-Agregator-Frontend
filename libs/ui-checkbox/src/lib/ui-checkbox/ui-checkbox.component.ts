@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./ui-checkbox.component.scss']
 })
 export class UICheckboxComponent implements OnInit {
-  @Input() name: string;
+  @Input() name: any;
   @Input() model: boolean;
   @Input() invert = false;
   @Output() modelChange: EventEmitter<any> = new EventEmitter();

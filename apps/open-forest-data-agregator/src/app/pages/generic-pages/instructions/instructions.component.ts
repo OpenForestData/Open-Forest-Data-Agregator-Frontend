@@ -3,11 +3,6 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 /**
  * Instructions page view
- *
- * @export
- * @class InstructionsComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-instructions',
@@ -17,8 +12,6 @@ import { LanguageService } from '@app/services/language.service';
 export class InstructionsComponent implements OnInit, OnDestroy {
   /**
    * Accordion content
-   *
-   * @memberof InstructionsComponent
    */
   public accordionContent = [
     {
@@ -86,17 +79,15 @@ export class InstructionsComponent implements OnInit, OnDestroy {
    * @memberof HomeNewsComponent
    */
   public languageSubscription: Subscription = new Subscription();
+
   /**
-   *
-   * @param {LanguageService} languageService
-   * @memberof HomeNewsComponent
+   * Instructions component
+   * @param {LanguageService} languageService Language service
    */
   constructor(public languageService: LanguageService) {}
 
   /**
    * @ignore
-   *
-   * @memberof HomeNewsComponent
    */
   ngOnInit() {
     this.languageSubscription = this.languageService.changeLanguage.subscribe(() => this.getData());

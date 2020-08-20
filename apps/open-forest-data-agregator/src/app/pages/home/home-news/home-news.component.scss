@@ -2,8 +2,7 @@
 
 .news-body {
   width: 100%;
-  margin: 0;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 
   .news-image-holder {
     max-width: 90%;
@@ -14,15 +13,20 @@
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: center;
     }
   }
 
   .news-date {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 
@@ -41,20 +45,20 @@
   }
 
   .news-title {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 22px;
     font-weight: 600;
     margin-bottom: 15px;
   }
 
   .news-content {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 20px;
     margin-bottom: 25px;
   }
 
   .tags-p {
-    font-size: 12px;
+    font-size: 0.75rem;
 
     a {
       color: $accent-color;

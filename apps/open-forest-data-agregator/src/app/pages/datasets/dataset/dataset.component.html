@@ -18,7 +18,7 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
-              <a [href]="makeSource()">{{
+              <a [href]="makeSource()" target="_blank" rel="noopener noreferrer">{{
                 dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
                   ? (dataset?.providers)[0]?.authorAffiliation?.value
                   : 'Dataverse'
@@ -28,10 +28,11 @@
               {{ 'datasets.dataset.metadata-all.author' | translate }}
               {{ (metricData?.author?.value)[0].authorName.value }}
             </p>
-            <p>{{ 'datasets.dataset.metadata-all.data-openness' | translate }} {{ mockLeftSide.dataOpenness }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
-              <a href="{{ mockLeftSide.license.link }}">{{ dataset.latestVersion?.license }}</a>
+              <a href="{{ mockLeftSide.license.link }}" target="_blank" rel="noopener noreferrer">{{
+                dataset.latestVersion?.license
+              }}</a>
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.domain' | translate }}
@@ -48,7 +49,7 @@
           </div>
 
           <div class="metric__social">
-            <ofd-agregator-social [linkTo]="" class="social-container"></ofd-agregator-social>
+            <ofd-agregator-social class="social-container"></ofd-agregator-social>
           </div>
         </div>
         <div class="versions">
@@ -57,7 +58,9 @@
           </ofd-agregator-header-bar>
 
           <div class="versions__content">
-            <a [href]="makeSource()"> {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a>
+            <a [href]="makeSource()" target="_blank" rel="noopener noreferrer">
+              {{ 'ver ' + dataset.latestVersion?.versionNumber }}</a
+            >
             <p>{{ ' - ' + (dataset.latestVersion?.releaseTime | date: 'dd.MM.yyyy') + ' | ' + dataset.publisher }}</p>
           </div>
         </div>
@@ -166,22 +169,29 @@
                 <div class="background-gray">
                   {{ formatConverter(file.label) | uppercase }}
                 </div>
-                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}">{{ file.label }}</p>
+                <p class="title" *ngIf="file.restricted">{{ file.label }}</p>
+                <p class="title" routerLink="/datasets/resource/{{ file.dataFile.id }}" *ngIf="!file.restricted">
+                  {{ file.label }}
+                </p>
               </ui-checkbox>
               <div class="buttons-download">
-                <button class="buttons-download__style">
+                <button class="buttons-download__style" *ngIf="!file.restricted">
                   <svg-icon
                     [src]="'/assets/images/dataset/download.svg'"
                     [applyCss]="true"
                     (click)="downloadSingleResource(file.download_url)"
                   ></svg-icon>
                 </button>
-                <button class="buttons-download__style">
+                <button class="buttons-download__style" *ngIf="!file.restricted">
                   <svg-icon
                     [src]="'/assets/images/dataset/look.svg'"
                     [applyCss]="true"
                     routerLink="/datasets/resource/{{ file.dataFile.id }}"
                   ></svg-icon>
+                </button>
+                <button class="buttons-download__style tooltip-button" *ngIf="file.restricted">
+                  <svg-icon [src]="'/assets/images/dataset/gray_look.svg'" [applyCss]="true"></svg-icon>
+                  <span class="tooltipText">{{ 'datasets.resource.ask-for-access' | translate }}</span>
                 </button>
               </div>
             </div>
@@ -222,13 +232,26 @@
             [expanded]="false"
           >
             <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
-              <div class="meta-citation__row__multiple" *ngIf="field.multiple">
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName !== 'keyword'">
                 <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
                     {{ value.value.value }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName === 'keyword'">
+                <div class="meta-citation__row__container">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + 'keywordValue' | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    <span class="comma" *ngFor="let keyword of field.value; let i = index">{{
+                      keyword.keywordValue.value
+                    }}</span>
                   </div>
                 </div>
               </div>

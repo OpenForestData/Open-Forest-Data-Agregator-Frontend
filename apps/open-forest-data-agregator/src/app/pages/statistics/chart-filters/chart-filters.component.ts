@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
+import { IDatePickerConfig } from 'ng2-date-picker';
+import moment from 'moment';
 
 /**
  * Filters for charts
@@ -14,7 +16,7 @@ import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.co
   templateUrl: './chart-filters.component.html',
   styleUrls: ['./chart-filters.component.scss']
 })
-export class ChartFiltersComponent implements OnInit {
+export class ChartFiltersComponent implements OnInit, AfterViewInit {
   /**
    * If show date range filter
    *
@@ -34,26 +36,26 @@ export class ChartFiltersComponent implements OnInit {
    *
    * @memberof ChartFiltersComponent
    */
-  public startDate = '';
+  public startDate = moment(new Date().setFullYear(new Date().getFullYear() - 1)).format('MM-YYYY');
 
   /**
    * End date value
    *
    * @memberof ChartFiltersComponent
    */
-  public endDate = '';
+  public endDate = moment(new Date()).format('MM-YYYY');
 
   /**
    * Start date datepicker config
    *
    * @memberof ChartFiltersComponent
    */
-  public startDatePickerConfig = {
+  public startDatePickerConfig: IDatePickerConfig = {
     locale: 'pl-PL',
     disableKeypress: true,
     unSelectOnClick: false,
     firstDayOfWeek: 'mo',
-    format: 'DD-MM-yyyy'
+    format: 'MM-yyyy'
   };
 
   /**
@@ -61,14 +63,14 @@ export class ChartFiltersComponent implements OnInit {
    *
    * @memberof ChartFiltersComponent
    */
-  public endDatePickerConfig = {
+  public endDatePickerConfig: any = {
     min: this.startDate,
     disableKeypress: true,
     unSelectOnClick: false,
     minDate: this.startDate,
     firstDayOfWeek: 'mo',
     locale: 'pl-PL',
-    format: 'DD-MM-yyyy'
+    format: 'MM-yyyy'
   };
 
   /**
@@ -121,7 +123,7 @@ export class ChartFiltersComponent implements OnInit {
       minDate: this.startDate,
       firstDayOfWeek: 'mo',
       locale: 'pl-PL',
-      format: 'DD-MM-yyyy'
+      format: 'MM-yyyy'
     };
 
     const d1 = Date.parse(this.startDate);
@@ -149,6 +151,17 @@ export class ChartFiltersComponent implements OnInit {
       this.translate.get(item.name).subscribe(value => {
         this.selectItems[index].name = value;
       });
+    });
+  }
+
+  /**
+   * Get new chart data after view init
+   */
+  ngAfterViewInit() {
+    this.filtersChanged.emit({
+      startDate: this.startDate,
+      endDate: this.endDate,
+      selectValue: this.showRange ? this.selectValue : null
     });
   }
 }

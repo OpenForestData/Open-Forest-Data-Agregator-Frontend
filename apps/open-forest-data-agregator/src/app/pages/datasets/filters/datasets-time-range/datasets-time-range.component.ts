@@ -54,7 +54,7 @@ export class DatasetsTimeRangeComponent {
   @Input() single = false;
 
   /**
-   * Event emmiter for value change
+   * Event emitter for value change
    *
    * @memberof DatasetsFilterComponent
    */
@@ -68,12 +68,12 @@ export class DatasetsTimeRangeComponent {
   public datePickerConfig: IDatePickerConfig = {
     locale: 'pl-PL',
     disableKeypress: true,
-    unSelectOnClick: true,
-    closeOnSelect: true,
-    enableMonthSelector: true,
-    showMultipleYearsNavigation: true,
+    unSelectOnClick: false,
     firstDayOfWeek: 'mo',
-    hideOnOutsideClick: false
+    format: 'yyyy',
+    hideOnOutsideClick: true,
+    closeOnSelect: true,
+    showMultipleYearsNavigation: true
   };
 
   /**

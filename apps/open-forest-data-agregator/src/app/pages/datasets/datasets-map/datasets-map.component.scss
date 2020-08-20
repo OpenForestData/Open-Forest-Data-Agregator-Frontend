@@ -27,7 +27,7 @@
     z-index: 1010;
     transform: translateX(100%);
     transition: 0.3s transform ease;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 18px;
     padding: 25px 18px;
     box-sizing: border-box;
@@ -69,7 +69,7 @@
     }
 
     &__metadata {
-      font-size: 10px;
+      font-size: 0.625rem;
 
       p {
         margin: 0 0 10px 0;
@@ -82,7 +82,7 @@
     }
 
     &__details {
-      font-size: 16px;
+      font-size: 1rem;
       display: flex;
       align-items: center;
       margin-bottom: 20px;
@@ -116,7 +116,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
 
     select {

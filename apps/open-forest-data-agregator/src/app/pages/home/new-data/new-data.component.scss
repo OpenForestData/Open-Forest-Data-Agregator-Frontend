@@ -14,23 +14,23 @@
 }
 
 .add-date {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 }
 
 .add-title {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
 .add-text {
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .add-owner {
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -78,8 +78,8 @@
 }
 
 .drop-down {
-  display: none;
   padding: 0;
+  display: none;
   position: absolute;
   bottom: -3px;
   left: -1px;
@@ -88,7 +88,6 @@
   border-radius: 0 0 25px 25px;
   border-top: none;
   transform: translateY(100%);
-  padding-top: 5px;
   padding-top: 10px;
   background-color: $light-gray-color;
   overflow: hidden;
@@ -98,8 +97,7 @@
     text-align: left;
 
     a {
-      padding: 12px 0;
-      padding-left: 30px;
+      padding: 12px 0 12px 30px;
       display: block;
       color: $text-color;
       transition: color 0.3s ease, background-color 0.3s ease;

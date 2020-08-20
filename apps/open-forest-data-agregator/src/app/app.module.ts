@@ -33,6 +33,7 @@ import { FooterLogoComponent } from '@app/layout/footer/footer-logo/footer-logo.
 import { SharedModule } from './shared/shared.module';
 import { HammerConfig } from 'src/config/hammer.config';
 import { BackToTopComponent } from '@app/layout/back-to-top/back-to-top.component';
+import { LoaderComponent } from './layout/main-layout/loader/loader.component';
 
 /**
  * Initialize translate loader
@@ -50,6 +51,9 @@ export function initializeApp(appConfigService: AppConfigService) {
   return () => appConfigService.load();
 }
 
+/**
+ * App module components
+ */
 const components = [
   AppComponent,
   MainLayoutComponent,
@@ -62,7 +66,8 @@ const components = [
   FooterLogoComponent,
   AdminLayoutComponent,
   NotFoundComponent,
-  BackToTopComponent
+  BackToTopComponent,
+  LoaderComponent
 ];
 /**
  * Application main module. Loads initial modules for app to work
