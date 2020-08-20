@@ -4,11 +4,11 @@ import * as fromDatasets from './datasets/datasets.reducer';
 
 /**
  * Application state interface
- *
- * @export
- * @interface AppState
  */
 export interface AppState {
+  /**
+   * Datasets state
+   */
   datasets: fromDatasets.DatasetsState;
 }
 

@@ -3,11 +3,6 @@ import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 /**
  * About project page view
- *
- * @export
- * @class AboutProjectComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-about-project',
@@ -83,8 +78,8 @@ export class AboutProjectComponent implements OnInit, OnDestroy {
    */
   public languageSubscription: Subscription = new Subscription();
   /**
-   *
-   * @param {LanguageService} languageService
+   * About project component constructor
+   * @param {LanguageService} languageService Language service
    * @memberof HomeNewsComponent
    */
   constructor(public languageService: LanguageService) {}

@@ -74,7 +74,15 @@ export class APIInterceptor implements HttpInterceptor {
    * @param {string} token
    */
   setAccessToken(token: string): void {
-    this.cookieService.set(environment.tokenCookie, token, environment.userCookieTime, '/');
+    this.cookieService.set(
+      environment.tokenCookie,
+      token,
+      environment.userCookieTime,
+      '/',
+      window.location.hostname,
+      location.protocol === 'https:',
+      'None'
+    );
   }
 
   /**

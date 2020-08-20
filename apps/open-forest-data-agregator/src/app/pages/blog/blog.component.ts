@@ -45,6 +45,11 @@ export class BlogComponent implements OnInit, OnDestroy {
   public languageSubscription: Subscription = new Subscription();
 
   /**
+   * Is load new blog on scroll locked
+   */
+  public isLocked = false;
+
+  /**
    * Blog constructor
    *
    * @param {LanguageService} languageService Language Service
@@ -55,7 +60,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   // TODO - nie działa fitlrownie po keywords'ach
   /**
-   * Initialize at the start of page and fetch blog informations, takes arguments from URL
+   * Initialize at the start of page and fetch blog information, takes arguments from URL
    */
   ngOnInit() {
     this.route.queryParams
@@ -92,7 +97,11 @@ export class BlogComponent implements OnInit, OnDestroy {
    * Fetch data for scroll
    */
   getDataForScroll() {
-    this.blogService.getBlog({ page: this.globalScrollValue, limit: 4, keyword: '' }).subscribe(response => {
+    this.isLocked = true;
+    this.filters.page = this.globalScrollValue;
+    this.filters.limit = 4;
+    this.blogService.getBlog(this.filters).subscribe(response => {
+      this.isLocked = false;
       this.blogData.articles = [...this.blogData.articles, ...response.articles];
     });
   }
@@ -109,21 +118,28 @@ export class BlogComponent implements OnInit, OnDestroy {
    */
   @HostListener('window:scroll', [])
   onScroll() {
-    if (window.innerHeight + window.scrollY * 1.1 >= document.body.offsetHeight) {
-      if (this.maxPages > this.globalScrollValue) {
-        this.globalScrollValue++;
-        this.getDataForScroll();
+    if (!this.isLocked)
+      if (window.innerHeight + window.scrollY * 1.1 >= document.body.offsetHeight) {
+        if (this.maxPages > this.globalScrollValue) {
+          this.globalScrollValue++;
+          this.getDataForScroll();
+        }
       }
-    }
   }
 
   /**
    * Filter for keywords
-   * @param keywordUrl Keyword url
+   * @param keywordSlug Keyword url
    */
-  keywordFilter(keywordUrl: any) {
-    this.blogService.getArticlesByKeyword(keywordUrl).subscribe(response => {
-      this.blogData = response;
-    });
+  keywordFilter(keywordSlug: any) {
+    const params: any = new URLSearchParams(location.search);
+    params.set('keyword', keywordSlug);
+    location.search = params;
+    // location.href = '/blog?keyword='
+    // this.filters.keyword = keywordSlug;
+    // this.getData({ ...this.filters, page: 1 });
+    // this.blogService.getArticlesByKeyword(keywordUrl).subscribe(response => {
+    //   this.blogData = response;
+    // });
   }
 }

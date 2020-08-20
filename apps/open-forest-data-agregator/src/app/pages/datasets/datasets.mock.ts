@@ -1,3 +1,6 @@
+/**
+ * Mock datasets
+ */
 export const datasetsMock = [
   {
     id: 1,
@@ -96,6 +99,9 @@ export const datasetsMock = [
   }
 ];
 
+/**
+ * Categories mocks
+ */
 export const categoriesMock = [
   { name: 'Kolekcja zoologiczna IBS PAN', value: 0 },
   { name: 'Kolekcja roślin naczyniowych INL PB', value: 1 },

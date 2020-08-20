@@ -4,7 +4,7 @@
   margin: 0;
   text-transform: uppercase;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   background-color: $accent-color;
   width: 100%;
@@ -22,9 +22,11 @@
     margin-right: 13px;
     display: block;
 
-    svg {
-      path {
-        fill: #fff;
+    ::ng-deep {
+      svg {
+        path {
+          fill: #fff;
+        }
       }
     }
   }
@@ -37,10 +39,8 @@
     transform: translateY(-50%);
     border: none;
     background-color: transparent;
-    margin: 0;
-    padding: 0;
     padding: 10px 10px 10px 10px;
-    margin-right: -10px;
+    margin: 0 -10px 0 0;
 
     svg-icon {
       display: flex;

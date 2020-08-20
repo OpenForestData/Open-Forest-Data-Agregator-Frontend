@@ -42,7 +42,7 @@
   }
   &__content > p {
     display: block;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   &__social {
     display: block;
@@ -53,7 +53,7 @@
   &__content {
     padding: 20px 0 0 5px;
     height: 20px;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   &__content > p {
     display: inline;
@@ -106,7 +106,7 @@
     }
     &__content > p {
       display: block;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     &__social {
       display: block;
@@ -119,7 +119,7 @@
     &__content {
       padding: 23px 0 0 14px;
       height: 20px;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     &__content > p {
       display: inline;
@@ -135,7 +135,7 @@
   &__header {
     padding: 10px 14px;
     p {
-      font-size: 14px;
+      font-size: 0.875rem;
       padding-top: 10px;
       margin: 0;
     }
@@ -147,7 +147,7 @@
       }
       p {
         padding: 0;
-        font-size: 18px;
+        font-size: 1.125rem;
       }
     }
     &__api {
@@ -196,13 +196,13 @@
           }
         }
         .single-checkbox {
-          font-size: 12px;
+          font-size: 0.75rem;
           width: 90%;
           .field label {
             min-width: 20px;
           }
           .background-gray {
-            font-size: 9px;
+            font-size: 0.5625rem;
             text-decoration: none !important;
             min-width: 80px;
             display: flex;
@@ -229,7 +229,7 @@
       flex-direction: row;
       padding: 5px 0 10px 14px;
       align-items: center;
-      font-size: 14px;
+      font-size: 0.875rem;
       width: 100%;
       justify-content: space-between;
       &__bar-right {
@@ -276,7 +276,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   .meta-citation__row__multiple {
     flex-direction: column;
@@ -286,7 +286,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 16px 0 0 14px;
   }
   .meta-citation__row__keys {
@@ -308,7 +308,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 12px;
+    font-size: 0.75rem;
     padding: 16px 0 0 14px;
   }
   .meta-citation__row__keys {
@@ -373,7 +373,7 @@
     button {
       background-color: transparent;
       border: none;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       color: $primary-color;
@@ -480,8 +480,33 @@
   }
 
   p {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
+}
+
+.comma:not(:last-child)::after {
+  content: ', ';
+}
+
+.tooltip-button {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-button:hover .tooltipText {
+  visibility: visible;
+}
+
+.tooltipText {
+  visibility: hidden;
+  width: 200px;
+  background-color: $accent-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 11;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -564,7 +589,7 @@
   }
 
   .single-checkbox::ng-deep {
-    font-size: 12px;
+    font-size: 0.75rem;
     width: 90%;
     .checkbox-label {
       display: flex;

@@ -1,5 +1,5 @@
-<div class="file-as-table">
-  <table>
+<div class="file-as-table" [ngStyle]="{ 'max-width.percent': fullScreen ? '100%' : '80%' }">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover datasets-table__table">
     <thead>
       <tr>
         <th *ngFor="let title of convertedData?.meta?.fields">{{ title }}</th>
@@ -8,7 +8,22 @@
     <tbody>
       <tr *ngFor="let row of convertedData?.data; let i = index">
         <td *ngFor="let details of row | keyvalue: keepOrder">
-          {{ details.value }}
+          <p *ngIf="details.key !== 'file_location'">{{ details.value }}</p>
+          <img
+            [src]="row['file_location']"
+            [alt]="row['file_location']"
+            *ngIf="row['file_mimetype'] === 'image/jpeg' && details.key === 'file_location'"
+            (click)="showGallery(i, $event.target)"
+          />
+          <iframe
+            *ngIf="row['file_mimetype'] === 'video/mp4' && details.key === 'file_location'"
+            [src]="sanitizeVideo(row['file_location'])"
+            style="border:0 #ffffff none;"
+            height="60px"
+            width="60px"
+            title="Video frame"
+            allowfullscreen
+          ></iframe>
         </td>
       </tr>
     </tbody>

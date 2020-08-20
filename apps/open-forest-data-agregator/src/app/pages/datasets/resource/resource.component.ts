@@ -3,6 +3,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
 /**
  * Resource component
@@ -28,7 +29,8 @@ export class ResourceComponent implements OnInit {
     csv: null,
     doc: null,
     map: null,
-    iframe: null
+    iframe: null,
+    video: null
   };
   /**
    * Viewer type
@@ -85,21 +87,23 @@ export class ResourceComponent implements OnInit {
    */
   mobile = false;
   /**
-   * Mocks
+   * Amount of green stars for display
    */
-  externalTools = `
-3d: https://externaltools.whiteaster.com/tools/3dViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
-Micro: https://data-epuszcza.biaman.pl/tools/microViewer.html?siteUrl=https://openforestdata.pl&fileid=43&datasetid=41&datasetversion=1.0
-Tiff: https://data-epuszcza.biaman.pl/tools/tiffViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=217&datasetid=206&datasetversion=2.1
-Geonode: https://data-epuszcza.biaman.pl/tools/geonodeViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=232&datasetid=231&datasetversion=1.0
-Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https://data-epuszcza.biaman.pl/&fileid=237&datasetid=236&datasetversion=1.0
-  `;
+  greenStars: number[] = [];
+  /**
+   * Amount of gray stars for display
+   */
+  grayStars: number[] = [];
+  /**
+   * Fullscreen for table
+   */
+  fullScreen = false;
 
   /**
    * Resource constructor
-   * @param {Http} http Http
-   * @param {DatasetSservice} datasetService Dataset Service
-   * @param {Route} route Route
+   * @param {HttpClient} http Http
+   * @param {DatasetsService} datasetService Dataset Service
+   * @param {ActivatedRoute} route Route
    */
   constructor(private http: HttpClient, private datasetService: DatasetsService, private route: ActivatedRoute) {}
   /**
@@ -120,12 +124,20 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   getResourceByID(id: any) {
     this.datasetService.getResourceByID(id).subscribe(response => {
       this.resource = response;
+      if (this.resource.details.fileTag !== undefined) {
+        this.fiveStarCreate(Number(this.resource.details.fileTag[0]));
+      } else {
+        this.fiveStarCreate(0);
+      }
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
-      this.breadCrumbs.push({ name: this.resource?.dataset_details?.providers[0]?.authorAffiliation?.value, href: '' });
       this.breadCrumbs.push({
-        name: this.resource?.dataset_details?.latestVersion.metadataBlocks.citation.fields[0].value,
-        href: ''
+        name: this.resource?.dataset_details?.dvName,
+        href: `${AppConfigService.config.siteURL}/datasets?start=0&rows=15&sort=asc&category=${this.resource.dataset_details.identifierOfDataverse}`
+      });
+      this.breadCrumbs.push({
+        name: this.resource?.details.parentName,
+        href: `${AppConfigService.config.siteURL}datasets/detail?doi=${btoa(this.resource.details.parentIdentifier)}`
       });
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
@@ -140,21 +152,28 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       } else if (['application/rdf+xml', 'XML'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
       } else if (
-        ['Comma Separated Values', 'Tab-Separated Values'].indexOf(this.resource.details?.fileTypeDisplay) >= 0
+        ['Comma Separated Values', 'Tab-Separated Values', 'Tab-Delimited'].indexOf(
+          this.resource.details?.fileTypeDisplay
+        ) >= 0
       ) {
         this.resourceContent.csv = this.resource.download_url;
-      } else if (['map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/x-abiword', 'map_geonode'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'geonodeViewer';
-      } else if (['dashboard_grafana'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (
+        ['application/vnd.apple.installer+xml', 'dashboard_grafana'].indexOf(this.resource.details?.fileTypeDisplay) >=
+        0
+      ) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'grafanaViewer';
       } else if (
-        ['3ds', 'application/x-tgif', 'application/vnd.ms-pki.stl'].indexOf(this.resource.details?.fileTypeDisplay) >= 0
+        ['image/x-3ds', 'application/x-tgif', 'application/vnd.ms-pki.stl'].indexOf(
+          this.resource.details?.fileTypeDisplay
+        ) >= 0
       ) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = '3dViewer';
-      } else if (['micro'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+      } else if (['application/x-shockwave-flash', 'micro'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.resourceContent.iframe = this.resource;
         this.viewerType = 'microViewer';
       } else if (['TIFF Image'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
@@ -166,6 +185,8 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
         ) >= 0
       ) {
         this.resourceContent.map = this.resource.download_url;
+      } else if (['MPEG-4 Video'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
+        this.resourceContent.video = this.resource;
       }
     });
   }
@@ -177,16 +198,6 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
   getTextFromURL(url: string) {
     this.http.get(url, { responseType: 'text' }).subscribe(response => {
       this.resourceContent.plain_text = response;
-    });
-  }
-
-  /**
-   * Get file content from given URL
-   * @param url URL to file
-   */
-  getJSONFromURL(url: string) {
-    this.http.get(url, { responseType: 'text' }).subscribe(response => {
-      this.resourceContent.iframe = JSON.parse(response);
     });
   }
 
@@ -255,7 +266,7 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
    * // returns https://data-epuszcza.biaman.pl/file.xhtml?fileId=73&version=1.0
    */
   makeSource() {
-    if (this.resource.detaset_details?.alternativeURL) {
+    if (this.resource.dataset_details?.alternativeURL) {
       return this.resource.dataset_details?.alternativeURL;
     } else {
       return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
@@ -275,5 +286,51 @@ Grafana: https://data-epuszcza.biaman.pl/tools/grafanaViewer.html?siteUrl=https:
       format = format.substr(format.lastIndexOf('.') + 1);
       return format;
     }
+  }
+
+  /**
+   * Fill arrays with zeros based on amount of stars for Angular to display
+   * @param {number} amountOfStars
+   */
+  fiveStarCreate(amountOfStars: number) {
+    this.greenStars = Array(amountOfStars).fill(0);
+    this.grayStars = Array(5 - amountOfStars).fill(0);
+  }
+
+  /**
+   * Export metadata of file to csv
+   * @param data Data of file
+   */
+  exportFileData(data: any) {
+    const csvArray = [];
+    let firstRow = '';
+    let secondRow = '';
+    Object.keys(data).forEach((first: any) => {
+      firstRow += first + ';';
+    });
+    Object.values(data).forEach((second: any) => {
+      secondRow += second + ';';
+    });
+    csvArray.push(firstRow);
+    csvArray.push('\r\n');
+    csvArray.push(secondRow);
+
+    const a = document.createElement('a');
+    const blob = new Blob(csvArray, { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = this.resource.details.name + `_metadane.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
+
+  /**
+   * Set fullscreen on table
+   * @param value Value
+   */
+  setFullScreen(value) {
+    this.fullScreen = value;
   }
 }

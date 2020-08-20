@@ -1,6 +1,6 @@
 .content {
   margin-top: 50px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .download {
@@ -9,6 +9,8 @@
 
 .phone-image {
   margin-left: auto;
+  max-height: 440px;
+  max-width: 100%;
 }
 
 .align-center {

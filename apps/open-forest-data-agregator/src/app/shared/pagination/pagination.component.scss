@@ -8,6 +8,8 @@
   &__go-to-page {
     input {
       margin-left: 10px;
+      width: 90px;
+      box-sizing: border-box;
     }
   }
 
@@ -34,7 +36,7 @@
     button {
       background-color: transparent;
       border: none;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       color: $primary-color;
@@ -52,8 +54,10 @@
     }
 
     .prev-page {
-      svg {
-        transform: rotate(180deg);
+      ::ng-deep {
+        svg {
+          transform: rotate(180deg);
+        }
       }
     }
 
@@ -77,10 +81,11 @@
     .next-page {
       margin: 0;
       padding: 2px;
-
-      svg {
-        path {
-          fill: $accent-color;
+      ::ng-deep {
+        svg {
+          path {
+            fill: $accent-color;
+          }
         }
       }
     }
@@ -98,7 +103,7 @@
 @media (max-width: 1200px) {
   .pagination {
     flex-wrap: wrap;
-    font-size: 14px;
+    font-size: 0.875rem;
     justify-content: space-between;
 
     &__pages {

@@ -88,3 +88,11 @@
     }
   }
 }
+
+::ng-deep {
+  .latest-added {
+    .titleText {
+      white-space: nowrap;
+    }
+  }
+}

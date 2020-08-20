@@ -7,9 +7,15 @@ import * as DatasetsActions from './datasets.actions';
  * @interface DatasetsState
  */
 export interface DatasetsState {
+  /**
+   * Datasets view mode
+   */
   mode: string;
 }
 
+/**
+ * Datasets initial state
+ */
 const initialState: DatasetsState = {
   mode: 'list'
 };
@@ -19,7 +25,7 @@ const initialState: DatasetsState = {
  *
  * @export
  * @param {DatasetsState} [state=initialState]
- * @param {DatasetsActions.DatasetsActions} action
+ * @param {DatasetsActions} action
  * @returns {DatasetsState}
  */
 export function datasetsReducer(

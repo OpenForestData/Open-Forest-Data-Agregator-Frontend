@@ -1,15 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { icon, Marker, geoJSON } from 'leaflet';
+import { Component, Input, OnInit } from '@angular/core';
+import { geoJSON, icon, Marker } from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import '@asymmetrik/ngx-leaflet';
 import 'leaflet-kml';
 import 'georaster-layer-for-leaflet';
 import * as omnivore from '@mapbox/leaflet-omnivore';
 import 'shapefile';
+
+/**
+ * Geo raster layer
+ */
 declare let GeoRasterLayer;
+/**
+ * Geo Raster parser
+ */
 declare let parseGeoraster;
+/**
+ * Leaflet
+ */
 declare let L;
+/**
+ * Shape file
+ */
 declare let shapefile;
+
+/**
+ * Map component
+ */
 @Component({
   selector: 'ofd-agregator-map',
   templateUrl: './map.component.html',
@@ -59,7 +76,7 @@ export class MapComponent implements OnInit {
     const iconRetinaUrl = '/assets/images/marker-icon-2x.png';
     const iconUrl = '/assets/images/marker-icon.png';
     const shadowUrl = '/assets/images/marker-shadow.png';
-    const iconDefault = icon({
+    Marker.prototype.options.icon = icon({
       iconRetinaUrl,
       iconUrl,
       shadowUrl,
@@ -69,7 +86,6 @@ export class MapComponent implements OnInit {
       tooltipAnchor: [16, -28],
       shadowSize: [41, 41]
     });
-    Marker.prototype.options.icon = iconDefault;
   }
 
   /**
@@ -154,7 +170,7 @@ export class MapComponent implements OnInit {
    */
   private initMap(): void {
     this.map = new L.Map('map');
-    this.tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    this.tiles = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     this.map.setView([0, 0], 0);
     this.map.addLayer(this.tiles);
   }

@@ -1,16 +1,10 @@
-import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, OnDestroy, ChangeDetectorRef, NgZone } from '@angular/core';
 
-import { DrawEvents, FeatureGroup, latLng, tileLayer, Map, featureGroup, rectangle } from 'leaflet';
+import { FeatureGroup, latLng, tileLayer, Map, featureGroup, rectangle, Control } from 'leaflet';
 import { Subscription } from 'rxjs';
 import { DatasetsService } from '../../datasets.service';
 /**
  * Map filter component
- *
- * @export
- * @class DatasetsRangeComponent
- * @implements {OnInit}
- * @implements {OnChanges}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-datasets-range',
@@ -21,99 +15,70 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   /**
    * Values for filter
    * I.e. for Select OR Autocomplete
-   *
-   * @type {any[]}
-   * @memberof DatasetsFilterComponent
    */
   @Input() data: any[] = [];
 
   /**
    * Current value
-   *
-   * @type {*}
-   * @memberof DatasetsFilterComponent
    */
   @Input() value: any = null;
 
   /**
    * Has filter multiple options
-   *
-   * @memberof DatasetsFilterComponent
    */
   @Input() multiple = true;
 
   /**
    * Define whatever filter is visible
-   *
-   * @type {boolean}
-   * @memberof DatasetsRangeComponent
    */
   @Input() isExpanded: boolean;
 
   /**
-   * Event emmiter for value change
-   *
-   * @memberof DatasetsFilterComponent
+   * Event emitter for value change
    */
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    * Leaflet layers
-   *
-   * @memberof DatasetsRangeComponent
    */
   public layers = [];
 
   /**
    * Leaflet map reference
-   *
-   * @type {Map}
-   * @memberof DatasetsRangeComponent
    */
   public map: Map;
 
   /**
    * @ignore
-   *
-   * @type {Subscription}
-   * @memberof DatasetsRangeComponent
    */
   public sub: Subscription;
 
   /**
-   * Leaflet eatureGroup
-   *
-   * @type {FeatureGroup}
-   * @memberof DatasetsRangeComponent
+   * Leaflet featureGroup
    */
   public drawnItems: FeatureGroup = featureGroup();
 
   /**
    * Leaflet draw options
-   *
-   * @memberof DatasetsRangeComponent
    */
-  public drawOptions = {
+  public drawOptions: Control.DrawConstructorOptions = {
     position: 'topright',
     draw: {
       marker: false,
-      rectangle: true,
       circle: false,
       polygon: false,
       polyline: false,
       circlemarker: false
     },
-    edit: { featureGroup: this.drawnItems }
+    edit: { featureGroup: this.drawnItems, edit: false }
   };
 
   /**
    * Leaflet options
-   *
-   * @memberof DatasetsRangeComponent
    */
   public options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
       })
@@ -125,21 +90,20 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
 
   /**
    * Creates an instance of DatasetsRangeComponent.
-   * @param {DatasetsService} DSService
-   * @memberof DatasetsRangeComponent
+   * @param {DatasetsService} DSService Datasets service
+   * @param {ChangeDetectorRef} changeDetectorRef Change Detector red
+   * @param {NgZone} zone Ng Zone
    */
-  constructor(public DSService: DatasetsService) {
+  constructor(public DSService: DatasetsService, public changeDetectorRef: ChangeDetectorRef, public zone: NgZone) {
     this.sub = this.DSService.newFiltersStructureSubject.subscribe(_ => {
       setTimeout(() => {
-        this.drawnItems = featureGroup();
         if (this.value.length) {
           const layer = rectangle(this.value);
           this.layers.push(layer);
-
           this.drawnItems.addLayer(layer);
         } else {
           this.layers.forEach(layer => {
-            this.map.removeLayer(layer);
+            this.drawnItems.removeLayer(layer);
           });
         }
       }, 50);
@@ -149,21 +113,20 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   /**
    * Rerender map on input change
    *
-   * @param {*} changes
-   * @memberof DatasetsRangeComponent
+   * @param {any} changes Changes
    */
   ngOnChanges(changes) {
     if (this.isExpanded && this.map) this.map.invalidateSize();
   }
 
   /**
-   * Initzialize map when leaflet ready
+   * Initialize map when leaflet ready
    *
-   * @param {Map} map
-   * @memberof DatasetsRangeComponent
+   * @param {Map} map Map
    */
   onMapReady(map: Map) {
     this.map = map;
+
     if (this.value.length) {
       this.drawnItems.addLayer(rectangle(this.value));
       const layer = rectangle(this.value);
@@ -172,26 +135,39 @@ export class DatasetsRangeComponent implements OnChanges, OnDestroy {
   }
 
   /**
-   * Creates darwing layer on map when drawn
+   * Clear layers on drawn delete
+   * @param e Event data
+   */
+  onDrawnDeleted(e) {
+    this.zone.run(() => {
+      this.layers = [];
+      this.valueChange.emit(null);
+      this.drawnItems.clearLayers();
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  /**
+   * Creates drawing layer on map when drawn
    *
-   * @param {*} e
-   * @memberof DatasetsRangeComponent
+   * @param {any} e Event
    */
   onDrawCreated(e: any) {
-    const layer = (e as DrawEvents.Created).layer;
-    this.drawnItems.addLayer(layer);
+    this.zone.run(() => {
+      this.drawnItems.clearLayers();
+      this.layers = [];
+      this.drawnItems.addLayer(e.layer);
+
+      this.layers.push(e.layer);
+      this.changeDetectorRef.detectChanges();
+    });
 
     const bounds = this.drawnItems.getBounds();
-
-    this.layers.push(layer);
-
     this.valueChange.emit([bounds[Object.keys(bounds)[0]], bounds[Object.keys(bounds)[1]]]);
   }
 
   /**
    * @ignore
-   *
-   * @memberof DatasetsRangeComponent
    */
   ngOnDestroy() {
     this.sub.unsubscribe();

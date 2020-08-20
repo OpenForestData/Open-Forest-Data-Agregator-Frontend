@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+import { map } from 'rxjs/operators';
 
+/**
+ * News service
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
+  /**
+   * News service constructor
+   * @param {HttpClient} http Http client
+   */
   constructor(private http: HttpClient) {}
 
   /**
@@ -16,11 +24,35 @@ export class NewsService {
    */
   getNews(filters) {
     const queryParams = this.getQueryParamsFromObject(filters);
-    return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`);
+    return this.http.get<any>(`${AppConfigService.config.api}news?${queryParams}`).pipe(
+      map(response => {
+        response['articles'].map(article => {
+          article['image_in_list'] =
+            article['image_in_list'] !== ''
+              ? AppConfigService.config.api + article['image_in_list'].replace('/api/v1/', '')
+              : '/assets/images/no_photo.png';
+        });
+        return response;
+      })
+    );
   }
 
-  getSingleNews(url: any) {
-    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`);
+  /**
+   * Get news data from url
+   * @param {string} url News Url
+   */
+  getSingleNews(url: string) {
+    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`).pipe(
+      map(response => {
+        if (response['article']) {
+          response['article']['image_in_list'] =
+            response['article']['image_in_list'] !== ''
+              ? AppConfigService.config.api + response['article']['image_in_list'].replace('/api/v1/', '')
+              : '/assets/images/no_photo.png';
+        }
+        return response;
+      })
+    );
   }
 
   /**

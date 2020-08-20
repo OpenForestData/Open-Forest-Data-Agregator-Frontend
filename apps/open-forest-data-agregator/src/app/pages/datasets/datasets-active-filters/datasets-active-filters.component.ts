@@ -1,50 +1,55 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { DatasetsService } from '../datasets.service';
 /**
- *
- *
- * @export
- * @class DatasetsActiveFiltersComponent
- * @implements {OnInit}
+ * Datasets active filters component
  */
 @Component({
   selector: 'ofd-agregator-datasets-active-filters',
   templateUrl: './datasets-active-filters.component.html',
   styleUrls: ['./datasets-active-filters.component.scss']
 })
-export class DatasetsActiveFiltersComponent {
+export class DatasetsActiveFiltersComponent implements OnChanges {
   /**
    * Creates an instance of DatasetsActiveFiltersComponent.
-   * @param {DatasetsService} DSService
-   * @memberof DatasetsActiveFiltersComponent
+   * @param {DatasetsService} DSService Datasets service
    */
   constructor(public DSService: DatasetsService) {}
 
   /**
    * Active filters
-   *
-   * @type {*}
-   * @memberof DatasetsActiveFiltersComponent
    */
   @Input() activeFilters: any;
 
   /**
    * Send action to subject to remove filter
-   *
-   * @param {*} name
-   * @param {*} index
-   * @memberof DatasetsActiveFiltersComponent
    */
   removeFilter(name, index) {
     this.DSService.removeFilterSubject.next({ name, index });
   }
 
   /**
+   * Parse lat and lng to number and change to fixed 2
+   */
+  ngOnChanges() {
+    this.activeFilters = [
+      ...this.activeFilters.map(filter => {
+        if (filter['type'] === 'MAP') {
+          filter['values'] = filter['values'].map(item => {
+            item.lat = Number(item.lat).toFixed(2);
+            item.lng = Number(item.lng).toFixed(2);
+            return item;
+          });
+        }
+
+        return filter;
+      })
+    ];
+  }
+
+  /**
    * Parses moment value to readable date format
    *
-   * @param {*} date
-   * @returns
-   * @memberof DatasetsActiveFiltersComponent
+   * @param {*} date Date
    */
   getDateValue(date) {
     if (date) {

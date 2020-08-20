@@ -1,16 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '@app/services/language.service';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '@app/services/news.service';
-// TODO - wywalić related, następny poprzedni
+
 /**
  * View of news post
- *
- * @export
- * @class NewsPostComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-agregator-news-post',
@@ -41,13 +36,36 @@ export class NewsPostComponent implements OnInit, OnDestroy {
    */
   public newsID = 0;
 
-  news: any = {};
+  /**
+   * News data
+   */
+  public news: any = {};
 
   /**
-   *
-   * @param {LanguageService} languageService
-   * @param {ActivatedRoute} route
-   * @memberof NewsPostComponent
+   * Change image position on scroll
+   */
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    const header: HTMLElement = document.querySelector('ofd-header header');
+    const imageHolder: HTMLElement = document.querySelector('.news-image-holder');
+    const newsContent: HTMLElement = document.querySelector('.news-container');
+
+    const headerHeight = header.clientHeight - 70;
+
+    const maxTranslate = newsContent.clientHeight - imageHolder.clientHeight - 40;
+    const translate = window.scrollY + headerHeight - imageHolder.offsetTop + 10;
+
+    imageHolder.style.transform =
+      imageHolder.offsetTop <= window.scrollY + headerHeight
+        ? `translateY(${translate <= maxTranslate ? translate : maxTranslate}px)`
+        : `translateY(0)`;
+  }
+
+  /**
+   * News post component constructor
+   * @param {LanguageService} languageService Language service
+   * @param {ActivatedRoute} route Activated route
+   * @param {NewsService} newsService News service
    */
   constructor(public languageService: LanguageService, private newsService: NewsService, public route: ActivatedRoute) {
     this.route.params.subscribe(params => {

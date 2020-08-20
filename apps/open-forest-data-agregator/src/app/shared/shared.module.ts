@@ -25,6 +25,9 @@ import { DataContainerComponent } from './data-container/data-container.componen
 import { DebounceKeyupDirective } from '@app/directives/debonuce-keyup.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+/**
+ * Shared components
+ */
 const components = [
   PageNavComponent,
   PaginationComponent,
@@ -41,9 +44,6 @@ const components = [
 ];
 /**
  * Shared module, contains common used components across whole application
- *
- * @export
- * @class SharedModule
  */
 @NgModule({
   imports: [

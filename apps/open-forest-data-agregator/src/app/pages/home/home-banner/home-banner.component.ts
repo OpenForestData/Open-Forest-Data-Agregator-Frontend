@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { UtilsService } from '@app/services/utils.service';
 /**
  * Banner component
- *
- * @export
- * @class HomeBannerComponent
  */
 @Component({
   selector: 'ofd-agregator-home-banner',
@@ -14,14 +11,12 @@ import { UtilsService } from '@app/services/utils.service';
 export class HomeBannerComponent {
   /**
    * If categories are visible at mobile
-   *
-   * @memberof HomeBannerComponent
    */
   public showMobileCategories = false;
 
   /**
    * Creates an instance of HomeBannerComponent.
-   * @param {UtilsService} utilService
+   * @param {UtilsService} utilService Utils service
    * @memberof HomeBannerComponent
    */
   constructor(public utilService: UtilsService) {}

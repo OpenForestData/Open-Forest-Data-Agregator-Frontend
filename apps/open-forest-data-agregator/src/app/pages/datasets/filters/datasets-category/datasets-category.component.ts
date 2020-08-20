@@ -14,22 +14,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DatasetsCategoryComponent {
   /**
    * Categories
-   *
-   * @type {{ name: string; value: any }[]}
-   * @memberof DatasetsCategoryComponent
    */
   @Input() categories: { name: string; value: any }[];
 
   /**
    * Active category
-   *
-   * @type {*}
-   * @memberof DatasetsCategoryComponent
    */
   @Input() selectedCategory: any = null;
 
   /**
-   * Event emmiter on currently active category change
+   * Event emitter on currently active category change
    *
    * @type {EventEmitter<any>}
    * @memberof DatasetsCategoryComponent

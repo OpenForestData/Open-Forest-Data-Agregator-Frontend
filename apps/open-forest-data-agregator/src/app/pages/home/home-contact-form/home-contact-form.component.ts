@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { UIModalService } from '@app/shared/ui-modal/ui-modal.service';
+import { HomeService, IContactForm } from '@app/pages/home/home.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
-// TODO - Kontakt do spięcia, dorobienie captchy
 /**
  * Contact modal content
- *
- * @export
- * @class HomeContactFormComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'ofd-agregator-home-contact-form',
@@ -25,14 +22,39 @@ export class HomeContactFormComponent {
     lastName: '',
     emailAddress: '',
     text: '',
-    checkbox: ''
+    checkbox: '',
+    captcha: ''
   };
+
+  /**
+   * Form field errors
+   */
+  public formError = {
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    text: ''
+  };
+
+  /**
+   * Config
+   */
+  config: any;
+
   /**
    * Creates an instance of HomeContactFormComponent.
-   * @param {UIModalService} modal
+   * @param {UIModalService} modal UI Modal Service
+   * @param {HomeService} homeService Home Service
+   * @param appConfigService App config service
    * @memberof HomeContactFormComponent
    */
-  constructor(public modal: UIModalService) {}
+  constructor(
+    public modal: UIModalService,
+    private homeService: HomeService,
+    public appConfigService: AppConfigService
+  ) {
+    this.config = AppConfigService.config;
+  }
   /**
    * Close modal window
    *
@@ -40,6 +62,20 @@ export class HomeContactFormComponent {
    */
   closeModal() {
     this.modal.close('contact-modal');
+    this.form = {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      checkbox: '',
+      text: '',
+      captcha: ''
+    };
+    this.formError = {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      text: ''
+    };
   }
 
   /**
@@ -47,5 +83,31 @@ export class HomeContactFormComponent {
    *
    * @memberof HomeContactFormComponent
    */
-  submitForm() {}
+  submitForm() {
+    const payload: IContactForm = {
+      name: this.form.firstName,
+      last_name: this.form.lastName,
+      e_mail: this.form.emailAddress,
+      content: this.form.text,
+      recaptcha_response: this.form.captcha
+    };
+
+    this.homeService.sendContactForm(payload).subscribe(
+      () => {
+        alert('Pomyślnie wysłano wiadomość');
+        this.closeModal();
+      },
+      error => {
+        this.formError.emailAddress = error.error.e_mail;
+      }
+    );
+  }
+
+  /**
+   * Captcha resolve trigger
+   * @param event Event
+   */
+  resolved(event) {
+    this.form.captcha = event;
+  }
 }

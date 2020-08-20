@@ -4,33 +4,44 @@
   max-width: 100%;
   overflow-x: auto;
   position: relative;
+}
 
-  table {
-    border-collapse: collapse;
+.datasets-table {
+  &__table {
+    width: 100% !important;
+  }
 
-    th {
-      background-color: $accent-color;
-      padding: 0.75rem;
+  &__container {
+    display: block;
+    background-color: #fff;
+    padding: 32px 0 15px 40px;
+    font-size: 0.75rem;
+  }
+}
+
+::ng-deep {
+  .dt-buttons {
+    display: flex;
+
+    .dt-button {
+      display: flex !important;
+      background: none !important;
+      height: 30px !important;
+      min-width: 75px;
+      border: 1px solid $accent-color !important;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .fullScreen {
+    button.fullscreen {
+      background-color: $accent-color !important;
       color: white;
-      min-width: 300px;
-      width: 300px;
-      box-sizing: border-box;
-    }
 
-    td {
-      padding: 5px 10px;
-      min-width: 300px;
-      width: 300px;
-      box-sizing: border-box;
-      word-break: break-all;
-      color: #3c3c3c;
-    }
-
-    tr {
-      &:nth-child(odd) {
-        td {
-          background-color: #e6e7e8;
-        }
+      span {
+        display: flex;
       }
     }
   }

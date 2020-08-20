@@ -36,19 +36,19 @@ export class DatasetsInputTagComponent {
   @Input() multiple = true;
 
   /**
-   * Event emmiter for value change
+   * Event emitter for value change
    *
    * @memberof DatasetsFilterComponent
    */
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   /**
-   * Emit value manualy
+   * Emit value manually
    *
-   * @param {*} payload
+   * @param {any} value
    * @memberof DatasetsFilterComponent
    */
-  emitValue(value) {
+  emitValue(value: any) {
     this.valueChange.emit(this.value);
   }
 }

@@ -4,9 +4,6 @@ import { DatasetsService } from '@app/pages/datasets/datasets.service';
 
 /**
  * New data component for desktop
- *
- * @export
- * @class NewDataComponent
  */
 @Component({
   selector: 'ofd-agregator-new-data',
@@ -19,14 +16,18 @@ export class NewDataComponent implements OnInit {
    */
   public buttonsAddData = [];
 
+  /**
+   * Datasets list
+   */
   public datasets = [];
 
   /**
    * New data constructor
    *
    * @param {UtilsService} utilsService Utils service
+   * @param {DatasetsService} datasetsService Datasets service
    */
-  constructor(private utilsService: UtilsService, public datasetsService: DatasetsService) {}
+  constructor(public utilsService: UtilsService, public datasetsService: DatasetsService) {}
 
   /**
    * Initialize on start and fetch data for buttons
@@ -45,6 +46,9 @@ export class NewDataComponent implements OnInit {
     });
   }
 
+  /**
+   * Get last 3 added datasets
+   */
   getLastAddedDatasets() {
     this.datasetsService.getLastAddedDatasets().subscribe(response => {
       this.datasets = response['list']['results'].map(dataset => {
@@ -57,15 +61,20 @@ export class NewDataComponent implements OnInit {
     });
   }
 
-  shareLink(link, social) {
+  /**
+   * Share link to dataset in social
+   * @param {string} link Link to dataset
+   * @param {string} social Social type
+   */
+  shareLink(link: string, social: string) {
     switch (social) {
       case 'facebook': {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`, '_blank', 'height=300,width=600');
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`, '_blank noopener noreferrer');
         break;
       }
 
       case 'twitter': {
-        window.open(`http://twitter.com/share?url=${link}`, '_blank', 'height=300,width=600');
+        window.open(`http://twitter.com/share?url=${link}`, '_blank noopener noreferrer');
         break;
       }
 

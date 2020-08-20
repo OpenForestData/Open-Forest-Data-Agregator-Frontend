@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" *ngIf="article">
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
-      <a class="post-link">
+      <a class="post-link" [routerLink]="'/blog/' + article.prev" *ngIf="article.prev">
         <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-xs-6">
-      <a class="post-link end">
+      <a class="post-link end" [routerLink]="'/blog/' + article.next" *ngIf="article.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
@@ -16,7 +16,7 @@
 
   <div class="row post-links">
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link">
+      <a class="post-link" [routerLink]="'/blog/' + article.prev" *ngIf="article.prev">
         <svg-icon src="assets/images/arrow_left_green.svg" class="m-r-25"></svg-icon>
         {{ 'blog.previous' | translate }}
       </a>
@@ -29,7 +29,7 @@
       ></ofd-agregator-section-title>
     </div>
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link end">
+      <a class="post-link end" [routerLink]="'/blog/' + article.next" *ngIf="article.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
@@ -56,15 +56,23 @@
     </div>
     <div class="col-md-7 col-xs-12 middle-xs">
       <div class="news-image-holder">
-        <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+        <!--        <img src="assets/modules/home/ex_1.jpg" alt="Example" />-->
+        <img
+          [src]="article.image_in_list"
+          *ngIf="article.image_in_list && article.image_in_list !== ''"
+          [alt]="article.title"
+        />
+        <img
+          src="/assets/images/no_photo.png"
+          *ngIf="!article.image_in_list && article.image_in_list === ''"
+          [alt]="article.title"
+        />
       </div>
 
       <div class="row news-body ckeditor-content">
         <div class="col-xs-12 col-md-12 col-lg-12">
           <h3>{{ article?.title }}</h3>
-          <p class="news-content">
-            {{ article?.description }}
-          </p>
+          <p class="news-content" [innerHTML]="article.content"></p>
         </div>
       </div>
     </div>
@@ -76,19 +84,25 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-md-7 col-lg-7">
-      <ofd-agregator-section-title [iconURL]="'assets/modules/blog/blog.png'" [titleText]="'blog.similar' | translate">
-      </ofd-agregator-section-title>
+  <ng-container *ngIf="relatedPosts.length > 0">
+    <div class="row">
+      <div class="col-xs-12 col-md-7 col-lg-7">
+        <ofd-agregator-section-title
+          [iconURL]="'assets/modules/blog/blog.png'"
+          [titleText]="'blog.similar' | translate"
+        >
+        </ofd-agregator-section-title>
+      </div>
     </div>
-  </div>
 
-  <div class="row m-t-30">
-    <div class="col-xs-6 phone-full col-md-6 col-lg-6 left-tile-side">
-      <ofd-agregator-post-tile></ofd-agregator-post-tile>
+    <div class="row m-t-30">
+      <div
+        class="col-xs-6 phone-full col-md-6 col-lg-6"
+        *ngFor="let post of relatedPosts; let i = index"
+        [ngClass]="{ 'left-tile-side': i % 2 === 1, 'right-tile-side': i % 2 === 0 }"
+      >
+        <ofd-agregator-post-tile [article]="post"></ofd-agregator-post-tile>
+      </div>
     </div>
-    <div class="col-xs-6 phone-full col-md-6 col-lg-6 right-tile-side">
-      <ofd-agregator-post-tile></ofd-agregator-post-tile>
-    </div>
-  </div>
+  </ng-container>
 </div>

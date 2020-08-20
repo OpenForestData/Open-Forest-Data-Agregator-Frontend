@@ -1,5 +1,5 @@
 /**
- * Breadrcumbs interface
+ * Breadcrumbs interface
  */
 export interface IBreadcrumbs {
   /**

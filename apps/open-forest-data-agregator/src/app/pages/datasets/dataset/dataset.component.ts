@@ -25,20 +25,9 @@ export class DatasetComponent implements OnInit {
    */
   public sortItemsType = [{ name: 'All', value: 0 }];
   /**
-   * Sort by access values
-   */
-  public sortItemsAccess = [
-    { name: 'Public', value: 0 },
-    { name: 'Domain', value: 0 }
-  ];
-  /**
    * Sort by filter value
    */
   public sortByType = null;
-  /**
-   * Sort by access filter value
-   */
-  public sortByAccess = null;
   /**
    * Sort by filter value
    */
@@ -47,12 +36,6 @@ export class DatasetComponent implements OnInit {
    * Options type name
    */
   public optionsType: IUISelectOptions = {
-    placeholder: 'Filtruj wg'
-  };
-  /**
-   * Options access name
-   */
-  public optionsAccess: IUISelectOptions = {
     placeholder: 'Filtruj wg'
   };
   /**
@@ -96,14 +79,6 @@ export class DatasetComponent implements OnInit {
    */
   dataset: any = {};
   /**
-   * URL to Dataset
-   */
-  urlToDataset: any = '';
-  /**
-   * List of checkbox
-   */
-  checkboxList = [];
-  /**
    * All files checkbox state
    */
   allFilesCheckboxState = false;
@@ -126,7 +101,7 @@ export class DatasetComponent implements OnInit {
 
   /**
    * Dataset constructor
-   * @param {datasetSservice} datasetService Dataset Service
+   * @param {DatasetsService} datasetService Dataset Service
    * @param {route} route Route
    */
   constructor(private datasetService: DatasetsService, private route: ActivatedRoute) {}
@@ -160,7 +135,10 @@ export class DatasetComponent implements OnInit {
         file.isChecked = false;
         return file;
       });
-      this.breadCrumbs.push({ name: this.dataset?.providers[0]?.authorAffiliation?.value, href: '' });
+      this.breadCrumbs.push({
+        name: this.dataset.search_info.results[0].dvName,
+        href: `/datasets?start=0&rows=15&sort=asc&category=${this.dataset.search_info.results[0].identifierOfDataverse}`
+      });
       this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
       this.allFiles = [...response?.latestVersion?.files];
     });
@@ -220,7 +198,7 @@ export class DatasetComponent implements OnInit {
    */
   downloadCheckedFiles() {
     this.dataset.latestVersion.files.forEach(file => {
-      if (file.isChecked) {
+      if (file.isChecked && !file.restricted) {
         this.downloadSingleResource(file.download_url);
       }
     });

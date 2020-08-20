@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" *ngIf="news">
   <div class="row mobile-flex-only post-links">
     <div class="col-xs-6">
-      <a class="post-link">
+      <a class="post-link" *ngIf="news.prev && news.prev !== ''" [routerLink]="'/news/' + news.prev">
         <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-xs-6">
-      <a class="post-link end">
+      <a class="post-link end" *ngIf="news.next && news.next !== ''" [routerLink]="'/news/' + news.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
@@ -16,14 +16,14 @@
 
   <div class="row post-links">
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link">
+      <a class="post-link" *ngIf="news.prev && news.prev !== ''" [routerLink]="'/news/' + news.prev">
         <img src="assets/modules/home/arrow_left_green.png" class="m-r-25" alt="{{ 'home.read_more' | translate }}" />
         {{ 'blog.previous' | translate }}
       </a>
     </div>
     <div class="col-lg-4 col-md-6 col-xs-12"></div>
     <div class="col-lg-4 col-md-3 desktop-only">
-      <a class="post-link end">
+      <a class="post-link end" *ngIf="news.next && news.next !== ''" [routerLink]="'/news/' + news.next">
         {{ 'blog.next' | translate }}
         <svg-icon src="assets/images/arrow_right_green.svg" class="m-l-25"></svg-icon>
       </a>
@@ -36,7 +36,7 @@
         <ofd-agregator-social [linkTo]="" class="social-container"></ofd-agregator-social>
       </div>
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12 ">
       <h2 class="news-title">
         {{ news.title }}
       </h2>
@@ -47,9 +47,9 @@
         <span class="author">{{ news.author }}</span>
       </span>
     </div>
-    <div class="col-lg-7 col-md-6 col-xs-12 middle-xs">
+    <div class="col-lg-7 col-md-6 col-xs-12 middle-xs news-container">
       <div class="news-image-holder">
-        <img src="assets/modules/home/ex_1.jpg" alt="Example" />
+        <img [src]="news['image_in_list']" [alt]="news.title" />
       </div>
     </div>
     <div class="col-lg-5 col-md-6 col-xs-12">

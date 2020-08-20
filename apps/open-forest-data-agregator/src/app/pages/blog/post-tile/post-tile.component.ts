@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BlogTile } from '@app/interfaces/blog-tile';
+import { BlogArticle } from '@app/interfaces/blog-article';
 /**
  * Post tile component
  */
@@ -12,7 +13,7 @@ export class PostTileComponent {
   /**
    * Article input
    */
-  @Input() article: BlogTile;
+  @Input() article: BlogTile | BlogArticle;
   /**
    * Keyword link
    */

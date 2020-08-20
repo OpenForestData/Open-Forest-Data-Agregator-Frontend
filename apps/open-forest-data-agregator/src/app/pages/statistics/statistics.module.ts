@@ -11,12 +11,13 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { ChartFiltersComponent } from './chart-filters/chart-filters.component';
 
+/**
+ * Statistics components
+ */
 const components = [StatisticsComponent, PieChartComponent, BarChartComponent, ChartFiltersComponent];
+
 /**
  * Statistics Module
- *
- * @export
- * @class StatisticsModule
  */
 @NgModule({
   declarations: components,

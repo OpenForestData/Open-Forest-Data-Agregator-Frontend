@@ -64,7 +64,7 @@
 
   &__advanced-search {
     background-color: transparent;
-    font-size: 16px;
+    font-size: 1rem;
     color: $text-color;
     cursor: pointer;
     border: none;
@@ -124,7 +124,7 @@
 }
 
 .f-s-16 {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 ::ng-deep {
@@ -159,7 +159,6 @@
 
 .drop-down {
   display: none;
-  padding: 0;
   position: absolute;
   z-index: 100;
   bottom: -3px;
@@ -169,8 +168,7 @@
   border-radius: 0 0 25px 25px;
   border-top: 1px solid white;
   transform: translateY(100%);
-  padding-top: 5px;
-  padding-top: 10px;
+  padding: 10px 0 0 0;
   background-color: white;
   overflow: hidden;
 
@@ -179,8 +177,7 @@
     text-align: left;
 
     a {
-      padding: 12px 0;
-      padding-left: 30px;
+      padding: 12px 0 12px 30px;
       display: block;
       color: $text-color;
       transition: color 0.3s ease, background-color 0.3s ease;

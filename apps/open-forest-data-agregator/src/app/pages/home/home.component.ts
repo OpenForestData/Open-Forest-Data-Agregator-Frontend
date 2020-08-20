@@ -6,11 +6,6 @@ import { UtilsService } from '@app/services/utils.service';
 
 /**
  * Home component
- *
- * @export
- * @class HomeComponent
- * @implements {OnInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'ofd-home',
@@ -27,17 +22,14 @@ import { UtilsService } from '@app/services/utils.service';
 export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Language subscription
-   *
-   * @type {Subscription}
-   * @memberof HomeComponent
    */
   public languageSubscription: Subscription = new Subscription();
 
   /**
-   *
-   * @param {LanguageService} languageService
-   * @param {UIModalService} modal
-   * @memberof HomeComponent
+   * Home component
+   * @param {LanguageService} languageService Language service
+   * @param {UIModalService} modal UI Modal service
+   * @param {UtilsService} utilService Utils service
    */
   constructor(
     public languageService: LanguageService,
@@ -47,8 +39,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * @ignore
-   *
-   * @memberof HomeComponent
    */
   ngOnInit() {
     this.getData();
@@ -57,8 +47,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Fetch data from API
-   *
-   * @memberof HomeComponent
    */
   getData() {
     this.utilService.getHomePage().subscribe(response => {
@@ -69,8 +57,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * @ignore
-   *
-   * @memberof HomeComponent
    */
   ngOnDestroy() {
     this.languageSubscription.unsubscribe();
@@ -78,8 +64,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Close modal
-   *
-   * @memberof HomeComponent
    */
   onModalClose() {
     this.modal.close('contact-modal');
