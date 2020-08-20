@@ -308,7 +308,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           dwcFamily: item.dwcFamily,
           dwcGenus: item.dwcGenus,
           dvName: item.dvName,
-          cate: item.identifierOfDataverse
+          cate: item.identifierOfDataverse,
+          dateSort: item.dateSort
         };
       });
 

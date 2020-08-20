@@ -27,8 +27,8 @@
           {{ datasetDetails.dataset.title }} - {{ datasetDetails.dataset.id }}
         </h4>
         <p class="datasets-map__dataset-item__time">
-          <time [dateTime]="datasetDetails.dataset.createdAt">{{
-            datasetDetails.dataset.createdAt | date: 'dd.MM.yyyy'
+          <time [dateTime]="datasetDetails.dataset.sortDate">{{
+            datasetDetails.dataset.sortDate | date: 'dd.MM.yyyy'
           }}</time>
           | <span>{{ datasetDetails.dataset.author }}</span> - <a href="#">{{ datasetDetails.dataset.category }}</a>
         </p>
