@@ -238,8 +238,13 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    * @memberof DatasetsComponent
    */
   paginationChanged(payload) {
-    this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
-    this.DSService.searchFilters = { field: 'start', data: this.page, search: true };
+    if (this.pageSize !== payload.limit) {
+      this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
+      this.DSService.searchFilters = { field: 'start', data: 1, search: true };
+    } else {
+      this.DSService.searchFilters = { field: 'rows', data: payload.limit, search: true };
+      this.DSService.searchFilters = { field: 'start', data: this.page, search: true };
+    }
   }
 
   /**
@@ -303,7 +308,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           dwcFamily: item.dwcFamily,
           dwcGenus: item.dwcGenus,
           dvName: item.dvName,
-          cate: item.identifierOfDataverse
+          cate: item.identifierOfDataverse,
+          dateSort: item.dateSort
         };
       });
 

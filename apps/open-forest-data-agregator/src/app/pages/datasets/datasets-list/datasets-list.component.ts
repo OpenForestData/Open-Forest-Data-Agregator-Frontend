@@ -89,8 +89,8 @@ export class DatasetsListComponent implements OnDestroy {
 
     this.translate.get('datasets.filters').subscribe(response => {
       this.sortItems = [
-        { name: response['oldest'], value: 1 },
-        { name: response['newest'], value: 0 }
+        { name: response['newest'], value: 1 },
+        { name: response['oldest'], value: 0 }
       ];
     });
   }

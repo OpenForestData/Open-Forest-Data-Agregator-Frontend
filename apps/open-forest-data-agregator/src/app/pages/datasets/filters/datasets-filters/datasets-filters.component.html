@@ -64,7 +64,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 end-xs">
-        <img src="assets/modules/search/times.png" class="times" alt="Close" (click)="closeAdvenced()" />
+        <button class="close-button-svg" (click)="closeAdvenced()" alt="Close">
+          <svg-icon src="assets/images/close.svg" [applyCss]="true"></svg-icon>
+        </button>
       </div>
     </div>
     <div class="row">
@@ -145,14 +147,12 @@
                 <aside>
                   <ul>
                     <li *ngFor="let item of group.items" class="filter-li" (click)="toogleFilter(item)">
-                      <img
-                        src="assets/modules/search/advanced_checks.png"
-                        width="22"
-                        height="18"
+                      <svg-icon
+                        [src]="'/assets/images/advanced-check.svg'"
                         class="check"
-                        alt="Check"
+                        [applyCss]="true"
                         [ngClass]="{ 'active-green': item.activeOrder > 0 }"
-                      />
+                      ></svg-icon>
                       {{ item.name | translate }}
                     </li>
                   </ul>
