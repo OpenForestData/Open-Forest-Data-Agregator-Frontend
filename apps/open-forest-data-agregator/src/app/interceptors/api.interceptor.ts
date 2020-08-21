@@ -81,7 +81,7 @@ export class APIInterceptor implements HttpInterceptor {
       '/',
       window.location.hostname,
       location.protocol === 'https:',
-      'None'
+      location.protocol === 'https:' ? 'None' : 'Lax'
     );
   }
 

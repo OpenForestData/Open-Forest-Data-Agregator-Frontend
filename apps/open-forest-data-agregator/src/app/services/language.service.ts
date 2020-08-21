@@ -38,7 +38,7 @@ export class LanguageService {
       '/',
       window.location.hostname,
       location.protocol === 'https:',
-      'None'
+      location.protocol === 'https:' ? 'None' : 'Lax'
     );
     this.translate.setDefaultLang(value);
     this.translate.use(value);

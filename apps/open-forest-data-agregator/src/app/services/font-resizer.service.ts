@@ -93,7 +93,7 @@ export class FontResizeService {
         '/',
         window.location.hostname,
         location.protocol === 'https:',
-        'None'
+        location.protocol === 'https:' ? 'None' : 'Lax'
       );
     }
   }

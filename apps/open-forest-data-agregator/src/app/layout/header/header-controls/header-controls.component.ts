@@ -44,7 +44,7 @@ export class HeaderControlsComponent implements OnInit {
         '/',
         window.location.hostname,
         location.protocol === 'https:',
-        'None'
+        location.protocol === 'https:' ? 'None' : 'Lax'
       );
     } else {
       document.querySelector('body').classList.remove('wcag-contrast');

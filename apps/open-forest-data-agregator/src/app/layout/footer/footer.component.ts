@@ -31,7 +31,7 @@ export class FooterComponent {
       '/',
       window.location.hostname,
       location.protocol === 'https:',
-      'None'
+      location.protocol === 'https:' ? 'None' : 'Lax'
     );
   }
 
