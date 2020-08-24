@@ -110,14 +110,6 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Error handler for missing thumbnails
-   * @param event Event
-   */
-  errorHandler(event) {
-    event.target.src = '/assets/images/no_photo.png';
-  }
-
-  /**
    * @ignore
    *
    * @memberof DatasetsGalleryComponent

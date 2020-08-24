@@ -22,7 +22,7 @@
             [src]="dataset.preview"
             *ngIf="dataset.preview && dataset.preview !== 'wait'"
             [alt]="dataset.title"
-            (error)="errorHandler($event)"
+            (error)="utilsService.errorHandler($event)"
           />
           <img
             src="/assets/images/no_photo.png"
@@ -42,7 +42,7 @@
                   [src]="dataset.preview"
                   *ngIf="dataset.preview && dataset.preview !== 'wait'"
                   [alt]="dataset.title"
-                  (error)="errorHandler($event)"
+                  (error)="utilsService.errorHandler($event)"
                 />
                 <img
                   src="/assets/images/no_photo.png"

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DatasetsService } from '@app/pages/datasets/datasets.service';
 import { Router } from '@angular/router';
+import { UtilsService } from '@app/services/utils.service';
 
 /**
  * Search section at home page
@@ -43,7 +44,7 @@ export class HomeSearchComponent {
    * @param {DatasetsService} DSService Datasets service
    * @param {Router} router Router
    */
-  constructor(public DSService: DatasetsService, public router: Router) {
+  constructor(public DSService: DatasetsService, public router: Router, public utilsService: UtilsService) {
     this.DSService.getDatasetOfTheDay().subscribe(response => {
       try {
         this.datasetOfTheDay = {
@@ -59,14 +60,6 @@ export class HomeSearchComponent {
         };
       } catch (e) {}
     });
-  }
-
-  /**
-   * Error handler for missing thumbnails
-   * @param event Event
-   */
-  errorHandler(event) {
-    event.target.src = '/assets/images/no_photo.png';
   }
 
   /**

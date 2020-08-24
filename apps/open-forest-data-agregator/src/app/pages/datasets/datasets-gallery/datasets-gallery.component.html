@@ -28,7 +28,7 @@
             [src]="dataset.preview"
             *ngIf="dataset.preview && dataset.preview !== 'wait'"
             [alt]="dataset.title"
-            (error)="errorHandler($event)"
+            (error)="utilsService.errorHandler($event)"
           />
         </a>
         <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
