@@ -122,4 +122,12 @@ export class DatasetsListComponent implements OnDestroy {
   public get page() {
     return this.DSService.searchFilters.data.start;
   }
+
+  /**
+   * Error handler for missing thumbnails
+   * @param event Event
+   */
+  errorHandler(event) {
+    event.target.src = '/assets/images/no_photo.png';
+  }
 }

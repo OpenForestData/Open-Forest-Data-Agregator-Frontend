@@ -18,7 +18,12 @@
       <a [routerLink]="['detail']" [queryParams]="{ doi: dataset.identifier64 }">
         <picture class="datasets-list__datasets__item__picture">
           <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
-          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+          <img
+            [src]="dataset.preview"
+            *ngIf="dataset.preview && dataset.preview !== 'wait'"
+            [alt]="dataset.title"
+            (error)="errorHandler($event)"
+          />
           <img
             src="/assets/images/no_photo.png"
             *ngIf="!dataset.preview && dataset.preview !== 'wait'"
@@ -37,6 +42,7 @@
                   [src]="dataset.preview"
                   *ngIf="dataset.preview && dataset.preview !== 'wait'"
                   [alt]="dataset.title"
+                  (error)="errorHandler($event)"
                 />
                 <img
                   src="/assets/images/no_photo.png"

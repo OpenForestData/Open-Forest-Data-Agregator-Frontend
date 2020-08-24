@@ -28,6 +28,7 @@
       [src]="datasetOfTheDay.preview"
       *ngIf="datasetOfTheDay.preview && datasetOfTheDay.preview !== 'wait'"
       [alt]="datasetOfTheDay.name"
+      (error)="errorHandler($event)"
     />
     <img
       src="/assets/images/no_photo.png"

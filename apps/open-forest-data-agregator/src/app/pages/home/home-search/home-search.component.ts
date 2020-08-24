@@ -62,6 +62,14 @@ export class HomeSearchComponent {
   }
 
   /**
+   * Error handler for missing thumbnails
+   * @param event Event
+   */
+  errorHandler(event) {
+    event.target.src = '/assets/images/no_photo.png';
+  }
+
+  /**
    * Redirects to datasets view with serach params set
    */
   search() {
