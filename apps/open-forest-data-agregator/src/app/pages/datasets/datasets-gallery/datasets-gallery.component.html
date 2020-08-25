@@ -24,7 +24,12 @@
           [ngClass]="{ 'events-none': dataset.preview === 'wait' }"
         >
           <div class="spinning-loader" *ngIf="dataset.preview === 'wait'"></div>
-          <img [src]="dataset.preview" *ngIf="dataset.preview && dataset.preview !== 'wait'" [alt]="dataset.title" />
+          <img
+            [src]="dataset.preview"
+            *ngIf="dataset.preview && dataset.preview !== 'wait'"
+            [alt]="dataset.title"
+            (error)="utilsService.errorHandler($event)"
+          />
         </a>
         <h3 class="datasets-list__datasets__item__title">{{ dataset.title }}</h3>
         <a
