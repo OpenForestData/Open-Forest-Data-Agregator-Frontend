@@ -80,7 +80,14 @@
 
   <div class="row tag-row">
     <div class="col-xs-12 tag-wrapper">
-      <span class="tag" *ngFor="let keyword of article?.keywords">{{ keyword.title }}</span>
+      <!-- <span class="tag" *ngFor="let keyword of article?.keywords">{{ keyword.title }}</span> -->
+      <a
+        class="tag"
+        [title]="keyword.title"
+        [href]="createKeywordsLink(keyword.slug)"
+        *ngFor="let keyword of article.keywords"
+        >{{ keyword.title }}</a
+      >
     </div>
   </div>
 
