@@ -433,4 +433,12 @@ export class UtilsService {
       })
       .join('&');
   }
+
+  /**
+   * Error handler for missing thumbnails
+   * @param event Event
+   */
+  errorHandler(event) {
+    event.target.src = '/assets/images/no_photo.png';
+  }
 }

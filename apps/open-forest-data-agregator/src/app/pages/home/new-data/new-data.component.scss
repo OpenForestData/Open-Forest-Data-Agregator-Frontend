@@ -23,10 +23,15 @@
   font-weight: 600;
   margin-top: 10px;
   margin-bottom: 15px;
+  min-height: 35px;
+  max-height: 35px;
+  word-break: break-word;
 }
 
 .add-text {
   font-size: 0.875rem;
+  min-height: 80px;
+  max-height: 80px;
 }
 
 .add-owner {

@@ -42,7 +42,7 @@ export class NewsService {
    * @param {string} url News Url
    */
   getSingleNews(url: string) {
-    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/news/${url}`).pipe(
+    return this.http.get<any>(`${AppConfigService.config.api}news-slug?slug=/cms-api/v1/news/${url}`).pipe(
       map(response => {
         if (response['article']) {
           response['article']['image_in_list'] =

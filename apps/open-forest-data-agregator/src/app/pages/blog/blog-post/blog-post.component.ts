@@ -56,6 +56,14 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Creates link for keyword
+   * @param keywordSlug Keyword slug
+   */
+  createKeywordsLink(keywordSlug) {
+    return window.location.origin + '/blog?keyword=' + keywordSlug;
+  }
+
+  /**
    * Unsubscribes to subscribed items
    */
   ngOnDestroy() {
