@@ -19,8 +19,8 @@
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
               <a [href]="makeSource()" target="_blank" rel="noopener noreferrer">{{
-                dataset.providers && (dataset?.providers)[0]?.authorAffiliation?.value
-                  ? (dataset?.providers)[0]?.authorAffiliation?.value
+                (dataset.search_info?.results)[0].dataSources && (dataset?.search_info?.results)[0].dataSources[0]
+                  ? (dataset?.search_info?.results)[0].dataSources[0]
                   : 'Dataverse'
               }}</a>
             </p>
@@ -30,8 +30,8 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
-              <a href="{{ mockLeftSide.license.link }}" target="_blank" rel="noopener noreferrer">{{
-                dataset.latestVersion?.license
+              <a href="https://creativecommons.org/" target="_blank" rel="noopener noreferrer">{{
+                dataset.latestVersion?.termsOfUse ? dataset.latestVersion?.termsOfUse : dataset.latestVersion?.license
               }}</a>
             </p>
             <p>

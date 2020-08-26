@@ -338,7 +338,12 @@ export class UtilsService {
       if (identifiers.length) {
         this.DSService.details(identifiers).subscribe((details: any) => {
           Object.values(details).forEach((singleDataset: any) => {
-            allMetadata.push(this.convertMetadata(singleDataset?.latestVersion?.metadataBlocks));
+            allMetadata.push(
+              this.convertMetadata(
+                singleDataset?.latestVersion?.metadataBlocks,
+                singleDataset?.latestVersion?.datasetPersistentId
+              )
+            );
           });
           this.convertMetadataToFile(columnKeys, allMetadata);
         });
@@ -360,6 +365,7 @@ export class UtilsService {
       firstRow += first + ';';
       indexer[first] = index;
     });
+    firstRow += 'doi' + ';';
     const csvArray: any = [firstRow];
     Object.values(allMetadata).forEach(meta => {
       temp = [];
@@ -367,6 +373,8 @@ export class UtilsService {
         if (meta[key] !== undefined && typeof meta[key] !== 'object') {
           const noNewLineInMeta = meta[key].replace(/(\r\n|\n|\r)/gm, '');
           temp[indexer[key]] = noNewLineInMeta;
+        } else if (meta['doi'].includes('doi:')) {
+          temp[keys.length] = meta['doi'];
         } else {
           temp[indexer[key]] = meta[key];
         }
@@ -392,7 +400,7 @@ export class UtilsService {
    * Search through object values and format them into readable object
    * @param metadata Metadata
    */
-  convertMetadata(metadata) {
+  convertMetadata(metadata, doi) {
     const metadataObject = {};
     Object.values(metadata).forEach((meta: any) => {
       meta?.fields.forEach(field => {
@@ -411,6 +419,7 @@ export class UtilsService {
         }
       });
     });
+    metadataObject['doi'] = doi;
     return metadataObject;
   }
 

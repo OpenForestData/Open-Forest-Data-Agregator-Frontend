@@ -187,8 +187,8 @@
         "dwcTaxonRank": "Taxon Rank",
         "dwcLicense": "License",
         "dwcBasisOfRecord": "Basis of Record",
-        "timePeriodCoveredEnd": "Time Perdiod End",
-        "timePeriodCoveredStart": "Time Perdiod Start",
+        "timePeriodCoveredEnd": "Time Period End",
+        "timePeriodCoveredStart": "Time Period Start",
         "dwcVerbatimLocality": "Verbatim Locality",
         "dwcPreparations": "Preparations",
         "dwcVernacularName": "Vernacular Name",
@@ -278,7 +278,15 @@
         "dwciriSex": "Sex",
         "dwciriTypeStatus": "Type Status",
         "dwciriVerbatimCoordinateSystem": "Verbatim Coordinate System",
-        "dwciriVerbatimSRS": "Verbatim SRS"
+        "dwciriVerbatimSRS": "Verbatim SRS",
+        "producerAbbreviation": "Producer Abbreviation",
+        "producerLogoURL": "Producer Logo URL",
+        "producerName": "Producer Name",
+        "distributorAbbreviation": "Distributor Abbreviation",
+        "distributorLogoURL": "Distributor Logo URL",
+        "distributorName": "Distributor Name",
+        "dwcGeodeticDatum": "Geodetic Datum",
+        "dwcHigherClassification": "Higher Classification"
       }
     },
     "resource": {
