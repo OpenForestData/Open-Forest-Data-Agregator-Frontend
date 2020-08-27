@@ -30,9 +30,16 @@
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.license' | translate }}
-              <a href="https://creativecommons.org/" target="_blank" rel="noopener noreferrer">{{
-                dataset.latestVersion?.termsOfUse ? dataset.latestVersion?.termsOfUse : dataset.latestVersion?.license
-              }}</a>
+              <a href="https://creativecommons.org/" target="_blank" rel="noopener noreferrer"
+                ><markdown
+                  class="variable-binding"
+                  [data]="
+                    dataset.latestVersion?.termsOfUse
+                      ? dataset.latestVersion?.termsOfUse
+                      : dataset.latestVersion?.license
+                  "
+                ></markdown>
+              </a>
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.domain' | translate }}

@@ -97,6 +97,7 @@
     "ngx-cookie-service": "^2.3.0",
     "ngx-doc-viewer": "0.1.24",
     "ngx-json-viewer": "^2.4.0",
+    "ngx-markdown": "^10.1.1",
     "ngx-pagination": "^5.0.0",
     "normalize.css": "^8.0.1",
     "papaparse": "^5.2.0",

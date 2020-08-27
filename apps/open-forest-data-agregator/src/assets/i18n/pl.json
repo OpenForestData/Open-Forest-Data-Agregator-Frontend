@@ -280,7 +280,8 @@
         "distributorLogoURL": "Distributor Logo URL",
         "distributorName": "Distributor Name",
         "dwcGeodeticDatum": "Geodetic Datum",
-        "dwcHigherClassification": "Higher Classification"
+        "dwcHigherClassification": "Higher Classification",
+        "publicationIDNumber": "Publication ID Number"
       }
     },
     "resource": {

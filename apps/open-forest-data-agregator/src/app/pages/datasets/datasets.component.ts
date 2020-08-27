@@ -253,6 +253,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    * @memberof DatasetsComponent
    */
   getData() {
+    let dataSources = '';
     this.DSService.search().subscribe((response: any) => {
       this.DSService.searchData = response;
       const identifiers = [];
@@ -273,6 +274,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
             }
           ];
         }
+
+        item.dataSources && item.dataSources[0] ? (dataSources = item.dataSources[0]) : (dataSources = 'Dataverse');
 
         return {
           id: item.id,
@@ -309,6 +312,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           dwcGenus: item.dwcGenus,
           dvName: item.dvName,
           cate: item.identifierOfDataverse,
+          dataSource: dataSources,
           dateSort: item.dateSort
         };
       });
