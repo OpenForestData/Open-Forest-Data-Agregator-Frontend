@@ -31,7 +31,7 @@
         placeholder="{{ 'datasets.search-placeholder' | translate }}"
         (keyup.enter)="search()"
       />
-      <button class="search-section__button" type="submit">
+      <button class="search-section__button" type="submit" (click)="search()">
         <svg-icon [src]="'/assets/images/search_icon.svg'" [applyCss]="true"></svg-icon>
       </button>
     </label>
