@@ -334,4 +334,13 @@ export class DatasetComponent implements OnInit {
   typeOf(value: any): string {
     return typeof value;
   }
+
+  /**
+   * Function that keep sorting in keyvalue angular pipe
+   * @param a Sorting value a
+   * @param b Sorting value b
+   */
+  keepOrder = (a, b) => {
+    return a;
+  };
 }
