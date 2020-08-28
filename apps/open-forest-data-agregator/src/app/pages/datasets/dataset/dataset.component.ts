@@ -326,7 +326,11 @@ export class DatasetComponent implements OnInit {
     this.files = this.allFiles.slice(payload.page * payload.limit - payload.limit, payload.page * payload.limit);
   }
 
-  typeOf(value) {
+  /**
+   * Check the type of value
+   * @returns Type of value as string
+   */
+  typeOf(value: any): string {
     return typeof value;
   }
 }
