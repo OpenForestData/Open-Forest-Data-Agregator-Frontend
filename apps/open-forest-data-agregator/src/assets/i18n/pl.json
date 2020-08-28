@@ -423,7 +423,9 @@
         "dwcRelationshipOfResource": "Relationship Of Resource",
         "dwcRelationshipAccordingTo": "Relationship According To",
         "dwcRelationshipEstablishedDate": "Relationship Established Date",
-        "dwcRelationshipRemarks": "Relationship Remarks"
+        "dwcRelationshipRemarks": "Relationship Remarks",
+        "seriesInformation": "Series Information",
+        "seriesName": "Series Name"
       }
     },
     "resource": {
