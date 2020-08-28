@@ -325,4 +325,8 @@ export class DatasetComponent implements OnInit {
   paginationChange(payload) {
     this.files = this.allFiles.slice(payload.page * payload.limit - payload.limit, payload.page * payload.limit);
   }
+
+  typeOf(value) {
+    return typeof value;
+  }
 }

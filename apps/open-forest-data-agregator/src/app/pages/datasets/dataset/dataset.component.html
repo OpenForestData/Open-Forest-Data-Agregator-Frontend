@@ -263,13 +263,24 @@
                 </div>
               </div>
 
-              <div class="meta-citation__row__multiple" *ngIf="!field.multiple">
+              <div class="meta-citation__row__multiple" *ngIf="!field.multiple && typeOf(field.value) !== 'object'">
                 <div class="meta-citation__row__container">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
                     {{ field.value }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-citation__row__multiple" *ngIf="!field.multiple && typeOf(field.value) === 'object'">
+                <div class="meta-citation__row__container" *ngFor="let field of field.value | keyvalue">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + field.key | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ field.value.value }}
                   </div>
                 </div>
               </div>
