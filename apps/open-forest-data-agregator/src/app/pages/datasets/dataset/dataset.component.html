@@ -14,7 +14,7 @@
             <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ 3 }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.created' | translate }}
-              {{ dataset.latestVersion?.createTime | date: 'dd.MM.yyyy' }}
+              {{ dataset?.publicationDate | date: 'dd.MM.yyyy' }}
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.source' | translate }}
@@ -231,7 +231,7 @@
           </div>
         </h3>
 
-        <div class="meta-citation-box" *ngFor="let meta of dataset.latestVersion?.metadataBlocks | keyvalue">
+        <div class="meta-citation-box" *ngFor="let meta of dataset.latestVersion?.metadataBlocks | keyvalue: keepOrder">
           <ofd-agregator-data-container
             class="meta-citation"
             [title]="meta.value.displayName"
@@ -240,7 +240,7 @@
           >
             <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
               <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName !== 'keyword'">
-                <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue">
+                <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue: keepOrder">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
                   </div>
@@ -275,7 +275,7 @@
               </div>
 
               <div class="meta-citation__row__multiple" *ngIf="!field.multiple && typeOf(field.value) === 'object'">
-                <div class="meta-citation__row__container" *ngFor="let field of field.value | keyvalue">
+                <div class="meta-citation__row__container" *ngFor="let field of field.value | keyvalue: keepOrder">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + field.key | translate }}
                   </div>
@@ -284,6 +284,22 @@
                   </div>
                 </div>
               </div>
+
+              <!-- <div
+                class="meta-citation__row__multiple"
+                *ngIf="field.multiple && field.value.length > 0 && typeOf(field.value[0]) !== 'object'"
+              >
+                <div class="meta-citation__row__container" *ngFor="let value of field | keyvalue: keepOrder">
+                  <div class="meta-citation__row__keys">
+                    {{ 'datasets.dataset.metadata.' + value.key | translate }}
+                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
+                  </div>
+                  <div class="meta-citation__row__values">
+                    {{ value.value }}
+                    {{ value.value.value }}
+                  </div>
+                </div>
+              </div> -->
             </div>
           </ofd-agregator-data-container>
         </div>
