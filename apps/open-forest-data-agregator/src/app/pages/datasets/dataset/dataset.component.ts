@@ -328,6 +328,7 @@ export class DatasetComponent implements OnInit {
 
   /**
    * Check the type of value
+   * @param value Value
    * @returns Type of value as string
    */
   typeOf(value: any): string {
