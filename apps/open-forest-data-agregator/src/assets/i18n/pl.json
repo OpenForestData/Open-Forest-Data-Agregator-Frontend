@@ -425,7 +425,15 @@
         "dwcRelationshipEstablishedDate": "Relationship Established Date",
         "dwcRelationshipRemarks": "Relationship Remarks",
         "seriesInformation": "Series Information",
-        "seriesName": "Series Name"
+        "seriesName": "Series Name",
+        "language": "Language",
+        "kindOfData": "Kind Of Data",
+        "relatedMaterial": "Related Material",
+        "relatedDatasets": "Related Datasets",
+        "otherReferences": "Other References",
+        "geographicUnit": "Geographic Unit",
+        "dwcLanguage": "Language",
+        "dwcReferences": "References"
       }
     },
     "resource": {
