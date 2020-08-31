@@ -239,13 +239,18 @@
             [expanded]="false"
           >
             <div class="meta-citation__row" *ngFor="let field of meta.value.fields">
-              <div class="meta-citation__row__multiple" *ngIf="field.multiple && field.typeName !== 'keyword'">
+              <div
+                class="meta-citation__row__multiple"
+                *ngIf="field.multiple && field.typeName !== 'keyword' && typeOf(field.value[0]) !== 'string'"
+              >
                 <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue: keepOrder">
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
-                    {{ value.value.value }}
+                    <span class="comma" *ngFor="let val of field.value; let i = index">{{
+                      field.value[i][value.value.typeName].value
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -268,9 +273,7 @@
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
                   </div>
-                  <div class="meta-citation__row__values">
-                    {{ field.value }}
-                  </div>
+                  <div class="meta-citation__row__values">{{ field.value }}</div>
                 </div>
               </div>
 
@@ -285,21 +288,19 @@
                 </div>
               </div>
 
-              <!-- <div
+              <div
                 class="meta-citation__row__multiple"
                 *ngIf="field.multiple && field.value.length > 0 && typeOf(field.value[0]) !== 'object'"
               >
-                <div class="meta-citation__row__container" *ngFor="let value of field | keyvalue: keepOrder">
+                <div class="meta-citation__row__container">
                   <div class="meta-citation__row__keys">
-                    {{ 'datasets.dataset.metadata.' + value.key | translate }}
-                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
+                    {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
-                    {{ value.value }}
-                    {{ value.value.value }}
+                    <span class="comma" *ngFor="let value of field.value; let i = index">{{ value }}</span>
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
           </ofd-agregator-data-container>
         </div>
