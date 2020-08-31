@@ -71,7 +71,7 @@
     </div>
 
     <div class="field button-wrapp">
-      <button type="submit" class="btn svg-btn" [disabled]="!f.valid">
+      <button type="submit" class="btn svg-btn" [disabled]="isDisabled(f)">
         {{ 'home.contact_form.send' | translate }}
         <svg-icon
           src="assets/modules/home/envelop_green.svg"
