@@ -308,9 +308,11 @@ export class ResourceComponent implements OnInit {
     Object.keys(data).forEach((first: any) => {
       firstRow += first + ';';
     });
+    firstRow += 'doi' + ';';
     Object.values(data).forEach((second: any) => {
       secondRow += second + ';';
     });
+    secondRow += this.resource.details?.parentIdentifier + ';';
     csvArray.push(firstRow);
     csvArray.push('\r\n');
     csvArray.push(secondRow);
