@@ -42,6 +42,11 @@ export class HomeContactFormComponent {
   config: any;
 
   /**
+   * Is captcha resolved
+   */
+  captchaResolved = false;
+
+  /**
    * Creates an instance of HomeContactFormComponent.
    * @param {UIModalService} modal UI Modal Service
    * @param {HomeService} homeService Home Service
@@ -109,5 +114,16 @@ export class HomeContactFormComponent {
    */
   resolved(event) {
     this.form.captcha = event;
+    this.captchaResolved = true;
+  }
+
+  /**
+   * Is button disabled
+   *
+   * @param f Form
+   * @returns True if captcha and form is resolved and valid False otherwise.
+   */
+  isDisabled(f) {
+    return !(this.captchaResolved && f.valid);
   }
 }
