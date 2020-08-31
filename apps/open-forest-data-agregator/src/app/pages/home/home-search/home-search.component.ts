@@ -43,6 +43,7 @@ export class HomeSearchComponent {
    * Creates an instance of HomeSearchComponent.
    * @param {DatasetsService} DSService Datasets service
    * @param {Router} router Router
+   * @param utilsService Utils service
    */
   constructor(public DSService: DatasetsService, public router: Router, public utilsService: UtilsService) {
     this.DSService.getDatasetOfTheDay().subscribe(response => {

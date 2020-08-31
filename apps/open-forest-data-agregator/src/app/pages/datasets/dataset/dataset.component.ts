@@ -275,9 +275,11 @@ export class DatasetComponent implements OnInit {
     Object.keys(data).forEach(first => {
       firstRow += first + ';';
     });
+    firstRow += 'doi' + ';';
     Object.values(data).forEach(second => {
       secondRow += second + ';';
     });
+    secondRow += this.dataset.latestVersion?.datasetPersistentId + ';';
     const csvArray = [firstRow, '\r\n', secondRow];
 
     const a = document.createElement('a');
@@ -325,4 +327,22 @@ export class DatasetComponent implements OnInit {
   paginationChange(payload) {
     this.files = this.allFiles.slice(payload.page * payload.limit - payload.limit, payload.page * payload.limit);
   }
+
+  /**
+   * Check the type of value
+   * @param value Value
+   * @returns Type of value as string
+   */
+  typeOf(value: any): string {
+    return typeof value;
+  }
+
+  /**
+   * Function that keep sorting in keyvalue angular pipe
+   * @param a Sorting value a
+   * @param b Sorting value b
+   */
+  keepOrder = (a, b) => {
+    return a;
+  };
 }
