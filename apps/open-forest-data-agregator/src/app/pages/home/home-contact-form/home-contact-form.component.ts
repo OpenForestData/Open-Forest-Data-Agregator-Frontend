@@ -118,7 +118,7 @@ export class HomeContactFormComponent {
   }
 
   /**
-   * Is button disabled
+   * Check if button is disabled based on captcha and form inside
    *
    * @param f Form
    * @returns True if captcha and form is resolved and valid False otherwise.
