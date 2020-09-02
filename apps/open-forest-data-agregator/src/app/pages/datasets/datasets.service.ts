@@ -304,7 +304,7 @@ export class DatasetsService {
           const key = filter['key'];
           let values = [...(Array.isArray(filter['values']) ? filter['values'] : [filter['values']])];
           if (filter['type'] === 'DATE') {
-            values[0] = values[0].format ? values[0].format('YYYY-MM-DD') : values[0];
+            values[0] = values[0].format ? values[0].format('YYYY') : values[0];
           }
 
           if (filter['type'] === 'DATERANGE') {
