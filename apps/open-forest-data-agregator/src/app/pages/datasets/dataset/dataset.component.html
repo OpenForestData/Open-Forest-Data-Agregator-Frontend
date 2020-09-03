@@ -245,11 +245,11 @@
               >
                 <div class="meta-citation__row__container" *ngFor="let value of field.value[0] | keyvalue: keepOrder">
                   <div class="meta-citation__row__keys">
-                    {{ 'datasets.dataset.metadata.' + value.value.typeName | translate }}
+                    {{ 'datasets.dataset.metadata.' + value?.value?.typeName | translate }}
                   </div>
                   <div class="meta-citation__row__values">
                     <span class="comma" *ngFor="let val of field.value; let i = index">{{
-                      field.value[i][value.value.typeName].value
+                      field.value[i][value.value.typeName]?.value
                     }}</span>
                   </div>
                 </div>
@@ -273,7 +273,7 @@
                   <div class="meta-citation__row__keys">
                     {{ 'datasets.dataset.metadata.' + field.typeName | translate }}
                   </div>
-                  <div class="meta-citation__row__values">{{ field.value }}</div>
+                  <div class="meta-citation__row__values">{{ field?.value }}</div>
                 </div>
               </div>
 
@@ -283,7 +283,7 @@
                     {{ 'datasets.dataset.metadata.' + field.key | translate }}
                   </div>
                   <div class="meta-citation__row__values">
-                    {{ field.value.value }}
+                    {{ field?.value?.value }}
                   </div>
                 </div>
               </div>
