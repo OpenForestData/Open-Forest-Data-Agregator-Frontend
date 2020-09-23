@@ -84,7 +84,7 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: 'https://bioloc.biaman.pl/',
+      path: 'https://bioloc.pl/',
       key: 'mobile-application',
       target: '_blank'
     }
@@ -111,7 +111,7 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: 'https://bioloc.biaman.pl/',
+      path: 'https://bioloc.pl/',
       key: 'mobile-application',
       target: '_blank'
     }
