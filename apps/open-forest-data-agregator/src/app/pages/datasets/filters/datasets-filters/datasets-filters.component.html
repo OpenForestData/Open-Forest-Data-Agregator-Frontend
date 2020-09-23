@@ -152,6 +152,7 @@
                         class="check"
                         [applyCss]="true"
                         [ngClass]="{ 'active-green': item.activeOrder > 0 }"
+                        *ngIf="item.activeOrder > 0"
                       ></svg-icon>
                       {{ item.name | translate }}
                     </li>
