@@ -28,6 +28,7 @@ After downloading repository run a command `npm install` in repository catalog t
 - `cms` - adress to communicate with CMS
 - `captcha` - Captcha variable
 - `siteURL` - URL of site
+- `dataverseURL` - URL of Dataverse
 
 ### Application installation (local)
 
