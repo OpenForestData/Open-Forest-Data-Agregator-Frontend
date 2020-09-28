@@ -225,3 +225,28 @@ ofd-agregator-footer-navigation-items {
     margin-right: 20px;
   }
 }
+
+@media (max-width: 380px) {
+  .image-wrapp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img:first-child {
+      margin-right: 0 !important;
+    }
+
+    &__img-1 {
+      max-width: 130px;
+      margin-bottom: 20px;
+    }
+
+    &__img-2 {
+      max-width: 130px;
+    }
+
+    img:last-child {
+      margin-left: 0;
+    }
+  }
+}
