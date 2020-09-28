@@ -3,6 +3,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
 /**
  * Dataset component
@@ -222,13 +223,13 @@ export class DatasetComponent implements OnInit {
    * @returns { string } URL to dataset or other resource where the file exists
    * @example
    * makeSource()
-   * // returns https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/HAS4WC
+   * // returns DATAVERSE_URL/dataset.xhtml?persistentId=doi:10.5072/FK2/HAS4WC
    */
   makeSource() {
     if (this.dataset?.alternativeURL) {
       return this.dataset?.alternativeURL;
     } else {
-      return `https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
+      return `${AppConfigService.config.dataverseURL}/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
     }
   }
 

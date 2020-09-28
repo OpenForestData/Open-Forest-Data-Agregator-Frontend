@@ -23,8 +23,8 @@ export class DatasetsGalleryComponent implements OnInit, OnDestroy {
    * Sort select options
    */
   public sortItems = [
-    { name: 'A-Z', value: 1 },
-    { name: 'Z-A', value: 0 }
+    { name: 'Najnowsze', value: 1 },
+    { name: 'Najstarsze', value: 0 }
   ];
 
   /**

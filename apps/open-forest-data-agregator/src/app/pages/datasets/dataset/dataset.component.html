@@ -11,7 +11,7 @@
       >
         <div class="metric">
           <div class="metric__content">
-            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ 3 }}</p>
+            <p>{{ 'datasets.dataset.metadata-all.downloads' | translate }} {{ dataset?.download_times?.message }}</p>
             <p>
               {{ 'datasets.dataset.metadata-all.created' | translate }}
               {{ dataset?.publicationDate | date: 'dd.MM.yyyy' }}

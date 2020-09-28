@@ -9,7 +9,7 @@
     </div>
     <div class="col-lg-9 col-md-8">
       <div class="news-social">
-        <span class="news-date">{{ singleNews.author }}</span>
+        <span class="news-date">{{ singleNews.date | date: 'dd.MM.yyyy' }}</span>
         <div class="news_social">
           <ofd-agregator-social [linkTo]="'news/' + singleNews.slug" class="social-container"> </ofd-agregator-social>
         </div>
