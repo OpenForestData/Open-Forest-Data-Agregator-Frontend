@@ -185,20 +185,22 @@
     font-weight: 600;
   }
 
-  .check {
-    object-fit: cover;
-    object-position: 0 0;
+  ::ng-deep {
+    .check {
+      object-fit: cover;
+      object-position: 0 0;
 
-    svg {
-      path {
-        fill: white;
-      }
-    }
-
-    &.active-green {
       svg {
         path {
-          fill: $accent-color;
+          fill: white;
+        }
+      }
+
+      &.active-green {
+        svg {
+          path {
+            fill: $accent-color;
+          }
         }
       }
     }
