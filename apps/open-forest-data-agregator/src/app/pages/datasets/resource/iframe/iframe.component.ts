@@ -52,7 +52,7 @@ export class IframeComponent implements OnInit {
    * // returns DATAVERSE_URL/tools/3dViewer.html?siteUrl=DATAVERSE_URL&fileid=73&datasetid=70&datasetversion=1
    */
   joinAndSanitize() {
-    const iframeUrl = `${AppConfigService.config.dataverseURL}tools/${this.viewerType}.html?siteUrl=${AppConfigService.config.dataverseURL}&fileid=${this.resource.details?.identifier}&datasetid=${this.resource.dataset_details?.id}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
+    const iframeUrl = `${AppConfigService.config.dataverseURL}/tools/${this.viewerType}.html?siteUrl=${AppConfigService.config.dataverseURL}&fileid=${this.resource.details?.identifier}&datasetid=${this.resource.dataset_details?.id}&datasetversion=${this.resource.dataset_details?.latestVersion.versionNumber}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(iframeUrl);
   }
 }
