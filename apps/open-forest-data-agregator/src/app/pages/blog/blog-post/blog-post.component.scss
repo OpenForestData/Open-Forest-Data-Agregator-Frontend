@@ -79,3 +79,9 @@
 .tag {
   color: #2a2b2c;
 }
+
+::ng-deep {
+  .news-content img {
+    max-width: 100%;
+  }
+}
