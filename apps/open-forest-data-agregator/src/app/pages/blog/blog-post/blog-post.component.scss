@@ -80,10 +80,8 @@
   color: #2a2b2c;
 }
 
-.news-content > img {
-  max-width: 100%;
-}
-
-img {
-  max-width: 100%;
+::ng-deep {
+  .news-content img {
+    max-width: 100%;
+  }
 }
