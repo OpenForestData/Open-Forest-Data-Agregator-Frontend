@@ -4,7 +4,6 @@
       <div class="col-lg-4 col-xs-12 col-md-10">
         <div class="main-footer__left-col">
           <ofd-agregator-footer-navigation-items></ofd-agregator-footer-navigation-items>
-          <ofd-agregator-footer-logo class="desktop-only"></ofd-agregator-footer-logo>
         </div>
         <div class="main-footer__right-col"></div>
       </div>
@@ -12,15 +11,21 @@
         <div class="image-wrapp">
           <img class="image-wrapp__img-1" src="assets/modules/home/footer_1.png" alt="IBS PAN Białowieża" />
           <img class="image-wrapp__img-2" src="assets/modules/home/footer_2.png" alt="Politechnika Białostocka" />
+          <img class="image-wrapp__img-3" src="assets/modules/home/biaman_logo.png" alt="BIAMAN" />
         </div>
         <p class="project-text">{{ 'footer.project-text' | translate }}</p>
 
         <ofd-agregator-footer-logo class="mobile-only"></ofd-agregator-footer-logo>
 
         <div class="align-center">
-          <img src="assets/modules/home/footer_ue.png" class="ue-logo" alt="UE" />
+          <img src="assets/modules/home/new_footer_ue.png" class="ue-logo" alt="UE" />
         </div>
       </div>
+    </div>
+  </div>
+  <div class="wa-logo">
+    <div class="wa-logo__container">
+      <ofd-agregator-footer-logo class="desktop-only"></ofd-agregator-footer-logo>
     </div>
   </div>
   <div class="main-footer__cookies" *ngIf="!getAcceptCookie()">

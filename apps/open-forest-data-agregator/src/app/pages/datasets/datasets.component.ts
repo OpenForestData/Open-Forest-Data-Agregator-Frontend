@@ -313,7 +313,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           dvName: item.dvName,
           cate: item.identifierOfDataverse,
           dataSource: dataSources,
-          dateSort: item.dateSort
+          dateSort: item.dateSort,
+          identifierDataverse: item.identifierOfDataverse
         };
       });
 

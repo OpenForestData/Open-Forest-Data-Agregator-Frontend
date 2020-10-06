@@ -30,7 +30,8 @@
           <time [dateTime]="datasetDetails.dataset.sortDate">{{
             datasetDetails.dataset.sortDate | date: 'dd.MM.yyyy'
           }}</time>
-          | <span>{{ datasetDetails.dataset.author }}</span> - <a href="#">{{ datasetDetails.dataset.category }}</a>
+          | <span>{{ datasetDetails.dataset.author }}</span> -
+          <a [href]="createLinkToGroup()">{{ datasetDetails.dataset.category }}</a>
         </p>
         <p class="datasets-map__dataset-item__description">
           {{ datasetDetails.dataset.description }}

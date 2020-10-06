@@ -159,6 +159,13 @@ export class DatasetsMapComponent implements OnChanges {
   }
 
   /**
+   * Creates link to group search
+   */
+  createLinkToGroup() {
+    return `/datasets?start=0&rows=15&sort=asc&category=${this.datasetDetails.dataset.identifierDataverse}`;
+  }
+
+  /**
    * Closes dataset details
    *
    * @memberof DatasetsMapComponent
