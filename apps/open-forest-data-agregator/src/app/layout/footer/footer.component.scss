@@ -112,8 +112,26 @@ ofd-agregator-footer-navigation-items {
   // margin-top: 38px;
 
   .image-wrapp {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      max-width: 130px;
+      max-height: 37px;
+    }
+
+    svg-icon {
+      max-width: 130px;
+      max-height: 40px;
+
+      svg {
+        max-width: 130px;
+        max-height: 40px;
+      }
+    }
+
     img:first-child {
-      margin-right: 5vw;
+      // margin-right: 5vw;
     }
 
     margin-bottom: 25px;
@@ -125,6 +143,7 @@ ofd-agregator-footer-navigation-items {
 
   .align-center {
     text-align: center;
+    margin-bottom: 25px;
   }
 }
 
@@ -140,7 +159,45 @@ ofd-agregator-footer-navigation-items {
   font-size: 0.875rem;
 }
 
+.wa-logo {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  width: 1136px;
+  padding: 0 40px;
+
+  &__container {
+    margin-right: 25px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .wa-logo {
+    width: 976px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    &__container {
+      margin-right: 25px;
+    }
+  }
+}
+
 @media (max-width: 992px) {
+  .wa-logo {
+    width: 976px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    &__container {
+      margin-right: 25px;
+    }
+  }
+
   .project-text {
     font-size: 0.875rem;
   }
@@ -243,6 +300,7 @@ ofd-agregator-footer-navigation-items {
 
     &__img-2 {
       max-width: 130px;
+      margin-bottom: 20px;
     }
 
     img:last-child {

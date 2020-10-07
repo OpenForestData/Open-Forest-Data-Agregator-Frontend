@@ -28,6 +28,16 @@ header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
+    &__logo {
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        margin-left: 10px;
+        max-height: 50px;
+      }
+    }
   }
 }
 
