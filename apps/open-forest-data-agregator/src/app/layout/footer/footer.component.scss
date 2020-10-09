@@ -120,18 +120,14 @@ ofd-agregator-footer-navigation-items {
       max-height: 37px;
     }
 
-    svg-icon {
+    svg-icon::ng-deep {
       max-width: 130px;
       max-height: 40px;
 
-      svg {
+      svg::ng-deep {
         max-width: 130px;
         max-height: 40px;
       }
-    }
-
-    img:first-child {
-      // margin-right: 5vw;
     }
 
     margin-bottom: 25px;
