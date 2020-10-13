@@ -14,7 +14,11 @@
         <span class="add-date">{{ dataset.dateSort | date: 'dd.MM.yyyy' }}</span>
         <h3 class="add-title">{{ dataset.title }}</h3>
         <p class="add-text">
-          {{ dataset.dsDescriptionValue[0] ? dataset.dsDescriptionValue[0] : '' }}
+          {{
+            dataset.dsDescriptionValue[0].length > 115
+              ? (dataset.dsDescriptionValue[0] | slice: 0:115) + '...'
+              : dataset.dsDescriptionValue[0]
+          }}
         </p>
 
         <p class="add-owner">
