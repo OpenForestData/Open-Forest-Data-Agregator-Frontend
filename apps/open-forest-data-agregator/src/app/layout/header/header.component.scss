@@ -109,6 +109,7 @@ header {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
   padding: 30px calc(25% + 60px) 30px 50px;
   overflow: hidden;
+  overflow-y: auto;
 
   &.active {
     transform: translateX(25%);
