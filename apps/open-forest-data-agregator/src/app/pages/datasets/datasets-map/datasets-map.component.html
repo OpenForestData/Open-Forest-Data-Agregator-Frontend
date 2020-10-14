@@ -30,14 +30,25 @@
           <time [dateTime]="datasetDetails.dataset.sortDate">{{
             datasetDetails.dataset.sortDate | date: 'dd.MM.yyyy'
           }}</time>
-          | <span>{{ datasetDetails.dataset.author }}</span> - <a href="#">{{ datasetDetails.dataset.category }}</a>
+          | <span>{{ datasetDetails.dataset.author }}</span> -
+          <a
+            [routerLink]="['/datasets']"
+            [queryParams]="{
+              start: '0',
+              rows: '15',
+              sort: 'asc',
+              category: datasetDetails.dataset.identifierDataverse
+            }"
+            routerLinkActive="true"
+            >{{ datasetDetails.dataset.category }}</a
+          >
         </p>
         <p class="datasets-map__dataset-item__description">
           {{ datasetDetails.dataset.description }}
         </p>
         <p class="datasets-map__dataset-item__source">
           <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
-          {{ 'global.source' | translate }}: <b>{{ datasetDetails.dataset.source }}</b>
+          {{ 'global.source' | translate }}: <b>{{ datasetDetails.dataset.dataSource }}</b>
         </p>
         <div class="datasets-map__dataset-item__metadata">
           <p>

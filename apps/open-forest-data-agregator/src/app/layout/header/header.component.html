@@ -11,9 +11,12 @@
       </div>
 
       <div class="main-nav__bottom-bar">
-        <a class="main-nav__logo" routerLink="/">
-          <svg-icon [src]="'/assets/images/logo_of.svg'" [applyCss]="true"></svg-icon>
-        </a>
+        <div class="main-nav__bottom-bar__logo">
+          <a routerLink="/">
+            <svg-icon [src]="'/assets/images/logo_of.svg'" [applyCss]="true"></svg-icon>
+          </a>
+          <img class="header-eu" src="/assets/modules/home/header_logo_eu_mobile.png" alt="Unia Europejska" />
+        </div>
 
         <div class="mobile-flex-only middle-md">
           <div class="hamburger" (click)="showMobileMenu = true">
