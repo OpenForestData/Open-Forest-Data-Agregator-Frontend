@@ -37,6 +37,10 @@ export class HomeSearchComponent {
      * Dataset DOI
      */
     identifier64: string;
+    vernacularName: string;
+    scientificName: string;
+    authorName: string;
+    dataverseName: string;
   } = null;
 
   /**
@@ -46,7 +50,7 @@ export class HomeSearchComponent {
    * @param utilsService Utils service
    */
   constructor(public DSService: DatasetsService, public router: Router, public utilsService: UtilsService) {
-    this.DSService.getDatasetOfTheDay().subscribe(response => {
+    this.DSService.getDatasetOfTheDay().subscribe((response: any) => {
       try {
         this.datasetOfTheDay = {
           name: response['latestVersion']['metadataBlocks']['citation']['fields'].filter(
@@ -57,7 +61,11 @@ export class HomeSearchComponent {
               .filter((_: any) => _.thumbnail_url)
               .map((_: any) => _.thumbnail_url)[0] || null,
           latinName: '',
-          identifier64: btoa(response['latestVersion']['datasetPersistentId'])
+          identifier64: btoa(response['latestVersion']['datasetPersistentId']),
+          vernacularName: response.search_info.results[0].dwcVernacularName,
+          scientificName: response.search_info.results[0].dwcScientificName,
+          authorName: response.search_info.results[0].authorName,
+          dataverseName: response.search_info.results[0].parentName
         };
       } catch (e) {}
     });
