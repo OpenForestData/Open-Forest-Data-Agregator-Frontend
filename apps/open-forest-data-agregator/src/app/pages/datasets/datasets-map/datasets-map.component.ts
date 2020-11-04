@@ -82,6 +82,8 @@ export class DatasetsMapComponent implements OnChanges {
    * Creates an instance of DatasetsMapComponent.
    * @param {ChangeDetectorRef} changeDetectorRef
    * @param {UtilsService} utilsService Utility service
+   * @param {DatasetsComponent} parent Parent of current component
+   * @param {Store<AppState>} store
    * @memberof DatasetsMapComponent
    */
   constructor(
@@ -91,6 +93,11 @@ export class DatasetsMapComponent implements OnChanges {
     private store: Store<AppState>
   ) {}
 
+  /**
+   * Sets view to list from map
+   *
+   * @param category Category
+   */
   openListView(category: any) {
     this.parent.setListViewForMap(category);
     this.store.dispatch(new DatasetsChangeViewMode('list'));
