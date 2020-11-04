@@ -221,6 +221,10 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     this.DSService.searchFilters = { field: 'mediaStatic', data: type, search: true };
   }
 
+  setListViewForMap(category: any) {
+    this.DSService.searchFilters = { field: 'category', data: category, search: true };
+  }
+
   /**
    * Set full screen view
    *
