@@ -1,6 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Host, Input, OnChanges } from '@angular/core';
 import { featureGroup, latLng, tileLayer, Map, canvas, circleMarker } from 'leaflet';
 import { UtilsService } from '@app/services/utils.service';
+import { DatasetsComponent } from '../datasets.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 /**
  * Datasets view on map
  *
@@ -78,9 +82,39 @@ export class DatasetsMapComponent implements OnChanges {
    * Creates an instance of DatasetsMapComponent.
    * @param {ChangeDetectorRef} changeDetectorRef
    * @param {UtilsService} utilsService Utility service
+   * @param {DatasetsComponent} parent Parent of current component
+   * @param {Store<AppState>} store
    * @memberof DatasetsMapComponent
    */
-  constructor(private changeDetectorRef: ChangeDetectorRef, public utilsService: UtilsService) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    public utilsService: UtilsService,
+    @Host() private parent: DatasetsComponent,
+    private store: Store<AppState>
+  ) {}
+
+  /**
+   * Sets view to list from map
+   *
+   * @param category Category
+   */
+  openListView(category: any) {
+    this.parent.setListViewForMap(category);
+    this.store.dispatch(new DatasetsChangeViewMode('list'));
+    const button: HTMLElement = document.querySelector('#view-list');
+    this.changeSelectorPosition(button.offsetLeft, button.clientWidth);
+  }
+
+  /**
+   * Change current tab selector position and width
+   * @param {number} left Left offset
+   * @param {number} width Width
+   */
+  changeSelectorPosition(left: number, width: number) {
+    const selector: HTMLElement = document.querySelector('#selector');
+    selector.style.transform = `translate(${left}px, 0)`;
+    selector.style.width = `${width}px`;
+  }
 
   /**
    * Gets map reference once leaflet is ready
