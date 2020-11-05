@@ -12,7 +12,9 @@
     <div class="row data-row">
       <div class="col-lg-3 data-info" *ngFor="let dataset of datasets">
         <span class="add-date">{{ dataset.dateSort | date: 'dd.MM.yyyy' }}</span>
-        <h3 class="add-title">{{ dataset.title }}</h3>
+        <h3 class="add-title">
+          {{ dataset.title.length > 115 ? (dataset.title | slice: 0:80) + '...' : dataset.title }}
+        </h3>
         <p class="add-text">
           {{
             dataset.dsDescriptionValue[0].length > 115
