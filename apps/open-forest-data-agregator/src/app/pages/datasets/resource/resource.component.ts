@@ -41,30 +41,6 @@ export class ResourceComponent implements OnInit {
    */
   metricData: any = {};
   /**
-   * @ignore
-   *
-   * @memberof ResourceComponent
-   */
-  mockLeftSide = {
-    downloadAmount: 5,
-    source: {
-      type: 'Dataverse',
-      link: 'https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/UGMKHW'
-    },
-    author: 'Olga Kurek',
-    dataOpenness: '',
-    license: {
-      name: 'GNU General Public License',
-      link: 'https://pl.wikipedia.org/wiki/GNU_General_Public_License'
-    },
-    version: {
-      number: '0.1',
-      date: new Date(),
-      acceptedBy: 'Olga Kurek',
-      link: 'https://whiteaster.com/'
-    }
-  };
-  /**
    * List of breadcrumbs
    */
   breadCrumbs: IBreadcrumbs[] = [
@@ -263,13 +239,13 @@ export class ResourceComponent implements OnInit {
    * @returns { string } URL to dataset or other resource where the file exists
    * @example
    * makeSource()
-   * // returns https://data-epuszcza.biaman.pl/file.xhtml?fileId=73&version=1.0
+   * // returns DATAVERSE_URL/file.xhtml?fileId=73&version=1.0
    */
   makeSource() {
     if (this.resource.dataset_details?.alternativeURL) {
       return this.resource.dataset_details?.alternativeURL;
     } else {
-      return `https://data-epuszcza.biaman.pl/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
+      return `${AppConfigService.config.dataverseURL}/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
     }
   }
 
@@ -308,9 +284,11 @@ export class ResourceComponent implements OnInit {
     Object.keys(data).forEach((first: any) => {
       firstRow += first + ';';
     });
+    firstRow += 'doi' + ';';
     Object.values(data).forEach((second: any) => {
       secondRow += second + ';';
     });
+    secondRow += this.resource.details?.parentIdentifier + ';';
     csvArray.push(firstRow);
     csvArray.push('\r\n');
     csvArray.push(secondRow);

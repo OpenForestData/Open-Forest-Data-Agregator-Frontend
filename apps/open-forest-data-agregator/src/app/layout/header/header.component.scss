@@ -28,6 +28,16 @@ header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
+    &__logo {
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        margin-left: 10px;
+        max-height: 50px;
+      }
+    }
   }
 }
 
@@ -99,6 +109,7 @@ header {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
   padding: 30px calc(25% + 60px) 30px 50px;
   overflow: hidden;
+  overflow-y: auto;
 
   &.active {
     transform: translateX(25%);
@@ -176,5 +187,16 @@ header {
     .main-nav__navigation-items.desktop-only {
       height: 40px;
     }
+  }
+}
+
+.header-eu {
+  max-height: 50px;
+}
+
+@media only screen and (max-width: 440px) {
+  .header-eu {
+    max-width: 130px;
+    max-height: 50px;
   }
 }

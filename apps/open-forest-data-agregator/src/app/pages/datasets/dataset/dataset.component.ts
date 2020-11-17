@@ -3,6 +3,7 @@ import { IBreadcrumbs } from '@app/interfaces/breadcrumbs';
 import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.component';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
+import { AppConfigService } from '@app/services/app-config.service';
 
 /**
  * Dataset component
@@ -222,13 +223,13 @@ export class DatasetComponent implements OnInit {
    * @returns { string } URL to dataset or other resource where the file exists
    * @example
    * makeSource()
-   * // returns https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=doi:10.5072/FK2/HAS4WC
+   * // returns DATAVERSE_URL/dataset.xhtml?persistentId=doi:10.5072/FK2/HAS4WC
    */
   makeSource() {
     if (this.dataset?.alternativeURL) {
       return this.dataset?.alternativeURL;
     } else {
-      return `https://data-epuszcza.biaman.pl/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
+      return `${AppConfigService.config.dataverseURL}/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
     }
   }
 
@@ -275,9 +276,11 @@ export class DatasetComponent implements OnInit {
     Object.keys(data).forEach(first => {
       firstRow += first + ';';
     });
+    firstRow += 'doi' + ';';
     Object.values(data).forEach(second => {
       secondRow += second + ';';
     });
+    secondRow += this.dataset.latestVersion?.datasetPersistentId + ';';
     const csvArray = [firstRow, '\r\n', secondRow];
 
     const a = document.createElement('a');
@@ -325,4 +328,22 @@ export class DatasetComponent implements OnInit {
   paginationChange(payload) {
     this.files = this.allFiles.slice(payload.page * payload.limit - payload.limit, payload.page * payload.limit);
   }
+
+  /**
+   * Check the type of value
+   * @param value Value
+   * @returns Type of value as string
+   */
+  typeOf(value: any): string {
+    return typeof value;
+  }
+
+  /**
+   * Function that keep sorting in keyvalue angular pipe
+   * @param a Sorting value a
+   * @param b Sorting value b
+   */
+  keepOrder = (a, b) => {
+    return a;
+  };
 }

@@ -222,6 +222,15 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Sets datasets view for map
+   *
+   * @param category Category
+   */
+  setListViewForMap(category: any) {
+    this.DSService.searchFilters = { field: 'category', data: category, search: true };
+  }
+
+  /**
    * Set full screen view
    *
    * @param {*} value
@@ -313,7 +322,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           dvName: item.dvName,
           cate: item.identifierOfDataverse,
           dataSource: dataSources,
-          dateSort: item.dateSort
+          dateSort: item.dateSort,
+          identifierDataverse: item.identifierOfDataverse
         };
       });
 

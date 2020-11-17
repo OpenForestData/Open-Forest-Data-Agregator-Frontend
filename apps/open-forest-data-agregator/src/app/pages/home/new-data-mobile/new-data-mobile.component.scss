@@ -96,3 +96,13 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  ::ng-deep {
+    .latest-added {
+      .titleText {
+        white-space: normal;
+      }
+    }
+  }
+}

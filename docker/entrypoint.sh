@@ -11,6 +11,7 @@ do
             captcha)               captcha=${VALUE} ;;
             siteURL)               siteURL=${VALUE} ;;
             cms)                   cms=${VALUE} ;;
+            dataverseURL)                   dataverseURL=${VALUE} ;;
             *)   
     esac    
 
@@ -22,6 +23,7 @@ echo "HOSTNAME = $HOSTNAME"
 echo "captcha = $captcha"
 echo "siteURL = $siteURL"
 echo "cms = $cms"
+echo "dataverseURL = $dataverseURL"
 echo "================="
 
 cd /usr/share/nginx/html
@@ -29,3 +31,4 @@ jq  '."api" = "'"$HOSTNAME"'"' config.json | sponge config.json
 jq  '."captcha" = "'"$captcha"'"' config.json | sponge config.json
 jq  '."siteURL" = "'"$siteURL"'"' config.json | sponge config.json
 jq  '."cms" = "'"$cms"'"' config.json | sponge config.json
+jq  '."dataverseURL" = "'"$dataverseURL"'"' config.json | sponge config.json

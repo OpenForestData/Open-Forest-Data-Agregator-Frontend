@@ -84,7 +84,7 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: 'https://bioloc.biaman.pl/',
+      path: 'https://bioloc.pl/',
       key: 'mobile-application',
       target: '_blank'
     }
@@ -111,7 +111,7 @@ export class UtilsService {
     },
     {
       name: 'nav.items.mobile-application',
-      path: 'https://bioloc.biaman.pl/',
+      path: 'https://bioloc.pl/',
       key: 'mobile-application',
       target: '_blank'
     }
@@ -370,10 +370,10 @@ export class UtilsService {
     Object.values(allMetadata).forEach(meta => {
       temp = [];
       Object.keys(meta).forEach((key: any) => {
-        if (meta[key] !== undefined && typeof meta[key] !== 'object') {
+        if (meta[key] !== undefined && typeof meta[key] !== 'object' && key !== 'doi') {
           const noNewLineInMeta = meta[key].replace(/(\r\n|\n|\r)/gm, '');
           temp[indexer[key]] = noNewLineInMeta;
-        } else if (meta['doi'].includes('doi:')) {
+        } else if (meta['doi']) {
           temp[keys.length] = meta['doi'];
         } else {
           temp[indexer[key]] = meta[key];
