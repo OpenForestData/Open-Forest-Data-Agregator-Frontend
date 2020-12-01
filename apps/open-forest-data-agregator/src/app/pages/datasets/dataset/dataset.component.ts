@@ -4,6 +4,7 @@ import { IUISelectOptions } from '@libs/ui-select/src/lib/ui-select/ui-select.co
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
 import { AppConfigService } from '@app/services/app-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Dataset component
@@ -105,7 +106,11 @@ export class DatasetComponent implements OnInit {
    * @param {DatasetsService} datasetService Dataset Service
    * @param {route} route Route
    */
-  constructor(private datasetService: DatasetsService, private route: ActivatedRoute) {}
+  constructor(
+    private datasetService: DatasetsService,
+    private route: ActivatedRoute,
+    public translateService: TranslateService
+  ) {}
 
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
@@ -136,11 +141,17 @@ export class DatasetComponent implements OnInit {
         file.isChecked = false;
         return file;
       });
-      this.breadCrumbs.push({
-        name: this.dataset.search_info.results[0].dvName,
-        href: `/datasets?start=0&rows=15&sort=asc&category=${this.dataset.search_info.results[0].identifierOfDataverse}`
+      this.translateService.get('nav.items').subscribe((translations: any) => {
+        this.breadCrumbs = [
+          { name: translations.start, href: '/' },
+          { name: translations.datasets, href: '/datasets' },
+          {
+            name: this.dataset.search_info.results[0].dvName,
+            href: `/datasets?start=0&rows=15&sort=asc&category=${this.dataset.search_info.results[0].identifierOfDataverse}`
+          },
+          { name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' }
+        ];
       });
-      this.breadCrumbs.push({ name: this.dataset.latestVersion.metadataBlocks.citation.fields[0].value, href: '' });
       this.allFiles = [...response?.latestVersion?.files];
     });
   }

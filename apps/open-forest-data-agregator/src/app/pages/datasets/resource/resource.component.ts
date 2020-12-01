@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DatasetsService } from '../datasets.service';
 import { AppConfigService } from '@app/services/app-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Resource component
@@ -81,7 +82,19 @@ export class ResourceComponent implements OnInit {
    * @param {DatasetsService} datasetService Dataset Service
    * @param {ActivatedRoute} route Route
    */
-  constructor(private http: HttpClient, private datasetService: DatasetsService, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private datasetService: DatasetsService,
+    private route: ActivatedRoute,
+    public translateService: TranslateService
+  ) {
+    this.translateService.get('nav.items').subscribe((translations: any) => {
+      this.breadCrumbs = [
+        { name: translations.start, href: '/' },
+        { name: translations.datasets, href: '/datasets' }
+      ];
+    });
+  }
   /**
    * Function that initialize at the start of website loading. Set mobile/desktop view based on resoultion of window.
    * Convert doi and get dataset details based on DOI
@@ -107,13 +120,21 @@ export class ResourceComponent implements OnInit {
       }
       this.getMetrics(this.resource);
       this.getMetadataOfFile(this.resource);
-      this.breadCrumbs.push({
-        name: this.resource?.dataset_details?.dvName,
-        href: `${AppConfigService.config.siteURL}/datasets?start=0&rows=15&sort=asc&category=${this.resource.dataset_details.identifierOfDataverse}`
-      });
-      this.breadCrumbs.push({
-        name: this.resource?.details.parentName,
-        href: `${AppConfigService.config.siteURL}datasets/detail?doi=${btoa(this.resource.details.parentIdentifier)}`
+      this.translateService.get('nav.items').subscribe((translations: any) => {
+        this.breadCrumbs = [
+          { name: translations.start, href: '/' },
+          { name: translations.datasets, href: '/datasets' },
+          {
+            name: this.resource?.dataset_details?.dvName,
+            href: `${AppConfigService.config.siteURL}/datasets?start=0&rows=15&sort=asc&category=${this.resource.dataset_details.identifierOfDataverse}`
+          },
+          {
+            name: this.resource?.details.parentName,
+            href: `${AppConfigService.config.siteURL}datasets/detail?doi=${btoa(
+              this.resource.details.parentIdentifier
+            )}`
+          }
+        ];
       });
       if (['Plain Text'].indexOf(this.resource.details?.fileTypeDisplay) >= 0) {
         this.getTextFromURL(this.resource.download_url);
