@@ -58,6 +58,10 @@ export class NewDataComponent implements OnInit {
           link: location.protocol + '//' + location.host + '/datasets/details?doi=' + dataset.identifier
         };
       });
+
+      setTimeout(() => {
+        this.setNewsHeight();
+      }, 20);
     });
   }
 
@@ -83,5 +87,17 @@ export class NewDataComponent implements OnInit {
         break;
       }
     }
+  }
+
+  setNewsHeight() {
+    const texts = Array.from(document.querySelectorAll('ofd-agregator-new-data .data-info p.add-text'));
+    let maxHeight = 0;
+    texts.forEach((item: HTMLElement) => {
+      if (item.clientHeight > maxHeight) maxHeight = item.clientHeight;
+    });
+
+    texts.forEach((item: HTMLElement) => {
+      item.style.minHeight = maxHeight + 'px';
+    });
   }
 }
