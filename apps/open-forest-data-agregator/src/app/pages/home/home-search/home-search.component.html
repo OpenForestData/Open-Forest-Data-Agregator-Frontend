@@ -45,7 +45,11 @@
 
     <span class="animal-name">
       <b class="semibold"
-        >{{ datasetOfTheDay.vernacularName ? datasetOfTheDay.vernacularName : datasetOfTheDay.scientificName }}
+        >{{
+          datasetOfTheDay.vernacularName
+            ? datasetOfTheDay.vernacularName + '/' + datasetOfTheDay.scientificName
+            : datasetOfTheDay.scientificName
+        }}
       </b>
     </span>
 
