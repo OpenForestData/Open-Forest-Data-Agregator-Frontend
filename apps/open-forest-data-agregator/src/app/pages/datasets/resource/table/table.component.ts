@@ -98,7 +98,7 @@ export class TableComponent implements OnInit {
    * @param path Path to resource
    */
   getCSV(path: string) {
-    this.http.get(path, { responseType: 'text' }).subscribe(results => {
+    this.http.get(path.replace('?format=original', ''), { responseType: 'text' }).subscribe(results => {
       this.csvContainer = results;
       this.parseToDisplay(this.csvContainer);
     });
