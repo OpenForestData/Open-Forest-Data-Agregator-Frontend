@@ -112,6 +112,13 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   ) {
     this.subs.add(this.store.select('datasets').subscribe(datasets => (this.datasets = datasets)));
     this.subs.add(this.DSService.triggerSearchSubject.subscribe(() => this.getData()));
+
+    this.translateService.get('nav.items').subscribe((translations: any) => {
+      this.breadcrumbs = [
+        { name: translations.start, href: '/' },
+        { name: translations.datasets, href: '/datasets' }
+      ];
+    });
   }
 
   /**

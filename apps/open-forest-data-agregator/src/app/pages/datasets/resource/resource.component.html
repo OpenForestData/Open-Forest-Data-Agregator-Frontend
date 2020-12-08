@@ -13,7 +13,8 @@
           <div class="metric__content">
             <p>
               <b>{{ 'datasets.dataset.metadata-all.downloads' | translate }}</b>
-              {{ resource.download_times }}
+              <!--              {{ resource.download_times }}-->
+              -
             </p>
             <p>
               <b>{{ 'datasets.dataset.metadata-all.created' | translate }}</b>
@@ -93,7 +94,7 @@
             <div class="background-gray">
               {{ formatConverter(resource.details?.name) | lowercase }}
             </div>
-            <p>{{ (resource?.details?.fileNameWithoutExtension)[0] }}</p>
+            <!--            <p>{{ (resource?.details?.fileNameWithoutExtension)[0] }}</p>-->
           </div>
           <p>{{ resource?.details?.fileDescription }}</p>
           <div class="right-container__header__api">
