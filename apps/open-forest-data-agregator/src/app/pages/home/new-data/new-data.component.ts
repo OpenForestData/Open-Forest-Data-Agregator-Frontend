@@ -99,5 +99,15 @@ export class NewDataComponent implements OnInit {
     texts.forEach((item: HTMLElement) => {
       item.style.minHeight = maxHeight + 'px';
     });
+
+    const titles = Array.from(document.querySelectorAll('ofd-agregator-new-data .data-info h3.add-title'));
+    let maxTitleHeight = 0;
+    titles.forEach((item: HTMLElement) => {
+      if (item.clientHeight > maxTitleHeight) maxTitleHeight = item.clientHeight;
+    });
+
+    titles.forEach((item: HTMLElement) => {
+      item.style.minHeight = maxTitleHeight + 'px';
+    });
   }
 }
