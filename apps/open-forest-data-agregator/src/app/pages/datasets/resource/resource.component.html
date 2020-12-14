@@ -45,9 +45,20 @@
                 [applyCss]="true"
               ></svg-icon>
             </p>
-            <p>
+            <p *ngIf="resource.details">
               <b>{{ 'datasets.dataset.metadata-all.license' | translate }}</b>
-              <a href="https://creativecommons.org/">{{ resource.dataset_details?.latestVersion?.license }}</a>
+              <a href="https://creativecommons.org/" target="_blank" rel="noopener noreferrer"
+                ><markdown
+                  class="variable-binding"
+                  [data]="
+                    resource.dataset_details.latestVersion?.termsOfUse
+                      ? resource.dataset_details.latestVersion?.termsOfUse
+                      : resource.dataset_details.latestVersion?.license
+                  "
+                ></markdown>
+              </a>
+              <!--              <span [innerHTML]="resource.dataset_details.latestVersion.termsOfUse"></span>-->
+              <!--              <a href="https://creativecommons.org/">{{ resource.dataset_details?.latestVersion?.license }}</a>-->
             </p>
             <p>
               <b>{{ 'datasets.dataset.metadata-all.domain' | translate }}</b>
