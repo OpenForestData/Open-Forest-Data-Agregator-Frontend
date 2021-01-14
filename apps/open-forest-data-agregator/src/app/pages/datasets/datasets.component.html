@@ -31,7 +31,13 @@
           >
             {{ 'datasets.filters.' + filters.filters.key | translate }}
           </ofd-agregator-header-bar>
-          <ofd-agregator-datasets-filters [hideBasic]="filters.filters.isExpanded"> </ofd-agregator-datasets-filters>
+          <ofd-agregator-datasets-filters
+            [categories]="categories"
+            [hideBasic]="filters.filters.isExpanded"
+            (selectedCategoryChange)="setCategory($event)"
+            [selectedCategory]="selectedCategory"
+          >
+          </ofd-agregator-datasets-filters>
         </div>
       </div>
       <div class="datasets__content" [ngClass]="{ fullScreen: fullscreen && datasets.mode === 'table' }">

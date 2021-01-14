@@ -11,9 +11,13 @@
       >
         <div class="metric">
           <div class="metric__content">
-            <p>
+            <p *ngIf="dataset.download_times">
               {{ 'datasets.dataset.metadata-all.downloads' | translate }}
               {{ dataset.download_times.downloadsTotal ? dataset.download_times.downloadsTotal : '-' }}
+            </p>
+            <p *ngIf="!dataset.download_times">
+              {{ 'datasets.dataset.metadata-all.downloads' | translate }}
+              -
             </p>
             <p>
               {{ 'datasets.dataset.metadata-all.created' | translate }}

@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
@@ -74,13 +82,35 @@ interface IFiltersStructure {
   selector: 'ofd-agregator-datasets-filters',
   templateUrl: './datasets-filters.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./datasets-filters.component.scss']
+  styleUrls: ['./datasets-filters.component.scss', './datasets-filter/datasets-filter.component.scss']
 })
 export class DatasetsFiltersComponent implements OnDestroy {
   /**
    * Collapse filters column
    */
   @Input() hideBasic;
+
+  @Input() public categories = [];
+
+  /**
+   * Event emitter on currently active category change
+   *
+   * @type {EventEmitter<any>}
+   * @memberof DatasetsCategoryComponent
+   */
+  @Output() selectedCategoryChange: EventEmitter<any> = new EventEmitter<any>();
+
+  /**
+   * Active category
+   */
+  @Input() selectedCategory: any = null;
+
+  categoriesMobile = {
+    isExpanded: false,
+    key: 'category',
+    value: null,
+    multiple: false
+  };
 
   /**
    * Key/Value convert object
@@ -281,6 +311,16 @@ export class DatasetsFiltersComponent implements OnDestroy {
         this.DSService.showAdvancedSubject.next();
       }, 1000);
     }
+  }
+
+  /**
+   * Set value for new category
+   *
+   * @param {*} value
+   * @memberof DatasetsCategoryComponent
+   */
+  selectValue(value) {
+    if (value !== this.selectedCategory) this.selectedCategoryChange.emit(value);
   }
 
   /**

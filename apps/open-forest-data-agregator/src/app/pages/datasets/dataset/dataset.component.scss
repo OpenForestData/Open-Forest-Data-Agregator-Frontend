@@ -295,6 +295,11 @@
   .meta-citation__row__values {
     width: 60%;
     word-break: break-all;
+    //TODO Serwis 101, nie ma znaków nowej linii...
+    white-space: pre-wrap;
+  }
+  .comma {
+    white-space: pre-wrap;
   }
 }
 

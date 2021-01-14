@@ -17,6 +17,7 @@ import { IframeComponent } from './iframe/iframe.component';
 import { NotSupportedComponent } from './not-supported/not-supported.component';
 import { DataTablesModule } from 'angular-datatables';
 import { VideoComponent } from './video/video.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { VideoComponent } from './video/video.component';
     PdfViewerModule,
     NgxJsonViewerModule,
     NgxDocViewerModule,
-    DataTablesModule
+    DataTablesModule,
+    MarkdownModule
   ]
 })
 export class ResourceModule {}
