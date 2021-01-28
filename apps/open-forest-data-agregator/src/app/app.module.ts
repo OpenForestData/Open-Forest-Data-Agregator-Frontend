@@ -34,6 +34,8 @@ import { SharedModule } from './shared/shared.module';
 import { HammerConfig } from 'src/config/hammer.config';
 import { BackToTopComponent } from '@app/layout/back-to-top/back-to-top.component';
 import { LoaderComponent } from './layout/main-layout/loader/loader.component';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { environment } from '@env/environment';
 
 /**
  * Initialize translate loader
@@ -83,6 +85,8 @@ const components = [
     HttpClientModule,
     AppRoutingModule,
     StateModule,
+    NgxGoogleAnalyticsModule.forRoot(environment.ga),
+    NgxGoogleAnalyticsRouterModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
