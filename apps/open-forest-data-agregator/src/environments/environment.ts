@@ -10,7 +10,7 @@ export const environment = {
   version: '0.0.1',
   tokenCookie: '_token',
   userCookieTime: 1,
-  ga: 'UA-114781084-10'
+  ga: 'UA-188318305-1'
 };
 
 /*
