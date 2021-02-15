@@ -53,7 +53,17 @@
               <a> {{ dataset.title }} </a>
             </h3>
             <time [dateTime]="dataset.dateSort">{{ dataset.dateSort | date: 'dd.MM.yyyy' }}</time> |
-            <span>{{ dataset.author }}</span> - <a href="#">{{ dataset.category }}</a>
+            <span>{{ dataset.author }}</span> -
+            <a
+              [routerLink]="'/datasets'"
+              [queryParams]="{
+                start: 0,
+                rows: 15,
+                sort: 'asc',
+                category: dataset.identifierDataverse
+              }"
+              >{{ dataset.category }}</a
+            >
           </header>
           <p class="datasets-list__datasets__item__description">
             {{ dataset.description }}

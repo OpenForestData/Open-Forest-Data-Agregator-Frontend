@@ -1,43 +1,45 @@
 <ol class="navigation-items__list">
-  <li
-    class="navigation-items__list-item"
-    *ngFor="let item of items"
-    [ngClass]="{ 'has-children': item.children && item.children.length > 0 }"
-  >
-    <ng-container *ngIf="!item['target']">
-      <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
-        {{ item.name | translate }}
-        <svg-icon
-          src="assets/images/arrow_right_green.svg"
-          class="mobile-only"
-          width="16"
-          height="11"
-          [applyCss]="true"
-        ></svg-icon>
-      </a>
-    </ng-container>
-    <ng-container *ngIf="item['target']">
-      <a
-        [href]="item.path"
-        [target]="item.target"
-        [routerLinkActive]="['active']"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        {{ item.name | translate }}
-        <svg-icon
-          src="assets/images/arrow_right_green.svg"
-          class="mobile-only"
-          width="16"
-          height="11"
-          [applyCss]="true"
-        ></svg-icon>
-      </a>
-    </ng-container>
+  <ng-container *ngFor="let item of items">
+    <li
+      class="navigation-items__list-item"
+      *ngIf="item.name !== ''"
+      [ngClass]="{ 'has-children': item.children && item.children.length > 0 }"
+    >
+      <ng-container *ngIf="!item['target']">
+        <a [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+          {{ item.name | translate }}
+          <svg-icon
+            src="assets/images/arrow_right_green.svg"
+            class="mobile-only"
+            width="16"
+            height="11"
+            [applyCss]="true"
+          ></svg-icon>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="item['target']">
+        <a
+          [href]="item.path"
+          [target]="item.target"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ item.name | translate }}
+          <svg-icon
+            src="assets/images/arrow_right_green.svg"
+            class="mobile-only"
+            width="16"
+            height="11"
+            [applyCss]="true"
+          ></svg-icon>
+        </a>
+      </ng-container>
 
-    <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
-      <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">
-        <a [routerLink]="[childrenItem.path]">{{ childrenItem.name | translate }}</a>
-      </li>
-    </ul>
-  </li>
+      <ul class="navigation-items__dropdown-list" *ngIf="item.children && item.children.length > 0">
+        <li class="navigation-items__dropdown-list-item" *ngFor="let childrenItem of item.children">
+          <a [routerLink]="[childrenItem.path]">{{ childrenItem.name | translate }}</a>
+        </li>
+      </ul>
+    </li>
+  </ng-container>
 </ol>

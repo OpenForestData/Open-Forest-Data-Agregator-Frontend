@@ -481,8 +481,10 @@
   display: flex;
   flex-direction: row;
 
-  svg {
-    padding: 16px 14px 0 14px;
+  ::ng-deep {
+    svg {
+      padding: 16px 14px 0 14px;
+    }
   }
 
   p {
