@@ -239,37 +239,39 @@ export class StatisticsComponent implements OnInit {
       });
       this.statisticsData.addedDataversesBySubject.datasets = [];
 
-      let datasets = [];
-      let chartLabels = [];
+      // let datasets = [];
+      // let chartLabels = [];
       let labels = [];
-      const data = response['by_subject'];
-      const dataQ = {};
+      let values = [];
+      // const data = response['by_subject'];
+      const data = response['months'];
+      // const dataQ = {};
 
       Object.keys(data).forEach(key => {
-        labels = [...labels, ...data[key].map(item => item.subject)];
-      });
-      labels = [...new Set(labels)];
-
-      Object.keys(data).forEach(key => {
-        labels.forEach(label => {
-          if (!dataQ[label]) dataQ[label] = {};
-          if (typeof dataQ[label][key] === 'undefined') dataQ[label][key] = 0;
-          const filteredItem = data[key].filter(item => item.subject === label);
-          dataQ[label][key] = filteredItem.length === 0 ? 0 : dataQ[label][key] + filteredItem[0].count;
-        });
+        labels = [...labels, key];
+        values = [...values, data[key]];
       });
 
-      chartLabels = Object.keys(data);
+      // Object.keys(data).forEach(key => {
+      //   labels.forEach(label => {
+      //     if (!dataQ[label]) dataQ[label] = {};
+      //     if (typeof dataQ[label][key] === 'undefined') dataQ[label][key] = 0;
+      //     const filteredItem = data[key].filter(item => item.subject === label);
+      //     dataQ[label][key] = filteredItem.length === 0 ? 0 : dataQ[label][key] + filteredItem[0].count;
+      //   });
+      // });
 
-      Object.keys(dataQ).forEach(key => {
-        const d = Object.values(dataQ[key]);
-        datasets = [...datasets, { label: key, data: d }];
-      });
+      // chartLabels = Object.keys(data);
+
+      // Object.keys(dataQ).forEach(key => {
+      //   const d = Object.values(dataQ[key]);
+      //   datasets = [...datasets, { label: key, data: d }];
+      // });
 
       setTimeout(() => {
-        this.statisticsData.addedDataversesBySubject.labels = chartLabels;
+        this.statisticsData.addedDataversesBySubject.labels = labels;
       });
-      this.statisticsData.addedDataversesBySubject.datasets = datasets;
+      this.statisticsData.addedDataversesBySubject.datasets = values;
     });
   }
 

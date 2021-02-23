@@ -127,7 +127,7 @@
         chartType="dataverses"
         [bgColor]="1"
         [chartTitle]="'Liczba dataversów dodana w czasie'"
-        [barChartDatasets]="statisticsData.addedDataversesBySubject.datasets"
+        [barChartData]="statisticsData.addedDataversesBySubject.datasets"
         [barChartLabels]="statisticsData.addedDataversesBySubject.labels"
         (filterChange)="getAddedDataversesSubject($event)"
       ></ofd-agregator-bar-chart>
