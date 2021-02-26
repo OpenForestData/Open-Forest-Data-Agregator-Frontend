@@ -55,7 +55,7 @@ export class NewDataComponent implements OnInit {
         return {
           ...dataset,
           identifier64: btoa(dataset.identifier),
-          link: location.protocol + '//' + location.host + '/datasets/details?doi=' + dataset.identifier
+          link: location.protocol + '//' + location.host + '/datasets/details?doi=' + btoa(dataset.identifier)
         };
       });
 
