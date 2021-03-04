@@ -57,7 +57,7 @@
         >
         </ofd-agregator-datasets-category-description>
 
-        <div class="datasets__list" *ngIf="datasets.mode === 'list'">
+        <div class="datasets__list" *ngIf="datasets.mode === 'list'" [hidden]="loaderService.isLoading">
           <ofd-agregator-datasets-list [datasets]="datasetsItems"></ofd-agregator-datasets-list>
         </div>
         <div class="datasets__table" *ngIf="datasets.mode === 'table'">
@@ -71,11 +71,11 @@
           <ofd-agregator-datasets-map [datasets]="datasetsItems"></ofd-agregator-datasets-map>
         </div>
 
-        <h3 class="no_results" *ngIf="pageCount <= 0">
+        <h3 class="no_results" *ngIf="pageCount <= 0" [hidden]="loaderService.isLoading">
           {{ 'search.no_results' | translate }}
         </h3>
 
-        <div class="datasets-list__pagination" *ngIf="pageCount">
+        <div class="datasets-list__pagination" *ngIf="pageCount" [hidden]="loaderService.isLoading">
           <ofd-agregator-pagination
             [items]="pageCount"
             [pageSize]="pageSize"

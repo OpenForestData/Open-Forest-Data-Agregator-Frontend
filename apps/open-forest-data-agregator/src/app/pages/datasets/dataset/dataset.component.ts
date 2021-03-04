@@ -238,7 +238,10 @@ export class DatasetComponent implements OnInit {
    */
   makeSource() {
     if (this.dataset?.alternativeURL) {
-      return this.dataset?.alternativeURL;
+      const source = this.dataset?.search_info?.results[0]?.dataSources
+        ? this.dataset?.search_info?.results[0]?.dataSources[0]
+        : null;
+      return this.dataset?.alternativeURL + (source === 'Grafana' ? '?from=now-7d&to=now' : '');
     } else {
       return `${AppConfigService.config.dataverseURL}/dataset.xhtml?persistentId=${this.dataset.latestVersion?.datasetPersistentId}`;
     }

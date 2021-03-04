@@ -264,7 +264,8 @@ export class ResourceComponent implements OnInit {
    */
   makeSource() {
     if (this.resource.dataset_details?.alternativeURL) {
-      return this.resource.dataset_details?.alternativeURL;
+      const source = this.metricData?.dataSources?.value[0] ? this.metricData?.dataSources?.value[0] : '';
+      return this.resource.dataset_details?.alternativeURL + (source === 'Grafana' ? '?from=now-7d&to=now' : '');
     } else {
       return `${AppConfigService.config.dataverseURL}/file.xhtml?fileId=${this.resource.details?.identifier}&version=${this.resource.dataset_details?.latestVersion.versionNumber}.0`;
     }

@@ -75,7 +75,11 @@
           [queryParams]="{ doi: dataset.identifier64 }"
         >
           <svg-icon src="/assets/images/link.svg" [applyCss]="true"></svg-icon>
-          <a href="{{ dataset.sourceLink }}" [ngClass]="{ 'events-none': !dataset.sourceLink }" target="_blank">
+          <a
+            href="{{ dataset.sourceLink + (dataset.dataSource === 'Grafana' ? '?from=now-7d&to=now' : '') }}"
+            [ngClass]="{ 'events-none': !dataset.sourceLink }"
+            target="_blank"
+          >
             {{ 'global.source' | translate }}: <b>{{ dataset.dataSource ? dataset.dataSource : 'Dataverse' }}</b>
           </a>
         </footer>
