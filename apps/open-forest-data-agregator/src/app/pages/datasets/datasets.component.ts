@@ -9,6 +9,7 @@ import { AppState } from '@app/store';
 import { DatasetsChangeViewMode } from '@app/store/datasets/datasets.actions';
 import { DatasetsService } from './datasets.service';
 import { DatasetsFiltersComponent } from './filters/datasets-filters/datasets-filters.component';
+import { LoaderService } from '@app/services/loader.service';
 
 /**
  * Datasets Component
@@ -108,7 +109,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     public translateService: TranslateService,
     public changeDetectorRef: ChangeDetectorRef,
     public DSService: DatasetsService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public loaderService: LoaderService
   ) {
     this.subs.add(this.store.select('datasets').subscribe(datasets => (this.datasets = datasets)));
     this.subs.add(this.DSService.triggerSearchSubject.subscribe(() => this.getData()));
@@ -269,6 +271,8 @@ export class DatasetsComponent implements OnInit, OnDestroy {
    * @memberof DatasetsComponent
    */
   getData() {
+    this.loaderService.isLoading = true;
+    this.changeDetectorRef.detectChanges();
     let dataSources = '';
     this.DSService.search().subscribe((response: any) => {
       this.DSService.searchData = response;
@@ -364,6 +368,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
       this.DSService.newFiltersStructureSubject.next();
       this.changeDetectorRef.detectChanges();
+      this.loaderService.isLoading = false;
     });
   }
 

@@ -29,13 +29,13 @@
         </p>
 
         <div class="add-social">
-          <a href="#" (click)="shareLink(dataset.link, 'facebook')">
+          <a (click)="shareLink(dataset.link, 'facebook')">
             <svg-icon src="/assets/images/social/facebook-icon.svg" [applyCss]="true"></svg-icon>
           </a>
-          <a href="#" (click)="shareLink(dataset.link, 'twitter')">
+          <a (click)="shareLink(dataset.link, 'twitter')">
             <svg-icon src="/assets/images/social/twitter-icon.svg" [applyCss]="true"></svg-icon>
           </a>
-          <a href="#" (click)="shareLink(dataset.link, 'email')"
+          <a (click)="shareLink(dataset.link, 'email')"
             ><svg-icon src="/assets/images/social/email-icon.svg" [applyCss]="true"></svg-icon
           ></a>
         </div>
