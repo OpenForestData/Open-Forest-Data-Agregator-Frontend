@@ -31,6 +31,7 @@ export class FooterNavigationItemsComponent {
   public items: NavigationItem[] = [
     { name: 'footer.items.datasets', path: '/datasets' },
     { name: 'footer.items.policy', path: '/more/privacy-policy' },
+    { name: 'accessibility.footer', path: '/more/accessibility' },
     { name: 'footer.items.api', path: '/more/api-docs' },
     { name: 'footer.items.faq', path: '/more/faq' }
   ];
