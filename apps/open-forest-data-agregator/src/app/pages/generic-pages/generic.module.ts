@@ -7,6 +7,7 @@ import { AboutResourcesComponent } from './about-resources/about-resources.compo
 import { FaqComponent } from './faq/faq.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { PartnersComponent } from './partners/partners.component';
+import { AccessibilityComponent } from '@app/pages/generic-pages/accessibility/accessibility.component';
 
 /**
  * Generic module components
@@ -16,7 +17,8 @@ const components = [
   AboutResourcesComponent,
   FaqComponent,
   InstructionsComponent,
-  PartnersComponent
+  PartnersComponent,
+  AccessibilityComponent
 ];
 /**
  * Generic pages module
